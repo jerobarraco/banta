@@ -1,0 +1,11 @@
+resources are a little bit messy.
+Resources are stored in rc.py
+this file must be generated EVERYTIME a resource changes.
+That is done running the script resources.bat
+
+rc.qrc is says what's inside the resources. Please edit it with QtDesigner.
+main.ui loads rc.qrc so edit it from there.
+
+trans/gf.pro has the definition of some stuff, like, which forms are going to be used. so if you create a .ui, add it there, so it can be translated.
+
+if a resource change fails, try to delete rc.pyC first. that's a cache file.
