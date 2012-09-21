@@ -8,10 +8,11 @@ import itertools
 #TODO refactor
 from PySide import QtCore, QtGui
 
-from banta.packages.generic import GenericModule, LICENSES_NOT_FREE
+from banta.packages import GenericModule
+from banta.db.models import LICENSES_NOT_FREE
 #cant import a submodule
 #todo find a better way to communicate frm module to module
-import banta.packages.utils
+import banta.utils
 import banta.packages.base.bills
 import banta.db as _db
 

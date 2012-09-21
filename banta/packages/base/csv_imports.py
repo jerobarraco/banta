@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 import csv
 ##TODO refactor imports
 from PySide import QtCore, QtGui
-from banta.packages.generic import GenericModule
+from banta.packages import GenericModule
 import banta.db as _db
 
 class CSVImports(GenericModule):

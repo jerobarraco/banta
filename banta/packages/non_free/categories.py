@@ -9,8 +9,8 @@ from PySide.QtCore import QT_TRANSLATE_NOOP
 
 from banta.packages import GenericModule
 
-
 import banta.db as _db
+import banta.utils
 
 class CategoryModel(QAbstractTableModel):
 	HEADERS = (
@@ -19,6 +19,7 @@ class CategoryModel(QAbstractTableModel):
 	def __init__(self, parent=None):
 		QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
+		self.tr = banta.utils.unitr(self.trUtf8)
 
 	def rowCount(self, parent=None):
 		return len(_db.DB.categories)

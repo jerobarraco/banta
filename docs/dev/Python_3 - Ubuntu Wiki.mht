@@ -1,0 +1,2007 @@
+Content-Type: multipart/related; start=<op.mhtml.1342815305838.2718f021047cc431@192.168.1.98>; boundary=----------bwyWfzd6zuXPfyscydFNNV
+Content-Location: https://wiki.ubuntu.com/Python/3
+Subject: =?utf-8?Q?Python/3=20-=20Ubuntu=20Wiki?=
+MIME-Version: 1.0
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline; filename=3.htm
+Content-Type: text/html; charset=utf-8; name=3.htm
+Content-ID: <op.mhtml.1342815305838.2718f021047cc431@192.168.1.98>
+Content-Location: https://wiki.ubuntu.com/Python/3
+Content-Transfer-Encoding: Quoted-Printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/=
+html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html;charset=3Dutf-8">=
+
+<meta name=3D"robots" content=3D"index,nofollow">
+
+<title>Python/3 - Ubuntu Wiki</title>
+<script type=3D"text/javascript" src=3D"/moin_static192/common/js/common=
+.js"></script>
+
+<script type=3D"text/javascript">
+<!--
+var search_hint =3D "B=C3=BAsqueda";
+//-->
+</script>
+
+
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"al=
+l" href=3D"/moin_static192/light/css/common.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"sc=
+reen" href=3D"/moin_static192/light/css/screen.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"pr=
+int" href=3D"/moin_static192/light/css/print.css">
+<link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D"pr=
+ojection" href=3D"/moin_static192/light/css/projection.css">
+
+<!-- css only for MS IE6/IE7 browsers -->
+<!--[if lt IE 8]>
+   <link rel=3D"stylesheet" type=3D"text/css" charset=3D"utf-8" media=3D=
+"all" href=3D"/moin_static192/light/css/msie.css">
+<![endif]-->
+
+
+
+
+
+<link rel=3D"Start" href=3D"/Home">
+<link rel=3D"Alternate" title=3D"Formato Wiki" href=3D"/Python/3?action=3D=
+raw">
+<link rel=3D"Alternate" media=3D"print" title=3D"Vista de impresi=C3=B3n=
+" href=3D"/Python/3?action=3Dprint">
+<link rel=3D"Up" href=3D"/Python">
+<link rel=3D"Search" href=3D"/FindPage">
+<link rel=3D"Index" href=3D"/TitleIndex">
+<link rel=3D"Glossary" href=3D"/WordIndex">
+<link rel=3D"Help" href=3D"/HelpOnFormatting">
+</head>
+
+<body  lang=3D"es" dir=3D"ltr">
+
+<!-- BEGIN HEADER -->
+<div id=3D"wrapper" class=3D"hfeed">
+<div id=3D"header">
+    <ul id=3D"mothership">
+        <li> <a href=3D"http://www.ubuntu.com/partners">Partners</a> </l=
+i>
+        <li> <a href=3D"http://www.ubuntu.com/support">Support</a> </li>=
+
+        <li> <a href=3D"http://www.ubuntu.com/community">Community</a> <=
+/li>
+        <li> <a href=3D"http://www.ubuntu.com">Ubuntu.com</a> </li>
+    </ul>
+
+    <div id=3D"orangeHeader">
+        <h1> <a href=3D"/" title=3D"Ubuntu Wiki"><span>Ubuntu Wiki</span=
+></a> </h1>
+            <div id=3D"search-box">
+
+<form id=3D"searchform" method=3D"get" action=3D"/Python/3">
+<div>
+<input type=3D"hidden" name=3D"action" value=3D"fullsearch">
+<input type=3D"hidden" name=3D"context" value=3D"180">
+<label for=3D"searchinput">Buscar:</label>
+<input id=3D"searchinput" type=3D"text" name=3D"value" value=3D"" size=3D=
+"20"
+    onfocus=3D"searchFocus(this)" onblur=3D"searchBlur(this)"
+    onkeyup=3D"searchChange(this)" onchange=3D"searchChange(this)" alt=3D=
+"Search">
+<input id=3D"titlesearch" name=3D"titlesearch" type=3D"submit"
+    value=3D"T=C3=ADtulos" alt=3D"Search Titles">
+<input id=3D"fullsearch" name=3D"fullsearch" type=3D"submit"
+    value=3D"Texto" alt=3D"Search Full Text">
+</div>
+</form>
+<script type=3D"text/javascript">
+<!--// Initialize search form
+var f =3D document.getElementById('searchform');
+f.getElementsByTagName('label')[0].style.display =3D 'none';
+var e =3D document.getElementById('searchinput');
+searchChange(e);
+searchBlur(e);
+//-->
+</script>
+
+
+            </div>
+    </div>
+
+</div>
+    <div id=3D"wikinav"> =
+
+<ul class=3D"editbar"><li><span class=3D"disabled">P=C3=A1gina inmutable=
+</span></li><li><a class=3D"nbinfo" href=3D"/Python/3?action=3Dinfo" rel=
+=3D"nofollow">Informaci=C3=B3n</a></li><li><a class=3D"nbattachments" hr=
+ef=3D"/Python/3?action=3DAttachFile" rel=3D"nofollow">Adjuntos</a></li><=
+li>
+<form class=3D"actionsmenu" method=3D"GET" action=3D"/Python/3">
+<div>
+    <label>M=C3=A1s Acciones</label>
+    <select name=3D"action"
+        onchange=3D"if ((this.selectedIndex !=3D 0) &&
+                      (this.options[this.selectedIndex].disabled =3D=3D =
+false)) {
+                this.form.submit();
+            }
+            this.selectedIndex =3D 0;">
+        <option value=3D"raw">Texto sin formato</option>
+<option value=3D"print">Vista de impresi=C3=B3n</option>
+<option value=3D"refresh">Eliminar cach=C3=A9</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"SpellCheck">Revisar ortograf=C3=ADa</option>
+<option value=3D"LikePages">P=C3=A1ginas similares</option>
+<option value=3D"LocalSiteMap">Mapa del sitio</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"RenamePage" disabled class=3D"disabled">Renombrar P=C3=A1=
+gina</option>
+<option value=3D"CopyPage">Copiar P=C3=A1gina</option>
+<option value=3D"DeletePage" disabled class=3D"disabled">Eliminar p=C3=A1=
+gina</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"show" disabled class=3D"disabled">Suscribir Usuario</op=
+tion>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"show" disabled class=3D"disabled">Eliminar Spam</option=
+>
+<option value=3D"show" disabled class=3D"disabled">Revertir a esta revis=
+i=C3=B3n</option>
+<option value=3D"PackagePages">Empaquetar P=C3=A1ginas</option>
+<option value=3D"SyncPages">Sincronizar P=C3=A1ginas</option>
+<option value=3D"show" disabled class=3D"disabled">---------------------=
+---</option>
+<option value=3D"Load">Subir</option>
+<option value=3D"Save">Guardar</option>
+<option value=3D"SlideShow">SlideShow</option>
+    </select>
+    <input type=3D"submit" value=3D"Hacer">
+    =
+
+</div>
+<script type=3D"text/javascript">
+<!--// Init menu
+actionsMenuInit('M=C3=A1s Acciones');
+//-->
+</script>
+</form>
+</li></ul>
+
+<ul id=3D"username">
+<li><a href=3D"/Home">Ubuntu Wiki</a></li>
+<li><a href=3D"?action=3Dlogin">Ingresar</a></li>
+<li><a href=3D"/HelpContents">Help</a></li>
+</ul>
+
+        <hr class=3D"clearBoth" />
+    </div>
+    =
+
+	<div id=3D"main"> =
+
+		<div id=3D"container">
+			<div id=3D"content">
+		<h2 class=3D"entry-title"> =
+
+<span><a href=3D"/Python/3">3</a></span>
+</h2>
+	<div class=3D"hentry post">
+               =
+
+
+<div id=3D"page" lang=3D"en" dir=3D"ltr">
+
+<!-- END HEADER --><div dir=3D"ltr" id=3D"content" lang=3D"en"><span cla=
+ss=3D"anchor" id=3D"top"></span>
+<span class=3D"anchor" id=3D"line-1"></span><p class=3D"line867">
+<h1 id=3D"Python_3_on_Ubuntu">Python 3 on Ubuntu</h1>
+<span class=3D"anchor" id=3D"line-2"></span><span class=3D"anchor" id=3D=
+"line-3"></span><p class=3D"line862">It is a release goal for Ubuntu 12.=
+10 to have only Python 3 on the desktop CD images.  We have a <a class=3D=
+"https" href=3D"https://blueprints.launchpad.net/ubuntu/+spec/foundation=
+s-q-python-versions">Q-series</a> blueprint for discussion of this goal =
+at <a class=3D"http" href=3D"http://uds.ubuntu.com/">UDS-Q</a> in Oaklan=
+d, California, in May of 2012.  There is a <a class=3D"https" href=3D"ht=
+tps://wiki.ubuntu.com/Python/FoundationsQPythonVersions">more detailed s=
+pec</a> for this effort, an <a class=3D"http" href=3D"http://people.cano=
+nical.com/~ubuntu-archive/transitions/onlypy3oncd.html">official transit=
+ion tracker</a> and a publicly shared <a class=3D"http" href=3D"http://t=
+inyurl.com/7dsyywo">Google docs spreadsheet</a> to track this effort.  T=
+his is an ambitious effort that will only succeed with help from the gre=
+ater Ubuntu, Debian, and Python communities.  In other words, we need <s=
+trong>you</strong>! <span class=3D"anchor" id=3D"line-4"></span><span cl=
+ass=3D"anchor" id=3D"line-5"></span><p class=3D"line862">At the bottom o=
+f this page, you will find various resources for diving more into aspect=
+s of supporting Python 3, from the pure-Python, C extension module, Debi=
+an packaging, and other perspectives.  The intent of <em>this</em> page =
+is to provide specific guidelines in a quick reference format, so that y=
+ou only need to go here once you're familiar with the basic concepts and=
+ approaches, but need a refresher on specific coding techniques.  This i=
+s a wiki page, and you are encouraged to contribute, but try to keep you=
+r recommendations tightly focused on accomplishing the release goal of P=
+ython 3 only on the 12.10 CDs. <span class=3D"anchor" id=3D"line-6"></sp=
+an><span class=3D"anchor" id=3D"line-7"></span><p class=3D"line867">
+<h2 id=3D"Before_you_start">Before you start</h2>
+<span class=3D"anchor" id=3D"line-8"></span><span class=3D"anchor" id=3D=
+"line-9"></span><p class=3D"line874">Here are recommendations for you to=
+ follow before you start porting. <span class=3D"anchor" id=3D"line-10">=
+</span><span class=3D"anchor" id=3D"line-11"></span><ul><li>Target Pytho=
+n 3.2, 2.7, and optionally 2.6.  Ignore anything older than that. <span =
+class=3D"anchor" id=3D"line-12"></span></li><li>Use a single code base f=
+or both Python 2 and 3. <span class=3D"anchor" id=3D"line-13"></span></l=
+i><li><p class=3D"line862">Try to avoid the production use of <a class=3D=
+"http" href=3D"http://docs.python.org/py3k/library/2to3.html">2to3</a>. =
+ However you may find it helpful to use <tt>2to3</tt> in <em>report-only=
+</em> mode to get a good sense of what changes will be necessary for you=
+r package. <span class=3D"anchor" id=3D"line-14"></span></li><li><p clas=
+s=3D"line862">Use the third part <a class=3D"http" href=3D"http://pypi.p=
+ython.org/pypi/six">six</a> module sparingly (i.e. only if necessary).  =
+One good use case is the <tt>reraise()</tt> method. <span class=3D"ancho=
+r" id=3D"line-15"></span></li><li><p class=3D"line862">Even if you can't=
+ complete the port to Python 3 because of your dependencies, start by mo=
+dernize your Python 2, getting it working cleanly with <tt>python2.7&nbs=
+p;-3</tt> first. <span class=3D"anchor" id=3D"line-16"></span></li><li>C=
+larify your data model: what are bytes (data) and what are strings (text=
+)? <span class=3D"anchor" id=3D"line-17"></span><span class=3D"anchor" i=
+d=3D"line-18"></span></li></ul><p class=3D"line874">I cannot overemphasi=
+ze the last point.  Without a clear separation in your mind and data mod=
+el between bytes and strings, your port will likely be much more painful=
+ than it needs to be.  This is the biggest distinction between Python 2 =
+and Python 3.  Where Python 2 let you be sloppy, with its 8-bit strings =
+that served as both data and ASCII strings, with automatic (but error pr=
+one) conversions between 8-bit strings and unicodes, in Python 3 there a=
+re only bytes and strings (i.e. unicodes), with no automatic conversion =
+between the two.  This is A Good Thing. <span class=3D"anchor" id=3D"lin=
+e-19"></span><span class=3D"anchor" id=3D"line-20"></span><p class=3D"li=
+ne867">
+<h2 id=3D"Python_source">Python source</h2>
+<span class=3D"anchor" id=3D"line-21"></span><span class=3D"anchor" id=3D=
+"line-22"></span><p class=3D"line867">
+<h3 id=3D"Basic_compatibility">Basic compatibility</h3>
+<span class=3D"anchor" id=3D"line-23"></span><span class=3D"anchor" id=3D=
+"line-24"></span><p class=3D"line874">Put the following at the top of al=
+l your Python files: <span class=3D"anchor" id=3D"line-25"></span><span =
+class=3D"anchor" id=3D"line-26"></span><p class=3D"line867"><span class=3D=
+"anchor" id=3D"line-27"></span><span class=3D"anchor" id=3D"line-28"></s=
+pan><pre><span class=3D"anchor" id=3D"line-1"></span>from __future__ imp=
+ort absolute_import, print_function, unicode_literals</pre><span class=3D=
+"anchor" id=3D"line-29"></span><span class=3D"anchor" id=3D"line-30"></s=
+pan><p class=3D"line874">This turns on three important compatibility fla=
+gs. <span class=3D"anchor" id=3D"line-31"></span><ul><li><p class=3D"lin=
+e862">Absolute imports are the default in Python 3 <a class=3D"http" hre=
+f=3D"http://python3porting.com/differences.html#imports">[more info</a>]=
+ <span class=3D"anchor" id=3D"line-32"></span></li><li><p class=3D"line8=
+91"><tt>print()</tt> is a function in Python 3 <a class=3D"http" href=3D=
+"http://python3porting.com/noconv.html#print-section">[more info</a>] <s=
+pan class=3D"anchor" id=3D"line-33"></span></li><li><p class=3D"line862"=
+>Unadorned string literals are unicode type in Python 3 <a class=3D"http=
+" href=3D"http://python3porting.com/problems.html#binary-section">[more =
+info</a>] <span class=3D"anchor" id=3D"line-34"></span><span class=3D"an=
+chor" id=3D"line-35"></span></li></ul><p class=3D"line874">In your code,=
+ make these changes: <span class=3D"anchor" id=3D"line-36"></span><ul><l=
+i><p class=3D"line862">Change all your <tt>print</tt> statements to use =
+<tt>print()</tt> functions, and remove all the <tt>u''</tt> prefixes fro=
+m your strings. <span class=3D"anchor" id=3D"line-37"></span></li><li><p=
+ class=3D"line862">If you have string literals in your code that represe=
+nt data, prefix them all with the <tt>b''</tt> prefix <a class=3D"http" =
+href=3D"http://python3porting.com/problems.html#byte-literals">[more inf=
+o</a>] <span class=3D"anchor" id=3D"line-38"></span></li><li><p class=3D=
+"line862">Remove all <tt>L</tt> suffixes from your long integers. <a cla=
+ss=3D"http" href=3D"http://python3porting.com/differences.html#long">[mo=
+re info</a>] <span class=3D"anchor" id=3D"line-39"></span><span class=3D=
+"anchor" id=3D"line-40"></span></li></ul><p class=3D"line867"><strong>Co=
+mmentary:</strong> Some folks don't like to import <tt>unicode_literals<=
+/tt> because it has the potential to change your API (e.g. possibly retu=
+rning unicodes where before it returned 8-bit strings in Python 2).  One=
+ developer recommends making this change in your tests only, or only doi=
+ng this if you have exceptionally good test coverage.  YMMV. <span class=
+=3D"anchor" id=3D"line-41"></span><span class=3D"anchor" id=3D"line-42">=
+</span><p class=3D"line867">
+<h3 id=3D"built-ins">built-ins</h3>
+<span class=3D"anchor" id=3D"line-43"></span><span class=3D"anchor" id=3D=
+"line-44"></span><ul><li><p class=3D"line862">Change usage of <tt>xrange=
+()</tt> to <tt>range()</tt>. <a class=3D"http" href=3D"http://python3por=
+ting.com/differences.html#filter-map-range-and-xrange">[more info</a>] <=
+span class=3D"anchor" id=3D"line-45"></span></li><li><p class=3D"line862=
+">When mocking builtins, remember that in Python 3, you need to use the =
+<tt>builtins</tt> module instead of the <tt>__builtin__</tt> module, e.g=
+. <span class=3D"anchor" id=3D"line-46"></span><span class=3D"anchor" id=
+=3D"line-47"></span></li></ul><p class=3D"line867"><span class=3D"anchor=
+" id=3D"line-48"></span><span class=3D"anchor" id=3D"line-49"></span><sp=
+an class=3D"anchor" id=3D"line-50"></span><span class=3D"anchor" id=3D"l=
+ine-51"></span><pre><span class=3D"anchor" id=3D"line-1-1"></span>def mo=
+ck_it(builtin_name):
+<span class=3D"anchor" id=3D"line-2"></span>   name =3D ('builtins.%s' i=
+f sys.version_info &gt;=3D (3,) else '__builtin__.%s') % builtin_name
+<span class=3D"anchor" id=3D"line-3"></span>   return mock.patch(name)</=
+pre><span class=3D"anchor" id=3D"line-52"></span><span class=3D"anchor" =
+id=3D"line-53"></span><p class=3D"line867"><a class=3D"http" href=3D"htt=
+p://python3porting.com/stdlib.html?highlight=3D__builtin__">[more info</=
+a>] <span class=3D"anchor" id=3D"line-54"></span><span class=3D"anchor" =
+id=3D"line-55"></span><ul><li><p class=3D"line862">Be explicit in the mo=
+de you <tt>open()</tt> files in; don't assume they will be opened in bin=
+ary or text mode, pass in the <tt>t</tt> or <tt>b</tt> flag as appropria=
+te. <a class=3D"http" href=3D"http://python3porting.com/problems.html?hi=
+ghlight=3Dopen#reading-from-files">[more info</a>] (link also contains o=
+ther good advice for opening files compatibly). <span class=3D"anchor" i=
+d=3D"line-56"></span><span class=3D"anchor" id=3D"line-57"></span></li><=
+/ul><p class=3D"line867">
+<h3 id=3D"codecs">codecs</h3>
+<span class=3D"anchor" id=3D"line-58"></span><span class=3D"anchor" id=3D=
+"line-59"></span><ul><li><p class=3D"line862">Python 2 codecs which do s=
+tr-to-str conversions (e.g. <em>rot-13</em>) do not work in Python 3.  U=
+se this instead: <span class=3D"anchor" id=3D"line-60"></span><span clas=
+s=3D"anchor" id=3D"line-61"></span></li></ul><p class=3D"line867"><span =
+class=3D"anchor" id=3D"line-62"></span><span class=3D"anchor" id=3D"line=
+-63"></span><span class=3D"anchor" id=3D"line-64"></span><span class=3D"=
+anchor" id=3D"line-65"></span><pre><span class=3D"anchor" id=3D"line-1-2=
+"></span>from codecs import getencoder
+<span class=3D"anchor" id=3D"line-2-1"></span>encoder =3D getencoder('ro=
+t-13')
+<span class=3D"anchor" id=3D"line-3-1"></span>rot13string =3D encoder(my=
+string)[0]</pre><span class=3D"anchor" id=3D"line-66"></span><span class=
+=3D"anchor" id=3D"line-67"></span><p class=3D"line867"><a class=3D"http"=
+ href=3D"http://www.wefearchange.org/2012/01/python-3-porting-fun-redux.=
+html">[more info</a>] <span class=3D"anchor" id=3D"line-68"></span><span=
+ class=3D"anchor" id=3D"line-69"></span><ul><li><p class=3D"line862">Wri=
+ting unicode safely against <tt>LC_ALL=3DC</tt> to stdout: <span class=3D=
+"anchor" id=3D"line-70"></span><span class=3D"anchor" id=3D"line-71"></s=
+pan></li></ul><p class=3D"line867"><span class=3D"anchor" id=3D"line-72"=
+></span><span class=3D"anchor" id=3D"line-73"></span><pre><span class=3D=
+"anchor" id=3D"line-1-3"></span>sys.stdout =3D io.TextIOWrapper(sys.stdo=
+ut.detach(), encoding=3D'UTF-8', line_buffering=3DTrue)</pre><span class=
+=3D"anchor" id=3D"line-74"></span><span class=3D"anchor" id=3D"line-75">=
+</span><p class=3D"line867">
+<h3 id=3D"dictionaries">dictionaries</h3>
+<span class=3D"anchor" id=3D"line-76"></span><span class=3D"anchor" id=3D=
+"line-77"></span><ul><li><p class=3D"line862">Change all your uses of th=
+e dictionary methods <tt>iteritems()</tt>, <tt>iterkeys()</tt>, and <tt>=
+itervalues()</tt> to use the non-<tt>iter</tt> variety, e.g. <tt>items()=
+</tt>, <tt>keys()</tt>, and <tt>values()</tt> respectively.  These retur=
+n dictionary views in Python 3, not concrete lists, so if you need a con=
+crete list, wrap these calls in <tt>list()</tt> or <tt>sorted()</tt>.  <=
+a class=3D"http" href=3D"http://python3porting.com/differences.html#inde=
+x-6">[more info</a>] <span class=3D"anchor" id=3D"line-78"></span><span =
+class=3D"anchor" id=3D"line-79"></span></li></ul><p class=3D"line867">
+<h3 id=3D"doctests">doctests</h3>
+<span class=3D"anchor" id=3D"line-80"></span><span class=3D"anchor" id=3D=
+"line-81"></span><ul><li><p class=3D"line862">In your doctest's <tt>setU=
+p()</tt>, add these globals to your test object's <tt>globs</tt> so they=
+'ll have the same <tt>__future___</tt> environment that your code has: <=
+span class=3D"anchor" id=3D"line-82"></span><span class=3D"anchor" id=3D=
+"line-83"></span></li></ul><p class=3D"line867"><span class=3D"anchor" i=
+d=3D"line-84"></span><span class=3D"anchor" id=3D"line-85"></span><span =
+class=3D"anchor" id=3D"line-86"></span><span class=3D"anchor" id=3D"line=
+-87"></span><span class=3D"anchor" id=3D"line-88"></span><span class=3D"=
+anchor" id=3D"line-89"></span><pre><span class=3D"anchor" id=3D"line-1-4=
+"></span>from __future__ import absolute_import, print_function, unicode=
+_literals
+<span class=3D"anchor" id=3D"line-2-2"></span>def setUp(testobj):
+<span class=3D"anchor" id=3D"line-3-2"></span>    testobj.globs['absolut=
+e_import'] =3D absolute_import
+<span class=3D"anchor" id=3D"line-4"></span>    testobj.globs['print_fun=
+ction'] =3D print_function
+<span class=3D"anchor" id=3D"line-5"></span>    testobj.globs['unicode_l=
+iterals'] =3D unicode_literals</pre><span class=3D"anchor" id=3D"line-90=
+"></span><span class=3D"anchor" id=3D"line-91"></span><p class=3D"line86=
+7"><a class=3D"http" href=3D"http://www.wefearchange.org/2012/01/python-=
+3-porting-fun-redux.html">[more info</a>] <span class=3D"anchor" id=3D"l=
+ine-92"></span><span class=3D"anchor" id=3D"line-93"></span><ul><li>Byte=
+s have different reprs in Python 2 and Python 3.  This convenience funct=
+ion is used to print bytes objects in cross-compatible ways: <span class=
+=3D"anchor" id=3D"line-94"></span><span class=3D"anchor" id=3D"line-95">=
+</span></li></ul><p class=3D"line867"><span class=3D"anchor" id=3D"line-=
+96"></span><span class=3D"anchor" id=3D"line-97"></span><span class=3D"a=
+nchor" id=3D"line-98"></span><span class=3D"anchor" id=3D"line-99"></spa=
+n><span class=3D"anchor" id=3D"line-100"></span><pre><span class=3D"anch=
+or" id=3D"line-1-5"></span>def print_bytes(obj)
+<span class=3D"anchor" id=3D"line-2-3"></span>    if bytes is not str:
+<span class=3D"anchor" id=3D"line-3-3"></span>        obj =3D repr(obj)[=
+2:-1]
+<span class=3D"anchor" id=3D"line-4-1"></span>    print(obj)</pre><span =
+class=3D"anchor" id=3D"line-101"></span><span class=3D"anchor" id=3D"lin=
+e-102"></span><p class=3D"line867">
+<h3 id=3D"gettext">gettext</h3>
+<span class=3D"anchor" id=3D"line-103"></span><span class=3D"anchor" id=3D=
+"line-104"></span><ul><li><p class=3D"line891"><tt>gettext.install()</tt=
+> only takes <tt>unicode=3DTrue</tt> in Python 2; this keyword is absent=
+ and unnecessary in Python 3 (Python 3 always returns unicodes).  A comp=
+atible call would be: <span class=3D"anchor" id=3D"line-105"></span><spa=
+n class=3D"anchor" id=3D"line-106"></span></li></ul><p class=3D"line867"=
+><span class=3D"anchor" id=3D"line-107"></span><span class=3D"anchor" id=
+=3D"line-108"></span><span class=3D"anchor" id=3D"line-109"></span><span=
+ class=3D"anchor" id=3D"line-110"></span><span class=3D"anchor" id=3D"li=
+ne-111"></span><pre><span class=3D"anchor" id=3D"line-1-6"></span>kwargs=
+ =3D {}
+<span class=3D"anchor" id=3D"line-2-4"></span>if sys.version_info &gt;=3D=
+ (3,):
+<span class=3D"anchor" id=3D"line-3-4"></span>    kwargs['unicode'] =3D =
+True
+<span class=3D"anchor" id=3D"line-4-2"></span>gettext.install(domain, LO=
+CALEDIR, **kwargs)</pre><span class=3D"anchor" id=3D"line-112"></span><s=
+pan class=3D"anchor" id=3D"line-113"></span><p class=3D"line867">
+<h3 id=3D"iterators">iterators</h3>
+<span class=3D"anchor" id=3D"line-114"></span><span class=3D"anchor" id=3D=
+"line-115"></span><ul><li><p class=3D"line862">Change your iterator clas=
+ses from providing a <tt>next()</tt> method to providing a <tt>__next__(=
+)</tt> method.  For cross-compatibility, in your class, set <tt>next&nbs=
+p;=3D&nbsp;__next__</tt>. <a class=3D"http" href=3D"http://python3portin=
+g.com/differences.html#next">[more info</a>] <span class=3D"anchor" id=3D=
+"line-116"></span></li><li><p class=3D"line862">Use <tt>itertools.zip_lo=
+ngest()</tt> in Python 3, with a conditional import for <tt>itertools.iz=
+ip_longest()</tt> in Python 2. <span class=3D"anchor" id=3D"line-117"></=
+span><span class=3D"anchor" id=3D"line-118"></span></li></ul><p class=3D=
+"line867">
+<h3 id=3D"metaclasses">metaclasses</h3>
+<span class=3D"anchor" id=3D"line-119"></span><span class=3D"anchor" id=3D=
+"line-120"></span><ul><li><p class=3D"line862">Syntax for creating insta=
+nces with different metaclasses is very different between Python 2 and 3=
+.  Use the ability to call <tt>type</tt> instances as a way to portably =
+create such instances. <a class=3D"http" href=3D"http://cgit.freedesktop=
+.org/dbus/dbus-python/tree/dbus/gobject_service.py">[example</a>] <span =
+class=3D"anchor" id=3D"line-121"></span><span class=3D"anchor" id=3D"lin=
+e-122"></span></li></ul><p class=3D"line867">
+<h3 id=3D"operators">operators</h3>
+<span class=3D"anchor" id=3D"line-123"></span><span class=3D"anchor" id=3D=
+"line-124"></span><ul><li><p class=3D"line862">Python 3 has no <tt>opera=
+tor.isSequenceType()</tt>.  Use the following code for cross-compatibili=
+ty. <span class=3D"anchor" id=3D"line-125"></span><span class=3D"anchor"=
+ id=3D"line-126"></span></li></ul><p class=3D"line867"><span class=3D"an=
+chor" id=3D"line-127"></span><span class=3D"anchor" id=3D"line-128"></sp=
+an><span class=3D"anchor" id=3D"line-129"></span><pre><span class=3D"anc=
+hor" id=3D"line-1-7"></span>from collections import Sequence
+<span class=3D"anchor" id=3D"line-2-5"></span>return isinstance(obj, Seq=
+uence)</pre><span class=3D"anchor" id=3D"line-130"></span><span class=3D=
+"anchor" id=3D"line-131"></span><p class=3D"line867">
+<h3 id=3D"raise">raise</h3>
+<span class=3D"anchor" id=3D"line-132"></span><span class=3D"anchor" id=3D=
+"line-133"></span><ul><li><p class=3D"line862">Three argument <tt>raise<=
+/tt> is simply not source compatible between Python 2 and 3 (the Python =
+2 form is a <tt>SyntaxError</tt> in Python 3).  You'll need to use <tt>e=
+xec()</tt> to work around this, or use <tt>six.reraise()</tt> (which ess=
+entially hides the nasty <tt>exec()</tt> from you!). <a class=3D"http" h=
+ref=3D"http://python3porting.com/differences.html?highlight=3Draise#rais=
+e">[more info</a>] <span class=3D"anchor" id=3D"line-134"></span><span c=
+lass=3D"anchor" id=3D"line-135"></span></li></ul><p class=3D"line867">
+<h3 id=3D"strings.2BAC8-bytes.2BAC8-unicodes">strings/bytes/unicodes</h3=
+>
+<span class=3D"anchor" id=3D"line-136"></span><span class=3D"anchor" id=3D=
+"line-137"></span><ul><li><p class=3D"line891"><tt>bytes</tt> objects in=
+ Python 3 have no <tt>.format()</tt> method.  Use concatenation instead.=
+ <span class=3D"anchor" id=3D"line-138"></span></li><li><p class=3D"line=
+862">For raw-bytes objects, use the <tt>br''</tt> string prefix (<tt>rb'=
+'</tt> was added to Python 3.3) <span class=3D"anchor" id=3D"line-139"><=
+/span><span class=3D"anchor" id=3D"line-140"></span></li></ul><p class=3D=
+"line867">
+<h3 id=3D"subprocess">subprocess</h3>
+<span class=3D"anchor" id=3D"line-141"></span><span class=3D"anchor" id=3D=
+"line-142"></span><ul><li><p class=3D"line862">Consider passing <tt>univ=
+ersal_newlines=3DTrue</tt> to <tt>subprocess.Popen()</tt> and friends to=
+ get text output directly. <span class=3D"anchor" id=3D"line-143"></span=
+><span class=3D"anchor" id=3D"line-144"></span></li></ul><p class=3D"lin=
+e867">
+<h3 id=3D"zope.interfaces">zope.interfaces</h3>
+<span class=3D"anchor" id=3D"line-145"></span><span class=3D"anchor" id=3D=
+"line-146"></span><ul><li><p class=3D"line862">The <tt>implements()</tt>=
+ method does not work in Python 3.   Use the <tt>@implementer</tt> class=
+ decorator instead. <a class=3D"http" href=3D"http://www.wefearchange.or=
+g/2012/01/python-3-porting-fun-redux.html">[more info</a>] <span class=3D=
+"anchor" id=3D"line-147"></span><span class=3D"anchor" id=3D"line-148"><=
+/span></li></ul><p class=3D"line867">
+<h2 id=3D"Python_extension_modules">Python extension modules</h2>
+<span class=3D"anchor" id=3D"line-149"></span><span class=3D"anchor" id=3D=
+"line-150"></span><ul><li><p class=3D"line862">Define a <tt>PY3</tt> mac=
+ro which you can later <tt>#ifdef</tt> on for C code which cannot be wri=
+tten portably for both Python 2 and Python 3. <a class=3D"http" href=3D"=
+http://cgit.freedesktop.org/dbus/dbus-python/tree/include/dbus-python.h#=
+n35">[example</a>] <span class=3D"anchor" id=3D"line-151"></span><span c=
+lass=3D"anchor" id=3D"line-152"></span></li></ul><p class=3D"line867">
+<h3 id=3D"Compatibility_macros">Compatibility macros</h3>
+<span class=3D"anchor" id=3D"line-153"></span><span class=3D"anchor" id=3D=
+"line-154"></span><ul><li><p class=3D"line862">The <tt>PyInt_*</tt> func=
+tions are gone in Python 3.  In your extension module, change all of the=
+se to <tt>PyLong_*</tt> functions, which will work in both versions. <a =
+class=3D"http" href=3D"http://python3porting.com/cextensions.html#change=
+s-in-python">[more info</a>] <span class=3D"anchor" id=3D"line-155"></sp=
+an></li><li><p class=3D"line891"><tt>#include&nbsp;&lt;bytesobject.h&gt;=
+</tt> and change all <tt>PyString_*</tt> functions with their <tt>PyByte=
+s_*</tt> equivalents, changing those that really operate on unicodes to =
+use <tt>PyUnicode_*</tt> functions. <a class=3D"http" href=3D"http://pyt=
+hon3porting.com/cextensions.html#strings-and-unicode">[more info</a>] <s=
+pan class=3D"anchor" id=3D"line-156"></span></li><li><p class=3D"line862=
+">Instead of explicitly dereferencing <tt>ob_type</tt>, use the <tt>Py_T=
+YPE()</tt> macro instead. <a class=3D"http" href=3D"http://python3portin=
+g.com/cextensions.html#object-initialization">[more info</a>] <span clas=
+s=3D"anchor" id=3D"line-157"></span><span class=3D"anchor" id=3D"line-15=
+8"></span></li></ul><p class=3D"line867">
+<h3 id=3D"C_types">C types</h3>
+<span class=3D"anchor" id=3D"line-159"></span><span class=3D"anchor" id=3D=
+"line-160"></span><p class=3D"line874">There are lots of differences you=
+ need to be aware of when defining types in C extensions.  A few importa=
+nt ones: <span class=3D"anchor" id=3D"line-161"></span><span class=3D"an=
+chor" id=3D"line-162"></span><ul><li><p class=3D"line862">Use <tt>PyVarO=
+bject_HEAD_INIT()</tt> and don't define the <tt>tp_size</tt> slot <a cla=
+ss=3D"http" href=3D"http://python3porting.com/cextensions.html#object-in=
+itialization">[more info</a>] <span class=3D"anchor" id=3D"line-163"></s=
+pan></li><li><p class=3D"line862">Remove references to <tt>Py_TPFLAGS_HA=
+VE_WEAKREFS</tt> and <tt>Py_TPFLAGS_HAVE_ITER</tt> since these are unnec=
+essary (and undefined) in Python 3.  If you need to support both Python =
+2 and 3, you'll need an <tt>#ifdef</tt>. <span class=3D"anchor" id=3D"li=
+ne-164"></span><span class=3D"anchor" id=3D"line-165"></span></li></ul><=
+p class=3D"line867">
+<h3 id=3D"PyArg_Parse.28.29">PyArg_Parse()</h3>
+<span class=3D"anchor" id=3D"line-166"></span><span class=3D"anchor" id=3D=
+"line-167"></span><ul><li><p class=3D"line891"><tt>PyArg_Parse()</tt> an=
+d friends lack a <tt>y</tt> code (for bytes objects) in Python 2, so you=
+ will have to <tt>#ifdef</tt> around these. <span class=3D"anchor" id=3D=
+"line-168"></span></li><li><p class=3D"line862">In Python 3, there's no =
+equivalent of the <tt>z</tt> code for bytes objects (accepting <tt>None<=
+/tt> as well).  Write an <tt>O&amp;</tt> converter. <span class=3D"ancho=
+r" id=3D"line-169"></span><span class=3D"anchor" id=3D"line-170"></span>=
+</li></ul><p class=3D"line867">
+<h3 id=3D"PyCObject">PyCObject</h3>
+<span class=3D"anchor" id=3D"line-171"></span><span class=3D"anchor" id=3D=
+"line-172"></span><ul><li><p class=3D"line862">Rewrite these to use <tt>=
+PyCapsule</tt> instead.  If you can drop Python 2.6, there's no need to =
+<tt>#ifdef</tt> these, since <tt>PyCapsule</tt> is available in Python 2=
+.7. <a class=3D"http" href=3D"http://cgit.freedesktop.org/dbus/dbus-pyth=
+on/tree/_dbus_bindings/module.c#n411">[example</a>] <span class=3D"ancho=
+r" id=3D"line-173"></span><span class=3D"anchor" id=3D"line-174"></span>=
+</li></ul><p class=3D"line867">
+<h3 id=3D"reprs">reprs</h3>
+<span class=3D"anchor" id=3D"line-175"></span><span class=3D"anchor" id=3D=
+"line-176"></span><ul><li><p class=3D"line862">If you derive new types f=
+rom builtin C types, e.g. <a class=3D"nonexistent" href=3D"/PyBytes">PyB=
+ytes</a>, and you want to override the repr in the subclass, you'll find=
+ you have a problem with cross-compatibility.  In Python 2, the super cl=
+ass's repr will return bytes (a.k.a. 8-bit strings) while in Python 3, t=
+hey will return unicodes.  Python's C API has a little known format code=
+ <tt>%V</tt> which can be used to bridge this gap.  Add this macro: <spa=
+n class=3D"anchor" id=3D"line-177"></span><span class=3D"anchor" id=3D"l=
+ine-178"></span></li></ul><p class=3D"line867"><span class=3D"anchor" id=
+=3D"line-179"></span><span class=3D"anchor" id=3D"line-180"></span><span=
+ class=3D"anchor" id=3D"line-181"></span><span class=3D"anchor" id=3D"li=
+ne-182"></span><pre><span class=3D"anchor" id=3D"line-1-8"></span>#defin=
+e REPRV(obj) \
+<span class=3D"anchor" id=3D"line-2-6"></span>    (PyUnicode_Check(obj) =
+? (obj) : NULL), \
+<span class=3D"anchor" id=3D"line-3-5"></span>    (PyUnicode_Check(obj) =
+? NULL : PyBytes_AS_STRING(obj))</pre><span class=3D"anchor" id=3D"line-=
+183"></span><span class=3D"anchor" id=3D"line-184"></span><p class=3D"li=
+ne874">and use it like this: <span class=3D"anchor" id=3D"line-185"></sp=
+an><span class=3D"anchor" id=3D"line-186"></span><p class=3D"line867"><s=
+pan class=3D"anchor" id=3D"line-187"></span><span class=3D"anchor" id=3D=
+"line-188"></span><pre><span class=3D"anchor" id=3D"line-1-9"></span>ret=
+urn PyUnicode_FromFormat("...%V...", REPRV(parent_repr));</pre><span cla=
+ss=3D"anchor" id=3D"line-189"></span><span class=3D"anchor" id=3D"line-1=
+90"></span><p class=3D"line867"><a class=3D"http" href=3D"http://www.wef=
+earchange.org/2011/12/lessons-in-porting-to-python-3.html">[more info</a=
+>] <span class=3D"anchor" id=3D"line-191"></span><span class=3D"anchor" =
+id=3D"line-192"></span><p class=3D"line867">
+<h2 id=3D"Third_party_packages">Third party packages</h2>
+<span class=3D"anchor" id=3D"line-193"></span><span class=3D"anchor" id=3D=
+"line-194"></span><ul><li><p class=3D"line862">If you're using python-ap=
+t, you <em>must</em> port entirely to the 0.8 API.  python-apt tolerated=
+ this under Python 2, but the old API is compiled out under Python 3.  <=
+tt>/usr/share/python-apt/migrate-0.8.py</tt> may be of some partial help=
+. <span class=3D"anchor" id=3D"line-195"></span><span class=3D"anchor" i=
+d=3D"line-196"></span></li><li class=3D"gap"><p class=3D"line862">pyflak=
+es doesn't like it when you define methods twice depending on <tt>sys.ve=
+rsion</tt>.  You may want to add some excludes for these. <span class=3D=
+"anchor" id=3D"line-197"></span><span class=3D"anchor" id=3D"line-198"><=
+/span></li><li class=3D"gap"><p class=3D"line891"><tt>python-libxml2</tt=
+> is currently unavailable for Python 3.  Consider using something avail=
+able in both Python 2 and 3 from the stdlib instead, e.g. <tt>xml.etree.=
+cElementTree</tt>.  If necessary, port to <tt>python{,3}-lxml</tt>. <spa=
+n class=3D"anchor" id=3D"line-199"></span><span class=3D"anchor" id=3D"l=
+ine-200"></span></li></ul><p class=3D"line867">
+<h2 id=3D"Resources">Resources</h2>
+<span class=3D"anchor" id=3D"line-201"></span><span class=3D"anchor" id=3D=
+"line-202"></span><ul><li><p class=3D"line891"><tt>#python3</tt> IRC cha=
+nnel on Freenode <span class=3D"anchor" id=3D"line-203"></span></li><li>=
+<p class=3D"line891"><a class=3D"http" href=3D"http://mail.python.org/ma=
+ilman/listinfo/python-porting">python-porting mailing list</a> <span cla=
+ss=3D"anchor" id=3D"line-204"></span></li><li><p class=3D"line891"><a cl=
+ass=3D"http" href=3D"http://wiki.debian.org/Python/LibraryStyleGuide">De=
+bian Python packaging style guide (covers Python 2 and Python 3)</a> <sp=
+an class=3D"anchor" id=3D"line-205"></span></li><li><p class=3D"line891"=
+><a class=3D"http" href=3D"http://getpython3.com/">Python community port=
+al to Python 3</a> <span class=3D"anchor" id=3D"line-206"></span></li><l=
+i><p class=3D"line891"><strong>Excellent</strong> <a class=3D"http" href=
+=3D"http://python3porting.com/">in-depth Python 3 porting guide</a> <spa=
+n class=3D"anchor" id=3D"line-207"></span></li><li><p class=3D"line891">=
+<a class=3D"http" href=3D"http://python3wos.appspot.com/">Python 3 "Wall=
+ of Shame"</a> <span class=3D"anchor" id=3D"line-208"></span></li><li><p=
+ class=3D"line891"><a class=3D"http" href=3D"http://pypi.python.org/pypi=
+?:action=3Dbrowse&amp;c=3D533&amp;show=3Dall">Cheeseshop packages explic=
+itly claiming Python 3 support</a> <span class=3D"anchor" id=3D"line-209=
+"></span></li><li><p class=3D"line891"><a class=3D"http" href=3D"http://=
+wiki.python.org/moin/PortingPythonToPy3k">Python wiki porting guide (pur=
+e-Python)</a> <span class=3D"anchor" id=3D"line-210"></span></li><li><p =
+class=3D"line891"><a class=3D"http" href=3D"http://wiki.python.org/moin/=
+PortingExtensionModulesToPy3k">Python wiki porting guide (extension modu=
+les)</a> <span class=3D"anchor" id=3D"line-211"></span></li><li>Barry Wa=
+rsaw's blog <span class=3D"anchor" id=3D"line-212"></span><ul><li><p cla=
+ss=3D"line891"><a class=3D"http" href=3D"http://www.wefearchange.org/201=
+2/01/debian-package-for-python-2-and-3.html">Debian packaging for Python=
+ 2 and 3</a> <span class=3D"anchor" id=3D"line-213"></span></li><li><p c=
+lass=3D"line891"><a class=3D"http" href=3D"http://www.wefearchange.org/2=
+011/12/lessons-in-porting-to-python-3.html">Python 3 porting (part 1)</a=
+> <span class=3D"anchor" id=3D"line-214"></span></li><li><p class=3D"lin=
+e891"><a class=3D"http" href=3D"http://www.wefearchange.org/2012/01/pyth=
+on-3-porting-fun-redux.html">Python 3 porting (part 2)</a> <span class=3D=
+"anchor" id=3D"line-215"></span></li><li><p class=3D"line891"><a class=3D=
+"http" href=3D"http://www.wefearchange.org/2012/04/python-3-on-desktop-f=
+or-quantal-quetzal.html">Python 3 plans for Ubuntu 12.10 Quantal Quetzal=
+</a> <span class=3D"anchor" id=3D"line-216"></span></li><li><p class=3D"=
+line891"><a class=3D"http" href=3D"http://www.wefearchange.org/2011/11/u=
+pdate-on-ubuntus-python-plans.html">Python 3 plans for Ubuntu 12.04 Prec=
+ise Pangolin</a> <span class=3D"anchor" id=3D"line-217"></span></li></ul=
+></li><li><p class=3D"line862">Ned Bachelder's Pycon 2012 talk <a class=3D=
+"http" href=3D"http://pyvideo.org/video/948/pragmatic-unicode-or-how-do-=
+i-stop-the-pain">Pragmatic Unicode, or How Do I Stop the Pain?</a> <em><=
+strong>Watch this NOW</strong></em> <span class=3D"anchor" id=3D"line-21=
+8"></span><span class=3D"anchor" id=3D"line-219"></span></li></ul><p cla=
+ss=3D"line867">
+<h2 id=3D"Q.2BAC8-A">Q/A</h2>
+<span class=3D"anchor" id=3D"line-220"></span><span class=3D"anchor" id=3D=
+"line-221"></span><ul><li>Why not rely on 2to3?  2to3 is a pretty slow t=
+ool so it can impede on the speed with which you develop your code.  It =
+can however be used in non-overwrite mode to get a good sense of what ne=
+eds to be changed in your source code.  Generally, a single-source appro=
+ach is the best for bilingual (i.e. Py2 and Py3) Python apps. <span clas=
+s=3D"anchor" id=3D"line-222"></span><span class=3D"anchor" id=3D"line-22=
+3"></span></li></ul><span class=3D"anchor" id=3D"bottom"></span></div> <=
+!-- BEGIN FOOTER -->
+<div id=3D"pagebottom"></div>
+</div>
+
+
+        <div class=3D"entry-utility"> =
+
+            <span class=3D"cat-links">
+<p id=3D"pageinfo" class=3D"info" lang=3D"es" dir=3D"ltr">Python/3  (=C3=
+=BAltima edici=C3=B3n 2012-06-25 18:08:35 efectuada por <span title=3D"b=
+arry @ mail.wooz.org[216.15.33.194]"><a class=3D"interwiki" href=3D"http=
+s://launchpad.net/~barry" title=3D"barry @ mail.wooz.org[216.15.33.194]"=
+>barry</a></span>)</p>
+
+</span> =
+
+        </div> =
+
+    </div><!-- .post --> =
+
+ =
+
+            </div><!-- #content --> =
+
+        </div><!-- #container --> =
+
+        <div class=3D"clearBoth"></div> =
+
+    </div><!-- #main --> =
+
+</div><!-- #wrapper .hfeed --> =
+
+    =
+
+<div id=3D"footer"> =
+
+    <div id=3D"siteinfo">        =
+
+        <p> The material on this wiki is available under a free license,=
+ see =
+
+	<a href=3D"https://help.ubuntu.com/community/License">Copyright / Licen=
+se</a> for details.
+        </p> =
+
+    </div><!-- #siteinfo --> =
+
+</div><!-- #footer --> </body>
+</html>
+
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline; filename=common.js
+Content-Type: application/javascript; name=common.js
+Content-Location: https://wiki.ubuntu.com/moin_static192/common/js/common.js
+Content-Transfer-Encoding: Base64
+
+Ly8KLy8gTW9pbk1vaW4gY29tbW9ubHkgdXNlZCBKYXZhU2NyaXB0IGZ1bmN0aW9u
+cwovLwoKLy8gV2Uga2VlcCBoZXJlIHRoZSBzdGF0ZSBvZiB0aGUgc2VhcmNoIGJv
+eApzZWFyY2hJc0Rpc2FibGVkID0gZmFsc2U7CgpmdW5jdGlvbiBzZWFyY2hDaGFu
+Z2UoZSkgewogICAgLy8gVXBkYXRlIHNlYXJjaCBidXR0b25zIHN0YXR1cyBhY2Nv
+cmRpbmcgdG8gc2VhcmNoIGJveCBjb250ZW50LgogICAgLy8gSWdub3JlIGVtcHR5
+IG9yIHdoaXRlc3BhY2Ugc2VhcmNoIHRlcm0uCiAgICB2YXIgdmFsdWUgPSBlLnZh
+bHVlLnJlcGxhY2UoL1xzKy8sICcnKTsKICAgIGlmICh2YWx1ZSA9PSAnJyB8fCBz
+ZWFyY2hJc0Rpc2FibGVkKSB7IAogICAgICAgIHNlYXJjaFNldERpc2FibGVkKHRy
+dWUpOwogICAgfSBlbHNlIHsKICAgICAgICBzZWFyY2hTZXREaXNhYmxlZChmYWxz
+ZSk7CiAgICB9Cn0KCmZ1bmN0aW9uIHNlYXJjaFNldERpc2FibGVkKGZsYWcpIHsK
+ICAgIC8vIEVuYWJsZSBvciBkaXNhYmxlIHNlYXJjaAogICAgZG9jdW1lbnQuZ2V0
+RWxlbWVudEJ5SWQoJ2Z1bGxzZWFyY2gnKS5kaXNhYmxlZCA9IGZsYWc7CiAgICBk
+b2N1bWVudC5nZXRFbGVtZW50QnlJZCgndGl0bGVzZWFyY2gnKS5kaXNhYmxlZCA9
+IGZsYWc7Cn0KCmZ1bmN0aW9uIHNlYXJjaEZvY3VzKGUpIHsKICAgIC8vIFVwZGF0
+ZSBzZWFyY2ggaW5wdXQgY29udGVudCBvbiBmb2N1cwogICAgaWYgKGUudmFsdWUg
+PT0gc2VhcmNoX2hpbnQpIHsKICAgICAgICBlLnZhbHVlID0gJyc7CiAgICAgICAg
+ZS5jbGFzc05hbWUgPSAnJzsKICAgICAgICBzZWFyY2hJc0Rpc2FibGVkID0gZmFs
+c2U7CiAgICB9Cn0KCmZ1bmN0aW9uIHNlYXJjaEJsdXIoZSkgewogICAgLy8gVXBk
+YXRlIHNlYXJjaCBpbnB1dCBjb250ZW50IG9uIGJsdXIKICAgIGlmIChlLnZhbHVl
+ID09ICcnKSB7CiAgICAgICAgZS52YWx1ZSA9IHNlYXJjaF9oaW50OwogICAgICAg
+IGUuY2xhc3NOYW1lID0gJ2Rpc2FibGVkJzsKICAgICAgICBzZWFyY2hJc0Rpc2Fi
+bGVkID0gdHJ1ZTsKICAgIH0KfQoKZnVuY3Rpb24gYWN0aW9uc01lbnVJbml0KHRp
+dGxlKSB7CiAgICAvLyBJbml0aWFsaXplIGFjdGlvbiBtZW51CiAgICBmb3IgKGkg
+PSAwOyBpIDwgZG9jdW1lbnQuZm9ybXMubGVuZ3RoOyBpKyspIHsKICAgICAgICB2
+YXIgZm9ybSA9IGRvY3VtZW50LmZvcm1zW2ldOwogICAgICAgIGlmIChmb3JtLmNs
+YXNzTmFtZSA9PSAnYWN0aW9uc21lbnUnKSB7CiAgICAgICAgICAgIC8vIENoZWNr
+IGlmIHRoaXMgZm9ybSBuZWVkcyB1cGRhdGUKICAgICAgICAgICAgdmFyIGRpdiA9
+IGZvcm0uZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ2RpdicpWzBdOwogICAgICAgICAg
+ICB2YXIgbGFiZWwgPSBkaXYuZ2V0RWxlbWVudHNCeVRhZ05hbWUoJ2xhYmVsJylb
+MF07CiAgICAgICAgICAgIGlmIChsYWJlbCkgewogICAgICAgICAgICAgICAgLy8g
+VGhpcyBpcyB0aGUgZmlyc3QgdGltZTogcmVtb3ZlIGxhYmVsIGFuZCBkbyBidXRv
+bi4KICAgICAgICAgICAgICAgIGRpdi5yZW1vdmVDaGlsZChsYWJlbCk7CiAgICAg
+ICAgICAgICAgICB2YXIgZG9idXR0b24gPSBkaXYuZ2V0RWxlbWVudHNCeVRhZ05h
+bWUoJ2lucHV0JylbMF07CiAgICAgICAgICAgICAgICBkaXYucmVtb3ZlQ2hpbGQo
+ZG9idXR0b24pOwogICAgICAgICAgICAgICAgLy8gYW5kIGFkZCBtZW51IHRpdGxl
+CiAgICAgICAgICAgICAgICB2YXIgc2VsZWN0ID0gZGl2LmdldEVsZW1lbnRzQnlU
+YWdOYW1lKCdzZWxlY3QnKVswXTsKICAgICAgICAgICAgICAgIHZhciBpdGVtID0g
+ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnb3B0aW9uJyk7CiAgICAgICAgICAgICAg
+ICBpdGVtLmFwcGVuZENoaWxkKGRvY3VtZW50LmNyZWF0ZVRleHROb2RlKHRpdGxl
+KSk7CiAgICAgICAgICAgICAgICBpdGVtLnZhbHVlID0gJ3Nob3cnOwogICAgICAg
+ICAgICAgICAgc2VsZWN0Lmluc2VydEJlZm9yZShpdGVtLCBzZWxlY3Qub3B0aW9u
+c1swXSk7CiAgICAgICAgICAgICAgICBzZWxlY3Quc2VsZWN0ZWRJbmRleCA9IDA7
+CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9Cn0KCi8vIHVzZSB0aGlzIGlu
+c3RlYWQgb2YgYXNzaWduaW5nIHRvIHdpbmRvdy5vbmxvYWQgZGlyZWN0bHk6CmZ1
+bmN0aW9uIGFkZExvYWRFdmVudChmdW5jKSB7CiAgICAvLyBhbGVydCgiYWRkTG9h
+ZEV2ZW50ICIgKyBmdW5jKQogICAgdmFyIG9sZG9ubG9hZCA9IHdpbmRvdy5vbmxv
+YWQ7CiAgICBpZiAodHlwZW9mIHdpbmRvdy5vbmxvYWQgIT0gJ2Z1bmN0aW9uJykg
+ewogICAgICAgIHdpbmRvdy5vbmxvYWQgPSBmdW5jOwogICAgfSBlbHNlIHsKICAg
+ICAgICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICAgICAgICAgIG9s
+ZG9ubG9hZCgpOwogICAgICAgICAgICBmdW5jKCk7CiAgICAgICAgfQogICAgfQp9
+CgovLyBjb3B5IGZyb20gZmNrZWRpdG9yIGJyb3dzZXIgY2hlY2sgY29kZSAoZmNr
+ZWRpdG9yLmpzOjI5OCwgZnVuY3Rpb24gOiBGQ0tlZGl0b3JfSXNDb21wYXRpYmxl
+QnJvd3NlcikKZnVuY3Rpb24gY2FuX3VzZV9ndWlfZWRpdG9yKCkgewogICAgdmFy
+IHNBZ2VudCA9IG5hdmlnYXRvci51c2VyQWdlbnQudG9Mb3dlckNhc2UoKSA7Cgog
+ICAgLy8gSW50ZXJuZXQgRXhwbG9yZXIgNS41KwogICAgaWYgKCAvKkBjY19vbiFA
+Ki9mYWxzZSAmJiBzQWdlbnQuaW5kZXhPZigibWFjIikgPT0gLTEgKQogICAgewog
+ICAgICAgIHZhciBzQnJvd3NlclZlcnNpb24gPSBuYXZpZ2F0b3IuYXBwVmVyc2lv
+bi5tYXRjaCgvTVNJRSAoLlwuLikvKVsxXSA7CiAgICAgICAgcmV0dXJuICggc0Jy
+b3dzZXJWZXJzaW9uID49IDUuNSApIDsKICAgIH0KCiAgICAvLyBHZWNrbyAoT3Bl
+cmEgOSB0cmllcyB0byBiZWhhdmUgbGlrZSBHZWNrbyBhdCB0aGlzIHBvaW50KS4K
+ICAgIGlmICggbmF2aWdhdG9yLnByb2R1Y3QgPT0gIkdlY2tvIiAmJiBuYXZpZ2F0
+b3IucHJvZHVjdFN1YiA+PSAyMDAzMDIxMCAmJiAhKCB0eXBlb2Yob3BlcmEpID09
+ICdvYmplY3QnICYmIG9wZXJhLnBvc3RFcnJvciApICkKICAgICAgICByZXR1cm4g
+dHJ1ZSA7CgogICAgLy8gT3BlcmEgOS41MCsKICAgIGlmICggd2luZG93Lm9wZXJh
+ICYmIHdpbmRvdy5vcGVyYS52ZXJzaW9uICYmIHBhcnNlRmxvYXQoIHdpbmRvdy5v
+cGVyYS52ZXJzaW9uKCkgKSA+PSA5LjUgKQogICAgICAgIHJldHVybiB0cnVlIDsK
+Ci8qCiAgLy8gZGlzYWJsZSBzYWZhcmkgOiB1bnRpbCBmY2sgZGV2dGVhbSBmaXgg
+aHR0cDovL2Rldi5mY2tlZGl0b3IubmV0L3RpY2tldC8yMzMzCiAgCiAgICAvLyBB
+ZG9iZSBBSVIKICAgIC8vIENoZWNrZWQgYmVmb3JlIFNhZmFyaSBiZWNhdXNlIEFJ
+UiBoYXZlIHRoZSBXZWJLaXQgcmljaCB0ZXh0IGVkaXRvcgogICAgLy8gZmVhdHVy
+ZXMgZnJvbSBTYWZhcmkgMy4wLjQsIGJ1dCB0aGUgdmVyc2lvbiByZXBvcnRlZCBp
+cyA0MjAuCiAgICBpZiAoIHNBZ2VudC5pbmRleE9mKCAnIGFkb2JlYWlyLycgKSAh
+PSAtMSApCiAgICAgICAgcmV0dXJuICggc0FnZW50Lm1hdGNoKCAvIGFkb2JlYWly
+XC8oXGQrKS8gKVsxXSA+PSAxICkgOyAvLyBCdWlsZCBtdXN0IGJlIGF0IGxlYXN0
+IHYxCgogICAgLy8gU2FmYXJpIDMrCiAgICBpZiAoIHNBZ2VudC5pbmRleE9mKCAn
+IGFwcGxld2Via2l0LycgKSAhPSAtMSApCiAgICAgICAgcmV0dXJuICggc0FnZW50
+Lm1hdGNoKCAvIGFwcGxld2Via2l0XC8oXGQrKS8gKVsxXSA+PSA1MjIgKSA7ICAg
+IC8vIEJ1aWxkIG11c3QgYmUgYXQgbGVhc3QgNTIyICh2MykKKi8KICAgIHJldHVy
+biBmYWxzZSA7Cgp9CgoKZnVuY3Rpb24gdXBkYXRlX2VkaXRfbGlua3MoKSB7CiAg
+ICAvLyBVcGRhdGUgZWRpdGxpbmsgYWNjb3JkaW5nIGlmIGlmIHRoZSBicm93c2Vy
+IGlzIGNvbXBhdGlibGUKICAgIGlmIChjYW5fdXNlX2d1aV9lZGl0b3IoKSA9PSBm
+YWxzZSl7CiAgICAgICAgLy9hbGVydCgidXBkYXRlX2VkaXRfbGlua3M6IGNhbid0
+IHVzZSBndWkgZWRpdG9yIik7CiAgICAgICAgcmV0dXJuOwogICAgfQogICAgdmFy
+IGVkaXRsaW5rcyA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlOYW1lKCJlZGl0bGlu
+ayIpOwogICAgZm9yIChpID0gMDsgaSA8IGVkaXRsaW5rcy5sZW5ndGg7IGkrKykg
+ewogICAgICAgIHZhciBsaW5rID0gZWRpdGxpbmtzW2ldOwogICAgICAgIGhyZWYg
+PSBsaW5rLmhyZWYucmVwbGFjZSgnZWRpdG9yPXRleHRvbmx5JywnZWRpdG9yPWd1
+aXBvc3NpYmxlJyk7CiAgICAgICAgbGluay5ocmVmID0gaHJlZjsKICAgICAgICAv
+L2FsZXJ0KCJ1cGRhdGVfZWRpdF9saW5rczogbW9kaWZpZWQgdG8gZ3VpcG9zc2li
+bGUiKTsKICAgIH0KfQoKCmZ1bmN0aW9uIGFkZF9ndWlfZWRpdG9yX2xpbmtzKCkg
+ewogICAgLy8gQWRkIGd1aSBlZGl0b3IgbGluayBhZnRlciB0aGUgdGV4dCBlZGl0
+b3IgbGluawogICAgCiAgICAvLyBJZiB0aGUgdmFyaWFibGUgaXMgbm90IHNldCBv
+ciBicm93c2VyIGlzIG5vdCBjb21wYXRpYmxlLCBleGl0CiAgICB0cnkge2d1aV9l
+ZGl0b3JfbGlua19ocmVmfQogICAgY2F0Y2ggKGUpIHsKICAgICAgICAvL2FsZXJ0
+KCJhZGRfZ3VpX2VkaXRvcl9saW5rczogZ3VpX2VkaXRvcl9saW5rX2hyZWYgbm90
+IGhlcmUiKTsKICAgICAgICByZXR1cm4KICAgIH0KICAgIGlmIChjYW5fdXNlX2d1
+aV9lZGl0b3IoKSA9PSBmYWxzZSl7CiAgICAgICAgLy9hbGVydCgiYWRkX2d1aV9l
+ZGl0b3JfbGlua3M6IGNhbid0IHVzZSBndWlfZWRpdG9yIik7CiAgICAgICAgcmV0
+dXJuOwogICAgfQogICAgdmFyIGFsbCA9IGRvY3VtZW50LmdldEVsZW1lbnRzQnlO
+YW1lKCd0ZXh0ZWRpdGxpbmsnKTsKICAgIGZvciAoaSA9IDA7IGkgPCBhbGwubGVu
+Z3RoOyBpKyspIHsKICAgICAgICB2YXIgdGV4dEVkaXRvckxpbmsgPSBhbGxbaV07
+CiAgICAgICAgLy8gQ3JlYXRlIGEgbGlzdCBpdGVtIHdpdGggYSBsaW5rCiAgICAg
+ICAgdmFyIGd1aUVkaXRvckxpbmsgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdh
+Jyk7CiAgICAgICAgZ3VpRWRpdG9yTGluay5ocmVmID0gZ3VpX2VkaXRvcl9saW5r
+X2hyZWY7CiAgICAgICAgdmFyIHRleHQgPSBkb2N1bWVudC5jcmVhdGVUZXh0Tm9k
+ZShndWlfZWRpdG9yX2xpbmtfdGV4dCk7CiAgICAgICAgZ3VpRWRpdG9yTGluay5h
+cHBlbmRDaGlsZCh0ZXh0KTsKICAgICAgICB2YXIgbGlzdEl0ZW0gPSBkb2N1bWVu
+dC5jcmVhdGVFbGVtZW50KCdsaScpCiAgICAgICAgbGlzdEl0ZW0uYXBwZW5kQ2hp
+bGQoZ3VpRWRpdG9yTGluayk7CiAgICAgICAgLy8gSW5zZXJ0IGluIHRoZSBlZGl0
+YmFyCiAgICAgICAgdmFyIGVkaXRiYXIgPSB0ZXh0RWRpdG9yTGluay5wYXJlbnRO
+b2RlLnBhcmVudE5vZGUKICAgICAgICB2YXIgbmV4dExpc3RJdGVtID0gdGV4dEVk
+aXRvckxpbmsucGFyZW50Tm9kZS5uZXh0U2libGluZzsKICAgICAgICBlZGl0YmFy
+Lmluc2VydEJlZm9yZShsaXN0SXRlbSwgbmV4dExpc3RJdGVtKTsKICAgICAgICAv
+L2FsZXJ0KCJhZGRfZ3VpX2VkaXRvcl9saW5rczogYWRkZWQgZ3VpIGVkaXRvciBs
+aW5rIik7CiAgICB9Cn0KIAoKZnVuY3Rpb24gc2hvd19zd2l0Y2gyZ3VpKCkgewog
+ICAgLy8gU2hvdyBzd2l0Y2ggdG8gZ3VpIGVkaXRvciBsaW5rIGlmIHRoZSBicm93
+c2VyIGlzIGNvbXBhdGlibGUKICAgIGlmIChjYW5fdXNlX2d1aV9lZGl0b3IoKSA9
+PSBmYWxzZSkgcmV0dXJuOwogICAgCiAgICB2YXIgc3dpdGNoMmd1aSA9IGRvY3Vt
+ZW50LmdldEVsZW1lbnRCeUlkKCdzd2l0Y2gyZ3VpJykKICAgIGlmIChzd2l0Y2gy
+Z3VpKSB7CiAgICAgICAgc3dpdGNoMmd1aS5zdHlsZS5kaXNwbGF5ID0gJ2lubGlu
+ZSc7CiAgICB9Cn0KCi8vIGZvciBsb25nIGRvY3VtZW50cyB3aXRoIG1hbnkgY29t
+bWVudHMgdGhpcyBpcyBleHBlbnNpdmUgdG8gY2FsY3VsYXRlLAovLyB0aHVzIHdl
+IGtlZXAgaXQgaGVyZToKY29tbWVudHMgPSBudWxsOwoKZnVuY3Rpb24gdG9nZ2xl
+Q29tbWVudHMoKSB7CiAgICAvLyBUb2dnbGUgdmlzaWJpbGl0eSBvZiBldmVyeSB0
+YWcgd2l0aCBjbGFzcyAiY29tbWVudCIKICAgIGZvciAoaSA9IDA7IGkgPCBjb21t
+ZW50cy5sZW5ndGg7IGkrKyl7CiAgICAgICAgZWwgPSBjb21tZW50c1tpXTsKICAg
+ICAgICBpZiAoIGVsLnN0eWxlLmRpc3BsYXkgIT0gJ25vbmUnICkgewogICAgICAg
+ICAgICBlbC5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogICAgICAgIH0gZWxzZSB7
+CiAgICAgICAgICAgIGVsLnN0eWxlLmRpc3BsYXkgPSAnJzsKICAgICAgICB9CiAg
+ICB9Cn0KCmZ1bmN0aW9uIHNob3dfdG9nZ2xlQ29tbWVudHMoKSB7CiAgICAvLyBT
+aG93IGVkaXQgYmFyIGl0ZW0gZm9yIHRvZ2dsaW5nIGlubGluZSBjb21tZW50cyBv
+bi9vZmYgb25seSBpZiBpbmxpbmUgY29tbWVudHMgZXhpc3Qgb24gdGhlIHBhZ2UK
+ICAgIGNvbW1lbnRzID0gZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSgnY29tbWVudCcs
+IG51bGwsIGRvY3VtZW50KTsKICAgIGlmIChjb21tZW50cy5sZW5ndGggPiAwKSB7
+CiAgICAgICAgdmFyIGJ1dHRvbnMgPSBnZXRFbGVtZW50c0J5Q2xhc3NOYW1lKCd0
+b2dnbGVDb21tZW50c0J1dHRvbicsIG51bGwsIGRvY3VtZW50KTsKICAgICAgICBm
+b3IgKGkgPSAwOyBpIDwgYnV0dG9ucy5sZW5ndGg7IGkrKyl7CiAgICAgICAgICAg
+IGVsID0gYnV0dG9uc1tpXTsKICAgICAgICAgICAgZWwuc3R5bGUuZGlzcGxheSA9
+ICcnOwogICAgICAgIH0KICAgIH0KfQoKCmZ1bmN0aW9uIGxvYWQoKSB7CiAgICAv
+LyBEbyBub3QgbmFtZSB0aGlzICJvbmxvYWQiLCBpdCBkb2VzIG5vdCB3b3JrIHdp
+dGggSUUgOi0pCiAgICAvLyBUT0RPOiBjcmVhdGUgc2VwYXJhdGUgb25sb2FkIGZv
+ciBlYWNoIHR5cGUgb2YgdmlldyBhbmQgc2V0IHRoZQogICAgLy8gY29ycmVjdCBm
+dW5jdGlvbiBuYW1lIGluIHRoZSBodG1sLiAKICAgIC8vIGUuZyA8Ym9keSBvbmxv
+ZD0nZWRpdG9yX29ubG9hZCgpJz4KCiAgICAvLyBsb2dpbiBmb2N1cwogICAgaWYg
+KGRvY3VtZW50LmZvcm1zWydsb2dpbmZvcm0nXSkgewogICAgICAgIGRvY3VtZW50
+LmZvcm1zWydsb2dpbmZvcm0nXS5lbGVtZW50c1snbmFtZSddLmZvY3VzKCk7CiAg
+ICB9CiAgICAKICAgIC8vIFBhZ2UgdmlldyBzdHVmZgogICAgdXBkYXRlX2VkaXRf
+bGlua3MoKTsKICAgIGFkZF9ndWlfZWRpdG9yX2xpbmtzKCk7CiAgICAKICAgIC8v
+IEVkaXRvciBzdHVmZgogICAgc2hvd19zd2l0Y2gyZ3VpKCk7CgogICAgLy8gRW5h
+YmxlIG1lbnUgaXRlbSAiVG9nZ2xlQ29tbWVudHMiIGlmIGlubGluZSBjb21tZW50
+cyBleGlzdAogICAgc2hvd190b2dnbGVDb21tZW50cygpOwogCiAgICAvLyBkYXRh
+IGJyb3dzZXIgd2lkZ2V0CiAgICBkYndfaGlkZV9idXR0b25zKCk7Cn0KCgpmdW5j
+dGlvbiBiZWZvcmVfdW5sb2FkKGV2dCkgewogICAgLy8gVE9ETzogQmV0dGVyIHRv
+IHNldCB0aGlzIGluIHRoZSBlZGl0b3IgaHRtbCwgYXMgaXQgZG9lcyBub3QgbWFr
+ZQogICAgLy8gc2Vuc2UgZWxzZWh3ZXJlLgogICAgLy8gY29uZmlybWxlYXZpbmcg
+aXMgYXZhaWxhYmxlIHdoZW4gZWRpdGluZwogICAgdHJ5IHtyZXR1cm4gY29uZmly
+bWxlYXZpbmcoKTt9CiAgICBjYXRjaCAoZSkge30KfQoKLy8gSW5pdGlhbGl6ZSBh
+ZnRlciBsb2FkaW5nIHRoZSBwYWdlCmFkZExvYWRFdmVudChsb2FkKQoKLy8gQ2F0
+Y2ggYmVmb3JlIHVubG9hZGluZyB0aGUgcGFnZQp3aW5kb3cub25iZWZvcmV1bmxv
+YWQgPSBiZWZvcmVfdW5sb2FkCgpmdW5jdGlvbiBkYndfdXBkYXRlX3NlYXJjaChk
+YndfaWQpCnsKICAgIHZhciB0YWJsZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlk
+KGRid19pZCsndGFibGUnKTsKICAgIHZhciBjZWxsOwogICAgdmFyIHNob3duOwog
+ICAgdmFyIGkKICAgIHZhciBjb2xzID0gdGFibGUucm93c1swXS5jZWxscy5sZW5n
+dGg7CiAgICB2YXIgZmlsdGVyID0gbmV3IEFycmF5KCk7CiAgICB2YXIgZG9maWx0
+ZXIgPSBuZXcgQXJyYXkoKTsKICAgIHZhciBmb3JtID0gZG9jdW1lbnQuZm9ybXNb
+ZGJ3X2lkKydmb3JtJ107CgogICAgZm9yIChpID0gMDsgaSA8IGNvbHM7IGkrKykg
+ewogICAgICAgIGRvZmlsdGVyW2ldID0gZmFsc2U7CiAgICAgICAgaWYgKGZvcm1b
+ZGJ3X2lkKydmaWx0ZXInK2ldKSB7CiAgICAgICAgICAgIGRvZmlsdGVyW2ldID0g
+dHJ1ZTsKICAgICAgICAgICAgZmlsdGVyW2ldID0gZm9ybVtkYndfaWQrJ2ZpbHRl
+cicraV0udmFsdWU7CiAgICAgICAgICAgIGlmIChmaWx0ZXJbaV0gPT0gJ1thbGxd
+JykKICAgICAgICAgICAgICAgIGRvZmlsdGVyW2ldID0gZmFsc2U7CiAgICAgICAg
+ICAgIGlmIChmaWx0ZXJbaV0gPT0gJ1tlbXB0eV0nKQogICAgICAgICAgICAgICAg
+ZmlsdGVyW2ldID0gJyc7CiAgICAgICAgfQogICAgfQoKICAgIGZvciAoaSA9IDE7
+IGkgPCB0YWJsZS5yb3dzLmxlbmd0aDsgaSsrKSB7CiAgICAgICAgdmFyIHNob3cg
+PSB0cnVlOwogICAgICAgIGZvciAoY29sID0gMDsgY29sIDwgY29sczsgY29sKysp
+IHsKICAgICAgICAgICAgaWYgKCFkb2ZpbHRlcltjb2xdKQogICAgICAgICAgICAg
+ICAgY29udGludWU7CgogICAgICAgICAgICBjZWxsID0gdGFibGUucm93c1tpXS5j
+ZWxsc1tjb2xdOwoKICAgICAgICAgICAgaWYgKGZpbHRlcltjb2xdID09ICdbbm90
+ZW1wdHldJykgewogICAgICAgICAgICAgICAgaWYgKGNlbGwuYWJiciA9PSAnJykg
+ewogICAgICAgICAgICAgICAgICAgIHNob3cgPSBmYWxzZTsKICAgICAgICAgICAg
+ICAgICAgICBicmVhazsKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfSBl
+bHNlIGlmIChmaWx0ZXJbY29sXSAhPSBjZWxsLmFiYnIpIHsKICAgICAgICAgICAg
+ICAgIHNob3cgPSBmYWxzZTsKICAgICAgICAgICAgICAgIGJyZWFrOwogICAgICAg
+ICAgICB9CiAgICAgICAgfQogICAgICAgIGlmIChzaG93KQogICAgICAgICAgICB0
+YWJsZS5yb3dzW2ldLnN0eWxlLmRpc3BsYXkgPSAnJzsKICAgICAgICBlbHNlCiAg
+ICAgICAgICAgIHRhYmxlLnJvd3NbaV0uc3R5bGUuZGlzcGxheSA9ICdub25lJzsK
+ICAgIH0KfQoKZnVuY3Rpb24gZGJ3X2hpZGVfYnV0dG9ucygpIHsKICAgIHZhciBm
+b3JtOwogICAgdmFyIGVsZW07CiAgICB2YXIgbmFtZTsKCiAgICBmb3IgKHZhciBm
+aWR4ID0gMDsgZmlkeCA8IGRvY3VtZW50LmZvcm1zLmxlbmd0aDsgZmlkeCsrKSB7
+CiAgICAgICAgZm9ybSA9IGRvY3VtZW50LmZvcm1zW2ZpZHhdOwogICAgICAgIGZv
+ciAodmFyIGVpZHggPSAwOyBlaWR4IDwgZm9ybS5lbGVtZW50cy5sZW5ndGg7IGVp
+ZHgrKykgewogICAgICAgICAgICBlbGVtID0gZm9ybS5lbGVtZW50c1tlaWR4XTsK
+ICAgICAgICAgICAgbmFtZSA9IGVsZW0ubmFtZTsKICAgICAgICAgICAgaWYgKG5h
+bWUpIHsKICAgICAgICAgICAgICAgIGlmIChuYW1lLmluZGV4T2YoJ2Ridy4nKSA+
+PSAwICYmIG5hbWUuc3Vic3RyKC03KSA9PSAnLnN1Ym1pdCcpCiAgICAgICAgICAg
+ICAgICAgICAgZWxlbS5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOwogICAgICAgICAg
+ICB9CiAgICAgICAgfQogICAgfQp9CgovKiAgZ2V0RWxlbWVudHNCeUNsYXNzTmFt
+ZQogICAgRGV2ZWxvcGVkIGJ5IFJvYmVydCBOeW1hbiwgaHR0cDovL3d3dy5yb2Jl
+cnRueW1hbi5jb20KICAgIENvZGUvbGljZW5zaW5nOiBodHRwOi8vY29kZS5nb29n
+bGUuY29tL3AvZ2V0ZWxlbWVudHNieWNsYXNzbmFtZS8gKE1JVCBsaWNlbnNlKQog
+ICAgVmVyc2lvbjogMS4wLjEKKi8gIAp2YXIgZ2V0RWxlbWVudHNCeUNsYXNzTmFt
+ZSA9IGZ1bmN0aW9uIChjbGFzc05hbWUsIHRhZywgZWxtKXsKICAgIGlmIChkb2N1
+bWVudC5nZXRFbGVtZW50c0J5Q2xhc3NOYW1lKSB7CiAgICAgICAgZ2V0RWxlbWVu
+dHNCeUNsYXNzTmFtZSA9IGZ1bmN0aW9uIChjbGFzc05hbWUsIHRhZywgZWxtKSB7
+CiAgICAgICAgICAgIGVsbSA9IGVsbSB8fCBkb2N1bWVudDsKICAgICAgICAgICAg
+dmFyIGVsZW1lbnRzID0gZWxtLmdldEVsZW1lbnRzQnlDbGFzc05hbWUoY2xhc3NO
+YW1lKSwKICAgICAgICAgICAgICAgIG5vZGVOYW1lID0gKHRhZyk/IG5ldyBSZWdF
+eHAoIlxcYiIgKyB0YWcgKyAiXFxiIiwgImkiKSA6IG51bGwsCiAgICAgICAgICAg
+ICAgICByZXR1cm5FbGVtZW50cyA9IFtdLAogICAgICAgICAgICAgICAgY3VycmVu
+dDsKICAgICAgICAgICAgZm9yKHZhciBpPTAsIGlsPWVsZW1lbnRzLmxlbmd0aDsg
+aTxpbDsgaSs9MSl7CiAgICAgICAgICAgICAgICBjdXJyZW50ID0gZWxlbWVudHNb
+aV07CiAgICAgICAgICAgICAgICBpZighbm9kZU5hbWUgfHwgbm9kZU5hbWUudGVz
+dChjdXJyZW50Lm5vZGVOYW1lKSkgewogICAgICAgICAgICAgICAgICAgIHJldHVy
+bkVsZW1lbnRzLnB1c2goY3VycmVudCk7CiAgICAgICAgICAgICAgICB9CiAgICAg
+ICAgICAgIH0KICAgICAgICAgICAgcmV0dXJuIHJldHVybkVsZW1lbnRzOwogICAg
+ICAgIH07CiAgICB9CiAgICBlbHNlIGlmIChkb2N1bWVudC5ldmFsdWF0ZSkgewog
+ICAgICAgIGdldEVsZW1lbnRzQnlDbGFzc05hbWUgPSBmdW5jdGlvbiAoY2xhc3NO
+YW1lLCB0YWcsIGVsbSkgewogICAgICAgICAgICB0YWcgPSB0YWcgfHwgIioiOwog
+ICAgICAgICAgICBlbG0gPSBlbG0gfHwgZG9jdW1lbnQ7CiAgICAgICAgICAgIHZh
+ciBjbGFzc2VzID0gY2xhc3NOYW1lLnNwbGl0KCIgIiksCiAgICAgICAgICAgICAg
+ICBjbGFzc2VzVG9DaGVjayA9ICIiLAogICAgICAgICAgICAgICAgeGh0bWxOYW1l
+c3BhY2UgPSAiaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIsCiAgICAgICAg
+ICAgICAgICBuYW1lc3BhY2VSZXNvbHZlciA9IChkb2N1bWVudC5kb2N1bWVudEVs
+ZW1lbnQubmFtZXNwYWNlVVJJID09PSB4aHRtbE5hbWVzcGFjZSk/IHhodG1sTmFt
+ZXNwYWNlIDogbnVsbCwKICAgICAgICAgICAgICAgIHJldHVybkVsZW1lbnRzID0g
+W10sCiAgICAgICAgICAgICAgICBlbGVtZW50cywKICAgICAgICAgICAgICAgIG5v
+ZGU7CiAgICAgICAgICAgIGZvcih2YXIgaj0wLCBqbD1jbGFzc2VzLmxlbmd0aDsg
+ajxqbDsgais9MSl7CiAgICAgICAgICAgICAgICBjbGFzc2VzVG9DaGVjayArPSAi
+W2NvbnRhaW5zKGNvbmNhdCgnICcsIEBjbGFzcywgJyAnKSwgJyAiICsgY2xhc3Nl
+c1tqXSArICIgJyldIjsKICAgICAgICAgICAgfQogICAgICAgICAgICB0cnkgewog
+ICAgICAgICAgICAgICAgZWxlbWVudHMgPSBkb2N1bWVudC5ldmFsdWF0ZSgiLi8v
+IiArIHRhZyArIGNsYXNzZXNUb0NoZWNrLCBlbG0sIG5hbWVzcGFjZVJlc29sdmVy
+LCAwLCBudWxsKTsKICAgICAgICAgICAgfQogICAgICAgICAgICBjYXRjaCAoZSkg
+ewogICAgICAgICAgICAgICAgZWxlbWVudHMgPSBkb2N1bWVudC5ldmFsdWF0ZSgi
+Li8vIiArIHRhZyArIGNsYXNzZXNUb0NoZWNrLCBlbG0sIG51bGwsIDAsIG51bGwp
+OwogICAgICAgICAgICB9CiAgICAgICAgICAgIHdoaWxlICgobm9kZSA9IGVsZW1l
+bnRzLml0ZXJhdGVOZXh0KCkpKSB7CiAgICAgICAgICAgICAgICByZXR1cm5FbGVt
+ZW50cy5wdXNoKG5vZGUpOwogICAgICAgICAgICB9CiAgICAgICAgICAgIHJldHVy
+biByZXR1cm5FbGVtZW50czsKICAgICAgICB9OwogICAgfQogICAgZWxzZSB7CiAg
+ICAgICAgZ2V0RWxlbWVudHNCeUNsYXNzTmFtZSA9IGZ1bmN0aW9uIChjbGFzc05h
+bWUsIHRhZywgZWxtKSB7CiAgICAgICAgICAgIHRhZyA9IHRhZyB8fCAiKiI7CiAg
+ICAgICAgICAgIGVsbSA9IGVsbSB8fCBkb2N1bWVudDsKICAgICAgICAgICAgdmFy
+IGNsYXNzZXMgPSBjbGFzc05hbWUuc3BsaXQoIiAiKSwKICAgICAgICAgICAgICAg
+IGNsYXNzZXNUb0NoZWNrID0gW10sCiAgICAgICAgICAgICAgICBlbGVtZW50cyA9
+ICh0YWcgPT09ICIqIiAmJiBlbG0uYWxsKT8gZWxtLmFsbCA6IGVsbS5nZXRFbGVt
+ZW50c0J5VGFnTmFtZSh0YWcpLAogICAgICAgICAgICAgICAgY3VycmVudCwKICAg
+ICAgICAgICAgICAgIHJldHVybkVsZW1lbnRzID0gW10sCiAgICAgICAgICAgICAg
+ICBtYXRjaDsKICAgICAgICAgICAgZm9yKHZhciBrPTAsIGtsPWNsYXNzZXMubGVu
+Z3RoOyBrPGtsOyBrKz0xKXsKICAgICAgICAgICAgICAgIGNsYXNzZXNUb0NoZWNr
+LnB1c2gobmV3IFJlZ0V4cCgiKF58XFxzKSIgKyBjbGFzc2VzW2tdICsgIihcXHN8
+JCkiKSk7CiAgICAgICAgICAgIH0KICAgICAgICAgICAgZm9yKHZhciBsPTAsIGxs
+PWVsZW1lbnRzLmxlbmd0aDsgbDxsbDsgbCs9MSl7CiAgICAgICAgICAgICAgICBj
+dXJyZW50ID0gZWxlbWVudHNbbF07CiAgICAgICAgICAgICAgICBtYXRjaCA9IGZh
+bHNlOwogICAgICAgICAgICAgICAgZm9yKHZhciBtPTAsIG1sPWNsYXNzZXNUb0No
+ZWNrLmxlbmd0aDsgbTxtbDsgbSs9MSl7CiAgICAgICAgICAgICAgICAgICAgbWF0
+Y2ggPSBjbGFzc2VzVG9DaGVja1ttXS50ZXN0KGN1cnJlbnQuY2xhc3NOYW1lKTsK
+ICAgICAgICAgICAgICAgICAgICBpZiAoIW1hdGNoKSB7CiAgICAgICAgICAgICAg
+ICAgICAgICAgIGJyZWFrOwogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAg
+ICAgICAgIH0KICAgICAgICAgICAgICAgIGlmIChtYXRjaCkgewogICAgICAgICAg
+ICAgICAgICAgIHJldHVybkVsZW1lbnRzLnB1c2goY3VycmVudCk7CiAgICAgICAg
+ICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgICAgcmV0dXJuIHJldHVy
+bkVsZW1lbnRzOwogICAgICAgIH07CiAgICB9CiAgICByZXR1cm4gZ2V0RWxlbWVu
+dHNCeUNsYXNzTmFtZShjbGFzc05hbWUsIHRhZywgZWxtKTsKfTsKCg==
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline; filename=common.css
+Content-Type: text/css; name=common.css
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/css/common.css
+Content-Transfer-Encoding: 8bit
+
+/* standard rule ---- */
+hr {
+    height: 1pt;
+    background-color: #C1B496; /* ubuntu dark tan */
+    border: 0;
+}
+
+/* custom rules ----- to ---------- */
+.hr1 {height: 2pt;}
+.hr2 {height: 3pt;}
+.hr3 {height: 4pt;}
+.hr4 {height: 5pt;}
+.hr5 {height: 6pt;}
+.hr6 {height: 7pt;}
+
+/* Replacement for html 3 u tag */
+.u {text-decoration: underline;}
+
+/* eye catchers */
+.warning 
+{
+	color: red;
+}
+
+.error 
+{
+	color: red;
+}
+
+strong.highlight 
+{
+	background-color: #edddba; /* ubuntu pale orange */
+	padding: 1pt;
+}
+
+
+/* Recent changes */
+
+.rcrss {
+	float: right;
+	margin: 0;
+}
+
+.recentchanges[dir="rtl"] .rcrss {
+	float: left;
+}
+
+.recentchanges table {
+	clear: both;
+}
+
+.recentchanges td {
+	vertical-align: top;
+	border: none;
+	border-bottom: 1pt solid #C1B496; /* ubuntu dark tan */
+	background: white;
+}
+
+.rcdaybreak td {
+	background: #EDD097; /* classic: deep yellow */
+	border: none;
+}
+
+.rcdaybreak td a {
+	font-size: 0.88em;
+}
+
+.rcicon1, .rcicon2 {
+	text-align: center;
+}
+
+.rcpagelink {
+	width: 33%;
+}
+
+.rctime {
+	font-size: 0.88em;
+	white-space: nowrap;
+}
+
+.rceditor {
+	white-space: nowrap;
+	font-size: 0.88em;
+}
+
+.rccomment {
+	width: 66%;
+	color: #C1B496; /* ubuntu dark tan */
+	font-size: 0.88em;
+	font-weight: bold;
+}
+
+
+/* User Preferences */
+
+.userpref table, .userpref td {
+	border: none;
+}
+
+/* CSS for new code_area markup used by Colorizer and ParserBase */
+
+div.codearea { /* the div makes the border */
+	margin: 4pt 0;
+	padding: 0;
+	border: 1pt solid #C1B496; /* ubuntu dark tan */
+	background-color: #F7F6F5;  / * light grey */
+	color: black;
+}
+
+div.codearea pre { /* the pre has no border and is inside the div */
+	margin: 0;
+	padding: 4pt;
+	border: none;
+	white-space: pre-wrap;
+}
+
+a.codenumbers { /* format of the line numbering link */
+	margin: 0 4pt;
+	font-size: 0.85em;
+	color: #6d4c07; /* ubuntu dark brown */
+}
+
+/* format of certain syntax spans */
+div.codearea pre span.LineNumber {color: gray;}
+div.codearea pre span.ID         {color: #000000;}
+div.codearea pre span.Operator   {color: #0000C0;}
+div.codearea pre span.Char       {color: #004080;}
+div.codearea pre span.Comment    {color: #008000;}
+div.codearea pre span.Number     {color: #0080C0;}
+div.codearea pre span.String     {color: #004080;}
+div.codearea pre span.SPChar     {color: #0000C0;}
+div.codearea pre span.ResWord    {color: #A00000;}
+div.codearea pre span.ConsWord   {color: #008080; font-weight: bold;}
+div.codearea pre span.Error      {color: #FF8080; border: solid 1.5pt #FF0000;}
+div.codearea pre span.ResWord2   {color: #0080ff; font-weight: bold;}
+div.codearea pre span.Special    {color: #0000ff;}
+div.codearea pre span.Preprc     {color: #803999;}
+
+
+/* Search results */
+
+.searchresults dt {
+    margin-top: 1em;
+	font-weight: normal;
+}
+
+.searchresults dd {
+	font-size: 0.85em;
+}
+
+/* MonthCalendar css */
+
+/* days without and with pages linked to them */
+a.cal-emptyday {
+    color: #777777;
+    text-align: center;
+}
+a.cal-usedday {
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+}
+/* general stuff: workdays, weekend, today */
+td.cal-workday {
+    background-color: #F1F1ED; /* ubuntu near-white */
+    text-align: center;
+}
+td.cal-weekend {
+    background-color: #edddba; /* ubuntu pale orange */
+    text-align: center;
+}
+td.cal-today {
+    background-color: #DBBA75; /* ubuntu orange */
+    border-style: solid;
+    border-width: 2pt;
+    text-align: center;
+}
+/* invalid places on the monthly calendar sheet */
+td.cal-invalidday {
+    background-color: #CCCCCC;
+}
+/* links to prev/next month/year */
+a.cal-link {
+    color: #F1F1ED; /* ubuntu near-white */
+    text-decoration: none;
+}
+th.cal-header {
+    background-color: #6d4c07; /* ubuntu dark brown */
+    color: white;
+    text-align: center;
+}
+
+/* for MonthCalendar mouseover info boxes */
+TABLE.tip {
+    color: black;
+	border: 1px solid #C1B496; /* ubuntu dark tan */
+	background-color: #f0eee6; /* ubuntu light salmon */
+    font-size: small;
+    font-weight: normal;
+}
+
+TH.tip {
+    background-color: #DBBA75; /* ubuntu orange */
+    font-weight: bold;
+    text-align: center;
+}
+
+TD.tip {
+    text-align: left;
+}
+*[dir="rtl"] TD.tip {
+    text-align: right;
+}
+
+/* end MonthCalendar stuff */
+
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline
+Content-Type: text/css
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/css/typography.css
+Content-Transfer-Encoding: 8bit
+
+body
+{
+	margin: 0 auto;
+	width: 984px;
+	font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, sans-serif;
+	background: #ecebe9;
+	font-size: 13px;
+	background: url("../images/dotted-bg.png");
+	line-height: 1.5;
+	color: #333;
+}
+
+table{
+	padding:12px !important;
+	margin-left:20px !important;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+table .table-of-contents ol{
+	padding-left:20px;
+}
+
+.clearBoth
+{
+	clear: both;
+}
+
+
+h1
+{	
+	font-size: 28px;
+	line-height: 40px;
+	margin: 0 0 8px;
+	font-weight: normal;
+}
+
+h1.pagetitle
+{
+	margin: 64px 0 0 8px;
+	height: 138px;
+	color: #741546;
+}
+
+#content h1{
+	border-top:1px solid #999;
+	padding-top:10px;
+	line-height: 1.2;
+}
+
+#content h1:first-of-type{
+	border:0;
+}
+
+h2
+{
+	border-top: 1px dotted #AEA79F;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 28px;
+    margin: 16px 0 8px;
+    padding-top: 16px;
+}
+
+h3
+{
+	font-size: 16px;
+	line-height: 24px;
+	margin: 0 0 8px 0;
+	font-weight: bold;
+}
+
+h4
+{
+	font-size: 13px;
+	margin: 18px 0 8px;
+	text-transform:uppercase;
+	font-weight: normal;
+}
+
+p
+{
+	font-size: 13px;
+	margin: 0 0 1em 0;
+}
+
+a
+{
+	color: #dd4814;
+	text-decoration: none;
+}
+
+a img
+{
+	border: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #dd4814;
+}
+
+pre{
+	width:100%;
+	overflow-x: auto;
+}
+
+.strike
+{
+	text-decoration: line-through;
+}
+
+.diff-removed
+{
+	background-color: #CCFFCC;
+}
+
+.diff-added
+{
+	background-color: #FFFFCC;
+}
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/images/dotted-bg.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAMAAACeL25MAAAAGXRFWHRTb2Z0d2Fy
+ZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////zsrFFOhhzwAAAA9JREFU
+eNpiYGTAAAABBgAAJwAC/BnsgQAAAABJRU5ErkJggg==
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline
+Content-Type: text/css
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/css/general.css
+Content-Transfer-Encoding: 8bit
+
+#wrapper
+{
+	background: #f7f7f7;
+	-moz-box-shadow: 0 0 2px #bbb;
+	-webkit-box-shadow: 0 0 2px #bbb;
+	-moz-border-radius: 0 0 4px 4px;
+	-webkit-border-radius: 0 0 4px 4px;
+	z-index: 2;
+	position: relative;
+}
+
+#header
+{
+	background-color: white;
+}
+
+#header ul#mothership
+{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	height: 20px;
+}
+
+#header ul#mothership li
+{
+	float: right;
+	padding: 3px 0;
+	margin: 0 16px 0 0;
+	font-size: 10px;
+	line-height: 14px;
+}
+
+#header ul#mothership a
+{
+	color: #333;
+}
+
+#header #orangeHeader
+{
+	height: 72px;
+	background: #d05630 url('../images/orangeheader-tile.png') repeat-x top left;
+  -moz-border-radius: 0 0 4px 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-radius: 0 0 4px 4px;
+}
+
+#header #orangeHeader h1
+{
+	margin: 0;
+    width: 350px;
+    float: left;
+}
+
+#header #orangeHeader a
+{
+	display: block;
+	height: 72px;
+	width: 198px;
+	background: url('../images/ubuntu-wiki.png') no-repeat center center;
+	padding-left: 40px;
+}
+
+#header #orangeHeader span
+{
+	display: none;
+}
+/* search box in header */
+
+#search-box {
+    float: right;
+    margin-top: 24px;
+    margin-right: 20px;
+}
+#searchinput {
+    float: left;
+}
+#fullsearch {
+    display: none;
+}
+
+#search-box #titlesearch {
+    float: left;
+    background: url("../images/search_button_sprite.png") transparent;
+    width: 24px;
+    height: 24px;
+    margin: 1px 0 0 8px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    text-indent: 50px;
+    float: left;
+}
+
+
+#pageTitle
+{
+	margin: 10px 0;
+	color: #aea79f;
+}
+
+#main
+{
+	background: #f7f6f5;
+}
+#container
+{
+	margin: 0 0 0 20px;
+	width: 944px;
+	float: left;
+}
+
+#secondary
+{
+	margin: 40px 20px 0 0;
+	width: 224px;
+	float: right;
+}
+
+.post
+{
+	background: #fff;
+	margin: 0 0 16px 0;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 20px;
+	-moz-box-shadow: 0px 1px 2px #CCC;
+	-webkit-box-shadow: 0px 1px 2px #CCC;
+	box-shadow: 0px 1px 2px #CCC;
+}
+
+.post .postHeader
+{
+	border-bottom: 1px dotted #aea79f;
+	margin: 0 0 8px 0;
+}
+
+.post .postHeader h2
+{
+	width: 560px;
+	float: left;
+	margin-bottom: 4px;
+}
+
+.post .postHeader h3
+{
+	width: 560px;
+	float: left;
+	color: #aea79f;
+	margin-bottom: 16px;
+}
+
+.post .postHeader h2.entry-title,
+.post .postHeader h2.entry-title a
+{
+	color: #333333;
+}
+.post .postHeader img
+{
+	float: right;
+	max-height: 56px;
+	padding-top: 4px;
+}
+
+.post .entry-content
+{
+	border-bottom: 1px dotted #aea79f;
+	padding-bottom: 8px;
+}
+
+.post .entry-content p
+{
+	clear: both;
+}
+
+.post .entry-content img
+{
+	float: left;
+	margin: 0 8px 8px 0;
+}
+
+.post .entry-utility
+{
+	margin: 8px 0 0;
+	text-align: right;
+}
+
+.post .entry-utility .cat-links a
+{
+	color: #888;
+}
+
+.xoxo
+{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+.widgetcontainer
+{
+	background: #fff;
+	margin: 0 0 16px 0;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 0 0 1em 0;
+	-moz-box-shadow: 0px 2px 2px #CCC;
+	-webkit-box-shadow: 0px 2px 3px #CCC;
+	box-shadow: 0px 2px 3px #CCC;
+}
+
+.widgetcontainer .widgettitle
+{
+	padding: 10px 8px;
+	background: url("../images/sidebox_stripes.png");
+	-moz-border-top-left-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	-moz-border-top-right-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	font-size: 18px;
+}
+
+.widgetcontainer p
+{
+	margin: 0 8px 1em 8px;
+}
+
+.widgetcontainer p:last-child
+{
+	margin: 0 8px;
+}
+
+.widgetcontainer a
+{
+	color: #333;
+}
+
+.widgetcontainer p a
+{
+	text-decoration: underline;
+}
+
+.widgetcontainer ul
+{
+	margin: 0 8px;
+	padding: 0;
+	list-style-type: none;
+}
+
+.widgetcontainer ul li
+{
+	padding: 6px 0;
+	border-bottom: 1px dotted #aea79f;
+}
+
+.widgetcontainer ul li:last-child
+{
+	border: 0;
+}
+
+#footer
+{
+	background: #F7F6F5;
+	z-index: 1;
+	position: relative;
+	color: #aea79f;
+	padding: 56px 16px 16px 16px;
+}
+
+#footer p
+{
+	margin: 0;
+	font-size: 10px;
+	line-height: 14px;
+}
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/images/orangeheader-tile.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAADAAAABACAYAAABcIPRGAAAAAXNSR0IArs4c6QAA
+AAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sC
+EQw0LKagQ6YAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAB
+wklEQVRo3u2Sy1IiQRBFj6l0Azoyw8MHovgJfsqs5k/mP126FEVURBTGR1e34iyq
+pTHCjhCVRUZkrU6cyKyqG3GXjv7+fok6xwAU2/toY9H8+WJ7H9H8+ahzjGj+vFXI
+KmQVsgpZhaxCViGr0JcrtNfOpEKW6KSTSYXsK7S7l0llLGFrl+j0BACNLK57msoW
+GlkAwp0WrttFI0vY3MGdpVIhi+udZVIh+wo1mzNSF0u4vY3r9bxUyOLOzwEItrbQ
+yAIQbG4SX1ygkSXY2CC+vPRSIUvc76eygUb2FWo0iPtXXtbri+Xveiu9R4J6jfjq
+daBGPBgslr/rrfQeiQfXABRqVTSyABSqVZLrIRpZCtVfJMNXqY8lGd54+bOCRvYV
+qlRIbkdoZFmprJOMvHzD6z/m43l38+Y/4mdYnkbj6fAbHv+bj+fdzZv/iJ9h8bA2
+M6yLZXltlafxHQAaWZ7v7r1cLaORBUDKJZ7vH9DIIuUSk4fHqVTHUygVM1kKed/n
+cbjgmfxdX6FiyOQxImPH+z6P3YJn8ndFwoBJlA5o5ImLM6mQlw7/HLyg+AjKjwWw
+ABbAAlgAC2ABLIAFsAAW4NPnP2ZH0iGQBVVYAAAAAElFTkSuQmCC
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/images/ubuntu-wiki.png
+Content-Transfer-Encoding: Base64
+
+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
+w38CDADtZ16zHMoaUwAAAABJRU5ErkJggg==
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline
+Content-Type: image/png
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/images/search_button_sprite.png
+Content-Transfer-Encoding: Base64
+
+iVBORw0KGgoAAAANSUhEUgAAABgAAABICAYAAADs+TUPAAAAGXRFWHRTb2Z0d2Fy
+ZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABexJREFUeNrsWH1sFFUQf7u31/buKMVe
+WxGRQiCSYAqtSKPGj4ghUZAECKYVDKgxfoQoEeSIpjFgRQORKho1MUpSI0RCU4zW
+qEHboP5hmjZYsQ0Vbb3S9kCOcl+96+3t7nPm8u7cXvftba8lGuMkk2t2Z36/ffPm
+zcwrIf+ktLW1SdFodGM8Hj+WSCROU0oVVPwbn+E7tMkFW/D5fDcBUAfNImiDtuhj
+FVyMRCK7NU2LUYuCtuiDvlbA36Q5CvqakQh+v38Lz1mNRqh3SyWVh/pMSRDDMFwe
+j6dQURSfmfPQzjXU99JDpgSyLPfv2bNnxoTQDA8PP54tBHHvWdr3wBwa+f4zUzvE
+ygxVXiAQOGElzpcP11Pv5opkyHgSCoWaEZPoWKSCgoJlVlJsVu1zyd/AJ29wbfLz
+81cgpv5ZoaqqIavZEm5tSoYq4R/mpa0MmDP1KxDhueWDolwaJILDRcQCl+F7PH+Z
+mVQUi8X6rXx94uJ52r++nAZbDnNtEAsx9SvQwuFwt5Wv97/jIfZ5i8nM+7dwbRiW
+pidQvV7vt9nAo+0nSbSjlZQ+exA8bVw7hqWOS9OqqqpyWNoAd92qQgceW0Evvb3L
+NISAMVRZWTk/labpg4YZeOrUqZ3cghaP0Qsvb6VqaMSUADEQy6gmIeP1586d+zjX
+Yoe+iIFHwbDYgbrKysoWdnV1vYu5PIlyLaMP+iKGWW/AZRWCzqurq1sXDAa7s4Gj
+TX19/QbwKWe+2XsCqAP02uLi4iUtLS27BwcHvwGgszrQs1DQWvEd2qAt8xGNwsIL
+l8ScsPQ62R6l6osCiuUgChoBjbFn1CqBfjWY8Hb2mz6YLM8T7Fcj/1kxDdHR6iJp
+WZG0ziYID4oCudEmkIpkXaHkjEbJryqlx7uCyqeb2oPKZAmEH+8pXlKcJzYC6HKz
+jwCyzhFZ23pr20iP0SYb5ax4ZpXbU5IvdmQDR0EbtEUfK2mK4A1Om7A9l3hHVXqo
+4uTlHfqs0jMKnfe6H+aBi9DB5jWeJvY5C7gE6IsY+g9PEzyxwDGjUBL285y12Ci0
+yiHifnKf6SpmSMLe7YucrkwC8dH5jhqI52zTbvbWTuK4+W7iumMt10YSyPzaGwpq
+U9jpscVhE9Zki7E80EuCze8R91P7kiHjicsmrE6VlTRBvkgszUWpeSg1HxlJniis
+yCSwSYJQYoUA92Lkw72kaMPTRHJfZxwmMVldpfFz0SQuEFLpXEKBSBsb5cxFJD0X
+pbMI7kZ+S+Blc5PhGWl8jWijIUObBKV/ZmaRNqpQS3NRybYDJAGbHfryI64Nwxo/
+Fw3FtKxzkbN6FXHespJcgnQlmsq1Y1iqnkB5sTvSHNfoeX7rsSUPGX653PcL1www
+hgHrBOtwfxP0hJRgV0A5xC27kp3If/QkY28mgNEAWIEUgZAxF5W23nXN/nKnbXMu
+xc4bVY+s/O4K3jYxYeKE9Vmi77MtPrnjzhK73Z0vVgrj33MFUjzRG1be39QeejWm
+JrNxLF3OM/sHGCSOnh/rhEbyQ0WRtBROZakZeEShPR/0x7Y981P4OAOP6huPwJkk
+cPSbOcsuuF9fWrh2SaG0yiUJc6FSLmagvVD7h7tDytfP/xz+PJCgl+FxiIVF+38u
++hfORb/fV3JVwBd+5U9eX02nEtD1oEdAO9hGKuzvI+wd96wgttl/qzAlsWRWG7xb
+znQTaDsoXjl7eVliJDjbnOaAZ0o1s91hleAA6EF2BqyKg/kcyEZQA7or18GL+dbw
+CPLYV0xp8AJ5RX9H1hNsZFfQKQ1eIIsY1gSCaRu89FhiRupNy+AFcpsRwezpGrz0
+oRZzKQHZBi9WyicQXJiuwQsnFyOCzukavPRYeoIvpmvw0mPpCZpAf5vq4AXSz7Am
+EODG1E118AJ5gbfJKMdAGwxruzxGLtY/QrTwFTPwBoZhWk09bCXyJDI3tXqPlXKN
+u4cVbSlrJtkEbaqYz4SdN+to2KFuZ21xIytiy3Vp2M/CccII2ApBajVN+qyYrIjk
+KstfAgwAb4CIGeH43pIAAAAASUVORK5CYII=
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline; filename=screen.css
+Content-Type: text/css; name=screen.css
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/css/screen.css
+Content-Transfer-Encoding: 8bit
+
+@import url('typography.css');
+@import url('general.css');
+
+#wikinav {
+    -moz-border-radius: 4px 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 4px;
+    margin: 0 16px 5px;
+    background-color: white;
+    -moz-box-shadow: 1px 1px 1px #bbb;
+    -webkit-box-shadow: 1px 1px 1px #bbb;
+    box-shadow: 1px 1px 1px #bbb;
+    height: 42px;
+}
+#wikinav ul {
+    display: inline;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-left: 0;
+}
+
+#wikinav li {
+    display: block;
+    font-size: 12px;
+    float: left;
+    height: 30px;
+    padding: 12px 10px 0;
+    margin-bottom: 0;
+    border-right: 1px solid #e9e9e9;
+    color: #333;
+}
+#wikinav li a {
+    color: #333;
+}
+
+#wikinav hr {
+    border: 0;
+    width: 100%;
+    color: #d9d9d9;
+    background-color: #d9d9d9;
+    margin: 0;
+    padding: 0;
+}
+#wikinav select {
+    width: 140px;
+    margin-top: 0;
+}
+
+/* header / title area */
+
+h2.entry-title {
+    font-size: 36px;
+    line-height: 40px;
+    margin: 24px 0 32px 0;
+    padding: 0 6px;
+    border:0px;
+}
+
+h2.entry-title a {
+    text-decoration: none;
+    color: #333;
+}
+
+#pagebottom {
+    clear: both;
+}
+
+/* modal message box - should stand out */
+#message {
+    padding: 8px 16px;
+    margin: 8px 0;
+    border: 2px #F7F6F5 solid;
+    font-size: 14px;
+    background-color: white;
+    -moz-border-radius: 4px 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 4px;
+    -moz-box-shadow: 1px 1px 1px #bbb;
+    -webkit-box-shadow: 1px 1px 1px #bbb;
+    box-shadow: 1px 1px 1px #bbb;
+}
+#message p {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+#message p.status {
+    font-weight: 400;
+}
+
+/* editor page styles */
+
+textarea {
+    display: block;
+    width: 100%;
+    font-size: 100%;
+}
+
+/* quick links menu */
+#wikinav .quicklinks li ul { 
+    font-size:.8em;
+    margin-bottom:1.875em;
+    line-height:1.875em; 
+}
+
+#wikinav .quicklinks li ul li{
+    display: block;
+    border: 1px solid #F58539;
+    background-color: #fff;
+    padding: 3px;
+}
+#wikinav .quicklinks li ul li.current {
+    background-color: #efefef;
+}
+#wikinav .quicklinks li ul li a {
+    color: #4A2811;
+    text-decoration: none;
+    border-bottom-style: none;
+    margin-right: 0;
+}
+
+#wikinav .quicklinks li ul li:hover {
+    background-color: #f5d4bf;
+}
+
+#wikinav .quicklinks li ul li.current:hover {
+    background-color: #efefef;
+}
+
+#wikinav .quicklinks li ul li:hover a {
+    color: #000;
+}
+
+#wikinav .quicklinks li {
+    display: inline;
+    position: relative;
+}
+
+#wikinav .quicklinks li a {
+    margin-right: 10px;
+}
+#wikinav .quicklinks li ul {
+    display: none;
+    position: absolute;
+    top: 1em;
+    left: 0;
+    max-height: 400px;
+    overflow: auto;
+    margin-right: 15px;
+}
+
+#wikinav .quicklinks:hover li ul {
+    display: block;
+}
+
+#wikinav .quicklinks li.wikilink {
+    display: none;
+}
+
+#content ul li p {
+	margin-bottom:0px;
+}
+
+#content ul li {
+	margin-bottom:10px;
+}
+
+
+#content td {
+    padding: 0 8px;
+}
+
+#content td p {
+    margin-bottom: 4px;
+}
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline; filename=print.css
+Content-Type: text/css; name=print.css
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/css/print.css
+Content-Transfer-Encoding: 8bit
+
+/*  print.css - MoinMoin Default Styles
+
+Copyright (c) 2001, 2002, 2003 by Juergen Hermann
+*/
+
+/* content styles */
+
+html {
+	font-family: Times, serif;
+	font-size: 12pt;
+}
+
+body {
+    /* Give about 3.4cm in Mozilla/Firefox and about 2.2cm in Safari */
+	margin: 1.5cm;
+}
+
+a, a:visited, a.nonexistent, a.badinterwiki {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+pre {
+	font-size: 10pt;
+}
+
+a.interwiki:before, a.badinterwiki:before {
+	content: attr(title) ":";
+}
+
+a.interwiki img, a.badinterwiki img {
+	display: none;
+}
+
+.footnotes div {
+	width: 5em;
+	border-top: 1pt solid gray;
+}
+
+/* user interface styles */
+
+#header, #sidebar, #footer, #timings, #credits {
+	display: none;
+}
+
+------------bwyWfzd6zuXPfyscydFNNV
+Content-Disposition: inline; filename=projection.css
+Content-Type: text/css; name=projection.css
+Content-Location: https://wiki.ubuntu.com/moin_static192/light/css/projection.css
+Content-Transfer-Encoding: 8bit
+
+/*  projection.css - MoinMoin Slide Styles
+
+Copyright (c) 2003 by Juergen Hermann
+*/
+
+@import url("screen.css");
+
+html { line-height: 1.8em; }
+
+body, b, em, a, span, div, p, td { font-size: 22pt; }
+h1 { font-size: 28pt; }
+h2 { font-size: 24pt; }
+h3 { font-size: 22pt; }
+h4 { font-size: 20pt; }
+h5 { font-size: 18pt; }
+h6 { font-size: 16pt; }
+tt,pre { font-size: 18pt; }
+sup, sub { font-size: 14pt; }
+
+.navigation {
+	font-size: 16pt;
+	padding-top: 8pt;
+	padding-bottom: 8pt;
+}
+
+
+------------bwyWfzd6zuXPfyscydFNNV--
