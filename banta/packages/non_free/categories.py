@@ -7,7 +7,8 @@ from PySide import QtCore, QtGui
 from PySide.QtCore import QAbstractTableModel
 from PySide.QtCore import QT_TRANSLATE_NOOP
 
-from banta.packages.generic import GenericModule
+from banta.packages import GenericModule
+
 
 import banta.db as _db
 

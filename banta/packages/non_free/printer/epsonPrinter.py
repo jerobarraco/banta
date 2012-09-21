@@ -3,8 +3,8 @@ import string
 import types
 import logging
 import unicodedata
-from packages.non_free.printer.fiscalGeneric import PrinterInterface, PrinterException
-from packages.non_free.printer import epsonFiscalDriver
+from .fiscalGeneric import PrinterInterface, PrinterException
+from . import epsonFiscalDriver
 
 class FiscalPrinterError(Exception):
 		pass

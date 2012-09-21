@@ -4,7 +4,9 @@ from PySide.QtCore import QAbstractTableModel, Qt
 from PySide import QtCore, QtGui
 from PySide.QtCore import QT_TRANSLATE_NOOP
 import logging
-from banta.packages.generic import GenericModule, LICENSES_NOT_FREE
+
+from banta.packages import GenericModule
+from banta.db.models import LICENSES_NOT_FREE
 from banta.db.models import User
 import banta.db as _db
 

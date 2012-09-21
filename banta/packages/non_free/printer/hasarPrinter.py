@@ -5,7 +5,7 @@ import logging
 import unicodedata
 from banta.packages.non_free.printer.fiscalGeneric import PrinterInterface, PrinterException
 #todo create a generic function for str(priceUnit).replace(",", ".")
-from banta.packages.non_free.printer import epsonFiscalDriver
+from . import epsonFiscalDriver
 
 class ValidationError(Exception):
 		pass

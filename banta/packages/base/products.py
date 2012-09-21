@@ -10,7 +10,8 @@ from PySide import QtCore, QtGui
 from PySide.QtCore import QAbstractTableModel, Qt
 from PySide.QtCore import QT_TRANSLATE_NOOP
 
-from banta.packages.generic import GenericModule, LICENSE_FREE, LICENSE_BASIC
+from banta.packages import GenericModule
+from banta.db.models import LICENSE_FREE, LICENSE_BASIC
 #cant use full import in a submodule.. probably because the parent module is still loading
 from  banta.packages.base import providers as _provs
 import banta.packages.non_free.categories as _cats #meaw!

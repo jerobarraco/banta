@@ -6,7 +6,8 @@ import logging
 logger = logging.getLogger(__name__)
 #TODO refactor
 from PySide import QtCore, QtGui
-from banta.packages.generic import GenericModule, LICENSES_NOT_FREE
+from banta.packages import GenericModule
+from banta.db.models import LICENSES_NOT_FREE
 
 import banta.db as _db
 

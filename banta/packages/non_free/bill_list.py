@@ -9,8 +9,9 @@ logger = logging.getLogger(__name__)
 import datetime
 import csv
 from PySide import QtCore, QtGui
-from banta.packages.generic import GenericModule, LICENSES_NOT_FREE, LICENSE_FREE
-from banta.packages import utils
+from banta.packages import GenericModule
+from banta.db.models import LICENSES_NOT_FREE, LICENSE_FREE
+
 
 import banta.db as _db
 import banta.utils
@@ -29,7 +30,7 @@ class BillList(GenericModule):
 		self.widget = self.app.uiLoader.load(":/data/ui/bill_list.ui")
 		self.app.window.tabWidget.addTab(self.widget, self.app.window.tr("Lista de Facturas"))
 
-		month_start, today, month_end = utils.currentMonthDates()
+		month_start, today, month_end = banta.utils.currentMonthDates()
 		self.widget.dBListMin.setDate(month_start)
 		self.widget.dBListMax.setDate(month_end)
 
@@ -53,10 +54,10 @@ class BillList(GenericModule):
 
 		name =  "banta_bills-" + str( datetime.datetime.now()).replace(":", "_") + ".csv"
 		#file = codecs.open(name, "wb",'utf-8')#dont even care for thsi...
-		#writer = utils.UnicodeCSVWriter(file,delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
+		#writer = banta.utils.UnicodeCSVWriter(file,delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
 		writer = csv.writer(open(name, 'wb'), delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
 
-		tmin, tmax = utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
+		tmin, tmax = banta.utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
 		ret = QtGui.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Exportar"),
 			self.app.window.tr('¿Desea eliminar los presupuestos?') ,
 			QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
@@ -102,7 +103,7 @@ class BillList(GenericModule):
 		tb.setRowCount(0)
 		total = 0.0
 		tax_total = 0.0
-		tmin, tmax = utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
+		tmin, tmax = banta.utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
 		for b in _db.DB.bills.values(min = tmin, max = tmax):
 			r = tb.rowCount()
 			tb.setRowCount(r+1)

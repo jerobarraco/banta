@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 from PySide import QtCore, QtGui
 
-from banta.packages.generic import GenericModule, LICENSES_NOT_FREE
+
+from banta.packages import GenericModule
 from banta.packages.base import bills
+from banta.db.models import LICENSES_NOT_FREE
 
 import banta.db as _db
 #Create a separate class that will handle the actual printing
@@ -328,4 +331,3 @@ IVA_TYPE_ATTRS =(
 	'IVA_TYPE_PEQUENIO_CONTRIBUYENTE_EVENTUAL_SOCIAL',
 	'IVA_TYPE_NO_CATEGORIZADO'
 )
-

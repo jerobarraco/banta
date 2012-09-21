@@ -3,7 +3,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 from PySide.QtCore import QAbstractTableModel, Qt, QT_TRANSLATE_NOOP
 from PySide import QtCore, QtGui
-from banta.packages.generic import GenericModule
+from banta.packages import GenericModule
 
 import banta.db as _db
 import banta.utils
