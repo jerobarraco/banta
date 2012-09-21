@@ -1,0 +1,138 @@
+﻿For the linux/mac version check out http://pypi.python.org/pypi/banta/ and easy_install
+MoonGate http://MoonGate.com.ar
+1.15
+	- Completa reestructuración interna de Banta.
+		- Pyside 1.1.2, preparación Python3, unicode, base de datos, sistema de módulos.
+	- Mejora en el soporte de instalación utilizando easy_install
+		- Ahora solo requiere usar "easy_install banta"
+			y para ejecutar "banta" desde la carpeta donde se desea almacenar los datos.
+			De esta manera se permite múltiples usuarios con diferentes datos,
+			y portabilidad en los datos.
+
+1.14
+	- Mejoras en la traducción al inglés
+	- Cambiar de código de cliente y cliente por defecto
+	- Liberada la interfaz del usuario con licencia CC-BY
+		( Creative Commons - Atribution Unported 3.0 http://creativecommons.org/licenses/by/3.0/ )
+	- Disponibilidad de todas las características a usuarios no registrados!!
+		(Para que podamos continuar desarollando un excelente producto,
+		considere registrarse y obtener muchos beneficios extras!)
+	- Muchas mejoras.
+		- Excepciones reportadas en el archivo de registro.
+		- Mejora en el threading de impresión.
+			Permite seguir trabajando mientras se imprime. Mayor resiliencia ante
+			problemas con la impresora fiscal.
+		- Velocidad en el listado de clientes
+		- Mayor resiliencia al cargar módulos.
+
+1.13
+	- Mejoras internas. Mejor soporte Unicode. Para mejor soporte de idiomas.
+	- Mejoras en la traducción al Inglés
+
+1.12
+	- Mejorada la estabilidad al imprimir con impresoras fiscales
+
+1.11
+	- Límites mensuales de ventas de productos, por precio y/o cantidad
+	- Mejoras interas de estabilidad y performance
+
+1.10
+	- Mejorada la estructura interna, estabilidad y performance
+
+1.9
+	- Agregados campos al producto
+		- Código externo (o de proveedor)
+		- Precio de compra (Para mejorar el análisis de ventas!)
+		- Descripción
+		- Unidades por caja de compra
+	- Sistema de compras
+	- Reporte de compras
+	- Bugfixes y Mejoras internas
+		- Precio personalizado 
+1.8
+	- Perfeccionamiento de la interfaz para mejorar la carga con lector de códigos de barrass
+	- Reporte de ventas por Rubro
+	- Reporte de ventas por Producto
+	- Reporte de ventas por Usuario
+	- Reporte de movimientos de Stock
+	- Exportación de reportes
+	- Importación de Clientes desde Excel
+	- Importación de Proveedores desde Excel
+	- Mejora interna
+		- Importación, reportes, storage interno
+
+1.7
+	- Soporte para impresoras fiscales Epson
+	- Mejoras internas
+		-- Noticias incluyen ícono, trabajan más suavemente ( Thanks to syrius @ irc.freenode.net )
+		-- Mejor control de stock en Notas de Crédito
+1.6
+	- Múltiples usuarios
+	- Categorías de productos
+	- Mejoras internas
+		- Estabilidad y velocidad
+
+1.5
+	- Novedades y tips en la pantalla de banta
+	- Importar productos desde Excel
+	- Posibilidad de personalizar la apariencia de la interfaz según el usuario
+	- Disponible en PyPi http://pypi.python.org/pypi/banta
+	- Disponible en Download.com
+	- Mejorado el control de Stock
+		- Listado de movimientos de stock
+	- Más posibilidades para los usuarios de la versión gratuita
+		- Más Stock
+		- Lista de facturas
+	- Mejoras internas
+		- Mejorado sistema de configuración
+		- Velocidad para trabajar con productos y clientes
+		- Mejoras al cambiar el código de un producto
+
+1.4
+	- Más fácil de manejar recargos y descuentos
+	- Algunas mejoras en estabilidad y simplicidad
+	- Mejorada la traducción a portugués
+	- Posibilidad de filtar artículos según Proveedor
+
+1.2 - 1.3
+	- Ver detalles de una factura impresa o presupuesto. En caso de presupuesto permite modificar e imprimir.
+	- Notas de Débito en impresora fiscal
+	- Mejoras en estabilidad y recuperación de datos en caso de pérdida de datos
+	- Mejorada traducción
+	- Mejoras en edición de cliente
+
+1.1
+    - Mejoras en estabilidad, claridad y comodidad:
+        - Imprimir tickets C
+        - Recarga de artículos
+        - Clientes Exentos
+		- Creación y eliminación de articulos y clientes
+		- Traducción al portugués
+		- Selección de clientes en la creación de factura
+		- Bases de datos inicial
+1.0
+    - Bill list export
+    - Change product code
+    - Products sorting and filtering
+    - Clients sorting and filtering
+    - Easier to set client on the bill
+    - Export drafts by date. Exported data improved
+    - Fix bug on Reducible IVA override on bill creation
+    - Dot as decimal separator override
+    - Can print drafts to a normal printer
+    - Fixed translation on dialogs (system)
+    - Small speed on bill listing. Also changed the texts and order of colums
+    - Several other bugfixes in internal code, tools and improvements (ui)
+
+0.9
+    - Added changelog ;)
+    - Bug on date for bills only saving the date not the time
+    - Bills are stored by date
+    - Bill listing and search improved dramatically (Thanks to Kosh @ irc.freenode.net)
+    - Bill list automatically shows current month
+    - Saving bill as draft
+    - Added provider support in products
+    - Improved system for database upgrade (updating banta while keeping the database)
+    - Added support for printer Hasar 441 (The most used now)
+    - Added support for barcode scanner
+    - Total sold in bill list. (Total and tax)
