@@ -1,0 +1,38 @@
+<RCC>
+  <qresource prefix="img">
+    <file>img/ico.png</file>
+    <file>img/logo3.png</file>
+    <file>img/logo2.png</file>
+    <file>img/logo.png</file>
+    <file>img/print.png</file>
+    <file>img/new.png</file>
+    <file>img/del.png</file>
+    <file>img/add.png</file>
+    <file>img/pagefold.png</file>
+    <file alias="down_arrow.png">down_arrow.png</file>
+    <file alias="handle.png">handle.png</file>
+  </qresource>
+  <qresource prefix="data">
+    <file>ui/temp_client.ui</file>
+    <file>ui/limits.ui</file>
+    <file>ui/client_details.ui</file>
+    <file>ui/buys.ui</file>
+    <file>ui/reports.ui</file>
+    <file>ui/categories.ui</file>
+    <file>ui/users.ui</file>
+    <file>ui/about.ui</file>
+    <file>ui/main.ui</file>
+    <file>ui/settings.ui</file>
+    <file>ui/tpay.ui</file>
+    <file>ui/settings_printer.ui</file>
+    <file>ui/bill_list.ui</file>
+    <file>trans/pt.qm</file>
+    <file>trans/en.qm</file>
+    <file>trans/es.qm</file>
+    <file>trans/de.qm</file>
+    <file>trans/qt_es.qm</file>
+    <file>darkorange.qss</file>
+    <file>levelfour.qss</file>
+    <file>style.qss</file>
+  </qresource>
+</RCC>
