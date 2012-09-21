@@ -2,18 +2,24 @@
 # TODO refactor the imports
 from __future__ import absolute_import, print_function, unicode_literals
 from PySide.QtCore import QAbstractTableModel, Qt
-from PySide import QtCore, QtGui
+import PySide.QtCore as _qc
 
-from banta.packages.generic import GenericModule
+from banta.packages import GenericModule
 import banta.db.models as _mods
+import banta.utils
 
 class TBillModel(QAbstractTableModel):
 	#TODO delete other columns
 	#TODO: translate
 
-	HEADERS = (	"Nombre", "IVA", "Actual")
+	HEADERS = (
+		_qc.QT_TRANSLATE_NOOP('typebill', "Nombre"),
+		_qc.QT_TRANSLATE_NOOP('typebill', "IVA"),
+		_qc.QT_TRANSLATE_NOOP('typebill', "Actual")
+	)
 	def __init__(self, parent=None):
 		QAbstractTableModel.__init__(self, parent)
+		self.tr = banta.utils.unitr(self.trUtf8)
 
 	def rowCount(self, parent=None):
 		return len(_mods.Bill.TYPE_NAMES)

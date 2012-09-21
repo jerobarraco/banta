@@ -1,0 +1,1047 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>671</width>
+    <height>542</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Banta</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../rc.qrc">
+    <normaloff>:/img/img/ico.png</normaloff>:/img/img/ico.png</iconset>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_7">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>Factura</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="lBClient">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Código del cliente</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cb_clients">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="bChangeType">
+              <property name="text">
+               <string>Search by Code</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="bNewCasualClient">
+              <property name="text">
+               <string>Cliente Casual</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="lBCliDetail">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Tipo</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cb_tbill"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Pago</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cb_tpay"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox">
+            <property name="title">
+             <string>Nuevo Ítem</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QLabel" name="label_17">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Cantidad</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="eBProdQuant">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>9999999</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_15">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Producto</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cb_billProds">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Precio</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="dsPrice">
+                 <property name="minimum">
+                  <double>-999999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Detalle</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="eProdDetail"/>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="chBProdReducible">
+                 <property name="text">
+                  <string>Iva Reducido</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_12">
+               <item>
+                <widget class="QLabel" name="label_19">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Subtotal</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="lBItemTotal">
+                 <property name="text">
+                  <string>0.0</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetMaximumSize</enum>
+          </property>
+          <item>
+           <widget class="QComboBox" name="cb_billUser"/>
+          </item>
+          <item>
+           <widget class="QToolButton" name="bBillAdd">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>add</string>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
+            </property>
+            <property name="arrowType">
+             <enum>Qt::NoArrow</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="bBillNew">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>new</string>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="bBillDelete">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>delete</string>
+            </property>
+            <property name="toolButtonStyle">
+             <enum>Qt::ToolButtonTextBesideIcon</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTableWidget" name="tb_bill">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Código</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Nombre</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Precio Unitario</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Cantidad</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Recargo</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Subtotal</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>IVA</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Total</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_20">
+             <property name="sizeConstraint">
+              <enum>QLayout::SetMinimumSize</enum>
+             </property>
+             <item>
+              <widget class="QLabel" name="label_21">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Número</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lBillNumber">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <item>
+              <widget class="QLabel" name="label_26">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Subtotal</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lBillSubtotalA">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_15">
+             <item>
+              <widget class="QLabel" name="label_22">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>IVA</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lBillTax">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_18">
+             <item>
+              <widget class="QLabel" name="label_30">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Total</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lBillTotal">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>0.0</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QToolButton" name="bDraft">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Drafts</string>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextBesideIcon</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="bBillPrint">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>...</string>
+             </property>
+             <property name="toolButtonStyle">
+              <enum>Qt::ToolButtonTextBesideIcon</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Clientes</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="eCliCode"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bCliNew">
+            <property name="text">
+             <string>Nuevo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bCliDelete">
+            <property name="text">
+             <string>Borrar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="bClientAccount">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Cuentas</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="v_clients">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Artículos</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Filtrar por Nombre</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="eProdCode"/>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>Filtrar por Proveedor</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="cb_FilProvider">
+                <property name="insertPolicy">
+                 <enum>QComboBox::NoInsert</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="bProdClearFilter">
+                <property name="text">
+                 <string>Limpiar Filtro</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
+             <widget class="QPushButton" name="bProdNew">
+              <property name="text">
+               <string>Nuevo</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="bProdDelete">
+              <property name="text">
+               <string>Borrar</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QPushButton" name="bExport">
+              <property name="text">
+               <string>Exportar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="bNewStockBuy">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="v_products">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::SolidLine</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Proveedores</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Nombre</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="eProvName"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bProvSearch">
+            <property name="text">
+             <string>Buscar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bProvNew">
+            <property name="text">
+             <string>Nuevo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="bProvDelete">
+            <property name="text">
+             <string>Borrar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableView" name="vProviders">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="l_news">
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>671</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>Menú</string>
+    </property>
+    <widget class="QMenu" name="mnuImport">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="title">
+      <string>Importar</string>
+     </property>
+     <addaction name="acImportProducts"/>
+     <addaction name="acImportClients"/>
+     <addaction name="acImportProviders"/>
+    </widget>
+    <addaction name="acCloseZ"/>
+    <addaction name="acConfig"/>
+    <addaction name="acCancelPrinter"/>
+    <addaction name="acChangeStyle"/>
+    <addaction name="mnuImport"/>
+   </widget>
+   <widget class="QMenu" name="menuAcerca_de">
+    <property name="title">
+     <string>Ayuda</string>
+    </property>
+    <addaction name="acAbout"/>
+    <addaction name="acAboutQt"/>
+   </widget>
+   <addaction name="menuMenu"/>
+   <addaction name="menuAcerca_de"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="acChangeStyle">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/img/img/pagefold.png</normaloff>:/img/img/pagefold.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cambiar Estilo</string>
+   </property>
+  </action>
+  <action name="acAbout">
+   <property name="text">
+    <string>Soporte y Acerca de</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="acCloseZ">
+   <property name="text">
+    <string>Imprimir Cierre Z</string>
+   </property>
+  </action>
+  <action name="acConfig">
+   <property name="text">
+    <string>Configuración</string>
+   </property>
+  </action>
+  <action name="acCancelPrinter">
+   <property name="text">
+    <string>Cancelar Impresion</string>
+   </property>
+  </action>
+  <action name="acItemAdd">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/img/img/add.png</normaloff>:/img/img/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Agregar Ítem</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="acBillNew">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Nueva Factura</string>
+   </property>
+   <property name="shortcut">
+    <string>F6</string>
+   </property>
+  </action>
+  <action name="acItemDelete">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/img/img/del.png</normaloff>:/img/img/del.png</iconset>
+   </property>
+   <property name="text">
+    <string>Borrar</string>
+   </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
+  </action>
+  <action name="acBillPrint">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/img/img/print.png</normaloff>:/img/img/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>IMPRIMIR</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="acSaveDraft">
+   <property name="text">
+    <string>Guardar Presupuesto</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="acAboutQt">
+   <property name="text">
+    <string>Acerca de Qt</string>
+   </property>
+  </action>
+  <action name="acChangeClientSearch">
+   <property name="text">
+    <string>Cambiar</string>
+   </property>
+   <property name="toolTip">
+    <string>Change Type</string>
+   </property>
+  </action>
+  <action name="acImportProducts">
+   <property name="text">
+    <string>Importar Artículos</string>
+   </property>
+  </action>
+  <action name="acImportClients">
+   <property name="text">
+    <string>Importar Clientes</string>
+   </property>
+  </action>
+  <action name="acImportProviders">
+   <property name="text">
+    <string>Importar Proveedores</string>
+   </property>
+  </action>
+  <action name="acExportar">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/img/img/new.png</normaloff>:/img/img/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exportar Produtos</string>
+   </property>
+  </action>
+  <action name="acNewStockBuy">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Nueva Compra</string>
+   </property>
+  </action>
+  <action name="acNewCasualClient">
+   <property name="text">
+    <string>Cliente Casual</string>
+   </property>
+  </action>
+ </widget>
+ <tabstops>
+  <tabstop>cb_clients</tabstop>
+  <tabstop>bChangeType</tabstop>
+  <tabstop>cb_tbill</tabstop>
+  <tabstop>cb_tpay</tabstop>
+  <tabstop>eBProdQuant</tabstop>
+  <tabstop>cb_billProds</tabstop>
+  <tabstop>dsPrice</tabstop>
+  <tabstop>eProdDetail</tabstop>
+  <tabstop>chBProdReducible</tabstop>
+  <tabstop>bBillAdd</tabstop>
+  <tabstop>tb_bill</tabstop>
+  <tabstop>cb_billUser</tabstop>
+  <tabstop>bBillNew</tabstop>
+  <tabstop>bBillDelete</tabstop>
+  <tabstop>bBillPrint</tabstop>
+  <tabstop>bDraft</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>bCliNew</tabstop>
+  <tabstop>eCliCode</tabstop>
+  <tabstop>bCliDelete</tabstop>
+  <tabstop>v_clients</tabstop>
+  <tabstop>eProdCode</tabstop>
+  <tabstop>bProdNew</tabstop>
+  <tabstop>bProdDelete</tabstop>
+  <tabstop>cb_FilProvider</tabstop>
+  <tabstop>v_products</tabstop>
+  <tabstop>eProvName</tabstop>
+  <tabstop>bProvSearch</tabstop>
+  <tabstop>bProvNew</tabstop>
+  <tabstop>bProvDelete</tabstop>
+  <tabstop>vProviders</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../rc.qrc"/>
+ </resources>
+ <connections/>
+</ui>

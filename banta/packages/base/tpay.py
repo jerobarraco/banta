@@ -5,14 +5,18 @@ from PySide import QtCore
 from PySide.QtCore import Qt
 
 import banta.db as _db
-import banta.packages.generic as _gen
+import banta.packages as _pack
+import banta.utils
 
-
+#TODO REFACTOR THIS MODULE IS BROKEN!!
 class TPayModel(_qtc.QAbstractTableModel):
 	HEADERS = (
 		_qtc.QT_TRANSLATE_NOOP("typepay", "Nombre"),
 		_qtc.QT_TRANSLATE_NOOP("typepay", "Recargo")
 	)
+	def __init__(self, parent=None):
+		_qtc.QAbstractTableModel.__init__(self, parent)
+		self.tr = banta.utils.unitr(self.trUtf8)
 
 	def rowCount(self, parent=None):
 		return len(_db.DB.typePays)
@@ -65,10 +69,10 @@ class TPayModel(_qtc.QAbstractTableModel):
 		return False
 
 	def insertRows(self, position, rows, index=None):
-		self.beginInsertRows(_qtc.QtCore.QModelIndex(), position, position+rows-1)
+		self.beginInsertRows(_qc.QModelIndex(), position, position+rows-1)
 		for i in range(rows):
-			db.zodb.typePays.append(TypePay(""))
-		db.zodb.commit()
+			banta.db.DB.typePays.append(TypePay(""))
+		banta.db.DB.commit()
 		self.endInsertRows()
 		return True
 
@@ -80,9 +84,9 @@ class TPayModel(_qtc.QAbstractTableModel):
 		self.endRemoveRows()
 		return True
 
-class TPay(_gen.GenericModule):
-	REQUIRES = (_gen.GenericModule.P_ADMIN, )
-	NAME = "Pay types"
+class TPay(_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN, )
+	NAME = "pay types"
 	def __init__(self, app):
 		super(TPay, self).__init__(app)
 		self.model = TPayModel()
@@ -91,7 +95,8 @@ class TPay(_gen.GenericModule):
 		
 	def load(self):
 		self.dialog = self.app.uiLoader.load(":/data/ui/tpay.ui")
-		self.app.settings.tabWidget.addTab(self.dialog, self.app.tr("Tipos de Pago"))
+		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
+		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Tipos de Pago"))
 		self.dialog.v_tpay.setModel(self.model)
 		
 		self.dialog.bTPNew.clicked.connect(self.new)
