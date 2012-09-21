@@ -4,12 +4,12 @@ import logging
 logger = logging.getLogger(__name__)
 from PySide import QtCore, QtGui
 
-
 from banta.packages import GenericModule
 from banta.packages.base import bills
 from banta.db.models import LICENSES_NOT_FREE
 
 import banta.db as _db
+import banta.utils
 #Create a separate class that will handle the actual printing
 class ThreadPrinter(QtCore.QObject):
 	#Emited to update the status when printing
@@ -152,7 +152,8 @@ class Printer(GenericModule):
 		self.app.window.acCancelPrinter.setVisible(True)
 		#settings (maybe i should create another module for this?)
 		self.dialog = self.app.uiLoader.load(":/data/ui/settings_printer.ui", self.app.settings.tabWidget)
-		self.app.settings.tabWidget.addTab(self.dialog, self.app.tr("Impresora"))
+		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
+		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Impresora"))
 		printer = _db.DB.printer
 		self.dialog.cbBrands.addItems(printer.BRAND_NAMES)
 		speed_texts = map(str, printer.SPEEDS)

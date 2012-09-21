@@ -68,7 +68,7 @@ class LimitModel(QtCore.QAbstractTableModel):
 	def __init__(self, parent=None):
 		QtCore.QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
-		self.tr = banta.utils.unitr(self.tr)
+		self.tr = banta.utils.unitr(self.trUtf8)
 
 	def rowCount(self, parent=None):
 		return len(_db.DB.limits)
@@ -194,7 +194,7 @@ class Limits(GenericModule):
 
 	def load(self):
 		self.dialog = self.app.uiLoader.load(":/data/ui/limits.ui", self.app.settings.tabWidget)
-		self.dialog.tr = banta.utils.unitr(self.dialog.tr)
+		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
 		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Límites"))
 		self.dialog.v_limits.setModel(self.model)
 		self.dialog.v_limits.setItemDelegate(LimitDelegate()) #i love qt

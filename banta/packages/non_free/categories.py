@@ -107,6 +107,7 @@ class Categories(GenericModule):
 
 	def load(self):
 		self.dialog = self.app.uiLoader.load(":/data/ui/categories.ui")
+		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
 		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Rubros de productos"))
 		self.dialog.v_categories.setModel(self.model)
 		

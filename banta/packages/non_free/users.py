@@ -9,7 +9,7 @@ from banta.packages import GenericModule
 from banta.db.models import LICENSES_NOT_FREE
 from banta.db.models import User
 import banta.db as _db
-
+import banta.utils
 #from db.models import User
 logger = logging.getLogger(__name__)
 #TODO solve the problem of the unset user on a free license
@@ -21,6 +21,7 @@ class UserModel(QAbstractTableModel):
 	def __init__(self, parent=None):
 		QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
+		self.tr = banta.utils.unitr(self.trUtf8)
 		
 	def rowCount(self, parent=None):
 		return len(_db.DB.users)
@@ -111,6 +112,7 @@ class Users (GenericModule):
 
 	def load(self):
 		self.dialog = self.app.uiLoader.load(":/data/ui/users.ui")
+		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
 		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Usuarios"))
 		self.dialog.v_users.setModel(self.model)
 		self.app.window.cb_billUser.setEnabled(True)
