@@ -153,7 +153,8 @@ class LimitModel(QtCore.QAbstractTableModel):
 	def removeRows(self, position, rows, index=None):
 		self.beginRemoveRows(QtCore.QModelIndex(), position, position+rows-1)
 		for i in range(rows):
-			del _db.DB.limits[position] #when i remove one item, the next takes it index
+			del _db.DB.limits[position] 
+			#when i remove one item, the next takes it index
 		_db.DB.commit()
 		self.endRemoveRows()
 		return True

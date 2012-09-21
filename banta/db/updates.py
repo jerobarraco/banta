@@ -286,7 +286,14 @@ def v8(root):
 
 		for i in bill.items:
 			i.__class__ = _mods.Item
-			i.product.__class__ = _mods.Product
+			if i.product:
+				i.product.__class__ = _mods.Product
+				if i.product.category :
+					i.product.category.__class__ = _mods.Category
+					i.product.categry = i.product.category
+					if i.product.provider:
+						i.product.provider.__class__ = _mods.Provider
+						i.product.provider = i.product.provider
 			i._p_changed = True
 
 		root['bills'][bill.time] = bill
@@ -310,7 +317,7 @@ def blankInit(root):
 
 	root['clients'] = _oo.OOBTree()
 	cli_code = '00000000'
-	cli = _mods.Client(cli_code, "Consumidor Final", doc_type= _mods.Client.DOC_DNI)
+	cli = _mods.Client(cli_code, "Consumidor Final", doc_type=_mods.Client.DOC_DNI)
 	root['clients'][cli_code] = cli
 
 	root['bills'] = _io.IOBTree()
