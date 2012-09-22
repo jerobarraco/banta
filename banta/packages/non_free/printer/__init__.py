@@ -39,16 +39,19 @@ class ThreadPrinter(QtCore.QObject):
 			#check the brand
 			if self._brand == _db.models.Printer.BRAND_HASAR:
 				#import the related module
-				from packages.non_free.printer.hasarPrinter import HasarPrinter
+				from banta.packages.non_free.printer.hasarPrinter import HasarPrinter
 				#creates an instance of the printer and returns it
 				printer = HasarPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
 			elif self._brand == _db.models.Printer.BRAND_EPSON:
-				from packages.non_free.printer.epsonPrinter import EpsonPrinter
+				from banta.packages.non_free.printer.epsonPrinter import EpsonPrinter
 				printer = EpsonPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
+
+			else:
+				raise Exception("No se configuró ninguna impresora")
 		except Exception as e:
 			emsg = str(e).decode('utf-8', 'ignore')
 			msg = self.tr("No se ha podido conectar con la impresora\n{0}").format(emsg)
-			#QtGui.QMessageBox.critical(None, self.tr("Impresión Fallida: "), msg )
+			#no qmessageboxses here! we're in another thread! can't do gui stuff.
 			logger.error(msg)
 
 		if self._persistent :
@@ -232,14 +235,13 @@ class Printer(GenericModule):
 			return
 		p=None
 		try:
-			raise Exception("alskd")
 			p = QtGui.QPainter()
 			p.begin(printer)
 			pr = QtCore.QRect(printer.pageRect())
 			#br = QtCore.QRect(printer.pageRect())
 			pr.setLeft(pr.left()+20)
 			#hader
-			msgs = [u'Fecha y Hora', u'CUIT/DNI', u'Nombre', u'Direccion']
+			msgs = ['Fecha y Hora', 'CUIT/DNI', 'Nombre', 'Direccion']
 			col_width = pr.width()/len(msgs)
 			printList(p, pr, msgs, col_width)
 
@@ -252,7 +254,7 @@ class Printer(GenericModule):
 			pr.setTop(pr.top()+20)
 
 			#item header
-			msgs = [u'Cantidad', u'Descripcion', u'Precio Unitario', u'IVA', u'Importe']
+			msgs = ['Cantidad', 'Descripcion', 'Precio Unitario', 'IVA', 'Importe']
 			col_width = pr.width()/len(msgs)
 			printList(p, pr, msgs, col_width)
 			#items
@@ -277,7 +279,6 @@ class Printer(GenericModule):
 			self.tprinter.printingFinished.emit( (False, bill, -1, str(e)) )
 		finally:
 			if p: p.end()
-
 
 	### All this below are for the Config
 	@QtCore.Slot(int)

@@ -453,8 +453,9 @@ class Products(GenericModule):
 		fname = fname[0]
 		if not fname:
 			return False
-
-		writer = csv.writer(open(name, 'wb'), delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
+		delimit = ';'.encode('utf-8')
+		quote = '"'.encode('utf-8')
+		writer = csv.writer(open(name, 'wb'), delimiter=delimit, quotechar=quote,  quoting=csv.QUOTE_MINIMAL)
 		#Write headers
 		row = []
 		for c in range (self.app.window.v_products.model().columnCount()):
@@ -473,7 +474,8 @@ class Products(GenericModule):
 				index = self.app.window.v_products.model().index(r,c)
 				data = self.app.window.v_products.model().data(index, Qt.DisplayRole)
 				#data should ALWAYS be unicode
-				row.append(data.encode('utf-8'))
+				#data can be a number or other stuff
+				row.append(unicode(data).encode('utf-8'))
 			try:
 				writer.writerow(row)
 			except :

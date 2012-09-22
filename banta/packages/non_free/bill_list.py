@@ -52,10 +52,13 @@ class BillList(GenericModule):
 		#ensure we dont work with uncommited data
 		_db.DB.commit()
 
-		name =  "banta_bills-" + str( datetime.datetime.now()).replace(":", "_") + ".csv"
+		name = "banta_bills-" + str( datetime.datetime.now()).replace(":", "_") + ".csv"
 		#file = codecs.open(name, "wb",'utf-8')#dont even care for thsi...
 		#writer = banta.utils.UnicodeCSVWriter(file,delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
-		writer = csv.writer(open(name, 'wb'), delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
+		#this too must be encoded, otherway it'll say that they must be exactly one character big
+		delimit = ';'.encode('utf-8')
+		quote = '"'.encode('utf-8')
+		writer = csv.writer(open(name, 'wb'), delimiter=delimit, quotechar=quote,  quoting=csv.QUOTE_MINIMAL)
 
 		tmin, tmax = banta.utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
 		ret = QtGui.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Exportar"),

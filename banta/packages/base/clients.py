@@ -19,15 +19,15 @@ class ClientDelegate(QtGui.QStyledItemDelegate):
 		col = index.column()
 		if col == 3:
 			editor = QtGui.QComboBox(parent)
-			editor.addItems(Client.TAX_NAMES)
+			editor.addItems(_db.models.Client.TAX_NAMES)
 			return editor
 		elif col == 4:
 			editor = QtGui.QComboBox(parent)
-			editor.addItems(Client.DOC_NAMES)
+			editor.addItems(_db.models.Client.DOC_NAMES)
 			return editor
 		elif col == 5:
 			editor = QtGui.QComboBox(parent)
-			editor.addItems(Client.IB_NAMES)
+			editor.addItems(_db.models.Client.IB_NAMES)
 			return editor
 		else:
 			return super(ClientDelegate, self).createEditor(parent, option, index)
