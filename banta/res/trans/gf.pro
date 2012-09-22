@@ -1,4 +1,5 @@
-SOURCES = ../../__main__.py \
+SOURCES = ../../__init__.py \
+	../../packages/base/bills.py \
 	../../packages/base/bills.py \
 	../../packages/base/clients.py \
 	../../packages/base/csv_imports.py \
