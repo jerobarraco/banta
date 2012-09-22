@@ -135,9 +135,6 @@ class App():
 			self.app.setStyleSheet()
 
 	def loadModules(self):
-		#Loads all the modules checking permissions
-		license = db.DB.root['license']
-
 		#First we check the permissions and license
 		#Iterate each CLASS in the avail list 
 		for av_mod in self.avail:

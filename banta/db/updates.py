@@ -288,14 +288,18 @@ def v8(root):
 			i.__class__ = _mods.Item
 			if i.product:
 				i.product.__class__ = _mods.Product
+				i.product = i.product
 				if i.product.category :
 					i.product.category.__class__ = _mods.Category
 					i.product.categry = i.product.category
 					if i.product.provider:
 						i.product.provider.__class__ = _mods.Provider
 						i.product.provider = i.product.provider
+						i.product._p_changed = True
 			i._p_changed = True
-
+		#important to tell the bill that the persistentlist changed
+		bill.items._p_changed = True
+		bill._p_changed = True #not really important, but...p
 		root['bills'][bill.time] = bill
 	root._p_changed = True
 

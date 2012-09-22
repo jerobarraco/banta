@@ -9,7 +9,6 @@ if __name__=='__main__':
 	#loading the module.
 	#on the other side we want banta to be executed in another path, so the database and the settings
 	#are stored in whichever directory is ran from. allowing several different versions to run
-	print (os.getcwd())
 	sys.path[0] = os.getcwd()
 	#sys.path.insert(0, os.getcwd())
 	import banta

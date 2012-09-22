@@ -1,4 +1,10 @@
-﻿For the linux/mac version check out http://pypi.python.org/pypi/banta/ and easy_install
+For the linux/mac version check out http://pypi.python.org/pypi/banta/ 
+and easy_install
+(
+	execute: easy_install banta
+	to run execute: banta
+)
+
 MoonGate http://MoonGate.com.ar
 1.15
 	- Completa reestructuración interna de Banta.

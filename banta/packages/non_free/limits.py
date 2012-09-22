@@ -243,7 +243,7 @@ class Limits(GenericModule):
 			if client == b.client:
 				for i in b.items:
 					#tries to get a limit for the current item
-					lim = checks.get(i.product.code, None)
+					lim = checks.get(i.product.code)
 					if lim:
 						if not lim.addQuantity(i.quantity):
 							return over_quant_msg % (lim.prod_code, lim.exQuantity())
