@@ -344,7 +344,7 @@ def blankInit(root):
 	root['limits'] = _pl.PersistentList()
 	root['categories'] = _pl.PersistentList()
 	root['categories'].append(_mods.Category("Rubro principal"))
-	root['version'] = 7
+	root['version'] = 8
 
 #List of updates functions
 #The key is the _base_ version from which it will be upgrading

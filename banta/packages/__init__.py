@@ -65,5 +65,5 @@ def getPackages():
 	"""This function will search for new packages and list them.
 	returns a list of packages.
 	"""
-	from banta.packages import base, non_free, barbarella
-	return (base, non_free, barbarella)
+	from banta.packages import base, optional, barbarella
+	return (base, optional, barbarella)

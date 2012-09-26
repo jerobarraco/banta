@@ -190,10 +190,14 @@ class Bills( _qc.QObject, banta.packages.GenericModule):
 			#Theres no sense in saying "i dont want to print" if he hitted the fiscal print
 			options |=  _qg.QMessageBox.No
 
-		ret = _qg.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Imprimir"),
-			self.app.window.tr('¿Desea imprimir?') , options,
-			_qg.QMessageBox.Cancel
+		msgBox = _qg.QMessageBox(
+			_qg.QMessageBox.Question, self.app.window.tr("Banta - Imprimir"), self.app.window.tr('¿Desea imprimir?'),
+			options, self.app.window
 		)
+		msgBox.setDefaultButton(_qg.QMessageBox.Cancel)
+		#we store it on app for tests
+		self.app.dialog = msgBox
+		ret = self.app.dialog.exec_()
 		return ret
 
 	@_qc.Slot(list)
@@ -470,3 +474,5 @@ class Bills( _qc.QObject, banta.packages.GenericModule):
 		#we need to update all items because the client might change his exempt status
 		self.updateItem()
 		self.updateAllItems()
+
+

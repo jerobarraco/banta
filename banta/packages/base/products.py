@@ -14,7 +14,7 @@ from banta.packages import GenericModule
 from banta.db.models import LICENSE_FREE, LICENSE_BASIC
 #cant use full import in a submodule.. probably because the parent module is still loading
 from  banta.packages.base import providers as _provs
-import banta.packages.non_free.categories as _cats #meaw!
+import banta.packages.optional.categories as _cats #meaw!
 import banta.db as _db
 import banta.utils
 
