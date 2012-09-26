@@ -1,0 +1,9 @@
+syntax: glob
+.pypirc
+.idea/
+banta.egg-info/
+*.pyc
+banta/res/trans/pyside/
+build/
+*.pyo
+dist/
