@@ -8,14 +8,14 @@ SOURCES = ../../__init__.py \
 	../../packages/base/providers.py \
 	../../packages/base/tbill.py \
 	../../packages/base/tpay.py \
-	../../packages/non_free/bill_list.py \
-	../../packages/non_free/buys.py \
-	../../packages/non_free/categories.py \
-	../../packages/non_free/reports.py \
-	../../packages/non_free/users.py \
-	../../packages/non_free/client_details.py \
-	../../packages/non_free/printer/__init__.py \
-	../../packages/non_free/limits.py \
+	../../packages/optional/bill_list.py \
+	../../packages/optional/buys.py \
+	../../packages/optional/categories.py \
+	../../packages/optional/reports.py \
+	../../packages/optional/users.py \
+	../../packages/optional/client_details.py \
+	../../packages/optional/printer/__init__.py \
+	../../packages/optional/limits.py \
 	
 TRANSLATIONS = es.ts \
 	pt.ts \

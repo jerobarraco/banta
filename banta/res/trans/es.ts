@@ -16,7 +16,6 @@
         <translation>Acerca de Banta</translation>
     </message>
     <message>
-        <location line="+0"/>
         <source>Entre en nostro sítio</source>
         <translation type="obsolete">Visite nuestro sitio</translation>
     </message>
@@ -89,14 +88,14 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CategoryModel</name>
     <message>
-        <location filename="../../packages/non_free/categories.py" line="+75"/>
+        <location filename="../../packages/optional/categories.py" line="+75"/>
         <source>Categorias</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location line="+0"/>
         <source>Ingrese el nombre de la categoría</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -710,29 +709,29 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ThreadPrinter</name>
     <message>
-        <location filename="../../packages/non_free/printer/__init__.py" line="+50"/>
+        <location filename="../../packages/optional/printer/__init__.py" line="+53"/>
         <source>No se ha podido conectar con la impresora
 {0}</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UserModel</name>
     <message>
-        <location filename="../../packages/non_free/users.py" line="+78"/>
+        <location filename="../../packages/optional/users.py" line="+78"/>
         <source>Usuarios</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+0"/>
         <source>Ingrese el nombre del usuario</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>app</name>
     <message>
-        <location line="-78"/>
+        <location filename="../../packages/base/providers.py" line="-105"/>
         <source>Bill module loaded</source>
         <translation type="obsolete">cargando modulo de bill</translation>
     </message>
@@ -740,7 +739,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>bill</name>
     <message>
-        <location line="+0"/>
         <source>Bill module loaded</source>
         <translation type="obsolete">cargando modulo de bill</translation>
     </message>
@@ -748,9 +746,9 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>categories</name>
     <message>
-        <location filename="../../packages/non_free/categories.py" line="-58"/>
+        <location filename="../../packages/optional/categories.py" line="-58"/>
         <source>Nombre</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -794,19 +792,19 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>limits</name>
     <message>
-        <location filename="../../packages/non_free/limits.py" line="+64"/>
+        <location filename="../../packages/optional/limits.py" line="+63"/>
+        <source>Producto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
         <source>Cantidad</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Monto</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="-2"/>
-        <source>Producto</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -883,7 +881,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>providers</name>
     <message>
-        <location filename="../../packages/base/providers.py" line="-92"/>
+        <location filename="../../packages/base/providers.py" line="+13"/>
         <source>CÃ³digo</source>
         <translation>Código</translation>
     </message>
@@ -911,34 +909,34 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>reports</name>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="+22"/>
+        <location filename="../../packages/optional/reports.py" line="+22"/>
         <source>Por Rubro</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Por Producto</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Por Usuario</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Por Cliente</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Movimientos</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Compras</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -982,7 +980,6 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message numerus="yes">
-        <location line="+0"/>
         <source>Su licencia es válida por %n día(s) más.</source>
         <comment>licencia</comment>
         <translation type="obsolete">
@@ -991,7 +988,7 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="+224"/>
+        <location filename="../../packages/base/bills.py" line="+228"/>
         <source>Impresión Fallida </source>
         <translation></translation>
     </message>
@@ -1031,12 +1028,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/non_free/bill_list.py" line="+48"/>
-        <source>No es posible exportar en la versión básica</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="-85"/>
+        <location filename="../../packages/base/bills.py" line="-89"/>
         <source>Código del cliente</source>
         <translation></translation>
     </message>
@@ -1046,12 +1038,12 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation></translation>
     </message>
     <message>
-        <location line="+51"/>
+        <location line="+52"/>
         <source>Banta - Imprimir</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-8"/>
+        <location line="-9"/>
         <source>No se ha indicado el cliente</source>
         <translation></translation>
     </message>
@@ -1066,17 +1058,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/bill_list.py" line="+13"/>
-        <source>Banta - Exportar</source>
-        <translation></translation>
-    </message>
-    <message utf8="true">
-        <location line="+1"/>
-        <source>¿Desea eliminar los presupuestos?</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../packages/base/bills.py" line="+118"/>
+        <location line="+122"/>
         <source>Debe seleccionar un producto.</source>
         <translation></translation>
     </message>
@@ -1089,7 +1071,7 @@ Si elige NO, la factura NO se guardará.</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-134"/>
+        <location line="-138"/>
         <source>Nuevo cliente casual</source>
         <translation></translation>
     </message>
@@ -1107,11 +1089,6 @@ Si elige NO, la factura NO se guardará.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/bill_list.py" line="-31"/>
-        <source>Lista de Facturas</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../../__init__.py" line="-80"/>
         <source>Usuario no registrado - Considere registrarse para obtener mejor soporte y ayudar a un mejor desarrollo.</source>
         <translation></translation>
@@ -1121,62 +1098,82 @@ Si elige NO, la factura NO se guardará.</source>
         <source>Usuario registrado - Muchas gracias por contribuir a un mejor software.</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../../packages/optional/bill_list.py" line="+31"/>
+        <source>Lista de Facturas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>Banta - Exportar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location line="-16"/>
+        <source>No es posible exportar en la versión básica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location line="+17"/>
+        <source>¿Desea eliminar los presupuestos?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>self.dialog</name>
-    <message utf8="true">
-        <location filename="../../packages/non_free/limits.py" line="+136"/>
-        <source>Límites</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../packages/non_free/categories.py" line="+94"/>
-        <source>Rubros de productos</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../../packages/non_free/users.py" line="+116"/>
-        <source>Usuarios</source>
-        <translation></translation>
-    </message>
     <message>
         <location filename="../../packages/base/tpay.py" line="+99"/>
         <source>Tipos de Pago</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/printer/__init__.py" line="+51"/>
+        <location filename="../../packages/optional/categories.py" line="+94"/>
+        <source>Rubros de productos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../packages/optional/users.py" line="+38"/>
+        <source>Usuarios</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../packages/optional/printer/__init__.py" line="+106"/>
         <source>Impresora</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="../../packages/optional/limits.py" line="+134"/>
+        <source>Límites</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>self.widget</name>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="+62"/>
-        <source>Sin rubro</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="-47"/>
+        <location filename="../../packages/optional/reports.py" line="+15"/>
         <source>Reportes</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+47"/>
+        <source>Sin rubro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+19"/>
         <source>Guardar Reporte</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>self.window</name>
     <message>
-        <location line="-108"/>
+        <location filename="../../packages/base/tpay.py" line="-99"/>
         <source>Loading ...</source>
         <translation type="obsolete">cargando ...</translation>
     </message>
@@ -1202,7 +1199,7 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>typepay</name>
     <message>
-        <location filename="../../packages/base/tpay.py" line="-85"/>
+        <location filename="../../packages/base/tpay.py" line="+14"/>
         <source>Nombre</source>
         <translation></translation>
     </message>
@@ -1215,9 +1212,9 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>users</name>
     <message>
-        <location filename="../../packages/non_free/users.py" line="-98"/>
+        <location filename="../../packages/optional/users.py" line="-98"/>
         <source>Nombre</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

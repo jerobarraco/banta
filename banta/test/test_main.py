@@ -44,9 +44,9 @@ class TestBanta:
 		app.app.modules['printer'].tprinter.printingFinished.connect(self.printing_finished)
 		os = _qc.QTimer()
 		os.singleShot(100, self.close_dialog_yes)
+		timer.start(5000)
 		#sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
-		timer.start(5000)
 		self.el.exec_()
 		assert self.results
 		assert self.results[0]
@@ -65,6 +65,7 @@ class TestBanta:
 		""" teardown any state that was previously setup with a call to
 		setup_class.
 		"""
+		app.app.exit()
 		pass
 		
 	def setup_method(self, method):

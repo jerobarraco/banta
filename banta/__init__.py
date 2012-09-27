@@ -61,7 +61,7 @@ class App():
 		#print(QtCore.QTextCodec.codecForCStrings().name())
 		#test the translation
 		#dont use unicode
-		logger.info(self.app.tr("Loading ..."))
+		logger.info(self.app.tr("Loading ...".encode('utf-8')))
 
 		#I've decided that is better to have consistence than pain
 		_qc.QLocale.setDefault(_qc.QLocale.c())
@@ -76,7 +76,7 @@ class App():
 		#uiLoader, load the ui from resources, (careful, a change in .ui file will require to build the resources again)
 		self.app.uiLoader = PySide.QtUiTools.QUiLoader()
 		self.app.window = self.app.uiLoader.load(":/data/ui/main.ui", None)
-		self.app.window.tr = utils.unitr(self.app.window.tr)
+		self.app.window.tr = utils.unitr(self.app.window.trUtf8)
 
 		self.app.about = self.app.uiLoader.load(":/data/ui/about.ui", self.app.window)
 		self.app.about.setWindowIcon(self.app.window.windowIcon())

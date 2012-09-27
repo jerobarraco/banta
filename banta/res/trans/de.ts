@@ -77,12 +77,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>CategoryModel</name>
     <message>
-        <location filename="../../packages/non_free/categories.py" line="75"/>
+        <location filename="../../packages/optional/categories.py" line="75"/>
         <source>Categorias</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/non_free/categories.py" line="75"/>
+        <location filename="../../packages/optional/categories.py" line="75"/>
         <source>Ingrese el nombre de la categoría</source>
         <translation type="unfinished"></translation>
     </message>
@@ -698,7 +698,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ThreadPrinter</name>
     <message>
-        <location filename="../../packages/non_free/printer/__init__.py" line="50"/>
+        <location filename="../../packages/optional/printer/__init__.py" line="53"/>
         <source>No se ha podido conectar con la impresora
 {0}</source>
         <translation type="unfinished"></translation>
@@ -707,12 +707,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UserModel</name>
     <message>
-        <location filename="../../packages/non_free/users.py" line="78"/>
+        <location filename="../../packages/optional/users.py" line="78"/>
         <source>Usuarios</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/users.py" line="78"/>
+        <location filename="../../packages/optional/users.py" line="78"/>
         <source>Ingrese el nombre del usuario</source>
         <translation type="unfinished"></translation>
     </message>
@@ -720,7 +720,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>categories</name>
     <message>
-        <location filename="../../packages/non_free/categories.py" line="17"/>
+        <location filename="../../packages/optional/categories.py" line="17"/>
         <source>Nombre</source>
         <translation type="unfinished"></translation>
     </message>
@@ -766,17 +766,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>limits</name>
     <message>
-        <location filename="../../packages/non_free/limits.py" line="63"/>
+        <location filename="../../packages/optional/limits.py" line="63"/>
         <source>Producto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/limits.py" line="64"/>
+        <location filename="../../packages/optional/limits.py" line="64"/>
         <source>Cantidad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/limits.py" line="65"/>
+        <location filename="../../packages/optional/limits.py" line="65"/>
         <source>Monto</source>
         <translation type="unfinished"></translation>
     </message>
@@ -875,32 +875,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>reports</name>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="22"/>
+        <location filename="../../packages/optional/reports.py" line="22"/>
         <source>Por Rubro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="23"/>
+        <location filename="../../packages/optional/reports.py" line="23"/>
         <source>Por Producto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="24"/>
+        <location filename="../../packages/optional/reports.py" line="24"/>
         <source>Por Usuario</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="25"/>
+        <location filename="../../packages/optional/reports.py" line="25"/>
         <source>Por Cliente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="26"/>
+        <location filename="../../packages/optional/reports.py" line="26"/>
         <source>Movimientos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="27"/>
+        <location filename="../../packages/optional/reports.py" line="27"/>
         <source>Compras</source>
         <translation type="unfinished"></translation>
     </message>
@@ -938,7 +938,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="193"/>
+        <location filename="../../packages/base/bills.py" line="194"/>
         <source>Banta - Imprimir</source>
         <translation type="unfinished"></translation>
     </message>
@@ -958,7 +958,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="222"/>
+        <location filename="../../packages/base/bills.py" line="226"/>
         <source>No se ha podido realizar la impresión
 {0}
 ¿Desea volver a editar la factura?
@@ -966,12 +966,12 @@ Si elige NO, la factura NO se guardará.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="224"/>
+        <location filename="../../packages/base/bills.py" line="228"/>
         <source>Impresión Fallida </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="285"/>
+        <location filename="../../packages/base/bills.py" line="289"/>
         <source>Debe seleccionar un producto.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1011,21 +1011,6 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/bill_list.py" line="61"/>
-        <source>Banta - Exportar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../packages/non_free/bill_list.py" line="48"/>
-        <source>No es posible exportar en la versión básica</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="../../packages/non_free/bill_list.py" line="62"/>
-        <source>¿Desea eliminar los presupuestos?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../packages/base/bills.py" line="88"/>
         <source>Nuevo cliente casual</source>
         <translation type="unfinished"></translation>
@@ -1044,11 +1029,6 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/bill_list.py" line="31"/>
-        <source>Lista de Facturas</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../../__init__.py" line="97"/>
         <source>Usuario no registrado - Considere registrarse para obtener mejor soporte y ayudar a un mejor desarrollo.</source>
         <translation type="unfinished"></translation>
@@ -1058,54 +1038,74 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>Usuario registrado - Muchas gracias por contribuir a un mejor software.</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>self.dialog</name>
     <message>
-        <location filename="../../packages/non_free/categories.py" line="111"/>
-        <source>Rubros de productos</source>
+        <location filename="../../packages/optional/bill_list.py" line="31"/>
+        <source>Lista de Facturas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/users.py" line="116"/>
-        <source>Usuarios</source>
+        <location filename="../../packages/optional/bill_list.py" line="64"/>
+        <source>Banta - Exportar</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/non_free/limits.py" line="199"/>
-        <source>Límites</source>
+        <location filename="../../packages/optional/bill_list.py" line="48"/>
+        <source>No es posible exportar en la versión básica</source>
         <translation type="unfinished"></translation>
     </message>
+    <message utf8="true">
+        <location filename="../../packages/optional/bill_list.py" line="65"/>
+        <source>¿Desea eliminar los presupuestos?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>self.dialog</name>
     <message>
         <location filename="../../packages/base/tpay.py" line="99"/>
         <source>Tipos de Pago</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/printer/__init__.py" line="156"/>
+        <location filename="../../packages/optional/categories.py" line="111"/>
+        <source>Rubros de productos</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../packages/optional/users.py" line="116"/>
+        <source>Usuarios</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../packages/optional/printer/__init__.py" line="159"/>
         <source>Impresora</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="../../packages/optional/limits.py" line="199"/>
+        <source>Límites</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>self.widget</name>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="42"/>
+        <location filename="../../packages/optional/reports.py" line="42"/>
         <source>Reportes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="89"/>
+        <location filename="../../packages/optional/reports.py" line="89"/>
         <source>Sin rubro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="108"/>
+        <location filename="../../packages/optional/reports.py" line="108"/>
         <source>Guardar Reporte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/non_free/reports.py" line="109"/>
+        <location filename="../../packages/optional/reports.py" line="109"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1144,7 +1144,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
 <context>
     <name>users</name>
     <message>
-        <location filename="../../packages/non_free/users.py" line="18"/>
+        <location filename="../../packages/optional/users.py" line="18"/>
         <source>Nombre</source>
         <translation type="unfinished"></translation>
     </message>
