@@ -4,7 +4,7 @@ import py.test
 
 from PySide.QtTest import QTest as _qtt
 import PySide.QtCore as _qc
-
+import PySide.QtGui as _qg
 import banta
 
 app = None
@@ -20,27 +20,36 @@ class TestBanta:
 		k.sort()
 		assert banta.db.DB.root['version'] == k[-1] +1
 		w.showMaximized()
-		
+
+	_qc.Slot(list)
+	def printing_finished (self, results):
+		self.results = results
+		self.el.quit()
+
+	def close_dialog_yes(self):
+		#dialog = app.app.dialog
+		dialog = app.app.activeWindow()
+		yes_button= dialog.button(_qg.QMessageBox.Yes)
+		_qtt.mouseClick(yes_button, _qc.Qt.LeftButton)
+		#_qtt.keyClick(dialog, _qc.Qt.Key_Enter, 0, 10)
+		#_qtt.keyClicks(dialog, 's', 0, 10)
+
 	def test_print(self):
 		_qtt.keyClicks( w.cb_clients, "00000000\t", 0, 10)
 		assert w.lBCliDetail.text() == '[00000000] Consumidor Final (Consumidor Final)'
+		self.results = None
+		self.el = _qc.QEventLoop()
+		timer = _qc.QTimer()
+		timer.timeout.connect(self.el.quit)
+		app.app.modules['printer'].tprinter.printingFinished.connect(self.printing_finished)
+		os = _qc.QTimer()
+		os.singleShot(100, self.close_dialog_yes)
+		#sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
-		sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
-		el = _qc.QEventLoop()
-		el.exec_()
-		"""
-	145	    QTimer timer;
-	146	    connect(&timer, SIGNAL(timeout()), &eventLoop, SLOT(quit()));
-		timer.start(5000);
-166	    eventLoop.exec();
-167
-168	    QCOMPARE(changedSpy.count(), 1);
-169	    QCOMPARE(changedSpy.at(0).count(), 1);
-170
-171	    QString fileName = changedSpy.at(0).at(0).toString();
-172	    QCOMPARE(fileName, testFile.fileName());
-173
-174	    changedSpy.clear();"""
+		timer.start(5000)
+		self.el.exec_()
+		assert self.results
+		assert self.results[0]
 
 	@classmethod
 	def setup_class(cls):
