@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
-import PySide.QtCore as _qtc
+import PySide.QtCore as _qc
 from PySide import QtCore
 from PySide.QtCore import Qt
 
@@ -9,13 +9,13 @@ import banta.packages as _pack
 import banta.utils
 
 #TODO REFACTOR THIS MODULE IS BROKEN!!
-class TPayModel(_qtc.QAbstractTableModel):
+class TPayModel(_qc.QAbstractTableModel):
 	HEADERS = (
-		_qtc.QT_TRANSLATE_NOOP("typepay", "Nombre"),
-		_qtc.QT_TRANSLATE_NOOP("typepay", "Recargo")
+		_qc.QT_TRANSLATE_NOOP("typepay", "Nombre"),
+		_qc.QT_TRANSLATE_NOOP("typepay", "Recargo")
 	)
 	def __init__(self, parent=None):
-		_qtc.QAbstractTableModel.__init__(self, parent)
+		_qc.QAbstractTableModel.__init__(self, parent)
 		self.tr = banta.utils.unitr(self.trUtf8)
 
 	def rowCount(self, parent=None):
@@ -31,7 +31,7 @@ class TPayModel(_qtc.QAbstractTableModel):
 		if row >= len(_db.DB.typePays):
 			return None
 
-		if (role not in (_qtc.Qt.DisplayRole, _qtc.Qt.EditRole)):
+		if (role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole)):
 			return None
 
 		col = index.column()
@@ -44,43 +44,43 @@ class TPayModel(_qtc.QAbstractTableModel):
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
-		if role != _qtc.Qt.DisplayRole:
+		if role != _qc.Qt.DisplayRole:
 			return None
-		if orientation == _qtc.Qt.Horizontal:
+		if orientation == _qc.Qt.Horizontal:
 			return self.tr(self.HEADERS[section])
 		else:
 			return str(section)
 
 	def flags(self, index=None):
 		if index.isValid():
-			return  _qtc.Qt.ItemIsEditable | _qtc.Qt.ItemIsEnabled | Qt.ItemIsSelectable #QAbstractItemModel::flags(index) |
+			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | Qt.ItemIsSelectable #QAbstractItemModel::flags(index) |
 		#Is needed in case of a bad index
-		return _qtc.Qt.ItemIsEnabled
+		return _qc.Qt.ItemIsEnabled
 
 	def setData(self, index=None, value=None, role=0):
-		if index.isValid() and (role == _qtc.Qt.EditRole):
+		if index.isValid() and (role == _qc.Qt.EditRole):
 			tp = _db.DB.typePays[index.row()]
 			if index.column() == 0:
 				tp.name = value
 			elif index.column() ==1:
 				tp.markup = float(value)
-			db.zodb.commit()
+			_db.DB.commit()
 			return True
 		return False
 
 	def insertRows(self, position, rows, index=None):
 		self.beginInsertRows(_qc.QModelIndex(), position, position+rows-1)
 		for i in range(rows):
-			banta.db.DB.typePays.append(TypePay(""))
-		banta.db.DB.commit()
+			_db.DB.typePays.append(_db.models.TypePay(""))
+		_db.DB.commit()
 		self.endInsertRows()
 		return True
 
 	def removeRows(self, position, rows, index=None):
-		self.beginRemoveRows(_qtc.QtCore.QModelIndex(), position, position+rows-1)
+		self.beginRemoveRows(_qc.QModelIndex(), position, position+rows-1)
 		for i in range(rows):
-			del db.zodb.typePays[position] #when i remove one item, the next takes it index
-		db.zodb.commit()
+			del _db.DB.typePays[position] #when i remove one item, the next takes it index
+		_db.DB.commit()
 		self.endRemoveRows()
 		return True
 
@@ -113,7 +113,7 @@ class TPay(_pack.GenericModule):
 		#This is not the correct way to search, use the model search function
 		text = self.dialog.eTPName.text()
 		self.dialog.v_tpay.selectRow(-1)
-		for i, tp in enumerate(db.DB.typePays):
+		for i, tp in enumerate(_db.DB.typePays):
 			if text in tp.name.lower():
 				self.dialog.v_tpay.selectRow(i)
 				break
