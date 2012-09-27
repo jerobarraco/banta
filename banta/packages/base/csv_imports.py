@@ -62,13 +62,14 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 				#try to read from utf
 
 				if name:
+					#is important to decode first, otherway logger will crash
 					name = name.decode('utf-8', 'replace')
 				else:
 					name = ""
 
 				if not code:
 					#logs incorrect lines
-					logger.debug("Invalid code for product (%s)"%(name))
+					logger.info("Invalid code for product (%s)"%(name))
 					discarded +=1
 					continue
 
@@ -166,13 +167,18 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 				address = cli and cli.pop(0) or ''
 				tax_type = cli and cli.pop(0) or '0'#if this is not an int, then exception
 
+				if name:
+					name = name.decode('utf-8', 'replace')
+				else:
+					name = ""
+
 				if not code:
-					logger.debug("Invalid code (%s) for (%s)"%(code, name))
+					logger.info("Invalid code for (%s)"%(name))
 					discarded +=1
 					continue
+
 				#Decode
 				code = code.decode('utf-8', 'replace')
-				name = name.decode('utf-8', 'replace')
 				address = address.decode('utf-8', 'replace')
 
 				try:		tax_type = int(tax_type)
@@ -243,13 +249,17 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 				phone = prov and prov.pop(0) or ""
 				mail = prov and prov.pop(0) or ""
 
+				if name:
+					name = name.decode('utf-8', 'replace')
+				else:
+					name = ""
+
 				if not code:
-					logger.debug("Invalid code (%s) for (%s)"%(code, name))
+					logger.debug("Invalid code for (%s)"%(name))
 					discarded +=1
 					continue
 
 				code = code.decode('utf-8', 'replace')
-				name = name.decode('utf-8', 'replace')
 				address = address.decode('utf-8', 'replace')
 				phone = phone.decode('utf-8', 'replace')
 				mail = mail.decode('utf-8', 'replace')

@@ -21,6 +21,7 @@ QTabWidget::pane { /* The tab widget frame */
 	/* border-top: 2px solid #fe8f26;*/
 	border: 2px solid #fe8f26;
  }
+ 
 #bBillPrint, #bBillAdd{
 	background-color:QLinearGradient(x1:0, y1:0, x2:0, y2:1, stop:0 #ffa344,  stop:1 #fe7b0f);
 	color: black;
@@ -38,32 +39,27 @@ QToolTip
      opacity: 100;
 }
 
-
-
-
 QWidget
 {
-color: #b1b1b1;
-background-color: #323232;
+	color: #b1b1b1;
+	background-color: #323232;
 }
 
 QWidget:disabled 
 {
-color: #404040;
-background-color: #323232;
+	color: #404040;
+	background-color: #323232;
 }
-
-
 
 QAbstractItemView
 {
-background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #4d4d4d, stop: 0.1 #646464, stop: 1 #5d5d5d);
+	background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #4d4d4d, stop: 0.1 #646464, stop: 1 #5d5d5d);
 }
 
 
 QWidget:focus
 {
-border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+	border: 2px solid QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
 }
 
 QLineEdit
@@ -75,17 +71,17 @@ border: 1px solid #1e1e1e;
 border-radius: 5;
 }
 
-
-
 QWidget:item:hover
 {
-background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #ca0619);
-color: #000000;
+	background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #ca0619);
+	color: #000000;
 }
 
+/*QAction hovered gets affected*/
 QWidget:item:selected
 {
-background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+	background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffa02f, stop: 1 #d7801a);
+	color:#000000;
 }
 
 
@@ -112,11 +108,11 @@ QPushButton:pressed, QToolButton:pressed
 
 QComboBox
 {
-selection-background-color: #ffaa00;
-background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);
-border-style: solid;
-border: 1px solid #1e1e1e;
-border-radius: 5;
+	selection-background-color: #ffaa00;
+	background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #565656, stop: 0.1 #525252, stop: 0.5 #4e4e4e, stop: 0.9 #4a4a4a, stop: 1 #464646);
+	border-style: solid;
+	border: 1px solid #1e1e1e;
+	border-radius: 5;
 }
 
 
@@ -356,9 +352,11 @@ QToolBar::handle
 
 
 
-
+QMenu::hover{
+color:#000000;
+}
 QMenuBar {
-	color:black;
+	color:#000000;
      background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 lightgray, stop:1 darkgray);
 }
  QMenu::separator
