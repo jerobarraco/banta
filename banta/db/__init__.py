@@ -9,7 +9,7 @@ from __future__ import absolute_import, unicode_literals
 import sys
 import logging
 #from banta.db import cnx will import it correctly, then using banta.db.cnx wont be confusing for python
-from banta.db import cnx, config
+from banta.db import cnx, config, models
 
 if 'CONF' not in globals():
 	global CONF

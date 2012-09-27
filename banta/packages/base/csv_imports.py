@@ -7,10 +7,11 @@ import csv
 from PySide import QtCore, QtGui
 from banta.packages import GenericModule
 import banta.db as _db
+import banta.packages.base
 
 class CSVImports(GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN, )
-	NAME = "Imports"
+	NAME = "imports"
 	#Theres no license restriction because we want EVERYBODY to use our soft, so we'll give as much as possible to make that happen
 	def load(self):
 		#cache the object :)
@@ -38,10 +39,13 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 
 		f = open(fname, 'rb')
 		#creates a csv reader
-		reader = csv.reader(f, delimiter=';', quotechar='"' )
+		delim = ';'.encode('ascii')
+		quote = '"'.encode('ascii')
+		reader = csv.reader(f, delimiter=delim, quotechar=quote )
 		updated = discarded = inserted = 0
 		#gets the (qt) MODEL for products using the MODULE for product
-		prod_model = self.app.modules[products.Products.NAME].model
+		mod_name = banta.packages.base.products.Products.NAME
+		prod_model = self.app.modules[mod_name].model
 		#starts to reset the model (invalidate all views)
 		#Documentation says we shouuld try to use begin* and end* if possible. and it is possible
 		prod_model.beginResetModel()
@@ -55,16 +59,21 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 				stock = art and art.pop(0) or "0"
 				tax_type = art and art.pop(0) or "0"
 				prov = art and art.pop(0) or ""
+				#try to read from utf
+
+				if name:
+					name = name.decode('utf-8', 'replace')
+				else:
+					name = ""
 
 				if not code:
 					#logs incorrect lines
-					logger.debug("Invalid code (%s) for (%s)"%(code, name))
+					logger.debug("Invalid code for product (%s)"%(name))
 					discarded +=1
 					continue
 
-				#try to read from utf
 				code = code.decode('utf-8', 'replace')
-				name = name.decode('utf-8', 'replace')
+
 
 				#tries to parse the data
 				#todo create a function for safe_get_float
@@ -119,10 +128,9 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 		"""Handles importing data from a csv file"""
 		#this is the MODULE for clients needed to reset the model
 		#this is the MODEL for products
-		from db.models import Client
 		msg = u"Elija un archivo .csv cuyas columnas sean:\n Código, Nombre, Dirección, Tipo de Iva\n"
 		msg += u"\tTipos de iva:"
-		for t in enumerate(Client.TAX_NAMES):
+		for t in enumerate(_db.models.Client.TAX_NAMES):
 			msg += u"\n\t%s\t%s"%t
 
 		QtGui.QMessageBox.information(self.app.window, "Banta", msg)
@@ -138,10 +146,13 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 
 		f = open(fname, 'rb')
 		#creates a csv reader
-		reader = csv.reader(f, delimiter=';', quotechar='"' )
+		delim = ';'.encode('ascii')
+		quote = '"'.encode('ascii')
+		reader = csv.reader(f, delimiter=delim, quotechar=quote)
 		updated = discarded = inserted = 0
 		#gets the (qt) MODEL for products using the MODULE for product
-		model = self.app.modules[clients.Clients.NAME].model
+		mod_name = banta.packages.base.clients.Clients.NAME
+		model = self.app.modules[mod_name].model
 		#starts to reset the model (invalidate all views)
 		#Documentation says we shouuld try to use begin* and end* if possible. and it is possible
 		model.beginResetModel()
@@ -195,13 +206,11 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 		#best to leave this outside, because once we call begin, we must allways call end
 		model.endResetModel()
 
-
 	@QtCore.Slot()
 	def importProviders(self):
 		"""Handles importing data from a csv file"""
 		#this is the MODULE for clients needed to reset the model
 		#this is the MODEL for products
-		from db.models import Provider
 		msg = u"Elija un archivo .csv cuyas columnas sean:\n Código (CUIT), Nombre, Dirección, Teléfono, Mail\n"
 		QtGui.QMessageBox.information(self.app.window, "Banta", msg)
 		#open a file
@@ -215,11 +224,14 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			return False
 
 		f = open(fname, 'rb')
+		delim = ';'.encode('ascii')
+		quote = '"'.encode('ascii')
 		#creates a csv reader
-		reader = csv.reader(f, delimiter=';', quotechar='"' )
+		reader = csv.reader(f, delimiter=delim, quotechar=quote)
 		updated = discarded = inserted = 0
 		#gets the (qt) MODEL for products using the MODULE for product
-		model = self.app.modules[providers.Providers.NAME].model
+		mod_name = banta.packages.base.providers.Providers.NAME
+		model = self.app.modules[mod_name].model
 		#starts to reset the model (invalidate all views)
 		#Documentation says we shouuld try to use begin* and end* if possible. and it is possible
 		model.beginResetModel()

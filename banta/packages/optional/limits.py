@@ -15,6 +15,7 @@ from banta.db.models import LICENSES_NOT_FREE
 import banta.utils
 import banta.packages.base.bills
 import banta.db as _db
+import banta.packages.base.products
 
 class LimitDelegate(QtGui.QStyledItemDelegate):
 	#Handles the edition on the table for each column
@@ -26,7 +27,7 @@ class LimitDelegate(QtGui.QStyledItemDelegate):
 		col = index.column()
 		if col == 0:
 			editor = QtGui.QComboBox(parent)
-			editor.setModel(_prods.MODEL)
+			editor.setModel(banta.packages.base.products.MODEL)
 			editor.setModelColumn(0)
 			return editor
 		else:

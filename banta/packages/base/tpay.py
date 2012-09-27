@@ -2,7 +2,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 import PySide.QtCore as _qc
 from PySide import QtCore
-from PySide.QtCore import Qt
 
 import banta.db as _db
 import banta.packages as _pack
@@ -53,7 +52,7 @@ class TPayModel(_qc.QAbstractTableModel):
 
 	def flags(self, index=None):
 		if index.isValid():
-			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | Qt.ItemIsSelectable #QAbstractItemModel::flags(index) |
+			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable #QAbstractItemModel::flags(index) |
 		#Is needed in case of a bad index
 		return _qc.Qt.ItemIsEnabled
 
