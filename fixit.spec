@@ -3,8 +3,8 @@ a = Analysis(
 	['C:\\Svn\\moongate\\bantapkg\\banta_fix.py'],
 	pathex=['C:\\Svn\\moongate\\bantapkg'],
 	hiddenimports=[
-			'zc', 'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
-			'encodings', 'zc.lockfile', 'zope', 'zope.event'
+		'zc', 'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
+		'encodings', 'zc.lockfile', 'zope', 'zope.event'
 	],
 	hookspath=None
 )

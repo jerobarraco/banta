@@ -20,7 +20,7 @@ class PyTest(TestCommand):
 		
 setup (
   name = 'banta',
-  version = '1.15.1',
+  version = '1.15.2',
 	#packages = find_packages(exclude=['*fixit*']),
 	packages = find_packages(),
   #exclude_package_data={'': ['*fixit*']},
@@ -70,7 +70,7 @@ setup (
 			'banta = banta:run',
 		],
 		'console_scripts': [
-			'banta_fix = banta_fix:run',
+			'banta_fix = banta.fix:run',
 		]
 	},
 	tests_require=['pytest'],
