@@ -11,10 +11,10 @@ exe = EXE(
         a.scripts + [('O', '', 'OPTION')],
         exclude_binaries=1,
         name=os.path.join('build\\pyi.win32\\banta', 'banta.exe'), 
-        debug=True,
+        debug=False,
         strip=None,
         upx=False,
-        console=True,
+        console=False,
 		icon='banta\\ico.ico'
 	)
 dats = [
