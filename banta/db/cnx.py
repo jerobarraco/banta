@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 """This module handles the conection to the database"""
 from __future__ import absolute_import, unicode_literals, print_function
-
+import zope
+#import zope.event
 import ZODB.DB, ZODB.FileStorage
-import ZEO.ClientStorage
+#import ZEO.ClientStorage
 import transaction
 doc = """PersistentList are not lazy , so be carefull.
 is better to use IOBTree s when possible (or OOBTrees)

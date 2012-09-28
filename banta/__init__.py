@@ -215,7 +215,5 @@ def run():
 	#	logger.exception(str(e).encode('ascii', 'replace'))
 	#	print ("i'm sorry, there's been a fatal exception")
 	#	raise e
-
-if __name__ == '__main__':
-	import os
-	print ('main', os.getcwd())
+if __name__=='__main__':
+	run()

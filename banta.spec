@@ -1,8 +1,8 @@
 # -*- mode: python -*-
 a = Analysis(
-		['C:\\Svn\\origins\\banta\\banta\\__main__.py'],
-        pathex=['C:\\Svn\\origins\\banta'],
-        hiddenimports=['zc', 'PySide.QtXml', 'PySide.QtNetwork', 'encodings', 'zc.lockfile'],
+		['C:\\Svn\\moongate\\bantapkg\\run.py'],
+        pathex=['C:\\Svn\\moongate\\bantapkg'],
+        hiddenimports=['zc', 'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui', 'encodings', 'zc.lockfile', 'zope', 'zope.event'],
         hookspath=None
 	)
 pyz = PYZ(a.pure)
@@ -11,10 +11,10 @@ exe = EXE(
         a.scripts + [('O', '', 'OPTION')],
         exclude_binaries=1,
         name=os.path.join('build\\pyi.win32\\banta', 'banta.exe'), 
-        debug=False,
+        debug=True,
         strip=None,
         upx=False,
-        console=False,
+        console=True,
 		icon='banta\\ico.ico'
 	)
 dats = [
