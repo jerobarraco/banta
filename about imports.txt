@@ -1,0 +1,44 @@
+Small lesson on imports.
+Situation:
+1) Banta must be held as a package so it fits correctly into setuptools architecture and is nicely
+handled. Also so we can use absolute imports like "import banta.x" which should be the correct way.
+2) Putting a run script inside banta package could screw all the imports.
+3) We need to be able to run banta from:
+	a) Module (pòssibly python -m banta (thought i havent tested that yet))
+	b) From import (import banta; banta.run()) (for tests)
+	c) Using setuptools (so i need a correct script)
+	d) From pyinstaller
+4) Python sets the first entry in sys.path pointing to the directory of the script being executed.
+
+Handling all that is pretty complex.
+Basically Banta module must be importable (in the path).
+But to add challenge python sets the __path of the script being executed__ as the FIRST path entry.
+That basically means that if i have a local module called banta, that local module is imported
+instead of a global one, which is cool. But also can make banta module completely uninportable if
+the script to be ran is not in the "banta/.." directory (the directory containging the banta module).
+The path added by python is NOT the current directory, is the path of the script, so if we have a structure
+like the one we have now:
+pkg
+	bin/
+		run.py
+	banta/
+		__init__.py
+
+doing this :
+	pkg:> python bin/run.py
+will be the same as doing this
+	pkg/bin:> python run.py
+in any case the module won't be found because the path will point to pkg/bin and not to pkg (where banta is).
+
+We could set the 1st path entry to the current working directory (os.getcwd()) which would work, but will mess
+with everything else.
+It would work with setuptools because banta is now global so the cwd doesn't matters, but won't work with
+pyinstaller that uses mostly local paths.
+
+Basically we can't
+1) Put the run script in banta/ directory
+	(doing "from banta import *" breaks some stuff, and also i don't like it)
+2) Put the run script in another folder and fake the path
+
+That leaves us with the only sane option. To put the script in "banta/.." directory, and hopefully that works with
+setuptols too.

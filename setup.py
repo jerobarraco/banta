@@ -21,7 +21,7 @@ class PyTest(TestCommand):
 setup (
   name = 'banta',
   version = '1.15.0',
-  #packages = find_packages(exclude=['*fixit*']),
+	#packages = find_packages(exclude=['*fixit*']),
 	packages = find_packages(),
   #exclude_package_data={'': ['*fixit*']},
   #scripts = ['bin/banta.py'],
@@ -65,12 +65,12 @@ setup (
 		#make it eggsecutable
 		'setuptools.installation': [
 			'eggsecutable = banta:run',
-			],
+		],
 		'gui_scripts': [
 			'banta = banta:run',
 		],
 		'console_scripts': [
-			'banta_fix = bin.banta_fix:run',
+			'banta_fix = banta_fix:run',
 		]
 	},
 	tests_require=['pytest'],
