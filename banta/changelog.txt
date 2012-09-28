@@ -6,9 +6,15 @@ and easy_install
 )
 
 MoonGate http://MoonGate.com.ar
+
 1.15
+	ADVERTENCIA:
+		Reestructuración importante. Se recomienda hacer un respalo de los datos antes de instalar la
+		nueva versión. Ante cualquier problema envie un mail a mail (arroba) moongte.com.ar
+
 	- Completa reestructuración interna de Banta.
-		- Pyside 1.1.2, preparación Python3, unicode, base de datos, sistema de módulos.
+		- Pyside 1.1.2, preparación Python3, unicode, base de datos, sistema de módulos,
+		archivos de configuración.
 	- Mejora en el soporte de instalación utilizando easy_install
 		- Ahora solo requiere usar "easy_install banta"
 			y para ejecutar "banta" desde la carpeta donde se desea almacenar los datos.

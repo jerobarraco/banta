@@ -202,18 +202,18 @@ class App():
 		if feed_mod: feed_mod.wait()
 
 def run():
-	app = App()
-	#try:
+	try:
+		app = App()
+		if db.CONF.PROFILING:
+			import cProfile
+			cProfile.runctx('app.run()', globals(), locals(), filename='profile')
+		else:
+			app.run()
+	except Exception, e:
+		#log if there's an error with initialization, remember that this will run with no console in windows
+		logger.exception(str(e).encode('ascii', 'replace'))
+		print ("i'm sorry, there's been a fatal exception")
+		raise e
 
-	if db.CONF.PROFILING:
-		import cProfile
-		cProfile.runctx('app.run()', globals(), locals(), filename='profile')
-	else:
-		app.run()
-	#except Exception, e:
-	#	#log if there's an error with initialization, remember that this will run with no console in windows
-	#	logger.exception(str(e).encode('ascii', 'replace'))
-	#	print ("i'm sorry, there's been a fatal exception")
-	#	raise e
 if __name__=='__main__':
 	run()

@@ -1,8 +1,11 @@
 # -*- mode: python -*-
 a = Analysis(
-		['C:\\Svn\\moongate\\bantapkg\\run.py'],
+		['C:\\Svn\\moongate\\bantapkg\\banta_run.py'],
         pathex=['C:\\Svn\\moongate\\bantapkg'],
-        hiddenimports=['zc', 'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui', 'encodings', 'zc.lockfile', 'zope', 'zope.event'],
+        hiddenimports=[
+			'zc', 'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
+			'encodings', 'zc.lockfile', 'zope', 'zope.event'
+		],
         hookspath=None
 	)
 pyz = PYZ(a.pure)

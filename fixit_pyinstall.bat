@@ -1,3 +1,3 @@
 @ echo Packing
-@ python C:\pyinstaller-dev\pyinstaller.py banta/fixit
+@ python C:\pyinstaller-2.0\pyinstaller.py fixit.spec
 @ echo done
