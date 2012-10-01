@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """This module handles the conection to the database"""
 from __future__ import absolute_import, unicode_literals, print_function
-import zope
-
-#from zope import event
 import ZODB.DB, ZODB.FileStorage
-#import ZEO.ClientStorage
+
 import transaction
 doc = """PersistentList are not lazy , so be carefull.
 is better to use IOBTree s when possible (or OOBTrees)
@@ -21,12 +18,11 @@ class MiZODB(object):
 		from banta.db import updates as _up
 		#if the server is set, then is a server connection (and ignore the file_name)
 		if server:
-			import zope.event
-			import Zeo.ClientStorage
 			#Recibe como parametro, el servidor al cual se conectara
 			#por defecto se conectara a localhost en el puerto 8090
 			#es importante asignar el blob_dir para poder contar con soporte de blobs
 			#de manera correcta
+			import ZEO.ClientStorage
 			self.storage =  ZEO.ClientStorage.ClientStorage((server, port))#, blob_dir="./blobcache")#mac stuff?
 		else:
 			self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac

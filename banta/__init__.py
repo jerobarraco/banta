@@ -16,6 +16,8 @@ import PySide.QtUiTools
 ##for pyinstaller
 import zc
 import zc.lockfile
+import zope.event
+import zope.interface
 
 #The call to basicConfig() should come before any calls to debug(), info() etc. As it’s intended as a one-off simple configuration facility, only the first call will actually do anything: subsequent calls are effectively no-ops.
 #db is needed for loading the config
