@@ -2,7 +2,8 @@
 """This module handles the conection to the database"""
 from __future__ import absolute_import, unicode_literals, print_function
 import zope
-#import zope.event
+
+#from zope import event
 import ZODB.DB, ZODB.FileStorage
 #import ZEO.ClientStorage
 import transaction
@@ -20,6 +21,8 @@ class MiZODB(object):
 		from banta.db import updates as _up
 		#if the server is set, then is a server connection (and ignore the file_name)
 		if server:
+			import zope.event
+			import Zeo.ClientStorage
 			#Recibe como parametro, el servidor al cual se conectara
 			#por defecto se conectara a localhost en el puerto 8090
 			#es importante asignar el blob_dir para poder contar con soporte de blobs

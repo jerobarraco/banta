@@ -3,11 +3,14 @@
 ####################### 		E X P E R I M E N T A L
 #######################
 from __future__ import absolute_import, print_function, unicode_literals
-from packages.generic import GenericModule
-from PySide import QtCore
 import logging
+
+from PySide import QtCore
+
 import web
-import db
+import json
+import banta.db
+from banta.packages import GenericModule
 
 try:
 	from cStringIO import StringIO
@@ -31,16 +34,34 @@ class Reader( QtCore.QThread ):
 				o.write("<br /><table>")
 				for i in range(20):
 					p = self.getProd(i)
-					o.write ("<tr><td>%s</td><td>%s</td><td>%s</td>"%(p.code.encode('utf-8'), p.name.encode('utf-8'), p.price))
+					item = "<tr><td>%s</td><td>%s</td><td>%s</td>"%(p.code, p.name, p.price)
+					o.write (item.encode('utf-8', 'replace'))
 					o.write("</tr>")
 				o.write("</table></body></html>")
 				return o.getvalue()
+		class prodlist:
+			def prod_as_dict(self, p):
+				return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
+
+			def GET(self):
+				o = StringIO()
+				prods = [
+					self.prod_as_dict(
+						self.getProd(i)
+					) for i in range(50)
+				]
+				dict_res = {'prods':prods, 'count':len(prods), 'total':self.prods()}
+				json.dump(dict_res, o)
+				return o.getvalue()
 		main.prods =  self.parent.productCount
 		main.getProd = self.parent.getProduct
+		prodlist.prods = self.parent.productCount
+		prodlist.getProd =  self.parent.getProduct
 		d = locals()
 		d['prods'] = self.parent.productCount
 
-		urls = ('/', 'main')
+		urls = ('/', 'main',
+		'/products/list', 'prodlist')
 		app = web.application(urls, locals())
 		app.run()
 
@@ -59,8 +80,8 @@ class HTTPInterface(GenericModule):
 
 	@QtCore.Slot()
 	def productCount(self):
-		return len(db.zodb.products)
+		return len(banta.db.DB.products)
 
 	@QtCore.Slot(int)
 	def getProduct(self, i):
-		return db.zodb.products.values()[i]
+		return banta.db.DB.products.values()[i]

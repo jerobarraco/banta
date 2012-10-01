@@ -202,8 +202,9 @@ class App():
 		if feed_mod: feed_mod.wait()
 
 def run():
+	app = App()
 	try:
-		app = App()
+
 		if db.CONF.PROFILING:
 			import cProfile
 			cProfile.runctx('app.run()', globals(), locals(), filename='profile')
