@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-#CAREFUL! unicode literals!
 from __future__ import absolute_import, print_function, unicode_literals
 
 import logging
@@ -9,9 +8,7 @@ import itertools
 from PySide import QtCore, QtGui
 
 from banta.packages import GenericModule
-from banta.db.models import LICENSES_NOT_FREE
 #cant import a submodule
-#todo find a better way to communicate frm module to module
 import banta.utils
 import banta.packages.base.bills
 import banta.db as _db
@@ -189,7 +186,6 @@ class LimitCheck():
 
 class Limits(GenericModule):
 	NAME = "Limits"
-	LICENSES = LICENSES_NOT_FREE
 	def __init__(self, app):
 		super(Limits, self).__init__(app)
 		self.model = LimitModel(app.window)

@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
+import logging
+logger = logging.getLogger(__name__)
+
 from PySide.QtCore import QAbstractTableModel, Qt
 from PySide import QtCore, QtGui
 from PySide.QtCore import QT_TRANSLATE_NOOP
-import logging
 
 from banta.packages import GenericModule
-from banta.db.models import LICENSES_NOT_FREE
 from banta.db.models import User
 import banta.db as _db
 import banta.utils
 #from db.models import User
-logger = logging.getLogger(__name__)
+
+
 #TODO solve the problem of the unset user on a free license
 class UserModel(QAbstractTableModel):
 	HEADERS = (
@@ -102,7 +104,6 @@ class UserModel(QAbstractTableModel):
 class Users (GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN,)
 	NAME = "Users"
-	LICENSES = LICENSES_NOT_FREE
 	def __init__(self, app):
 		super(Users, self).__init__(app)
 		#We create the Model here in case is needed in another module

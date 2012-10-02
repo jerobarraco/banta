@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-#TODO keep code compatible with 3.x
-#CAREFUL! unicode literals!
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
@@ -14,7 +12,6 @@ import banta.db as _db
 class Buys(GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN, )
 	NAME = 'Buys'
-	LICENSES = LICENSES_NOT_FREE
 	def __init__(self, app):
 		super(Buys, self).__init__(app)
 		self.app.window.bNewStockBuy.setDefaultAction(self.app.window.acNewStockBuy)

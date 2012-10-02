@@ -5,7 +5,7 @@ __date__ ="$27-abr-2012 1:51:31$"
 import distribute_setup
 distribute_setup.use_setuptools()
 from setuptools import setup, find_packages
-
+#import py2exe
 #Class for using py.test as testing 
 from setuptools.command.test import test as TestCommand
 class PyTest(TestCommand):
@@ -19,6 +19,7 @@ class PyTest(TestCommand):
 		pytest.main(self.test_args)
 		
 setup (
+	#console = [ "banta_run.py"],
   name = 'banta',
   version = '1.15.2',
 	#packages = find_packages(exclude=['*fixit*']),

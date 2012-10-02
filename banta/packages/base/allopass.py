@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-#TODO keep code compatible with 3.x
-#CAREFUL! unicode literals!
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 from PySide import QtCore, QtGui
-import db
-import db.models
+import banta.db
+import banta.db.models
 from packages.generic import GenericModule
 
 class Buys(GenericModule):

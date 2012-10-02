@@ -7,7 +7,6 @@ import banta.db as _db
 import banta.packages as _pack
 import banta.utils
 
-#TODO REFACTOR THIS MODULE IS BROKEN!!
 class TPayModel(_qc.QAbstractTableModel):
 	HEADERS = (
 		_qc.QT_TRANSLATE_NOOP("typepay", "Nombre"),

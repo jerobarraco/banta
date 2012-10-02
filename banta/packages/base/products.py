@@ -128,19 +128,14 @@ class ProductModel(QAbstractTableModel):
 		self.__setMaxRows()
 
 	def __setMaxRows(self):
+		#TODO remove this ??
 		"""Sets the rowcount in the model depending on the license, clamping if the actual rowcount is larger
 		that way the data is preserved when the license expires
 		Is Important to call this function when the quantity of products changes
 		(in theory that's well managed using this model for adding/removing rows)
 		"""
-		license = _db.DB.root['license']
 		rows = len(_db.DB.products)
-		if (license == LICENSE_FREE) :
-			self.max_rows = min(rows, self.MAX_ROWS_FOR_FREE)
-		elif (license == LICENSE_BASIC):
-			self.max_rows = min(rows, self.MAX_ROWS_FOR_BASIC)
-		else:
-			self.max_rows = rows
+		self.max_rows = rows
 
 	def rowCount(self, parent=None):
 		return self.max_rows
@@ -379,7 +374,7 @@ class Products(GenericModule):
 
 		self.app.window.cb_FilProvider.setModel(prov_model)
 		self.app.window.cb_FilProvider.setModelColumn(1)
-
+		self.app.window.cb_FilProvider.setCurrentIndex(-1)
 		#Conections
 		self.app.window.bProdNew.clicked.connect(self.new)
 		self.app.window.bProdDelete.clicked.connect(self.delete)
@@ -405,6 +400,7 @@ class Products(GenericModule):
 	def providerChanged(self, i):
 		if i < 0 : 
 			return
+
 		if self.filter_mode != 1:
 			#the column in the product model for the provider is 5
 			self.proxy_model.setFilterKeyColumn(6)

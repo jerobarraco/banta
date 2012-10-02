@@ -10,13 +10,11 @@ from PySide.QtCore import QT_TRANSLATE_NOOP
 from PySide import QtCore, QtGui
 
 from banta.packages import GenericModule
-from banta.db.models import LICENSES_NOT_FREE
 import banta.utils as _utils
 import banta.db as _db
 
 class Reports(GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN, )
-	LICENSES = LICENSES_NOT_FREE
 	NAME = "Reports"
 	REPORT_NAMES = (
 		QT_TRANSLATE_NOOP('reports', 'Por Rubro'),

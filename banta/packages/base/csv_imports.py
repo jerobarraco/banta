@@ -14,7 +14,6 @@ class CSVImports(GenericModule):
 	NAME = "imports"
 	#Theres no license restriction because we want EVERYBODY to use our soft, so we'll give as much as possible to make that happen
 	def load(self):
-		#cache the object :)
 		self.app.window.acImportProducts.triggered.connect(self.importProducts)
 		self.app.window.acImportClients.triggered.connect(self.importClients)
 		self.app.window.acImportProviders.triggered.connect(self.importProviders)

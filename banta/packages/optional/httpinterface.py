@@ -9,6 +9,7 @@ from PySide import QtCore
 
 import web
 import json
+import gzip
 import banta.db
 from banta.packages import GenericModule
 
@@ -19,6 +20,7 @@ except:
 
 logger = logging.getLogger(__name__)
 
+#TODO use the (qt)model in product module, and be sure to be calling the slot in queued connection
 class Reader( QtCore.QThread ):
 	def __init__(self, parent):
 		QtCore.QThread.__init__(self)
@@ -45,13 +47,18 @@ class Reader( QtCore.QThread ):
 
 			def GET(self):
 				o = StringIO()
+				prod_cant = self.prods()
 				prods = [
 					self.prod_as_dict(
 						self.getProd(i)
-					) for i in range(50)
+					) for i in range(prod_cant-1)
 				]
-				dict_res = {'prods':prods, 'count':len(prods), 'total':self.prods()}
+				dict_res = {'prods':prods, 'count':len(prods), 'total':prod_cant}
+				#zipper = gzip.GzipFile(fileobj=o, mode="w")
+				#json.dump(dict_res, zipper)
+				#web.header('Content-Encoding','gzip', unique=True)
 				json.dump(dict_res, o)
+				web.header('Content-Type', 'application/json; charset=utf-8', unique=True)
 				return o.getvalue()
 		main.prods =  self.parent.productCount
 		main.getProd = self.parent.getProduct

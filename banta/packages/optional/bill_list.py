@@ -22,7 +22,6 @@ LICENSES = ()
 class BillList(GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN, )
 	NAME = "bill list"
-	LICENSES = LICENSES_NOT_FREE
 	def __init__(self, app):
 		super(BillList, self).__init__(app)
 

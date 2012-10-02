@@ -2,7 +2,6 @@
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
-##TODO refactor imports
 from PySide import QtCore, QtGui
 from PySide.QtCore import QAbstractTableModel
 from PySide.QtCore import QT_TRANSLATE_NOOP
