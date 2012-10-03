@@ -1,9 +1,10 @@
 # -*- mode: python -*-
 a = Analysis(
 		['C:\\Svn\\moongate\\bantapkg\\banta_run.py'],
-        pathex=['C:\\Svn\\moongate\\bantapkg',
-		'C:\\Python27\\lib\\site-packages\\zope.interface-4.0.1-py2.7-win32.egg',
-		'C:\\Python27\\lib\\site-packages\\zope.event-4.0.0-py2.7.egg'
+        pathex=[
+		'C:\\Svn\\moongate\\bantapkg',
+		#'C:\\Python27\\lib\\site-packages\\zope.interface-4.0.1-py2.7-win32.egg',
+		#'C:\\Python27\\lib\\site-packages\\zope.event-4.0.0-py2.7.egg'
 		],
         hiddenimports=[
 			'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
