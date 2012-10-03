@@ -110,7 +110,8 @@ class Reports(GenericModule):
 		fname = fname[0]
 		if not fname:
 			return False
-		writer = csv.writer(open(name, 'wb'), delimiter=';', quotechar='"',  quoting=csv.QUOTE_MINIMAL)
+		writer = csv.writer(open(name, 'wb'),
+			delimiter=b';', quotechar=b'"',  quoting=csv.QUOTE_MINIMAL)
 		#Write headers
 		row = []
 		for c in range (self.widget.v_list.columnCount()):

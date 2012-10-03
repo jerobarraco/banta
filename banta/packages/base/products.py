@@ -128,8 +128,7 @@ class ProductModel(QAbstractTableModel):
 		self._setMaxRows()
 
 	def _setMaxRows(self):
-		"""Sets the rowcount in the model depending on the license, clamping if the actual rowcount is larger
-		that way the data is preserved when the license expires
+		"""Sets the rowcount in the model
 		Is Important to call this function when the quantity of products changes
 		(in theory that's well managed using this model for adding/removing rows)
 		"""

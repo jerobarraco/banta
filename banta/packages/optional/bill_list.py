@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """ Module for listing bills
 """
-#TODO this could be a "report" (??)
+#TODO this could be a "report" (??) (at this moment cant be a report because:
+# 1) need double click to reopen a bill, 2) when exporting it asks to purge drafts
 #TODO refactor imports
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
@@ -10,7 +11,6 @@ import datetime
 import csv
 from PySide import QtCore, QtGui
 from banta.packages import GenericModule
-from banta.db.models import LICENSES_NOT_FREE, LICENSE_FREE
 
 
 import banta.db as _db
@@ -41,13 +41,7 @@ class BillList(GenericModule):
 	def exportDrafts(self):
 		#TODO purge drafts with a menu action
 		"""Exports DRAFTS from the bill list, also deleting them"""
-		
-		if _db.DB.root['license'] == LICENSE_FREE:
-			QtGui.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Exportar"),
-				self.app.window.tr('No es posible exportar en la versión básica'),
-				QtGui.QMessageBox.Ok)
-			return
-		
+
 		#ensure we dont work with uncommited data
 		_db.DB.commit()
 
@@ -57,9 +51,8 @@ class BillList(GenericModule):
 		#this too must be encoded, otherway it'll say that they must be exactly one character big
 		delimit = ';'.encode('utf-8')
 		quote = '"'.encode('utf-8')
-		writer = csv.writer(open(name, 'wb'), delimiter=delimit, quotechar=quote,  quoting=csv.QUOTE_MINIMAL)
+		writer = csv.writer(open(name, 'wb'), delimiter=delimit, quotechar=quote, quoting=csv.QUOTE_MINIMAL)
 
-		tmin, tmax = banta.utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
 		ret = QtGui.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Exportar"),
 			self.app.window.tr('¿Desea eliminar los presupuestos?') ,
 			QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
@@ -67,6 +60,16 @@ class BillList(GenericModule):
 		)
 		delete = (ret == QtGui.QMessageBox.Yes)
 
+		tmin, tmax = banta.utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
+		#Write headers
+		row = []
+		for c in range (self.widget.tBList.columnCount()):
+			hi = self.widget.tBList.horizontalHeaderItem(c)
+			row.append(hi.text().encode('utf-8'))
+		try:
+			writer.writerow(row)
+		except:
+			pass
 		#looks like i cant delete on the fly WHEN USING MIN AND MAX! so i need to store the keys to be deleted and delete them later
 		#if the list is too big, it could mean problems
 		to_delete = []
@@ -92,7 +95,6 @@ class BillList(GenericModule):
 
 		for k in to_delete:
 			del _db.DB.bills[k]
-		#TODO Show message
 
 		if to_delete:
 			#only commit if we've deleted something

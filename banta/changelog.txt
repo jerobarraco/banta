@@ -7,6 +7,11 @@ and easy_install
 
 MoonGate http://MoonGate.com.ar
 
+1.16
+	- Quitado límite al exportar listado de facturas
+	- Mejoras internas
+		- Velocidad en listado de clientes
+		- Solucionado posible problema al exportar reportes
 1.15
 	ADVERTENCIA:
 		Reestructuración importante. Se recomienda hacer un respalo de los datos antes de instalar la

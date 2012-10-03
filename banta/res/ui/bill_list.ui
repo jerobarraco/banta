@@ -58,7 +58,7 @@
      <item>
       <widget class="QPushButton" name="bExportDraft">
        <property name="text">
-        <string>Exportar Presupuestos</string>
+        <string>Exportar</string>
        </property>
       </widget>
      </item>
