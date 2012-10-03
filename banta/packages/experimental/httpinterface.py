@@ -21,6 +21,7 @@ except:
 logger = logging.getLogger(__name__)
 
 #TODO use the (qt)model in product module, and be sure to be calling the slot in queued connection
+#This module can be completely wrong, we might be calling the other thread directly
 class Reader( QtCore.QThread ):
 	def __init__(self, parent):
 		QtCore.QThread.__init__(self)

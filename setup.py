@@ -2,7 +2,18 @@
 __author__="MoonGate"
 __date__ ="$27-abr-2012 1:51:31$"
 #python setup_banta.py bdist_egg --exclude-source-files
-import distribute_setup
+try:
+	import distribute_setup
+	distribute_setup.use_setuptools()
+	from setuptools import setup , find_packages
+except ImportError, e:
+	print e
+	print """
+	You don't have distribute installed, run:
+  $ curl -O http://python-distribute.org/distribute_setup.py
+	$ python distribute_setup.py"""
+	exit(1)
+
 distribute_setup.use_setuptools()
 from setuptools import setup, find_packages
 #import py2exe
@@ -17,11 +28,13 @@ class PyTest(TestCommand):
 		#import here, cause outside the eggs aren’t loaded
 		import pytest
 		pytest.main(self.test_args)
-		
+
+import banta
+
 setup (
 	#console = [ "banta_run.py"],
   name = 'banta',
-  version = '1.15.2',
+  version = banta.__version__,
 	#packages = find_packages(exclude=['*fixit*']),
 	packages = find_packages(),
   #exclude_package_data={'': ['*fixit*']},

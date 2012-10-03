@@ -125,17 +125,15 @@ class ProductModel(QAbstractTableModel):
 		self.tr = banta.utils.unitr(self.trUtf8)
 		#this might improve speed, but can be dangerous if we dont call __setMaxRows each time the rowcount is changed..
 		#for now, that's controlled here in the model
-		self.__setMaxRows()
+		self._setMaxRows()
 
-	def __setMaxRows(self):
-		#TODO remove this ??
+	def _setMaxRows(self):
 		"""Sets the rowcount in the model depending on the license, clamping if the actual rowcount is larger
 		that way the data is preserved when the license expires
 		Is Important to call this function when the quantity of products changes
 		(in theory that's well managed using this model for adding/removing rows)
 		"""
-		rows = len(_db.DB.products)
-		self.max_rows = rows
+		self.max_rows =len(_db.DB.products)
 
 	def rowCount(self, parent=None):
 		return self.max_rows
@@ -151,7 +149,7 @@ class ProductModel(QAbstractTableModel):
 		#reads the item from the db
 		#The .internalPointer should NOT be used outside THIS MODEL (in theory)
 		if (row<0) or (col<0) or (row >= self.max_rows):
-			return self.createIndex(-1, 0)#returns an invalid index
+			return self.createIndex(row, col)#returns an invalid index
 		else:
 			pro = _db.DB.products.values()[row]
 			#Create an index setting the "pointer" internal data to the actual Product object
@@ -313,11 +311,11 @@ class ProductModel(QAbstractTableModel):
 			code, ok = QtGui.QInputDialog.getText(self.parent_widget, title, self.tr("Ingrese el código"), QtGui.QLineEdit.Normal, "")
 
 			if not ok:
-				return False
+				continue
 
 			if code in _db.DB.products.keys():
 				QtGui.QMessageBox.warning(self.parent_widget, title, self.tr( "Ya existe un producto con ese código."))
-				return False
+				continue
 			#this would be slow, because it'll convert all the keys to a list, also can oly be called after inserting
 			#endpos = tuple(zodb.clients.keys()).index(code)
 			#this is faster, also, it can be called before inserting. is a little trick, basically we count all the items before
@@ -328,7 +326,7 @@ class ProductModel(QAbstractTableModel):
 			self.endInsertRows()
 			position+=1
 		_db.DB.commit()
-		self.__setMaxRows()
+		self._setMaxRows()
 		return True
 
 	def removeRows(self, position, rows, index=None):
@@ -338,7 +336,7 @@ class ProductModel(QAbstractTableModel):
 			del _db.DB.products[key] #when i remove one item, the next takes it index
 		_db.DB.commit()
 		self.endRemoveRows()
-		self.__setMaxRows()
+		self._setMaxRows()
 		return True
 
 MODEL = ProductModel()

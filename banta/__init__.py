@@ -5,15 +5,16 @@ from __future__ import absolute_import, print_function, unicode_literals
 import sys
 import logging
 
-#Bill list tab title
-#Reports, table column header encoding
+__version__ = '1.16.0'
+
 #3rd party
+##for pyinstaller
 import PySide
 import PySide.QtGui as _qg
 import PySide.QtCore as _qc
 import PySide.QtUiTools
 
-##for pyinstaller
+
 
 #The call to basicConfig() should come before any calls to debug(), info() etc. As it’s intended as a one-off simple configuration facility, only the first call will actually do anything: subsequent calls are effectively no-ops.
 #db is needed for loading the config
@@ -200,9 +201,8 @@ class App():
 		if feed_mod: feed_mod.wait()
 
 def run():
-	app = App()
 	try:
-
+		app = App()
 		if db.CONF.PROFILING:
 			import cProfile
 			cProfile.runctx('app.run()', globals(), locals(), filename='profile')

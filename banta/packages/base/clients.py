@@ -67,10 +67,18 @@ class ClientModel(QAbstractTableModel):
 		QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
 		self.tr = banta.utils.unitr(self.trUtf8)
+		self._setMaxRows()
+
+	def _setMaxRows(self):
+		"""Sets the rowcount in the model depending on the license, clamping if the actual rowcount is larger
+		that way the data is preserved when the license expires
+		Is Important to call this function when the quantity of products changes
+		(in theory that's well managed using this model for adding/removing rows)
+		"""
+		self.max_rows = len(_db.DB.clients)
 
 	def rowCount(self, parent=None):
-		#todo use max_rows
-		return len(_db.DB.clients)
+		return self.max_rows
 
 	def columnCount(self, parent=None):
 		return 7
@@ -82,7 +90,7 @@ class ClientModel(QAbstractTableModel):
 		#This makes the whole app some seconds faster (on a low end pc and 3K products) but requires a little more RAM (in theory)
 		#reads the item from the db
 		#The .internalPointer should NOT be used outside THIS MODEL (in theory)
-		if (row<0) or (col<0) or (row >= len(_db.DB.clients)):
+		if (row<0) or (col<0) or (row >= self.max_rows):
 			return self.createIndex(row, col)#returns an invalid index
 		else:
 			pro = _db.DB.clients.values()[row]
@@ -193,11 +201,11 @@ class ClientModel(QAbstractTableModel):
 			code, ok = QtGui.QInputDialog.getText(self.parent_widget, self.tr("Nuevo Cliente"),
 				self.tr("Ingrese el DNI/CUIT/CUIL"), QtGui.QLineEdit.Normal, "")
 			if not ok:
-				return False
+				continue
 			if code in _db.DB.clients.keys():
 				QtGui.QMessageBox.information(self.parent_widget, self.tr("Nuevo Cliente"),
 					self.tr( "Ya existe un cliente con ese código."))
-				return False
+				continue
 			#this would be slow, because it'll convert all the keys to a list, also can oly be called after inserting
 			#endpos = tuple(_db.DB.clients.keys()).index(code)
 			#this is faster, also, it can be called before inserting. is a little trick, basically we count all the items before
@@ -208,6 +216,7 @@ class ClientModel(QAbstractTableModel):
 			self.endInsertRows()
 			position+=1
 		_db.DB.commit()
+		self._setMaxRows()
 		return True
 
 	def removeRows(self, position, rows, index=None):
@@ -218,6 +227,7 @@ class ClientModel(QAbstractTableModel):
 			del _db.DB.clients[c.code] #when i remove one item, the next takes it index
 		_db.DB.commit()
 		self.endRemoveRows()
+		self._setMaxRows()
 		return True
 
 	def addItem(self, tpay=None):

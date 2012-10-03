@@ -350,13 +350,13 @@ def blankInit(root):
 #The key is the _base_ version from which it will be upgrading
 #it uses a dictionary because in the future, old updates will be deleted
 UPDATES = {
-	0: v1,
-	1: v2,
-	2: v3,
-	3: v4,
-	4: v5,
-	5: v6,
-	6: v7,
+	#0: v1,
+	#1: v2,
+	#2: v3,
+	#3: v4,
+	#4: v5,
+	#5: v6,
+	#6: v7,
 	7: v8
 }
 
@@ -365,8 +365,6 @@ def init(zodb):
 	update(zodb, 'version', blankInit, UPDATES)
 
 def update(zodb, version_key, init_callback, update_callbacks):
-	import sys
-	sys.modules['db.models'] = _mods
 	keys = update_callbacks.keys()
 	keys.sort()
 	latest = keys[-1] +1
@@ -394,5 +392,4 @@ def update(zodb, version_key, init_callback, update_callbacks):
 			msg = "Database upgraded to version '%s':%s "% (version_key, v_from+1)
 			zodb.commit("system", msg)
 			logger.info(msg)
-	del sys.modules['db.models']
 	zodb.commit()
