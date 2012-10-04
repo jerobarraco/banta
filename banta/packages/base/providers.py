@@ -131,12 +131,17 @@ class Providers(GenericModule):
 	def __init__(self, app):
 		super(Providers, self).__init__(app)
 		self.model = MODEL
+		#This is cheap, but i dont have other way yet.
+		#As the model gets created even if this module isnt loaded, it doesnt get the parent widget
+		#some stuff wont work properly (like the new dialog, wont get the correct window icon)
+		MODEL.parent_widget = app.window
 
 	def load(self):
 		self.app.window.vProviders.setModel(self.model)
 		self.app.window.bProvNew.clicked.connect(self.new)
 		self.app.window.bProvSearch.clicked.connect(self.search)
 		self.app.window.bProvDelete.clicked.connect(self.delete)
+
 
 	@QtCore.Slot()
 	def new(self):

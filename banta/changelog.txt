@@ -12,6 +12,7 @@ MoonGate http://MoonGate.com.ar
 	- Mejoras internas
 		- Velocidad en listado de clientes
 		- Solucionado posible problema al exportar reportes
+		- Mejoras visuales
 1.15
 	ADVERTENCIA:
 		Reestructuración importante. Se recomienda hacer un respalo de los datos antes de instalar la

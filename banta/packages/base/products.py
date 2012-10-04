@@ -114,8 +114,6 @@ class ProductModel(QAbstractTableModel):
 		QT_TRANSLATE_NOOP('products', 'Ingresos Brutos'),
 		QT_TRANSLATE_NOOP('products', "Descripción"),
 	)
-	MAX_ROWS_FOR_FREE = 1500
-	MAX_ROWS_FOR_BASIC = 6000
 	max_rows = 0
 	columns = 12
 	
@@ -345,8 +343,9 @@ class Products(GenericModule):
 	#needed for limits delegate. think of a way to solve the delegate crossover stuff and model sharing
 	def __init__(self, app):
 		super(Products, self).__init__(app)
-		#self.model = ProductModel(self.app.window)
 		self.model = MODEL
+		#explanation on providers
+		self.model.parent_widget = app.window
 		#i use a filteR_mode var just so i don't call the setFilter each time i make a change
 		self.filter_mode = -1
 

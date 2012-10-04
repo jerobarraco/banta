@@ -63,6 +63,7 @@ class ClientModel(QAbstractTableModel):
 		QT_TRANSLATE_NOOP('clients', "Ingresos Brutos"),
 		QT_TRANSLATE_NOOP('clients', "Saldo")
 	)
+	max_rows = 0
 	def __init__(self, parent=None):
 		QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
@@ -229,11 +230,6 @@ class ClientModel(QAbstractTableModel):
 		self.endRemoveRows()
 		self._setMaxRows()
 		return True
-
-	def addItem(self, tpay=None):
-		#Todo implement??
-		pass
-	pass
 
 class Clients(GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN, )

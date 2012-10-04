@@ -71,7 +71,8 @@ class CategoryModel(QAbstractTableModel):
 	def insertRows(self, position, rows, index=None):
 		for i in range(rows):
 			name, ok = QtGui.QInputDialog.getText(self.parent_widget,
-				self.tr("Categorias"), self.tr("Ingrese el nombre de la categoría"),	QtGui.QLineEdit.Normal, "")
+				self.tr("Rubros"),
+				self.tr("Ingrese el nombre del rubro"),	QtGui.QLineEdit.Normal, "")
 
 			if not ok:
 				return False
@@ -99,15 +100,16 @@ MODEL =  CategoryModel()
 
 class Categories(GenericModule):
 	REQUIRES = (GenericModule.P_ADMIN, )
-	NAME = "Categories"
+	NAME = "categories"
 	def __init__(self, app):
 		super(Categories, self).__init__(app)
 		self.model = MODEL
+		self.model.parent_widget = app.window
 
 	def load(self):
 		self.dialog = self.app.uiLoader.load(":/data/ui/categories.ui")
 		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
-		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Rubros de productos"))
+		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Rubros"))
 		self.dialog.v_categories.setModel(self.model)
 		
 		self.dialog.bCatNew.clicked.connect(self.new)
