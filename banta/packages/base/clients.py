@@ -3,30 +3,31 @@ from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 #TODO refactor imports
-from PySide.QtCore import QAbstractTableModel, Qt
-from PySide import QtCore, QtGui
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
 from PySide.QtCore import QT_TRANSLATE_NOOP
-from banta.packages import GenericModule
+
 import banta.utils
 import banta.db as _db
+import banta.packages as _pkg
 
-class ClientDelegate(QtGui.QStyledItemDelegate):
+class ClientDelegate(_qg.QStyledItemDelegate):
 	def __init__(self, parent = None):
-		QtGui.QStyledItemDelegate.__init__(self, parent)
+		_qg.QStyledItemDelegate.__init__(self, parent)
 
 	def createEditor(self, parent, option, index):
 		self.initStyleOption(option, index)
 		col = index.column()
 		if col == 3:
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Client.TAX_NAMES)
 			return editor
 		elif col == 4:
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Client.DOC_NAMES)
 			return editor
 		elif col == 5:
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Client.IB_NAMES)
 			return editor
 		else:
@@ -51,21 +52,21 @@ class ClientDelegate(QtGui.QStyledItemDelegate):
 			model.setData(index, editor.currentIndex(), Qt.EditRole)
 		else:
 			super(ClientDelegate, self).setModelData(editor, model, index)
-			#QtGui.QStyledItemDelegate.setModelData(editor, model, index)
+			#_qg.QStyledItemDelegate.setModelData(editor, model, index)
 
-class ClientModel(QAbstractTableModel):
+class ClientModel(_qc.QAbstractTableModel):
 	HEADERS = (
-		QT_TRANSLATE_NOOP('clients', "DNI/CUIT/CUIL"),
-		QT_TRANSLATE_NOOP('clients', "Nombre"),
-		QT_TRANSLATE_NOOP('clients', "Dirección"),
-		QT_TRANSLATE_NOOP('clients', "Tipo Iva"),
-		QT_TRANSLATE_NOOP('clients', "Tipo Documento"),
-		QT_TRANSLATE_NOOP('clients', "Ingresos Brutos"),
-		QT_TRANSLATE_NOOP('clients', "Saldo")
+		_qc.QT_TRANSLATE_NOOP('clients', "DNI/CUIT/CUIL"),
+		_qc.QT_TRANSLATE_NOOP('clients', "Nombre"),
+		_qc.QT_TRANSLATE_NOOP('clients', "Dirección"),
+		_qc.QT_TRANSLATE_NOOP('clients', "Tipo Iva"),
+		_qc.QT_TRANSLATE_NOOP('clients', "Tipo Documento"),
+		_qc.QT_TRANSLATE_NOOP('clients', "Ingresos Brutos"),
+		_qc.QT_TRANSLATE_NOOP('clients', "Saldo")
 	)
 	max_rows = 0
 	def __init__(self, parent=None):
-		QAbstractTableModel.__init__(self, parent)
+		_qc.QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
 		self.tr = banta.utils.unitr(self.trUtf8)
 		self._setMaxRows()
@@ -102,14 +103,14 @@ class ClientModel(QAbstractTableModel):
 			return None
 
 		#userRole is for searchign in the combobox (for other model)
-		if role not in (Qt.DisplayRole, Qt.EditRole, Qt.UserRole): #maybe faster, easier to understand, compact
+		if role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole, _qc.Qt.UserRole): #maybe faster, easier to understand, compact
 			return None
 
 		#technically faster
 		cli = index.internalPointer()
 		col = index.column()
 		#Most probably is a display role
-		if role == Qt.DisplayRole:
+		if role == _qc.Qt.DisplayRole:
 			if col == 0:
 				return cli.code
 			elif col ==1:
@@ -127,7 +128,7 @@ class ClientModel(QAbstractTableModel):
 			else:
 				return None
 		#2nd probably a edit role
-		elif role == Qt.EditRole:
+		elif role == _qc.Qt.EditRole:
 			if col == 0:
 				return cli.code
 			elif col == 1:
@@ -142,14 +143,14 @@ class ClientModel(QAbstractTableModel):
 				return cli.ib_type
 			elif col == 6:
 				return cli.balance
-		elif role == Qt.UserRole:#User role is usually for searching
+		elif role == _qc.Qt.UserRole:#User role is usually for searching
 			return cli.code
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
-		if role != Qt.DisplayRole:
+		if role != _qc.Qt.DisplayRole:
 			return None
-		if orientation == Qt.Horizontal:
+		if orientation == _qc.Qt.Horizontal:
 			return self.tr(self.HEADERS[section])
 		else:
 			return str(section)
@@ -157,12 +158,12 @@ class ClientModel(QAbstractTableModel):
 	def flags(self, index=None):
 		if index.isValid():
 			#if index.column() == 0 :
-			#	return  Qt.ItemIsEnabled | Qt.ItemIsSelectable
-			return  Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
-		return Qt.ItemIsEnabled
+			#	return  _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable
+			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
+		return _qc.Qt.ItemIsEnabled
 
 	def setData(self, index=None, value=None, role=0):
-		if index.isValid() and (role == Qt.EditRole):
+		if index.isValid() and (role == _qc.Qt.EditRole):
 			#dangerous
 			cli = index.internalPointer()
 			col = index.column()
@@ -174,7 +175,7 @@ class ClientModel(QAbstractTableModel):
 				#also check to NOT replace another product
 				if value in _db.DB.clients.keys():
 					#if the pro.code != value, but value is in the db, then they are 2 different products..
-					QtGui.QMessageBox.warning(self.parent_widget, "Banta", self.tr("Ya existe un cliente con ese código."))
+					_qg.QMessageBox.warning(self.parent_widget, "Banta", self.tr("Ya existe un cliente con ese código."))
 					return False
 				#The del must come BEFORE!! there's a chance that the code hasn't changed, in which case it'll end up DELETING the product
 				#it should be fixed with the if
@@ -199,19 +200,19 @@ class ClientModel(QAbstractTableModel):
 
 	def insertRows(self, position, rows, index=None):
 		for i in range(rows):
-			code, ok = QtGui.QInputDialog.getText(self.parent_widget, self.tr("Nuevo Cliente"),
-				self.tr("Ingrese el DNI/CUIT/CUIL"), QtGui.QLineEdit.Normal, "")
+			code, ok = _qg.QInputDialog.getText(self.parent_widget, self.tr("Nuevo Cliente"),
+				self.tr("Ingrese el DNI/CUIT/CUIL"), _qg.QLineEdit.Normal, "")
 			if not ok:
 				continue
 			if code in _db.DB.clients.keys():
-				QtGui.QMessageBox.information(self.parent_widget, self.tr("Nuevo Cliente"),
+				_qg.QMessageBox.information(self.parent_widget, self.tr("Nuevo Cliente"),
 					self.tr( "Ya existe un cliente con ese código."))
 				continue
 			#this would be slow, because it'll convert all the keys to a list, also can oly be called after inserting
 			#endpos = tuple(_db.DB.clients.keys()).index(code)
 			#this is faster, also, it can be called before inserting. is a little trick, basically we count all the items before
 			endpos = len(_db.DB.clients.keys(max=code, excludemax=True))
-			self.beginInsertRows(QtCore.QModelIndex(), endpos, endpos)
+			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
 			cli = _db.models.Client(code, "-")
 			_db.DB.clients[cli.code] = cli
 			self.endInsertRows()
@@ -221,7 +222,7 @@ class ClientModel(QAbstractTableModel):
 		return True
 
 	def removeRows(self, position, rows, index=None):
-		self.beginRemoveRows(QtCore.QModelIndex(), position, position+rows-1)
+		self.beginRemoveRows(_qc.QModelIndex(), position, position+rows-1)
 		for i in range(rows):
 			#i use values and c.code in case .keys() return the items in different order
 			c = _db.DB.clients.values()[position]
@@ -231,18 +232,18 @@ class ClientModel(QAbstractTableModel):
 		self._setMaxRows()
 		return True
 
-class Clients(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
+class Clients(_pkg.GenericModule):
+	REQUIRES = (_pkg.GenericModule.P_ADMIN, )
 	NAME = 'Clients'
 	def __init__(self, app):
 		super(Clients, self).__init__(app)
 		self.model = ClientModel(self.app.window)
 		#self.app.window.v_clients.setModel(self.model)
 		self.app.window.cb_clients.setModel(self.model)
-		self.proxy_model = QtGui.QSortFilterProxyModel(self.app.window.v_clients)
+		self.proxy_model = _qg.QSortFilterProxyModel(self.app.window.v_clients)
 		self.proxy_model.setSourceModel(self.model)
 		self.proxy_model.setFilterKeyColumn(1)
-		self.proxy_model.setFilterCaseSensitivity(QtCore.Qt.CaseInsensitive)
+		self.proxy_model.setFilterCaseSensitivity(_qc.Qt.CaseInsensitive)
 		#This is important so when a row is inserted, it is selected, so the client dont have to scroll 300000 items
 		# to change the basic info of a new (and blank) item (so it has no name either)
 		self.proxy_model.rowsInserted.connect(self.rowInserted)
@@ -258,12 +259,12 @@ class Clients(GenericModule):
 		self.app.window.eCliCode.textChanged.connect(self.proxy_model.setFilterWildcard)
 		self.app.window.bClientAccount.setVisible(False)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def new(self):
 		#new instances are inserted in whatever place they get, keys are sorted.. so it doesnt matter
 		self.model.insertRows(0, 1)
 
-	@QtCore.Slot(QtCore.QModelIndex, int, int)
+	@_qc.Slot(_qc.QModelIndex, int, int)
 	def rowInserted(self, parent, start, end):
 		"""This slot gets called when a row is inserted (read new) when a row is inserted, we dont actually know where
 		 it gets inserted because keys are sorted, and key bounds position """
@@ -272,7 +273,7 @@ class Clients(GenericModule):
 		i = self.app.window.v_clients.selectedIndexes()[0]
 		self.app.window.v_clients.scrollTo(i)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def delete(self):
 		selected = self.app.window.v_clients.selectedIndexes()
 		if not selected: return

@@ -209,9 +209,12 @@ def run():
 		else:
 			app.run()
 	except Exception, e:
+		import traceback
+
 		#log if there's an error with initialization, remember that this will run with no console in windows
 		logger.exception(str(e).encode('ascii', 'replace'))
 		print ("i'm sorry, there's been a fatal exception")
+		traceback.print_exc()
 		raise e
 
 if __name__=='__main__':

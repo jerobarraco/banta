@@ -7,13 +7,13 @@ logger = logging.getLogger(__name__)
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
 import banta.db as _db
-import banta.packages
+import banta.packages as _pkg
 
 #This module will handle most of the stuff for a bill
 #Also it need to expose the signals and slots required by the printer module
 #QObject is needed for signals
-class Bills( _qc.QObject, banta.packages.GenericModule):
-	REQUIRES = (banta.packages.GenericModule.P_SELL, )
+class Bills( _qc.QObject, _pkg.GenericModule):
+	REQUIRES = (_pkg.GenericModule.P_SELL, )
 	NAME = "bills"
 	#Tries to print a bill
 	startPrinting = _qc.Signal(object)

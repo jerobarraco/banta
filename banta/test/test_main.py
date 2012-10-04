@@ -10,6 +10,17 @@ import banta
 app = None
 w = None
 
+def setup_module(module):
+	global app, w
+	if app is None:
+		app = banta.App()
+		w = app.app.window
+		w.showMaximized()
+
+
+def teardown_module(module):
+	app.app.exit()
+
 class TestBanta:
 	def test_loads(self):
 		global app
@@ -19,7 +30,6 @@ class TestBanta:
 		k = banta.db.updates.UPDATES.keys()
 		k.sort()
 		assert banta.db.DB.root['version'] == k[-1] +1
-		w.showMaximized()
 
 	_qc.Slot(list)
 	def printing_finished (self, results):
@@ -35,7 +45,9 @@ class TestBanta:
 		#_qtt.keyClicks(dialog, 's', 0, 10)
 
 	def test_print(self):
-		_qtt.keyClicks( w.cb_clients, "00000000\t", 0, 10)
+		#set focus on cbclient
+		_qtt.mouseClick(w.cb_clients,  _qc.Qt.LeftButton)
+		_qtt.keyClicks( w.cb_clients, "00000000\t", 0, 1)
 		assert w.lBCliDetail.text() == '[00000000] Consumidor Final (Consumidor Final)'
 		self.results = None
 		self.el = _qc.QEventLoop()
@@ -43,29 +55,45 @@ class TestBanta:
 		timer.timeout.connect(self.el.quit)
 		app.app.modules['printer'].tprinter.printingFinished.connect(self.printing_finished)
 		os = _qc.QTimer()
-		os.singleShot(100, self.close_dialog_yes)
-		timer.start(5000)
+		os.singleShot(500, self.close_dialog_yes)
+		#timer.singleShot(2000, self.close_dialog_yes)
 		#sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
 		self.el.exec_()
 		assert self.results
 		assert self.results[0]
 
+	def _enterNewClient(self):
+		dialog = app.app.activeWindow()
+		_qtt.keyClicks(dialog, b"testing",0,1)
+		_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
+	#yes_button = dialog.button(_qg.QMessageBox.Yes)
+	#_qtt.mouseClick(yes_button, _qc.Qt.LeftButton)
+	#_qtt.keyClick(dialog, _qc.Qt.Key_Enter, 0, 10)
+
+	def test_createClient(self):
+		os = _qc.QTimer()
+		#dialog blocks the flow
+		os.singleShot(1000, self._enterNewClient)
+		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
+		assert 'testing' in banta.db.DB.clients
+		#del banta.db.DB.clients['test']
+	def setup_method(self, method):
+		if method == self.test_createClient:
+			if 'test' in banta.db.DB.clients:
+				exit(1)
 	@classmethod
 	def setup_class(cls):
 		""" setup any state specific to the execution of the given class (which
 		usually contains tests).
 		"""
-		global app, w
-		app = banta.App()
-		w = app.app.window
-		
+		pass
+
 	@classmethod
 	def teardown_class(cls):
 		""" teardown any state that was previously setup with a call to
 		setup_class.
 		"""
-		app.app.exit()
 		pass
 		
 	def setup_method(self, method):
@@ -78,12 +106,6 @@ class TestBanta:
 		call.
 		"""
 		pass
-		
-def setup_module(module):
-	print (module)
-	
-def teardown_module(module):
-	print (module)
 
 
 thanks = """ Thanks to:
