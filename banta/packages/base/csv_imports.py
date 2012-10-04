@@ -4,30 +4,31 @@ import logging
 logger = logging.getLogger(__name__)
 import csv
 ##TODO refactor imports
-from PySide import QtCore, QtGui
-from banta.packages import GenericModule
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
+import banta.packages as _pkg
 import banta.db as _db
-import banta.packages.base
 
-class CSVImports(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
-	NAME = "imports"
+
+class CSVImports(_pkg.GenericModule):
+	REQUIRES = (_pkg.GenericModule.P_ADMIN, )
+	NAME = "csvimports"
 	#Theres no license restriction because we want EVERYBODY to use our soft, so we'll give as much as possible to make that happen
 	def load(self):
 		self.app.window.acImportProducts.triggered.connect(self.importProducts)
 		self.app.window.acImportClients.triggered.connect(self.importClients)
 		self.app.window.acImportProviders.triggered.connect(self.importProviders)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def importProducts(self):
 		"""Handles importing data from a csv file"""
 		#this is the MODULE for products
 		#this is the MODEL for products
 		msg = self.app.window.tr("""Elija un archivo .csv cuyas columnas sean:
 Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
-		QtGui.QMessageBox.information(self.app.window, "Banta", msg)
+		_qg.QMessageBox.information(self.app.window, "Banta", msg)
 		#open a file
-		fname = QtGui.QFileDialog.getOpenFileName(self.app.window,
+		fname = _qg.QFileDialog.getOpenFileName(self.app.window,
 			self.app.window.tr('Abrir archivo'), "",
 			self.app.window.tr("Archivos CSV (*.csv);;Todos los archivos (*.*)")
 		)
@@ -43,7 +44,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 		reader = csv.reader(f, delimiter=delim, quotechar=quote )
 		updated = discarded = inserted = 0
 		#gets the (qt) MODEL for products using the MODULE for product
-		mod_name = banta.packages.base.products.Products.NAME
+		mod_name = _pkg.base.products.Products.NAME
 		prod_model = self.app.modules[mod_name].model
 		#starts to reset the model (invalidate all views)
 		#Documentation says we shouuld try to use begin* and end* if possible. and it is possible
@@ -111,19 +112,19 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			msg = self.app.window.tr("""%s productos agregados\n%s modificados\n%s descartados por código incorrecto""")
 			msg = msg%(inserted, updated, discarded)
 			logger.info(msg)
-			QtGui.QMessageBox.information(self.app.window, "Banta", msg)
+			_qg.QMessageBox.information(self.app.window, "Banta", msg)
 		except Exception, e:
 			#if something goes wrong, we have to rollback.. sorry, everyitem not commited was lost...
 			_db.DB.abort()
 			#and tell the admin
 			logger.exception(e)
 			#and the user (though they wont understand anything)
-			QtGui.QMessageBox.critical(self.app.window, "Banta", self.app.window.tr("Ha ocurrido un error:\n%s")% e.message)
+			_qg.QMessageBox.critical(self.app.window, "Banta", self.app.window.tr("Ha ocurrido un error:\n%s")% e.message)
 		#and after all (even if it commited or rolled-back) we finish resetting the model.
 		#best to leave this outside, because once we call begin, we must allways call end
 		prod_model.endResetModel()
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def importClients(self):
 		"""Handles importing data from a csv file"""
 		#this is the MODULE for clients needed to reset the model
@@ -133,9 +134,9 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 		for t in enumerate(_db.models.Client.TAX_NAMES):
 			msg += u"\n\t%s\t%s"%t
 
-		QtGui.QMessageBox.information(self.app.window, "Banta", msg)
+		_qg.QMessageBox.information(self.app.window, "Banta", msg)
 		#open a file
-		fname = QtGui.QFileDialog.getOpenFileName(self.app.window,
+		fname = _qg.QFileDialog.getOpenFileName(self.app.window,
 			self.app.window.tr('Abrir archivo'), "",
 			self.app.window.tr("Archivos CSV (*.csv);;Todos los archivos (*.*)")
 		)
@@ -151,7 +152,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 		reader = csv.reader(f, delimiter=delim, quotechar=quote)
 		updated = discarded = inserted = 0
 		#gets the (qt) MODEL for products using the MODULE for product
-		mod_name = banta.packages.base.clients.Clients.NAME
+		mod_name = _pkg.base.clients.Clients.NAME
 		model = self.app.modules[mod_name].model
 		#starts to reset the model (invalidate all views)
 		#Documentation says we shouuld try to use begin* and end* if possible. and it is possible
@@ -198,7 +199,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			msg = self.app.window.tr("""%s clientes agregados\n%s modificados\n%s descartados por código incorrecto""")
 			msg = msg%(inserted, updated, discarded)
 			logger.info(msg)
-			QtGui.QMessageBox.information(self.app.window, "Banta", msg)
+			_qg.QMessageBox.information(self.app.window, "Banta", msg)
 			_db.DB.commit('', 'client import')
 		except Exception, e:
 			#if something goes wrong, we have to rollback.. sorry, everyitem not commited was lost...
@@ -206,20 +207,20 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			#and tell the admin
 			logger.exception(e)
 			#and the user (though they wont understand anything)
-			QtGui.QMessageBox.critical(self.app.window, "Banta", self.app.tr("Ha ocurrido un error:\n%s")% e.message)
+			_qg.QMessageBox.critical(self.app.window, "Banta", self.app.tr("Ha ocurrido un error:\n%s")% e.message)
 		#and after all (even if it commited or rolled-back) we finish resetting the model.
 		#best to leave this outside, because once we call begin, we must allways call end
 		model.endResetModel()
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def importProviders(self):
 		"""Handles importing data from a csv file"""
 		#this is the MODULE for clients needed to reset the model
 		#this is the MODEL for products
 		msg = u"Elija un archivo .csv cuyas columnas sean:\n Código (CUIT), Nombre, Dirección, Teléfono, Mail\n"
-		QtGui.QMessageBox.information(self.app.window, "Banta", msg)
+		_qg.QMessageBox.information(self.app.window, "Banta", msg)
 		#open a file
-		fname = QtGui.QFileDialog.getOpenFileName(self.app.window,
+		fname = _qg.QFileDialog.getOpenFileName(self.app.window,
 			self.app.window.tr('Abrir archivo'), "",
 			self.app.window.tr("Archivos CSV (*.csv);;Todos los archivos (*.*)")
 		)
@@ -235,7 +236,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 		reader = csv.reader(f, delimiter=delim, quotechar=quote)
 		updated = discarded = inserted = 0
 		#gets the (qt) MODEL for products using the MODULE for product
-		mod_name = banta.packages.base.providers.Providers.NAME
+		mod_name = _pkg.base.providers.Providers.NAME
 		model = self.app.modules[mod_name].model
 		#starts to reset the model (invalidate all views)
 		#Documentation says we shouuld try to use begin* and end* if possible. and it is possible
@@ -279,7 +280,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			msg = self.app.window.tr("""%s proveedores agregados\n%s modificados\n%s descartados por código incorrecto""")
 			msg = msg%(inserted, updated, discarded)
 			logger.info(msg)
-			QtGui.QMessageBox.information(self.app.window, "Banta", msg)
+			_qg.QMessageBox.information(self.app.window, "Banta", msg)
 			_db.DB.commit('', 'providers import')
 		except Exception, e:
 			#if something goes wrong, we have to rollback.. sorry, everyitem not commited was lost...
@@ -287,7 +288,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			#and tell the admin
 			logger.exception(e)
 			#and the user (though they wont understand anything)
-			QtGui.QMessageBox.critical(self.app.window, "Banta", self.app.tr("Ha ocurrido un error:\n%s")% e.message)
+			_qg.QMessageBox.critical(self.app.window, "Banta", self.app.tr("Ha ocurrido un error:\n%s")% e.message)
 		#and after all (even if it commited or rolled-back) we finish resetting the model.
 		#best to leave this outside, because once we call begin, we must allways call end
 		model.endResetModel()

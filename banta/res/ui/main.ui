@@ -34,7 +34,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
@@ -1035,6 +1035,7 @@
   </action>
  </widget>
  <tabstops>
+  <tabstop>tabWidget</tabstop>
   <tabstop>cb_clients</tabstop>
   <tabstop>bChangeType</tabstop>
   <tabstop>cb_tbill</tabstop>
@@ -1046,12 +1047,12 @@
   <tabstop>chBProdReducible</tabstop>
   <tabstop>bBillAdd</tabstop>
   <tabstop>tb_bill</tabstop>
-  <tabstop>cb_billUser</tabstop>
   <tabstop>bBillNew</tabstop>
   <tabstop>bBillDelete</tabstop>
   <tabstop>bBillPrint</tabstop>
   <tabstop>bDraft</tabstop>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>cb_billUser</tabstop>
+  <tabstop>bNewCasualClient</tabstop>
   <tabstop>bCliNew</tabstop>
   <tabstop>eCliCode</tabstop>
   <tabstop>bCliDelete</tabstop>
@@ -1069,7 +1070,6 @@
   <tabstop>bProvNew</tabstop>
   <tabstop>bProvDelete</tabstop>
   <tabstop>vProviders</tabstop>
-  <tabstop>bNewCasualClient</tabstop>
   <tabstop>bClientAccount</tabstop>
  </tabstops>
  <resources>

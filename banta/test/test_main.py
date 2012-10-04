@@ -22,6 +22,7 @@ def teardown_module(module):
 	app.app.exit()
 
 class TestBanta:
+	#####LOADS
 	def test_loads(self):
 		global app
 		assert app is not None
@@ -30,8 +31,8 @@ class TestBanta:
 		k = banta.db.updates.UPDATES.keys()
 		k.sort()
 		assert banta.db.DB.root['version'] == k[-1] +1
-
-	_qc.Slot(list)
+	#########PRINT
+	@_qc.Slot(list)
 	def printing_finished (self, results):
 		self.results = results
 		self.el.quit()
@@ -54,15 +55,14 @@ class TestBanta:
 		timer = _qc.QTimer()
 		timer.timeout.connect(self.el.quit)
 		app.app.modules['printer'].tprinter.printingFinished.connect(self.printing_finished)
-		os = _qc.QTimer()
-		_qc.QTimer.singleShot(500, self.close_dialog_yes)
+		_qc.QTimer().singleShot(500, self.close_dialog_yes)
 		#timer.singleShot(2000, self.close_dialog_yes)
 		#sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
 		self.el.exec_()
 		assert self.results
 		assert self.results[0]
-
+	#···· CLIENT
 	def _enterNewClient(self):
 		dialog = app.app.activeWindow()
 		dialog.setTextValue('testing')
@@ -76,17 +76,23 @@ class TestBanta:
 		if 'testing' in banta.db.DB.clients:
 			print("YA HABIA UN CLIENTE")
 			del banta.db.DB.clients['testing']
-		os = _qc.QTimer()
-		#dialog blocks the flow
-		os.singleShot(1000, self._enterNewClient)
+		_qc.QTimer().singleShot(200, self._enterNewClient)
 		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
 		assert 'testing' in banta.db.DB.clients
 		del banta.db.DB.clients['testing']
 
+	#### PRODUCT
+	def test_newProduct(self):
+		self.tp_code = 'test11'
+		if self.tp_code in banta.db.DB.products:
+			del banta.db.DB.products[self.tp_code]
+		assert self.tp_code in banta.db.DB.products
+		del banta.db.DB.products[self.tp_code]
+
 	def setup_method(self, method):
-		if method == self.test_createClient:
-			if 'test' in banta.db.DB.clients:
-				exit(1)
+		#if method == self.test_createClient:
+		pass
+
 	@classmethod
 	def setup_class(cls):
 		""" setup any state specific to the execution of the given class (which

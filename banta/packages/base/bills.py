@@ -458,7 +458,9 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		self.app.window.lBCliDetail.setText("[%s] %s (%s)"%d)
 		#this code is too simplistic
 		bill_types = client.getPossibleBillTypes()
-		if self.bill.btype not in bill_types:
+		#we use the cb_tbill to check the current billtype to ensure visual concordance
+		cbt = self.app.window.cb_tbill.currentIndex()
+		if cbt not in bill_types:
 			#the index is the same as the bill_type, so the next line is ok,
 			#if the bill_types changes we should use the model correctly.
 			self.app.window.cb_tbill.setCurrentIndex(bill_types[0]) #this will trigger self.bill.setTBill
