@@ -5,48 +5,44 @@ logger = logging.getLogger(__name__)
 
 import datetime
 import csv
-#TODO refactor imports
-from PySide import QtCore, QtGui
-from PySide.QtCore import QAbstractTableModel, Qt
-from PySide.QtCore import QT_TRANSLATE_NOOP
 
-from banta.packages import GenericModule
-from banta.db.models import LICENSE_FREE, LICENSE_BASIC
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
+import banta.packages as _pack
 #cant use full import in a submodule.. probably because the parent module is still loading
-from  banta.packages.base import providers as _provs
 import banta.packages.optional.categories as _cats #meaw!
 import banta.db as _db
 import banta.utils
 
-class ProductDelegate(QtGui.QStyledItemDelegate):
+class ProductDelegate(_qg.QStyledItemDelegate):
 	#Handles the edition on the table for each column
 	def __init__(self, parent = None):
-		QtGui.QStyledItemDelegate.__init__(self, parent)
+		_qg.QStyledItemDelegate.__init__(self, parent)
 	
 	def createEditor(self, parent, option, index):
 		self.initStyleOption(option, index)
 		col = index.column()
 		if col == 6:
 			#Provider
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			#TODO use getmodel.?¿
-			editor.setModel(_provs.MODEL)
+			editor.setModel(_pack.base.providers.MODEL)
 			editor.setModelColumn(1)
 			return editor
 		elif col == 8:
 			#Category
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			#todo use getmodel here too maybe..
-			editor.setModel(_cats.MODEL)
+			editor.setModel(_pack.optional.categories.MODEL)
 			return editor
 		elif col == 9:
 			#TaxType
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.TYPE_NAMES)
 			return editor
 		elif col == 10:
 			#Ingresos Brutos
-			editor = QtGui.QComboBox(parent)
+			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.IB_NAMES)
 			return editor
 		else:
@@ -59,9 +55,9 @@ class ProductDelegate(QtGui.QStyledItemDelegate):
 			#Ingresos Brutos, Category, Tax Types
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether
 			#Gets the data for the item, in edit mode
-			d = index.data(Qt.EditRole)
+			d = index.data(_qc.Qt.EditRole)
 			#same as
-			#d = index.model().data(index, Qt.EditRole)
+			#d = index.model().data(index, _qc.Qt.EditRole)
 			#sets the current index (data for this column is just the index)
 			#Notice this is the model for products (even on column 5)
 			if d:
@@ -72,7 +68,7 @@ class ProductDelegate(QtGui.QStyledItemDelegate):
 			#Gets the data in the product model. EditRole returns the provider code.
 			#remember that this index belongs to the product list, not to the provider,
 			# so we need the code in provider column, which is EditRole
-			d = index.data(Qt.EditRole)
+			d = index.data(_qc.Qt.EditRole)
 
 			#Searchs the code in the combo, (which uses the provider model)
 			if d< 0: return None
@@ -90,35 +86,35 @@ class ProductDelegate(QtGui.QStyledItemDelegate):
 			#Ingresos Brutos, Category, Tax Types
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether
 			#tells the model to change de data for the item in index, the data is the index of the editor, in editrole
-			model.setData(index, editor.currentIndex(), Qt.EditRole)
+			model.setData(index, editor.currentIndex(), _qc.Qt.EditRole)
 		elif col == 6:
 			#Provider
 			i = editor.currentIndex()
-			model.setData(index, editor.itemData(i), Qt.EditRole)
+			model.setData(index, editor.itemData(i), _qc.Qt.EditRole)
 		else:
 			super(ProductDelegate, self).setModelData(editor, model, index)
-		#QtGui.QStyledItemDelegate.setModelData(editor, model, index)
+		#_qg.QStyledItemDelegate.setModelData(editor, model, index)
 
-class ProductModel(QAbstractTableModel):
+class ProductModel(_qc.QAbstractTableModel):
 	HEADERS = (
-		QT_TRANSLATE_NOOP('products', "Código"),
-		QT_TRANSLATE_NOOP('products', "Código Externo"),
-		QT_TRANSLATE_NOOP('products', "Nombre"),
-		QT_TRANSLATE_NOOP('products', "Precio"),
-		QT_TRANSLATE_NOOP('products', "Precio de Compra"),
-		QT_TRANSLATE_NOOP('products', 'Stock'),
-		QT_TRANSLATE_NOOP('products', 'Proveedor'),
-		QT_TRANSLATE_NOOP('products', "Unidades por caja"),
-		QT_TRANSLATE_NOOP('products', 'Rubro'),
-		QT_TRANSLATE_NOOP('products', 'Tipo'),
-		QT_TRANSLATE_NOOP('products', 'Ingresos Brutos'),
-		QT_TRANSLATE_NOOP('products', "Descripción"),
+		_qc.QT_TRANSLATE_NOOP('products', "Código"),
+		_qc.QT_TRANSLATE_NOOP('products', "Código Externo"),
+		_qc.QT_TRANSLATE_NOOP('products', "Nombre"),
+		_qc.QT_TRANSLATE_NOOP('products', "Precio"),
+		_qc.QT_TRANSLATE_NOOP('products', "Precio de Compra"),
+		_qc.QT_TRANSLATE_NOOP('products', 'Stock'),
+		_qc.QT_TRANSLATE_NOOP('products', 'Proveedor'),
+		_qc.QT_TRANSLATE_NOOP('products', "Unidades por caja"),
+		_qc.QT_TRANSLATE_NOOP('products', 'Rubro'),
+		_qc.QT_TRANSLATE_NOOP('products', 'Tipo'),
+		_qc.QT_TRANSLATE_NOOP('products', 'Ingresos Brutos'),
+		_qc.QT_TRANSLATE_NOOP('products', "Descripción"),
 	)
 	max_rows = 0
 	columns = 12
 	
 	def __init__(self, parent = None):
-		QAbstractTableModel.__init__(self, parent)
+		_qc.QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
 		self.tr = banta.utils.unitr(self.trUtf8)
 		#this might improve speed, but can be dangerous if we dont call __setMaxRows each time the rowcount is changed..
@@ -156,23 +152,23 @@ class ProductModel(QAbstractTableModel):
 		"""Returns the data for a given index, with a given role.
 		This is the (most common) way to get the data from the model.
 		index is a QModelIndex created by this object ( self.index(row, col) )
-		role which role you need (Qt.EditRole (for editing) Qt.DisplayRole (for displaying), etc)
+		role which role you need (_qc.Qt.EditRole (for editing) _qc.Qt.DisplayRole (for displaying), etc)
 		"""
 			
 		if not index.isValid():
 			return None
 
-		if role not in (Qt.DisplayRole, Qt.EditRole, Qt.UserRole): #maybe faster, easier to understand, compact
+		if role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole, _qc.Qt.UserRole): #maybe faster, easier to understand, compact
 			return None
 
 		#technically faster
 		pro = index.internalPointer()
 
-		if role == Qt.UserRole:
+		if role == _qc.Qt.UserRole:
 			return pro.code
 
 		col = index.column()
-		if role == Qt.EditRole:
+		if role == _qc.Qt.EditRole:
 			if col == 9:
 				return pro.tax_type
 			elif col == 10:
@@ -226,21 +222,21 @@ class ProductModel(QAbstractTableModel):
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
-		if role != Qt.DisplayRole:
+		if role != _qc.Qt.DisplayRole:
 			#Careful with this, returning u"" Breaks it
 			return None
-		if orientation == Qt.Horizontal:
+		if orientation == _qc.Qt.Horizontal:
 			return self.tr(self.HEADERS[section])
 		else:
 			return str(section)
 
 	def flags(self, index=None):
 		if index.isValid():
-			return	Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
-		return Qt.ItemIsEnabled
+			return	_qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
+		return _qc.Qt.ItemIsEnabled
 
 	def setData(self, index=None, value=None, role=0):
-		if index.isValid() and (role == Qt.EditRole):
+		if index.isValid() and (role == _qc.Qt.EditRole):
 			#pro = _db.DB.products.values()[index.row()]
 			pro = index.internalPointer()
 			col = index.column()
@@ -252,7 +248,7 @@ class ProductModel(QAbstractTableModel):
 				#also check to NOT replace another product
 				if value in _db.DB.products.keys():
 					#if the pro.code != value, but value is in the db, then they are 2 different products..
-					QtGui.QMessageBox.warning(self.parent_widget, "Banta", self.tr("Ya existe un producto con ese código."))
+					_qg.QMessageBox.warning(self.parent_widget, "Banta", self.tr("Ya existe un producto con ese código."))
 					return False
 				#The del must come BEFORE!! there's a chance that the code hasn't changed, in which case it'll end up DELETING the product
 				#it should be fixed with the if
@@ -271,7 +267,7 @@ class ProductModel(QAbstractTableModel):
 				title = self.tr("Modificar Stock")
 				#Ask the user for the reason of modification
 				while True:
-					msg, ok = QtGui.QInputDialog.getText(self.parent_widget, title, self.tr("Razón de la modificación:"), QtGui.QLineEdit.Normal, "")
+					msg, ok = _qg.QInputDialog.getText(self.parent_widget, title, self.tr("Razón de la modificación:"), _qg.QLineEdit.Normal, "")
 					if not ok:
 						#cancel button
 						return False
@@ -305,19 +301,19 @@ class ProductModel(QAbstractTableModel):
 	def insertRows(self, position, rows, index=None):
 		title = self.tr("Nuevo Producto")
 		for i in range(rows):
-			code, ok = QtGui.QInputDialog.getText(self.parent_widget, title, self.tr("Ingrese el código"), QtGui.QLineEdit.Normal, "")
+			code, ok = _qg.QInputDialog.getText(self.parent_widget, title, self.tr("Ingrese el código"), _qg.QLineEdit.Normal, "")
 
 			if not ok:
 				continue
 
 			if code in _db.DB.products.keys():
-				QtGui.QMessageBox.warning(self.parent_widget, title, self.tr( "Ya existe un producto con ese código."))
+				_qg.QMessageBox.warning(self.parent_widget, title, self.tr( "Ya existe un producto con ese código."))
 				continue
 			#this would be slow, because it'll convert all the keys to a list, also can oly be called after inserting
 			#endpos = tuple(zodb.clients.keys()).index(code)
 			#this is faster, also, it can be called before inserting. is a little trick, basically we count all the items before
 			endpos = len(_db.DB.products.keys(max=code, excludemax=True))
-			self.beginInsertRows(QtCore.QModelIndex(), endpos, endpos)
+			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
 			prod = _db.models.Product(code, '-')
 			_db.DB.products[prod.code] = prod
 			self.endInsertRows()
@@ -327,7 +323,7 @@ class ProductModel(QAbstractTableModel):
 		return True
 
 	def removeRows(self, position, rows, index=None):
-		self.beginRemoveRows(QtCore.QModelIndex(), position, position+rows-1)
+		self.beginRemoveRows(_qc.QModelIndex(), position, position+rows-1)
 		for i in range(rows):
 			key = _db.DB.products.keys()[position]
 			del _db.DB.products[key] #when i remove one item, the next takes it index
@@ -337,8 +333,8 @@ class ProductModel(QAbstractTableModel):
 		return True
 
 MODEL = ProductModel()
-class Products(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
+class Products(_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN, )
 	NAME = 'Products'
 	#needed for limits delegate. think of a way to solve the delegate crossover stuff and model sharing
 	def __init__(self, app):
@@ -353,12 +349,12 @@ class Products(GenericModule):
 		import banta.packages.base.providers
 
 		#Models
-		self.proxy_model = QtGui.QSortFilterProxyModel(self.app.window.v_products)
+		self.proxy_model = _qg.QSortFilterProxyModel(self.app.window.v_products)
 		self.proxy_model.setSourceModel(self.model)
-		self.proxy_model.setFilterCaseSensitivity(QtCore.Qt.CaseInsensitive)
+		self.proxy_model.setFilterCaseSensitivity(_qc.Qt.CaseInsensitive)
 		self.proxy_model.rowsInserted.connect(self.rowInserted)
 		#Makes no sense, keys are strings anyways... this would be usefull for integer keys..
-		#self.proxy_model.setSortRole(QtCore.Qt.EditRole)
+		#self.proxy_model.setSortRole(_qc.Qt.EditRole)
 		self.app.window.v_products.setModel(self.proxy_model)
 		delegate = ProductDelegate(self.app.window)
 		self.app.window.v_products.setItemDelegate(delegate) #i love qt
@@ -385,14 +381,14 @@ class Products(GenericModule):
 		#careful! this could be slow!
 		#self.app.window.v_products.resizeColumnsToContents()
 
-	@QtCore.Slot(str)
+	@_qc.Slot(str)
 	def nameChanged(self, name):
 		if self.filter_mode != 0:
 			self.proxy_model.setFilterKeyColumn(2)
 		self.proxy_model.setFilterWildcard(name)
 		self.filter_mode = 0
 
-	@QtCore.Slot(int)
+	@_qc.Slot(int)
 	def providerChanged(self, i):
 		if i < 0 : 
 			return
@@ -401,15 +397,15 @@ class Products(GenericModule):
 			#the column in the product model for the provider is 5
 			self.proxy_model.setFilterKeyColumn(6)
 			#We use the EditRole on the product model (which returns the code, not the name) which technically is safer
-			self.proxy_model.setFilterRole(QtCore.Qt.EditRole)
+			self.proxy_model.setFilterRole(_qc.Qt.EditRole)
 		model = self.app.window.cb_FilProvider.model()
 		#the column for the code in the provider model is 0
 		#EditRole returns the code
-		code = model.data(model.index(i, 0), QtCore.Qt.EditRole)
+		code = model.data(model.index(i, 0), _qc.Qt.EditRole)
 		self.proxy_model.setFilterWildcard(code)
 		self.filter_mode = 1
 		
-	@QtCore.Slot()
+	@_qc.Slot()
 	def clearFilters(self):
 		self.proxy_model.setFilterKeyColumn(0)
 		self.proxy_model.setFilterWildcard(None)
@@ -417,27 +413,31 @@ class Products(GenericModule):
 		self.app.window.eProdCode.setText("")
 		self.filter_mode = -1
 		
-	@QtCore.Slot()
+	@_qc.Slot()
 	def new(self):
-		self.model.insertRows(0, 1)
+		self.proxy_model.insertRows(0, 1)
 
-	@QtCore.Slot(QtCore.QModelIndex, int, int)
+	@_qc.Slot(_qc.QModelIndex, int, int)
 	def rowInserted(self, parent, start, end):
 		"""This slot gets called when a row is inserted (read new) when a row is inserted, we dont actually know where
 		 it gets inserted because keys are sorted, and key bounds position """
+		print (start)
 		self.app.window.v_products.selectRow(start)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def delete(self):
 		selected = self.app.window.v_products.selectedIndexes()
 		if not selected: return
 		r = selected[0].row()
-		self.model.removeRows(r, 1)
+		#NOTICE THE PROXY MODEL!!
+		#The view handles different indexes than the real model because is using the proxy
+		#So we need to call the actual method on the proxy so it translates the indexes properly
+		self.proxy_model.removeRows(r, 1)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def exportProducts(self):
 		name =  "banta_products-" +   str( datetime.datetime.now()).replace(":", "_") + ".csv"
-		fname = QtGui.QFileDialog.getSaveFileName(self.app.window,
+		fname = _qg.QFileDialog.getSaveFileName(self.app.window,
 			self.app.window.tr('Guardar Reporte'), name,
 			self.app.window.tr("Archivos CSV (*.csv);;Todos los archivos (*.*)"),
 		)
@@ -451,7 +451,7 @@ class Products(GenericModule):
 		#Write headers
 		row = []
 		for c in range (self.app.window.v_products.model().columnCount()):
-			hi = self.app.window.v_products.model().headerData(c, Qt.Horizontal, Qt.DisplayRole)
+			hi = self.app.window.v_products.model().headerData(c, _qc.Qt.Horizontal, _qc.Qt.DisplayRole)
 			row.append( unicode(hi).encode('utf-8'))
 
 		try:
@@ -464,7 +464,7 @@ class Products(GenericModule):
 			row = []
 			for c in range(self.app.window.v_products.model().columnCount()):
 				index = self.app.window.v_products.model().index(r,c)
-				data = self.app.window.v_products.model().data(index, Qt.DisplayRole)
+				data = self.app.window.v_products.model().data(index, _qc.Qt.DisplayRole)
 				#data should ALWAYS be unicode
 				#data can be a number or other stuff
 				row.append(unicode(data).encode('utf-8'))

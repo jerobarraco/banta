@@ -28,10 +28,8 @@ logger = logging.getLogger(__name__)
 #ours
 #import RC before everthing else, so we can use the translations from the resource file
 from banta import rc
-#from banta import packages
 from banta import utils
 from banta import packages
-
 
 class App():
 	#A main class for the whole app, it divides the features in several modules
@@ -91,10 +89,12 @@ class App():
 		
 	def checkLicense(self):
 		#Licence is going to be removed from the app and business model.
+		status = self.app.window.tr ("Banta versión %s listo.")
+		status %= __version__
 		if db.DB.root['license'] == db.models.LICENSE_FREE:
-			status = self.app.window.tr("Usuario no registrado - Considere registrarse para obtener mejor soporte y ayudar a un mejor desarrollo.")
+			status += " " + self.app.window.tr("Usuario no registrado. Considere registrarse para obtener mejor soporte y contribuir a un mejor producto.")
 		else:
-			status = self.app.window.tr("Usuario registrado - Muchas gracias por contribuir a un mejor software.")
+			status += " " + self.app.window.tr("Usuario registrado. Muchas gracias por contribuir a un mejor producto.")
 		self.app.window.statusbar.showMessage(status)
 
 	def run(self):

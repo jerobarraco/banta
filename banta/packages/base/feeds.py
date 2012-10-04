@@ -185,5 +185,4 @@ Worker *worker = new Worker;
 connect(obj, SIGNAL(workReady()), worker, SLOT(doWork()));
 worker->moveToThread(thread);
 thread->start();
-
 """

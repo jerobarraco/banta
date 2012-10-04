@@ -12,7 +12,10 @@ MoonGate http://MoonGate.com.ar
 	- Mejoras internas
 		- Velocidad en listado de clientes
 		- Solucionado posible problema al exportar reportes
+		- Solucionado posible problema al eliminar un producto mientras la lista está ordenada
 		- Mejoras visuales
+		- Visible la versión
+
 1.15
 	ADVERTENCIA:
 		Reestructuración importante. Se recomienda hacer un respalo de los datos antes de instalar la

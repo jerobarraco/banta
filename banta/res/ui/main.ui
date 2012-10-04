@@ -26,9 +26,6 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <property name="unifiedTitleAndToolBarOnMac">
-   <bool>false</bool>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_7">
     <item>
@@ -1035,7 +1032,6 @@
   </action>
  </widget>
  <tabstops>
-  <tabstop>tabWidget</tabstop>
   <tabstop>cb_clients</tabstop>
   <tabstop>bChangeType</tabstop>
   <tabstop>cb_tbill</tabstop>
@@ -1046,8 +1042,8 @@
   <tabstop>eProdDetail</tabstop>
   <tabstop>chBProdReducible</tabstop>
   <tabstop>bBillAdd</tabstop>
-  <tabstop>tb_bill</tabstop>
   <tabstop>bBillNew</tabstop>
+  <tabstop>tb_bill</tabstop>
   <tabstop>bBillDelete</tabstop>
   <tabstop>bBillPrint</tabstop>
   <tabstop>bDraft</tabstop>
@@ -1071,6 +1067,7 @@
   <tabstop>bProvDelete</tabstop>
   <tabstop>vProviders</tabstop>
   <tabstop>bClientAccount</tabstop>
+  <tabstop>tabWidget</tabstop>
  </tabstops>
  <resources>
   <include location="../rc.qrc"/>

@@ -9,6 +9,8 @@ import banta
 
 app = None
 w = None
+#todo test print A
+#todo test the bill gets saved
 
 def setup_module(module):
 	global app, w
