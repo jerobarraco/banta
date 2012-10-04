@@ -55,7 +55,7 @@ class TestBanta:
 		timer.timeout.connect(self.el.quit)
 		app.app.modules['printer'].tprinter.printingFinished.connect(self.printing_finished)
 		os = _qc.QTimer()
-		os.singleShot(500, self.close_dialog_yes)
+		_qc.QTimer.singleShot(500, self.close_dialog_yes)
 		#timer.singleShot(2000, self.close_dialog_yes)
 		#sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
@@ -65,19 +65,24 @@ class TestBanta:
 
 	def _enterNewClient(self):
 		dialog = app.app.activeWindow()
-		_qtt.keyClicks(dialog, b"testing",0,1)
+		dialog.setTextValue('testing')
+		#_qtt.keyClicks(dialog, "testing")
 		_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
 	#yes_button = dialog.button(_qg.QMessageBox.Yes)
 	#_qtt.mouseClick(yes_button, _qc.Qt.LeftButton)
 	#_qtt.keyClick(dialog, _qc.Qt.Key_Enter, 0, 10)
 
 	def test_createClient(self):
+		if 'testing' in banta.db.DB.clients:
+			print("YA HABIA UN CLIENTE")
+			del banta.db.DB.clients['testing']
 		os = _qc.QTimer()
 		#dialog blocks the flow
 		os.singleShot(1000, self._enterNewClient)
 		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
 		assert 'testing' in banta.db.DB.clients
-		#del banta.db.DB.clients['test']
+		del banta.db.DB.clients['testing']
+
 	def setup_method(self, method):
 		if method == self.test_createClient:
 			if 'test' in banta.db.DB.clients:
@@ -95,8 +100,10 @@ class TestBanta:
 		setup_class.
 		"""
 		pass
-		
+
+
 	def setup_method(self, method):
+
 		""" setup any state tied to the execution of the given method in a
 		class. setup_method is invoked for every test method of a class.
 		"""
@@ -105,6 +112,7 @@ class TestBanta:
 		""" teardown any state that was previously setup with a setup_method
 		call.
 		"""
+
 		pass
 
 
