@@ -23,7 +23,7 @@
    <string>Acerca de Banta</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../rc.qrc">
+   <iconset>
     <normaloff>:/img/img/banta.png</normaloff>:/img/img/banta.png</iconset>
   </property>
   <property name="sizeGripEnabled">

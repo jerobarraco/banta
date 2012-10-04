@@ -70,6 +70,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>eUName</tabstop>
+  <tabstop>bUSearch</tabstop>
+  <tabstop>bUNew</tabstop>
+  <tabstop>v_users</tabstop>
+  <tabstop>bUDelete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

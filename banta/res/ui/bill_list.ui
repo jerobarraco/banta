@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>833</width>
+    <width>612</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Listado </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -138,6 +138,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>dBListMin</tabstop>
+  <tabstop>dBListMax</tabstop>
+  <tabstop>bBListShow</tabstop>
+  <tabstop>bExportDraft</tabstop>
+  <tabstop>tBList</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

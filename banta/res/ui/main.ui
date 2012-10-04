@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>671</width>
-    <height>542</height>
+    <width>620</width>
+    <height>539</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -835,7 +835,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>671</width>
+     <width>620</width>
      <height>22</height>
     </rect>
    </property>
@@ -897,6 +897,12 @@
    <property name="text">
     <string>Configuración</string>
    </property>
+   <property name="toolTip">
+    <string>F12</string>
+   </property>
+   <property name="shortcut">
+    <string>F12</string>
+   </property>
   </action>
   <action name="acCancelPrinter">
    <property name="text">
@@ -911,6 +917,9 @@
    <property name="text">
     <string>Agregar Ítem</string>
    </property>
+   <property name="toolTip">
+    <string>F2</string>
+   </property>
    <property name="shortcut">
     <string>F2</string>
    </property>
@@ -923,8 +932,11 @@
    <property name="text">
     <string>Nueva Factura</string>
    </property>
+   <property name="toolTip">
+    <string>F10</string>
+   </property>
    <property name="shortcut">
-    <string>F6</string>
+    <string>F10</string>
    </property>
   </action>
   <action name="acItemDelete">
@@ -934,6 +946,9 @@
    </property>
    <property name="text">
     <string>Borrar</string>
+   </property>
+   <property name="toolTip">
+    <string>F7</string>
    </property>
    <property name="shortcut">
     <string>F7</string>
@@ -947,16 +962,22 @@
    <property name="text">
     <string>IMPRIMIR</string>
    </property>
+   <property name="toolTip">
+    <string>F5</string>
+   </property>
    <property name="shortcut">
-    <string>F3</string>
+    <string>F5</string>
    </property>
   </action>
   <action name="acSaveDraft">
    <property name="text">
     <string>Guardar Presupuesto</string>
    </property>
+   <property name="toolTip">
+    <string>F6</string>
+   </property>
    <property name="shortcut">
-    <string>F5</string>
+    <string>F6</string>
    </property>
   </action>
   <action name="acAboutQt">
@@ -1033,15 +1054,20 @@
   <tabstop>bCliDelete</tabstop>
   <tabstop>v_clients</tabstop>
   <tabstop>eProdCode</tabstop>
+  <tabstop>cb_FilProvider</tabstop>
+  <tabstop>bProdClearFilter</tabstop>
   <tabstop>bProdNew</tabstop>
   <tabstop>bProdDelete</tabstop>
-  <tabstop>cb_FilProvider</tabstop>
+  <tabstop>bExport</tabstop>
+  <tabstop>bNewStockBuy</tabstop>
   <tabstop>v_products</tabstop>
   <tabstop>eProvName</tabstop>
   <tabstop>bProvSearch</tabstop>
   <tabstop>bProvNew</tabstop>
   <tabstop>bProvDelete</tabstop>
   <tabstop>vProviders</tabstop>
+  <tabstop>bNewCasualClient</tabstop>
+  <tabstop>bClientAccount</tabstop>
  </tabstops>
  <resources>
   <include location="../rc.qrc"/>

@@ -70,6 +70,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>eTPName</tabstop>
+  <tabstop>bTPSearch</tabstop>
+  <tabstop>bTPNew</tabstop>
+  <tabstop>v_tpay</tabstop>
+  <tabstop>bTPDelete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

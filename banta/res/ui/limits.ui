@@ -66,6 +66,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>bLimNew</tabstop>
+  <tabstop>v_limits</tabstop>
+  <tabstop>bLimDelete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

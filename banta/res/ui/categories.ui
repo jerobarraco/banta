@@ -70,6 +70,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>eCatName</tabstop>
+  <tabstop>bCatSearch</tabstop>
+  <tabstop>bCatNew</tabstop>
+  <tabstop>bCatDelete</tabstop>
+  <tabstop>v_categories</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

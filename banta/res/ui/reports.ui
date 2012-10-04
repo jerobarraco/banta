@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>552</width>
-    <height>277</height>
+    <width>429</width>
+    <height>257</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -108,6 +108,14 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>cb_type</tabstop>
+  <tabstop>dMin</tabstop>
+  <tabstop>dMax</tabstop>
+  <tabstop>bShow</tabstop>
+  <tabstop>bExport</tabstop>
+  <tabstop>v_list</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

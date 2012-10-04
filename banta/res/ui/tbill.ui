@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>405</width>
     <height>300</height>
    </rect>
   </property>
@@ -70,6 +70,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>eTBName</tabstop>
+  <tabstop>bTBSearch</tabstop>
+  <tabstop>bTBNew</tabstop>
+  <tabstop>v_tbill</tabstop>
+  <tabstop>bTBDelete</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
