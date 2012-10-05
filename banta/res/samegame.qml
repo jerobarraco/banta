@@ -45,7 +45,7 @@
 
  Rectangle {
      id: screen
-     width: 490; height: 720
+     width: 400; height: 640
      property bool inAnotherDemo: false //Samegame often is just plonked straight into other demos
 
      SystemPalette { id: activePalette }

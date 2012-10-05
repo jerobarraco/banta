@@ -11,7 +11,7 @@ import banta.db as _db
 import banta.utils
 #from db.models import User
 
-#TODO solve the problem of the unset user on a free license
+#TODO solve the problem of the unset user when this module is not loaded
 class UserModel(_qc.QAbstractTableModel):
 	HEADERS = (
 		_qc.QT_TRANSLATE_NOOP('users', "Nombre"),

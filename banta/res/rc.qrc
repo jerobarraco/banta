@@ -35,4 +35,20 @@
     <file>levelfour.qss</file>
     <file>style.qss</file>
   </qresource>
+  <qresource prefix="same">
+    <file>samegame.qml</file>
+    <file>SamegameCore/BoomBlock.qml</file>
+    <file>SamegameCore/Button.qml</file>
+    <file>SamegameCore/Dialog.qml</file>
+    <file>SamegameCore/samegame.js</file>
+    <file>SamegameCore/pics/background.png</file>
+    <file>SamegameCore/pics/blueStar.png</file>
+    <file>SamegameCore/pics/blueStone.png</file>
+    <file>SamegameCore/pics/greenStar.png</file>
+    <file>SamegameCore/pics/greenStone.png</file>
+    <file>SamegameCore/pics/redStar.png</file>
+    <file>SamegameCore/pics/redStone.png</file>
+    <file>SamegameCore/pics/star.png</file>
+    <file>SamegameCore/pics/yellowStone.png</file>
+  </qresource>
 </RCC>

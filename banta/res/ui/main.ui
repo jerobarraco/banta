@@ -866,6 +866,7 @@
     </property>
     <addaction name="acAbout"/>
     <addaction name="acAboutQt"/>
+    <addaction name="acSameGame"/>
    </widget>
    <addaction name="menuMenu"/>
    <addaction name="menuAcerca_de"/>
@@ -1028,6 +1029,11 @@
   <action name="acNewCasualClient">
    <property name="text">
     <string>Cliente Casual</string>
+   </property>
+  </action>
+  <action name="acSameGame">
+   <property name="text">
+    <string>SameGame</string>
    </property>
   </action>
  </widget>
