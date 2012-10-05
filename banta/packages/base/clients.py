@@ -268,7 +268,6 @@ class Clients(_pkg.GenericModule):
 	def rowInserted(self, parent, start, end):
 		"""This slot gets called when a row is inserted (read new) when a row is inserted, we dont actually know where
 		 it gets inserted because keys are sorted, and key bounds position """
-
 		self.app.window.v_clients.selectRow(start)
 		i = self.app.window.v_clients.selectedIndexes()[0]
 		self.app.window.v_clients.scrollTo(i)

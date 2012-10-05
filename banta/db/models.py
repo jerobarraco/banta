@@ -439,10 +439,9 @@ class Printer(_per.Persistent):
 	
 	name = "Hasar P/320F"
 	brand = BRAND_HASAR
-	device = "COM2"
+	device = "COM1"
 	#this stores the index of the speed in self.SPEEDS, not the speed itself
-	#speed = 0
-	speed = 0
+	speed = 2
 	model = 3 #hasarPrinter.MODEL_320
 
 class Provider(_per.Persistent):

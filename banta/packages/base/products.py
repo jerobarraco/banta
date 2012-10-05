@@ -421,8 +421,12 @@ class Products(_pack.GenericModule):
 	def rowInserted(self, parent, start, end):
 		"""This slot gets called when a row is inserted (read new) when a row is inserted, we dont actually know where
 		 it gets inserted because keys are sorted, and key bounds position """
-		print (start)
+		#we could use maptosource but as the index is inserted at the end is coincidently the same
+		#in the model and the source
+
 		self.app.window.v_products.selectRow(start)
+		i = self.app.window.v_products.selectedIndexes()[0]
+		self.app.window.v_products.scrollTo(i)
 
 	@_qc.Slot()
 	def delete(self):
