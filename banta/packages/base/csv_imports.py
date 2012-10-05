@@ -3,7 +3,6 @@ from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 import csv
-##TODO refactor imports
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
 import banta.packages as _pkg

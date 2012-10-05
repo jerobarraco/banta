@@ -63,6 +63,7 @@ class TPayModel(_qc.QAbstractTableModel):
 			elif index.column() ==1:
 				tp.markup = float(value)
 			_db.DB.commit()
+			self.dataChanged.emit(index, index)
 			return True
 		return False
 

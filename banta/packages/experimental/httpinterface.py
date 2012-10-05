@@ -9,9 +9,9 @@ from PySide import QtCore
 
 import web
 import json
-import gzip
+#import gzip
 import banta.db
-from banta.packages import GenericModule
+import banta.packages as _pack
 
 try:
 	from cStringIO import StringIO
@@ -71,12 +71,12 @@ class Reader( QtCore.QThread ):
 		d['prods'] = self.parent.productCount
 
 		urls = ('/', 'main',
-		'/products/list', 'prodlist')
+			'/products/list', 'prodlist')
 		app = web.application(urls, locals())
 		app.run()
 
 
-class HTTPInterface(GenericModule):
+class HTTPInterface(_pack.GenericModule):
 	REQUIRES = []
 	NAME = "HTTPI"
 	products = QtCore.Signal(int)

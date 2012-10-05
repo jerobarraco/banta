@@ -112,7 +112,20 @@ class ProductModel(_qc.QAbstractTableModel):
 	)
 	max_rows = 0
 	columns = 12
-	
+
+	"""loaded = 0
+	def canFetchMore(self, *args, **kwargs):
+		return self.loaded < self.max_rows
+
+	def fetchMore(self, parent, **kwargs):
+		o = self.loaded
+		self.loaded += 1000
+		if self.loaded > self.max_rows:
+			self.loaded = self.max_rows
+		self.beginInsertRows(parent, o+1, self.loaded)
+		self.endInsertRows()
+		pass"""
+
 	def __init__(self, parent = None):
 		_qc.QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
@@ -154,7 +167,7 @@ class ProductModel(_qc.QAbstractTableModel):
 		index is a QModelIndex created by this object ( self.index(row, col) )
 		role which role you need (_qc.Qt.EditRole (for editing) _qc.Qt.DisplayRole (for displaying), etc)
 		"""
-			
+
 		if not index.isValid():
 			return None
 
@@ -295,6 +308,7 @@ class ProductModel(_qc.QAbstractTableModel):
 				pro.description = value
 			#endif
 			_db.DB.commit()
+			self.dataChanged.emit(index, index)
 			return True
 		return False
 
@@ -332,6 +346,12 @@ class ProductModel(_qc.QAbstractTableModel):
 		self._setMaxRows()
 		return True
 
+	"""def submit(self, *args, **kwargs):
+		try:
+			_db.DB.commit('products')
+		except:
+			return False
+		return True"""
 MODEL = ProductModel()
 class Products(_pack.GenericModule):
 	REQUIRES = (_pack.GenericModule.P_ADMIN, )
@@ -423,7 +443,6 @@ class Products(_pack.GenericModule):
 		 it gets inserted because keys are sorted, and key bounds position """
 		#we could use maptosource but as the index is inserted at the end is coincidently the same
 		#in the model and the source
-
 		self.app.window.v_products.selectRow(start)
 		i = self.app.window.v_products.selectedIndexes()[0]
 		self.app.window.v_products.scrollTo(i)

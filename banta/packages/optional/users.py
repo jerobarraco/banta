@@ -3,25 +3,22 @@ from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-from PySide.QtCore import QAbstractTableModel, Qt
-from PySide import QtCore, QtGui
-from PySide.QtCore import QT_TRANSLATE_NOOP
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
 
-from banta.packages import GenericModule
-from banta.db.models import User
+import banta.packages as _pack
 import banta.db as _db
 import banta.utils
 #from db.models import User
 
-
 #TODO solve the problem of the unset user on a free license
-class UserModel(QAbstractTableModel):
+class UserModel(_qc.QAbstractTableModel):
 	HEADERS = (
-		QT_TRANSLATE_NOOP('users', "Nombre"),
+		_qc.QT_TRANSLATE_NOOP('users', "Nombre"),
 	)
 	
 	def __init__(self, parent=None):
-		QAbstractTableModel.__init__(self, parent)
+		_qc.QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
 		self.tr = banta.utils.unitr(self.trUtf8)
 		
@@ -39,7 +36,7 @@ class UserModel(QAbstractTableModel):
 		if (row >= len(_db.DB.users)):
 			return None
 
-		if (role not in (Qt.DisplayRole, Qt.EditRole)):
+		if (role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole)):
 			return None
 		#cache the user
 		user = _db.DB.users[row]
@@ -51,20 +48,20 @@ class UserModel(QAbstractTableModel):
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
-		if role != Qt.DisplayRole:
+		if role != _qc.Qt.DisplayRole:
 			return None
-		if orientation == Qt.Horizontal:
+		if orientation == _qc.Qt.Horizontal:
 			return self.tr(self.HEADERS[section])
 		else:
 			return str(section)
 
 	def flags(self, index=None):
 		if index.isValid():
-			return  Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
-		return Qt.ItemIsEnabled
+			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
+		return _qc.Qt.ItemIsEnabled
 
 	def setData(self, index=None, value=None, role=0):
-		if index.isValid() and (role == Qt.EditRole):
+		if index.isValid() and (role == _qc.Qt.EditRole):
 			user = _db.DB.users[index.row()]
 			col = index.column()
 			if col == 0:
@@ -76,15 +73,15 @@ class UserModel(QAbstractTableModel):
 
 	def insertRows(self, position, rows, index=None):
 		for i in range(rows):
-			name, ok = QtGui.QInputDialog.getText(self.parent_widget,
-				self.tr("Usuarios"), self.tr("Ingrese el nombre del usuario"),	QtGui.QLineEdit.Normal, "")
+			name, ok = _qg.QInputDialog.getText(self.parent_widget,
+				self.tr("Usuarios"), self.tr("Ingrese el nombre del usuario"),	_qg.QLineEdit.Normal, "")
 			
 			if not ok:
 				return False
 			
 			#end = len(_db.DB.users)
-			self.beginInsertRows(QtCore.QModelIndex(), position, position)
-			user = User(name)
+			self.beginInsertRows(_qc.QModelIndex(), position, position)
+			user = _db.models.User(name)
 			#zodb.users is a PersistentList , so we can append and insert items by their position (like a normal Array)
 			#this will probably change later, because is not a LazyLoading array..
 			_db.DB.users.insert(position, user)
@@ -93,7 +90,7 @@ class UserModel(QAbstractTableModel):
 		_db.DB.commit()
 			
 	def removeRows(self, position, rows, index = None):
-		self.beginRemoveRows(QtCore.QModelIndex(), position, position + rows - 1)
+		self.beginRemoveRows(_qc.QModelIndex(), position, position + rows - 1)
 		
 		for i in range(rows):
 			_db.DB.users.pop(position)
@@ -101,9 +98,9 @@ class UserModel(QAbstractTableModel):
 		self.endRemoveRows()
 		return True
 
-class Users (GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN,)
-	NAME = "Users"
+class Users (_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN,)
+	NAME = "users"
 	def __init__(self, app):
 		super(Users, self).__init__(app)
 		#We create the Model here in case is needed in another module
@@ -121,11 +118,11 @@ class Users (GenericModule):
 		self.dialog.bUSearch.clicked.connect(self.search)
 		self.dialog.bUDelete.clicked.connect(self.delete)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def new(self):
 		self.model.insertRows(0, 1)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def search(self):
 		#Searches for a User using the name in the gui and selects it on the grid
 		text = self.dialog.eUName.text()
@@ -135,7 +132,7 @@ class Users (GenericModule):
 				self.dialog.v_users.selectRow(i)
 				break
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def delete(self):
 		selected = self.dialog.v_users.selectedIndexes()
 		if not selected: return

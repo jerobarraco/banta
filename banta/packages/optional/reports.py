@@ -4,27 +4,26 @@ import logging
 logger = logging.getLogger(__name__)
 import csv
 import datetime
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
 
-#TODO refactor this
 from PySide.QtCore import QT_TRANSLATE_NOOP
-from PySide import QtCore, QtGui
 
-from banta.packages import GenericModule
+import banta.packages as _packs
 import banta.utils as _utils
 import banta.db as _db
 
-class Reports(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
-	NAME = "Reports"
+class Reports(_packs.GenericModule):
+	REQUIRES = (_packs.GenericModule.P_ADMIN, )
+	NAME = "reports"
 	REPORT_NAMES = (
-		QT_TRANSLATE_NOOP('reports', 'Por Rubro'),
-		QT_TRANSLATE_NOOP('reports', 'Por Producto'),
-		QT_TRANSLATE_NOOP('reports', 'Por Usuario'),
-		QT_TRANSLATE_NOOP('reports', 'Por Cliente'),
-		QT_TRANSLATE_NOOP('reports', 'Movimientos'),
-		QT_TRANSLATE_NOOP('reports', 'Compras'),
+		_qc.QT_TRANSLATE_NOOP('reports', 'Por Rubro'),
+		_qc.QT_TRANSLATE_NOOP('reports', 'Por Producto'),
+		_qc.QT_TRANSLATE_NOOP('reports', 'Por Usuario'),
+		_qc.QT_TRANSLATE_NOOP('reports', 'Por Cliente'),
+		_qc.QT_TRANSLATE_NOOP('reports', 'Movimientos'),
+		_qc.QT_TRANSLATE_NOOP('reports', 'Compras'),
 	)
-
 	def load(self):
 		#define here, so we use "self." notation, which means a bounded method, also avoid problems
 		self.REPORT_FUNCS = (
@@ -46,7 +45,7 @@ class Reports(GenericModule):
 		self.widget.bShow.clicked.connect(self.show)
 		self.widget.bExport.clicked.connect(self.export)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def show(self):
 		rep_type = self.widget.cb_type.currentIndex()
 		if rep_type < 0 : return
@@ -98,11 +97,11 @@ class Reports(GenericModule):
 
 		self._showResults(results)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def export(self):
 		report_name = self.REPORT_NAMES[self.widget.cb_type.currentIndex()]
 		name =  "banta_report_"+ report_name+ '-'+  str( datetime.datetime.now()).replace(":", "_") + ".csv"
-		fname = QtGui.QFileDialog.getSaveFileName(self.app.window,
+		fname = _qg.QFileDialog.getSaveFileName(self.app.window,
 			self.widget.tr('Guardar Reporte'), name,
 			self.widget.tr("Archivos CSV (*.csv);;Todos los archivos (*.*)"),
 		)
@@ -139,7 +138,7 @@ class Reports(GenericModule):
 			r = v.rowCount()
 			v.setRowCount(r+1)
 			for c, t in enumerate(res.toStringList()):
-				self.widget.v_list.setItem(r, c, QtGui.QTableWidgetItem(t))
+				self.widget.v_list.setItem(r, c, _qg.QTableWidgetItem(t))
 
 	def _showProducts(self):
 		class Result:
@@ -268,7 +267,7 @@ class Reports(GenericModule):
 			diff = 0
 			reason = ""
 			def toStringList(self):
-				return (QtCore.QDateTime(self.date).toString(), self.code, self.name, str(self.diff), self.reason)
+				return (_qc.QDateTime(self.date).toString(), self.code, self.name, str(self.diff), self.reason)
 
 		headers  = ('Fecha', 'Código', 'Producto', 'Diferencia', 'Razón')
 		v = self.widget.v_list
@@ -297,7 +296,7 @@ class Reports(GenericModule):
 			quantity = 0.0
 			total = 0.0
 			def toStringList(self):
-				return (QtCore.QDateTime(self.date).toString(), self.prod_code, self.prod_name, unicode(self.quantity), unicode(self.total))
+				return (_qc.QDateTime(self.date).toString(), self.prod_code, self.prod_name, unicode(self.quantity), unicode(self.total))
 
 		headers  = (u'Fecha', u'Código', u'Producto', u'Cantidad', u'Total')
 		v = self.widget.v_list

@@ -122,7 +122,6 @@ class TestBanta:
 			#_qtt.keyClicks(dialog, "testing")
 			_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
 
-
 		if tp_code in banta.db.DB.products:
 			del banta.db.DB.products[tp_code]
 
@@ -134,6 +133,29 @@ class TestBanta:
 		e = EXCEPTIONS
 		assert not e
 
+	#### PRODUCT
+	def test_newProvider(self):
+		global EXCEPTIONS
+		EXCEPTIONS = 0
+		tp_code = 'test11'
+		def __enterProvider():
+			dialog = app.activeWindow()
+			#note tpcode
+			dialog.setTextValue(tp_code)
+			_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
+
+		if tp_code in banta.db.DB.providers:
+			del banta.db.DB.providers[tp_code]
+
+		_qc.QTimer().singleShot(200, __enterProvider)
+		_qtt.mouseClick(w.bProvNew,  _qc.Qt.LeftButton)
+		assert tp_code in banta.db.DB.providers
+		#TODO delete using the model
+		mod = banta.packages.base.providers.MODEL
+		#idx = mod.
+		#assertions are lazy so we need to copy the value
+		e = EXCEPTIONS
+		assert not e
 
 	def setup_method(self, method):
 		pass

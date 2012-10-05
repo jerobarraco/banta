@@ -195,6 +195,7 @@ class ClientModel(_qc.QAbstractTableModel):
 			elif col == 6:
 				cli.balance = value
 			_db.DB.commit()
+			self.dataChanged.emit(index, index)
 			return True
 		return False
 

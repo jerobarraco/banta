@@ -2,21 +2,20 @@
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
-from PySide import QtCore, QtGui
-from PySide.QtCore import QAbstractTableModel
-from PySide.QtCore import QT_TRANSLATE_NOOP
 
-from banta.packages import GenericModule
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
 
+import banta.packages as _pack
 import banta.db as _db
 import banta.utils
 
-class CategoryModel(QAbstractTableModel):
+class CategoryModel(_qc.QAbstractTableModel):
 	HEADERS = (
-		QT_TRANSLATE_NOOP("categories", "Nombre"),
+		_qc.QT_TRANSLATE_NOOP("categories", "Nombre"),
 	)
 	def __init__(self, parent=None):
-		QAbstractTableModel.__init__(self, parent)
+		_qc.QAbstractTableModel.__init__(self, parent)
 		self.parent_widget = parent
 		self.tr = banta.utils.unitr(self.trUtf8)
 
@@ -30,7 +29,7 @@ class CategoryModel(QAbstractTableModel):
 		if not index.isValid():
 			return None
 
-		if (role not in (QtCore.Qt.DisplayRole, QtCore.Qt.EditRole)):
+		if (role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole)):
 			return None
 
 		row = index.row()
@@ -45,39 +44,40 @@ class CategoryModel(QAbstractTableModel):
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
-		if role != QtCore.Qt.DisplayRole:
+		if role != _qc.Qt.DisplayRole:
 			return None
-		if orientation == QtCore.Qt.Horizontal:
+		if orientation == _qc.Qt.Horizontal:
 			return self.tr(self.HEADERS[section])
 		else:
 			return str(section)
 
 	def flags(self, index=None):
 		if index.isValid():
-			return  QtCore.Qt.ItemIsEditable | QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
+			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable
 		#Is needed in case of a bad index
-		return QtCore.Qt.ItemIsEnabled
+		return _qc.Qt.ItemIsEnabled
 
 	def setData(self, index=None, value=None, role=0):
-		if index.isValid() and (role == QtCore.Qt.EditRole):
+		if index.isValid() and (role == _qc.Qt.EditRole):
 			cat = _db.DB.categories[index.row()]
 			col = index.column()
 			if col == 0:
 				cat.name = value
 			_db.DB.commit()
+			self.dataChanged.emit(index, index)
 			return True
 		return False
 
 	def insertRows(self, position, rows, index=None):
 		for i in range(rows):
-			name, ok = QtGui.QInputDialog.getText(self.parent_widget,
+			name, ok = _qg.QInputDialog.getText(self.parent_widget,
 				self.tr("Rubros"),
-				self.tr("Ingrese el nombre del rubro"),	QtGui.QLineEdit.Normal, "")
+				self.tr("Ingrese el nombre del rubro"),	_qg.QLineEdit.Normal, "")
 
 			if not ok:
 				return False
 
-			self.beginInsertRows(QtCore.QModelIndex(), position, position)
+			self.beginInsertRows(_qc.QModelIndex(), position, position)
 			cat = _db.models.Category(name)
 			#zodb.categories is a PersistentList, so we can append and insert items by their position (like a normal Array)
 			#this will probably change later, because is not a LazyLoading array..
@@ -87,7 +87,7 @@ class CategoryModel(QAbstractTableModel):
 		_db.DB.commit()
 
 	def removeRows(self, position, rows, index = None):
-		self.beginRemoveRows(QtCore.QModelIndex(), position, position + rows - 1)
+		self.beginRemoveRows(_qc.QModelIndex(), position, position + rows - 1)
 
 		for i in range(rows):
 			_db.DB.categories.pop(position)
@@ -98,8 +98,8 @@ class CategoryModel(QAbstractTableModel):
 #TODO put the model inside the Categories class, and add a function called getModel
 MODEL =  CategoryModel()
 
-class Categories(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
+class Categories(_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN, )
 	NAME = "categories"
 	def __init__(self, app):
 		super(Categories, self).__init__(app)
@@ -119,18 +119,18 @@ class Categories(GenericModule):
 	def getModel(self):
 		return self.model
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def new(self):
 		self.model.insertRows(0, 1)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def delete(self):
 		selected = self.dialog.v_categories.selectedIndexes()
 		if not selected: return
 		r = selected[0].row()
 		self.model.removeRows(r, 1)
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def search(self):
 		#Searches for a TypePay using the name in the gui and selects it on the grid
 		text = self.dialog.eCatName.text()

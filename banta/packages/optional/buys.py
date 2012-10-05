@@ -2,15 +2,13 @@
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
-#TODO refactor
-from PySide import QtCore, QtGui
-from banta.packages import GenericModule
-from banta.db.models import LICENSES_NOT_FREE
-
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
+import banta.packages as _pack
 import banta.db as _db
 
-class Buys(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
+class Buys(_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN, )
 	NAME = 'Buys'
 	def __init__(self, app):
 		super(Buys, self).__init__(app)
@@ -33,18 +31,18 @@ class Buys(GenericModule):
 		cbp = self.dialog.cbProd
 		cbp.setModel(model)
 
-		#v = QtGui.QTableView()
-		#v.setSelectionMode(QtGui.QTableView.SingleSelection)
-		#v.setSelectionBehavior(QtGui.QTableView.SelectRows)#i should be hidding all the columns
+		#v = _qg.QTableView()
+		#v.setSelectionMode(_qg.QTableView.SingleSelection)
+		#v.setSelectionBehavior(_qg.QTableView.SelectRows)#i should be hidding all the columns
 		#cbp.setView(v)
 		#cbp.setModelColumn(0)
 		#i was decided whether to set do this in "product" model or here. i've concluded that:
 		#as this module (buys) is not part of the FREE (hence always loaded) modules, is best to load this here.
 		#todo button to change to external_code
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def newBuy(self):
-		if self.dialog.exec_() != QtGui.QDialog.Accepted:
+		if self.dialog.exec_() != _qg.QDialog.Accepted:
 			#flat is better than nested
 			return
 		if (not self.prod) or (self.units == 0):
@@ -54,16 +52,16 @@ class Buys(GenericModule):
 		b = _db.models.Buy(self.prod, self.units)
 		_db.DB.commit()
 
-	@QtCore.Slot(int)
+	@_qc.Slot(int)
 	def prodChanged(self, i):
 		if i<0: return
-		code = self.app.window.cb_billProds.itemData(i, QtCore.Qt.UserRole)
+		code = self.app.window.cb_billProds.itemData(i, _qc.Qt.UserRole)
 		self.prod = _db.DB.products[code]
 		self.pack_units = self.prod.pack_units
 		self.buy_price = self.prod.buy_price
 		self.showInfo()
 
-	@QtCore.Slot(int)
+	@_qc.Slot(int)
 	def packChanged(self, i):
 		self.packs = i
 		self.showInfo()

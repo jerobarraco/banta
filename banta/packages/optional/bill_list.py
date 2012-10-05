@@ -3,14 +3,14 @@
 """
 #TODO this could be a "report" (??) (at this moment cant be a report because:
 # 1) need double click to reopen a bill, 2) when exporting it asks to purge drafts
-#TODO refactor imports
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 import datetime
 import csv
-from PySide import QtCore, QtGui
-from banta.packages import GenericModule
+import banta.packages as _pack
+import PySide.QtCore as _qc
+import PySide.QtGui as _qg
 
 
 import banta.db as _db
@@ -19,8 +19,8 @@ import banta.utils
 REQUIRES = list()
 LICENSES = ()
 
-class BillList(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
+class BillList(_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN, )
 	NAME = "bill list"
 	def __init__(self, app):
 		super(BillList, self).__init__(app)
@@ -37,7 +37,7 @@ class BillList(GenericModule):
 		self.widget.bExportDraft.clicked.connect(self.exportDrafts)
 		self.widget.tBList.doubleClicked.connect(self.showBill)
 		
-	@QtCore.Slot()
+	@_qc.Slot()
 	def exportDrafts(self):
 		#TODO purge drafts with a menu action
 		"""Exports DRAFTS from the bill list, also deleting them"""
@@ -53,12 +53,12 @@ class BillList(GenericModule):
 		quote = '"'.encode('utf-8')
 		writer = csv.writer(open(name, 'wb'), delimiter=delimit, quotechar=quote, quoting=csv.QUOTE_MINIMAL)
 
-		ret = QtGui.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Exportar"),
+		ret = _qg.QMessageBox.question(self.app.window, self.app.window.tr("Banta - Exportar"),
 			self.app.window.tr('¿Desea eliminar los presupuestos?') ,
-			QtGui.QMessageBox.Yes | QtGui.QMessageBox.No,
-			QtGui.QMessageBox.No
+			_qg.QMessageBox.Yes | _qg.QMessageBox.No,
+			_qg.QMessageBox.No
 		)
-		delete = (ret == QtGui.QMessageBox.Yes)
+		delete = (ret == _qg.QMessageBox.Yes)
 
 		tmin, tmax = banta.utils.getTimesFromFilters(self.widget.dBListMin, self.widget.dBListMax )
 		#Write headers
@@ -101,7 +101,7 @@ class BillList(GenericModule):
 			_db.DB.commit("system", "drafts exported and purged")
 		logger.info("Draft exported correctly, %s registries deleted from db"%len(to_delete))
 
-	@QtCore.Slot()
+	@_qc.Slot()
 	def show(self):
 		tb = self.widget.tBList
 		tb.setRowCount(0)
@@ -115,18 +115,18 @@ class BillList(GenericModule):
 			tax_total += b.tax
 			#we convert the DateTime to QDateTime to use Qt's translation system
 			#TODO solve the "problem" of a null user (¿?)
-			texts = (str(b.time), str(b.number), QtCore.QDateTime(b.date).toString(), b.TYPE_NAMES[b.btype],
+			texts = (str(b.time), str(b.number), _qc.QDateTime(b.date).toString(), b.TYPE_NAMES[b.btype],
 							 b.client.name, str(b.tax), str(b.total) , str(len(b.items)),
 							 b.strPrinted(), b.user and b.user.name
 			)
 			#notice len(b.items) != sum ([q for b.items.quantity])
 			for c, t in enumerate(texts):
-				tb.setItem(r, c, QtGui.QTableWidgetItem(t))
+				tb.setItem(r, c, _qg.QTableWidgetItem(t))
 		self.app.window.statusbar.showMessage("Total $%s (IVA %s)"%(total,tax_total))
 		#just to test
 		#self.app.modules['bills'].printDraft(zodb.bills[zodb.bills.keys()[-1]])
 
-	@QtCore.Slot(QtCore.QModelIndex)
+	@_qc.Slot(_qc.QModelIndex)
 	def showBill(self, mi):
 		row = mi.row()
 		code = int(self.widget.tBList.item(row, 0).text())

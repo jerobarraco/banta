@@ -1,24 +1,16 @@
 # -*- coding: utf-8 -*-
-# TODO refactor the imports
 from __future__ import absolute_import, print_function, unicode_literals
-from PySide.QtCore import QAbstractTableModel, Qt
 import PySide.QtCore as _qc
-
-from banta.packages import GenericModule
+import banta.packages as _pack
 import banta.db.models as _mods
 import banta.utils
 
-class TBillModel(QAbstractTableModel):
-	#TODO delete other columns
-	#TODO: translate
-
+class TBillModel(_qc.QAbstractTableModel):
 	HEADERS = (
 		_qc.QT_TRANSLATE_NOOP('typebill', "Nombre"),
-		_qc.QT_TRANSLATE_NOOP('typebill', "IVA"),
-		_qc.QT_TRANSLATE_NOOP('typebill', "Actual")
 	)
 	def __init__(self, parent=None):
-		QAbstractTableModel.__init__(self, parent)
+		_qc.QAbstractTableModel.__init__(self, parent)
 		self.tr = banta.utils.unitr(self.trUtf8)
 
 	def rowCount(self, parent=None):
@@ -30,33 +22,32 @@ class TBillModel(QAbstractTableModel):
 	def data(self, index, role=0):
 		if not index.isValid():
 			return None
-
-		if index.row() >= len(_mods.Bill.TYPE_NAMES) or index.row() < 0:
+		r = index.row()
+		if r >= len(_mods.Bill.TYPE_NAMES):
 			return None
 
-		if (role == Qt.DisplayRole) or (role == Qt.EditRole):
-			name = _mods.Bill.TYPE_NAMES[index.row()]
-			pair = (name, 0.0, 0)
-			return pair[index.column()]
-		else:
-			return None
+		if (role == _qc.Qt.DisplayRole) or (role == _qc.Qt.EditRole):
+			if index.column() == 0:
+				return _mods.Bill.TYPE_NAMES[r]
+
+		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
-		if role != Qt.DisplayRole:
+		if role != _qc.Qt.DisplayRole:
 			return None
-		if orientation == Qt.Horizontal:
+		if orientation == _qc.Qt.Horizontal:
 			return self.trUtf8(self.HEADERS[section])
 		else:
 			return str(section)
 
 	def flags(self, index=None):
 		if index.isValid():
-			return  Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
-		return None #Qt.ItemIsEnabled
+			return  _qc.Qt.ItemIsEditable | _qc.Qt.ItemIsEnabled | _qc.Qt.ItemIsSelectable#QAbstractItemModel::flags(index) |
+		return None #_qc.Qt.ItemIsEnabled
 
-class TBill(GenericModule):
-	REQUIRES = (GenericModule.P_ADMIN, )
-	NAME = 'Bill Types'
+class TBill(_pack.GenericModule):
+	REQUIRES = (_pack.GenericModule.P_ADMIN, )
+	NAME = 'bill_types'
 	def load(self):
 		self.model = TBillModel()
 		self.app.window.cb_tbill.setModel(self.model)
