@@ -108,6 +108,12 @@ class ClientModel(_qc.QAbstractTableModel):
 
 		#technically faster
 		cli = index.internalPointer()
+
+		#User role is usually for searching
+		#so we put it outside to speed up a little, it could slow down if search is not common
+		if role == _qc.Qt.UserRole:
+			return cli.code
+		#actually calling index.column is slow, so we avoid it in case we only wanted the userrrole
 		col = index.column()
 		#Most probably is a display role
 		if role == _qc.Qt.DisplayRole:
@@ -143,8 +149,6 @@ class ClientModel(_qc.QAbstractTableModel):
 				return cli.ib_type
 			elif col == 6:
 				return cli.balance
-		elif role == _qc.Qt.UserRole:#User role is usually for searching
-			return cli.code
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
@@ -235,7 +239,7 @@ class ClientModel(_qc.QAbstractTableModel):
 
 class Clients(_pkg.GenericModule):
 	REQUIRES = (_pkg.GenericModule.P_ADMIN, )
-	NAME = 'Clients'
+	NAME = 'clients'
 	def __init__(self, app):
 		super(Clients, self).__init__(app)
 		self.model = ClientModel(self.app.window)

@@ -1032,8 +1032,15 @@
    </property>
   </action>
   <action name="acSameGame">
+   <property name="icon">
+    <iconset resource="../rc.qrc">
+     <normaloff>:/same/SamegameCore/pics/greenStone.png</normaloff>:/same/SamegameCore/pics/greenStone.png</iconset>
+   </property>
    <property name="text">
     <string>SameGame</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S, Ctrl+G</string>
    </property>
   </action>
  </widget>

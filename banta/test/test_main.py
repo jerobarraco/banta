@@ -21,7 +21,6 @@ import banta
 
 app = None
 w = None
-
 def setup_module(module):
 	global app, w
 	if app is None:
@@ -102,16 +101,38 @@ class TestBanta:
 		_qc.QTimer().singleShot(200, self._enterNewClient)
 		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
 		assert 'testing' in banta.db.DB.clients
-		del banta.db.DB.clients['testing']
 		e = EXCEPTIONS
 		assert not e
 
+	def test_delClient(self):
+		global EXCEPTIONS
+		EXCEPTIONS = 0
+		t_cli = 'testing'
+		assert t_cli in banta.db.DB.clients
+		cli_mod = w.v_clients.model()
+		i_start = cli_mod.index(0, 0)
+		#hit =-1 on purpose
+		matches = cli_mod.match(i_start, _qc.Qt.UserRole, t_cli, -1)
+		assert (len(matches))
+
+		i = matches[0]
+		c = cli_mod.data(i, _qc.Qt.EditRole)
+		assert t_cli == c
+		w.v_clients.selectionModel().clearSelection()
+		w.v_clients.selectRow(i.row())
+		w.v_clients.scrollTo(i)
+
+		#_qc.QTimer().singleShot(200, self._enterNewClient)
+		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
+		assert t_cli not in banta.db.DB.clients
+		e = EXCEPTIONS
+		assert not e
 
 	def test_changeProduct(self):
 		assert 0
 
 	#### PRODUCT
-	def test_newProduct(self):
+	def _test_newProduct(self):
 		global EXCEPTIONS
 		EXCEPTIONS = 0
 		tp_code = 'test11'
@@ -150,8 +171,6 @@ class TestBanta:
 		_qc.QTimer().singleShot(200, __enterProvider)
 		_qtt.mouseClick(w.bProvNew,  _qc.Qt.LeftButton)
 		assert tp_code in banta.db.DB.providers
-		#TODO delete using the model
-		mod = banta.packages.base.providers.MODEL
 		#idx = mod.
 		#assertions are lazy so we need to copy the value
 		e = EXCEPTIONS
@@ -191,4 +210,5 @@ class TestBanta:
 
 thanks = """ Thanks to:
 ntome @ freenode.net
+hpk @ freenode.net/#pylib
 """
