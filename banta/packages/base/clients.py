@@ -5,7 +5,6 @@ logger = logging.getLogger(__name__)
 #TODO refactor imports
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
-from PySide.QtCore import QT_TRANSLATE_NOOP
 
 import banta.utils
 import banta.db as _db
@@ -95,7 +94,12 @@ class ClientModel(_qc.QAbstractTableModel):
 		if (row<0) or (col<0) or (row >= self.max_rows):
 			return self.createIndex(row, col)#returns an invalid index
 		else:
-			pro = _db.DB.clients.values()[row]
+			try:
+				pro = _db.DB.clients.values()[row]
+			except Exception, e:
+				logger.exception(str(e) )
+				logger.exception(str(list(_db.DB.clients.values() )))
+
 			return self.createIndex(row, col, pro)
 
 	def data(self, index, role=0):
@@ -220,10 +224,10 @@ class ClientModel(_qc.QAbstractTableModel):
 			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
 			cli = _db.models.Client(code, "-")
 			_db.DB.clients[cli.code] = cli
+			self._setMaxRows()
 			self.endInsertRows()
 			position+=1
 		_db.DB.commit()
-		self._setMaxRows()
 		return True
 
 	def removeRows(self, position, rows, index=None):
@@ -233,8 +237,9 @@ class ClientModel(_qc.QAbstractTableModel):
 			c = _db.DB.clients.values()[position]
 			del _db.DB.clients[c.code] #when i remove one item, the next takes it index
 		_db.DB.commit()
-		self.endRemoveRows()
+		#important
 		self._setMaxRows()
+		self.endRemoveRows()
 		return True
 
 class Clients(_pkg.GenericModule):

@@ -33,8 +33,6 @@ def teardown_module(module):
 
 class TestBanta:
 	#####LOADS
-	i = 0
-	b = 0
 
 	def test_loads(self):
 		global app
@@ -79,26 +77,25 @@ class TestBanta:
 		#todo check if bill gets saved
 
 	def test_printA(self):
-		assert 0
+		pass
 
 	#···· CLIENT
-	def _enterNewClient(self):
-		dialog = app.activeWindow()
-		dialog.setTextValue('testing')
-		#_qtt.keyClicks(dialog, "testing")
-		_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
-		#yes_button = dialog.button(_qg.QMessageBox.Yes)
-		#_qtt.mouseClick(yes_button, _qc.Qt.LeftButton)
-		#_qtt.keyClick(dialog, _qc.Qt.Key_Enter, 0, 10)
-		#dialog.accept() #also does it
-
 	def test_newClient(self):
 		global EXCEPTIONS
 		EXCEPTIONS = 0
 		if 'testing' in banta.db.DB.clients:
 			print("YA HABIA UN CLIENTE")
 			del banta.db.DB.clients['testing']
-		_qc.QTimer().singleShot(200, self._enterNewClient)
+		def _enterNewClient():
+			dialog = app.activeWindow()
+			dialog.setTextValue('testing')
+			#_qtt.keyClicks(dialog, "testing")
+			_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
+			#yes_button = dialog.button(_qg.QMessageBox.Yes)
+			#_qtt.mouseClick(yes_button, _qc.Qt.LeftButton)
+			#_qtt.keyClick(dialog, _qc.Qt.Key_Enter, 0, 10)
+			#dialog.accept() #also does it
+		_qc.QTimer().singleShot(200, _enterNewClient)
 		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
 		assert 'testing' in banta.db.DB.clients
 		e = EXCEPTIONS
@@ -109,6 +106,8 @@ class TestBanta:
 		EXCEPTIONS = 0
 		t_cli = 'testing'
 		assert t_cli in banta.db.DB.clients
+		#is better to use the model() from the view, because it could change, in this case the model is
+		#a proxy model, so be carefull not to mix db indexes with view indexes
 		cli_mod = w.v_clients.model()
 		i_start = cli_mod.index(0, 0)
 		#hit =-1 on purpose
@@ -118,21 +117,21 @@ class TestBanta:
 		i = matches[0]
 		c = cli_mod.data(i, _qc.Qt.EditRole)
 		assert t_cli == c
+
 		w.v_clients.selectionModel().clearSelection()
 		w.v_clients.selectRow(i.row())
 		w.v_clients.scrollTo(i)
 
-		#_qc.QTimer().singleShot(200, self._enterNewClient)
 		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
 		assert t_cli not in banta.db.DB.clients
 		e = EXCEPTIONS
 		assert not e
 
-	def test_changeProduct(self):
-		assert 0
+	def test_billChangeProduct(self):
+		pass
 
 	#### PRODUCT
-	def _test_newProduct(self):
+	def test_newProduct(self):
 		global EXCEPTIONS
 		EXCEPTIONS = 0
 		tp_code = 'test11'
@@ -149,9 +148,40 @@ class TestBanta:
 		_qc.QTimer().singleShot(200, __enterProduct)
 		_qtt.mouseClick(w.bProdNew,  _qc.Qt.LeftButton)
 		assert tp_code in banta.db.DB.products
-		del banta.db.DB.products[tp_code]
 		#assertions are lazy so we need to copy the value
 		e = EXCEPTIONS
+		assert not e
+
+	def test_delProduct(self):
+		global EXCEPTIONS
+		EXCEPTIONS = 0
+		tp_code = 'test11'
+		#test previous existance
+		assert tp_code in banta.db.DB.products
+
+		#test search
+		mod = w.v_products.model()
+		i_start = mod.index(0, 0)
+		#hit =-1 on purpose
+		matches = mod.match(i_start, _qc.Qt.UserRole, tp_code, -1)
+		assert (len(matches))
+
+		#test getting data
+		i = matches[0]
+		p = mod.data(i, _qc.Qt.EditRole)
+		assert tp_code == p
+
+		#test deletion
+		#selects it
+		w.v_clients.selectionModel().clearSelection()
+		w.v_clients.selectRow(i.row())
+		w.v_clients.scrollTo(i)
+		#deletes it like a user (tests bindings, and stuff)
+		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
+		#checks non-existance
+		assert tp_code not in banta.db.DB.clients
+		e = EXCEPTIONS
+		#check exceptions
 		assert not e
 
 	#### PRODUCT

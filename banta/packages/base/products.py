@@ -308,6 +308,7 @@ class ProductModel(_qc.QAbstractTableModel):
 				pro.description = value
 			#endif
 			_db.DB.commit()
+			#informs other views of the change
 			self.dataChanged.emit(index, index)
 			return True
 		return False
@@ -330,10 +331,13 @@ class ProductModel(_qc.QAbstractTableModel):
 			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
 			prod = _db.models.Product(code, '-')
 			_db.DB.products[prod.code] = prod
+			#is important to set the max row before emitting endInsertRow,
+			#if not we might get a blank row or an exception
+			self._setMaxRows()
 			self.endInsertRows()
 			position+=1
 		_db.DB.commit()
-		self._setMaxRows()
+
 		return True
 
 	def removeRows(self, position, rows, index=None):
@@ -342,8 +346,11 @@ class ProductModel(_qc.QAbstractTableModel):
 			key = _db.DB.products.keys()[position]
 			del _db.DB.products[key] #when i remove one item, the next takes it index
 		_db.DB.commit()
-		self.endRemoveRows()
+		#VERY MUY IMPORTANT
+		#update the max_rows before emitting the endremoverows or we WILL get an exception...
+		#because the notified views  will try to update and WILL try to read the removed item
 		self._setMaxRows()
+		self.endRemoveRows()
 		return True
 
 	"""def submit(self, *args, **kwargs):
@@ -352,6 +359,7 @@ class ProductModel(_qc.QAbstractTableModel):
 		except:
 			return False
 		return True"""
+
 MODEL = ProductModel()
 class Products(_pack.GenericModule):
 	REQUIRES = (_pack.GenericModule.P_ADMIN, )
