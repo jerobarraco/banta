@@ -10,7 +10,7 @@ import os
 
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
-
+import banta
 import banta.db
 import banta.packages
 
@@ -44,12 +44,11 @@ p, li { white-space: pre-wrap; }
 			return ""
 
 	def getVersion(self):
-		ver = '1.14'
-		base_url = 'http://www.moongate.com.ar/p/version.html?source=banta&version='+ver
-		urllib2.urlopen(base_url).read()
+		#base_url = 'http://www.moongate.com.ar/p/version.html?source=banta&version='+banta.__version__
+		#urllib2.urlopen(base_url).read()
 		#TODO read from www.shinystat, and on status 302 read the correct location
 		#and cache that location if possible./distribute.sh -m "pil ffmpeg kivy"
-		conn = httplib.HTTPConnection("s2.shinystat.com")
+		#conn = httplib.HTTPConnection("s2.shinystat.com")
 		#conn = httplib.HTTPConnection("www.easycounter.com")
 
 		p = os.name
@@ -65,20 +64,30 @@ p, li { white-space: pre-wrap; }
 		s = _qc.QLocale.system()
 		country = s.countryToString(s.country())
 		lang = s.name()
-		ua = 'Banta/%s (%s; %s; %s)' % (ver, osn, country, lang)
+		ua = 'Banta/%s (%s; %s; %s)' % (banta.__version__, osn, country, lang)
+		ref = 'http://www.moongate.com.ar/?q=%s'%(banta.__version__)
 		head = {
 			#"Content-Type" : "application/x-www-form-urlencoded",
-			"Accept" : "*/*",
-			'Accept-Language':lang,
-			'Referer':'http://www.moongate.com.ar/ver?%s'%ua,
-			'User-Agent':ua
+
 			}
+		opener = urllib2.build_opener()
+		opener.addheaders = [
+			('User-agent', 'Mozilla/5.0'),
+			("Accept", "*/*"),
+		 	('Accept-Language', lang),
+			('Referer', ref),
+			('User-Agent', ua)
+		]
+		url = "http://s2.shinystat.com/cgi-bin/shinystat.cgi?USER=moongate&ver="+banta.__version__
+		#print(url)
+		opener.open(url).read()
+		#opener.open('/cgi-bin/shinystat.cgi?USER=moongate').read()
 		#parameters = urlencode({"strUserName" : "username", "strPassword" : "userpasswd"})
-		conn.request("GET", "/cgi-bin/shinystat.cgi?USER=moongate", headers=head)
-		r1 = conn.getresponse()
+		#conn.request("GET", "/cgi-bin/shinystat.cgi?USER=moongate", headers=head)
+		#r1 = conn.getresponse()
 
 		#print r1.status
-		r1.read()
+
 
 	def run(self, *args, **kwargs):
 		self.feeds = feedparser.parse( self.feed_url  )

@@ -7,7 +7,7 @@
 import PySide.QtCore as _qc
 import PySide.QtDeclarative
 import banta.packages as _pack
-
+#todo add in the pyinstaller the dll for particle system
 class QMLSame(_pack.GenericModule):
 	REQUIRES = []
 	NAME = "samegame"

@@ -36,9 +36,9 @@ class ClientDelegate(_qg.QStyledItemDelegate):
 		#Sets de dat to the editor (current item)
 		if index.column() in (3, 4, 5):#columns 3, 4, 5 works the same
 			#Gets the data for the item, in edit mode
-			d = index.data(Qt.EditRole)
+			d = index.data(_qc.Qt.EditRole)
 			#same as
-			#d = index.model().data(index, Qt.EditRole)
+			#d = index.model().data(index, _qc.Qt.EditRole)
 			#sets the current index (data for this column is just the index)
 			editor.setCurrentIndex(d)
 		else:
@@ -48,7 +48,7 @@ class ClientDelegate(_qg.QStyledItemDelegate):
 		#Set the data from the editor back to the model (usually changed)
 		if index.column() in (3,4,5):
 			#tells the model to change de data for the item in index, the data is the index of the editor, in editrole
-			model.setData(index, editor.currentIndex(), Qt.EditRole)
+			model.setData(index, editor.currentIndex(), _qc.Qt.EditRole)
 		else:
 			super(ClientDelegate, self).setModelData(editor, model, index)
 			#_qg.QStyledItemDelegate.setModelData(editor, model, index)
