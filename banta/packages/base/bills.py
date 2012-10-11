@@ -8,6 +8,7 @@ import PySide.QtCore as _qc
 import PySide.QtGui as _qg
 import banta.db as _db
 import banta.packages as _pkg
+import banta.utils
 
 #This module will handle most of the stuff for a bill
 #Also it need to expose the signals and slots required by the printer module
@@ -84,8 +85,9 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 
 	def loadNewClientDialog(self):
 		self.dialog = self.app.uiLoader.load(":/data/ui/temp_client.ui", self.app.window)
+		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
 		self.dialog.setWindowIcon(self.app.window.windowIcon())
-		self.dialog.setWindowTitle(self.app.window.tr('Nuevo cliente casual'))
+		self.dialog.setWindowTitle(self.dialog.tr('Nuevo cliente casual'))
 		self.app.window.bNewCasualClient.setDefaultAction(self.app.window.acNewCasualClient)
 		self.app.window.acNewCasualClient.triggered.connect(self.newCasualClient)
 		self.dialog.cbTaxType.addItems(_db.models.Client.TAX_NAMES)

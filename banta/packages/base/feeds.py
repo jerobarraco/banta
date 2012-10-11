@@ -17,8 +17,6 @@ import banta.packages
 
 class Reader( _qc.QThread ):
 	newsFetched = _qc.Signal(list)
-	#todo put in updates
-	cjk = 'cookies'
 	def __init__(self):
 		_qc.QThread.__init__(self)
 		#self.setAutoDelete(True)
@@ -62,9 +60,6 @@ p, li { white-space: pre-wrap; }
 		banta.db.DB.commit()
 
 	def getVersion(self):
-		#TODO read from www.shinystat, and on status 302 read the correct location
-		#and cache that location if possible.
-
 		p = os.name
 		if p == 'nt':
 			osn = 'Windows NT 5.1'

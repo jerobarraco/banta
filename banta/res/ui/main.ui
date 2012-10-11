@@ -31,7 +31,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
@@ -866,7 +866,6 @@
     </property>
     <addaction name="acAbout"/>
     <addaction name="acAboutQt"/>
-    <addaction name="acSameGame"/>
    </widget>
    <addaction name="menuMenu"/>
    <addaction name="menuAcerca_de"/>
@@ -1041,6 +1040,11 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S, Ctrl+G</string>
+   </property>
+  </action>
+  <action name="acShowClientDetails">
+   <property name="text">
+    <string>Cuentas</string>
    </property>
   </action>
  </widget>

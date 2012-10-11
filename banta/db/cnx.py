@@ -51,7 +51,7 @@ class MiZODB(object):
 			transaction.get().setUser(user)
 		if note:
 			transaction.get().note(note)
-		transaction.commit()
+		transaction.get().commit()
 		
 	def abort(self):
 		transaction.abort()

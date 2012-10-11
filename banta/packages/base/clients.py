@@ -267,7 +267,6 @@ class Clients(_pkg.GenericModule):
 		self.app.window.bCliNew.clicked.connect(self.new)
 		self.app.window.bCliDelete.clicked.connect(self.delete)
 		self.app.window.eCliCode.textChanged.connect(self.proxy_model.setFilterWildcard)
-		self.app.window.bClientAccount.setVisible(False)
 
 	@_qc.Slot()
 	def new(self):
