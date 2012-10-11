@@ -2,7 +2,7 @@
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
-#TODO refactor imports
+
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
 

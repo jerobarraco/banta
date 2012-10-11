@@ -5,7 +5,6 @@ logger = logging.getLogger(__name__)
 
 import feedparser
 import urllib2
-import httplib
 import os
 
 import PySide.QtCore as _qc
@@ -44,12 +43,8 @@ p, li { white-space: pre-wrap; }
 			return ""
 
 	def getVersion(self):
-		#base_url = 'http://www.moongate.com.ar/p/version.html?source=banta&version='+banta.__version__
-		#urllib2.urlopen(base_url).read()
 		#TODO read from www.shinystat, and on status 302 read the correct location
-		#and cache that location if possible./distribute.sh -m "pil ffmpeg kivy"
-		#conn = httplib.HTTPConnection("s2.shinystat.com")
-		#conn = httplib.HTTPConnection("www.easycounter.com")
+		#and cache that location if possible.
 
 		p = os.name
 		if p == 'nt':
@@ -66,10 +61,6 @@ p, li { white-space: pre-wrap; }
 		lang = s.name()
 		ua = 'Banta/%s (%s; %s; %s)' % (banta.__version__, osn, country, lang)
 		ref = 'http://www.moongate.com.ar/?q=%s'%(banta.__version__)
-		head = {
-			#"Content-Type" : "application/x-www-form-urlencoded",
-
-			}
 		opener = urllib2.build_opener()
 		opener.addheaders = [
 			('User-agent', 'Mozilla/5.0'),
@@ -79,14 +70,7 @@ p, li { white-space: pre-wrap; }
 			('User-Agent', ua)
 		]
 		url = "http://s2.shinystat.com/cgi-bin/shinystat.cgi?USER=moongate&ver="+banta.__version__
-		#print(url)
 		opener.open(url).read()
-		#opener.open('/cgi-bin/shinystat.cgi?USER=moongate').read()
-		#parameters = urlencode({"strUserName" : "username", "strPassword" : "userpasswd"})
-		#conn.request("GET", "/cgi-bin/shinystat.cgi?USER=moongate", headers=head)
-		#r1 = conn.getresponse()
-
-		#print r1.status
 
 
 	def run(self, *args, **kwargs):
