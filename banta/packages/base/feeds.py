@@ -3,18 +3,22 @@ from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
-import feedparser
+import cookielib
 import urllib2
 import os
 
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
+import feedparser
+
 import banta
 import banta.db
 import banta.packages
 
 class Reader( _qc.QThread ):
 	newsFetched = _qc.Signal(list)
+	#todo put in updates
+	cjk = 'cookies'
 	def __init__(self):
 		_qc.QThread.__init__(self)
 		#self.setAutoDelete(True)
@@ -42,6 +46,21 @@ p, li { white-space: pre-wrap; }
 		except:
 			return ""
 
+	def __getCookies(self):
+		#TODO MOVE TO OTHER THREAD!!
+		cjk = 'cookies'
+		#i could use pickle.dumps(cookiejar) and pickle.loads but this is a)clearer 2)more direct 3) allow for using the cookie objects
+		cookiejar = cookielib.CookieJar()
+		if cjk in banta.db.DB.root:
+			map (cookiejar.set_cookie, banta.db.DB.root[cjk])
+			cookiejar.clear_expired_cookies()
+		return cookiejar
+
+	def __saveCookies(self, cookiejar):
+		cjk = 'cookies'
+		banta.db.DB.root[cjk] = list(cookiejar)
+		banta.db.DB.commit()
+
 	def getVersion(self):
 		#TODO read from www.shinystat, and on status 302 read the correct location
 		#and cache that location if possible.
@@ -59,18 +78,35 @@ p, li { white-space: pre-wrap; }
 		s = _qc.QLocale.system()
 		country = s.countryToString(s.country())
 		lang = s.name()
-		ua = 'Banta/%s (%s; %s; %s)' % (banta.__version__, osn, country, lang)
-		ref = 'http://www.moongate.com.ar/?q=%s'%(banta.__version__)
-		opener = urllib2.build_opener()
+		bua = "Opera/%s (%s; %s; %s)"
+		ua = bua %(banta.__version__, osn, country, lang)
+		#ua = 'Banta/%s (%s; %s; %s)' % (banta.__version__, osn, country, lang)
+		ref = 'http://www.google.com/?q=banta%s'%(banta.__version__)
+		#tries to get the cookiejar from the database, if it doesnt exits it creates a new one
+		#Cookies aren't worth by now, also should to be fetched from the other thread
+		#cookies = self.__getCookies()
+		opener = urllib2.build_opener(
+			urllib2.HTTPRedirectHandler(),
+			urllib2.HTTPHandler(debuglevel=0),
+			urllib2.HTTPSHandler(debuglevel=0),
+			#urllib2.HTTPCookieProcessor(cookies)
+		)
+
 		opener.addheaders = [
-			('User-agent', 'Mozilla/5.0'),
+			('User-agent', ua),
 			("Accept", "*/*"),
-		 	('Accept-Language', lang),
-			('Referer', ref),
-			('User-Agent', ua)
+			('Accept-Language', lang),
+			('Referer', ref)
 		]
-		url = "http://s2.shinystat.com/cgi-bin/shinystat.cgi?USER=moongate&ver="+banta.__version__
-		opener.open(url).read()
+		#url = "http://s2.shinystat.com/cgi-bin/shinystat.cgi?USER=moongate&ver="+banta.__version__
+		url = "http://www.shinystat.com/cgi-bin/shinystat.cgi?USER=moongate"
+		r = opener.open(url)
+		#self.__saveCookies(cookies)
+		code = r.code
+		headers = r.info()
+		#todo store user id from cookie
+		r.read()
+
 
 
 	def run(self, *args, **kwargs):
