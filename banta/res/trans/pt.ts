@@ -82,7 +82,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>App</name>
     <message>
-        <location filename="../../__init__.py" line="70"/>
+        <location filename="../../__init__.py" line="72"/>
         <source>Loading ...</source>
         <translation>Carregando ...</translation>
     </message>
@@ -113,12 +113,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ClientModel</name>
     <message>
-        <location filename="../../packages/base/clients.py" line="208"/>
+        <location filename="../../packages/base/clients.py" line="217"/>
         <source>Nuevo Cliente</source>
         <translation>Novo Cliente</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="204"/>
+        <location filename="../../packages/base/clients.py" line="213"/>
         <source>Ingrese el DNI/CUIT/CUIL</source>
         <translation>Insira o DNI/CUIT/CUIL</translation>
     </message>
@@ -709,7 +709,7 @@ p, li { white-space: pre-wrap; }
         <translation>Limpar Filtro</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="607"/>
+        <location filename="../ui/main.ui" line="1047"/>
         <source>Cuentas</source>
         <translation>Contas</translation>
     </message>
@@ -728,11 +728,21 @@ p, li { white-space: pre-wrap; }
         <source>F10</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../ui/main.ui" line="1039"/>
+        <source>SameGame</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/main.ui" line="1042"/>
+        <source>Ctrl+S, Ctrl+G</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ProductModel</name>
     <message>
-        <location filename="../../packages/base/products.py" line="303"/>
+        <location filename="../../packages/base/products.py" line="318"/>
         <source>Nuevo Producto</source>
         <translation>Novo Produto</translation>
     </message>
@@ -747,12 +757,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ja Existe um produto com esse código.</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="269"/>
+        <location filename="../../packages/base/products.py" line="282"/>
         <source>Modificar Stock</source>
         <translation>Modificar Estoque</translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/products.py" line="270"/>
+        <location filename="../../packages/base/products.py" line="283"/>
         <source>Razón de la modificación:</source>
         <translation>Razão da Modificação:</translation>
     </message>
@@ -760,7 +770,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ProviderModel</name>
     <message>
-        <location filename="../../packages/base/providers.py" line="104"/>
+        <location filename="../../packages/base/providers.py" line="105"/>
         <source>Nuevo Proveedor</source>
         <translation>Novo Fornecedor</translation>
     </message>
@@ -782,12 +792,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UserModel</name>
     <message>
-        <location filename="../../packages/optional/users.py" line="80"/>
+        <location filename="../../packages/optional/users.py" line="77"/>
         <source>Ingrese el nombre del usuario</source>
         <translation>Insira o nome do usuário</translation>
     </message>
     <message>
-        <location filename="../../packages/optional/users.py" line="80"/>
+        <location filename="../../packages/optional/users.py" line="77"/>
         <source>Usuarios</source>
         <translation type="unfinished"></translation>
     </message>
@@ -795,7 +805,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>categories</name>
     <message>
-        <location filename="../../packages/optional/categories.py" line="16"/>
+        <location filename="../../packages/optional/categories.py" line="15"/>
         <source>Nombre</source>
         <translation>Nome</translation>
     </message>
@@ -803,37 +813,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>clients</name>
     <message>
-        <location filename="../../packages/base/clients.py" line="59"/>
+        <location filename="../../packages/base/clients.py" line="58"/>
         <source>DNI/CUIT/CUIL</source>
         <translation>DNI/CUIT/CUIL</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="60"/>
+        <location filename="../../packages/base/clients.py" line="59"/>
         <source>Nombre</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="61"/>
+        <location filename="../../packages/base/clients.py" line="60"/>
         <source>DirecciÃ³n</source>
         <translation>Direção</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="62"/>
+        <location filename="../../packages/base/clients.py" line="61"/>
         <source>Tipo Iva</source>
         <translation>Tipo IVA</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="63"/>
+        <location filename="../../packages/base/clients.py" line="62"/>
         <source>Tipo Documento</source>
         <translation>Tipo Documento</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="64"/>
+        <location filename="../../packages/base/clients.py" line="63"/>
         <source>Ingresos Brutos</source>
         <translation>Renda Bruta</translation>
     </message>
     <message>
-        <location filename="../../packages/base/clients.py" line="66"/>
+        <location filename="../../packages/base/clients.py" line="65"/>
         <source>Saldo</source>
         <translation>Saldo</translation>
     </message>
@@ -841,17 +851,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>limits</name>
     <message>
-        <location filename="../../packages/optional/limits.py" line="62"/>
+        <location filename="../../packages/optional/limits.py" line="60"/>
         <source>Cantidad</source>
         <translation>Quantidade</translation>
     </message>
     <message>
-        <location filename="../../packages/optional/limits.py" line="63"/>
+        <location filename="../../packages/optional/limits.py" line="61"/>
         <source>Monto</source>
         <translation>Total</translation>
     </message>
     <message>
-        <location filename="../../packages/optional/limits.py" line="61"/>
+        <location filename="../../packages/optional/limits.py" line="59"/>
         <source>Producto</source>
         <translation>Produto</translation>
     </message>
@@ -1097,7 +1107,7 @@ Os recibos guardados serão eliminados  eo arquivo anterior sera substituido!</t
         <translation type="obsolete">Código do cliente</translation>
     </message>
     <message>
-        <location filename="../../packages/base/csv_imports.py" line="291"/>
+        <location filename="../../packages/base/csv_imports.py" line="290"/>
         <source>Ha ocurrido un error:
 %s</source>
         <translation type="unfinished"></translation>
@@ -1108,7 +1118,7 @@ Os recibos guardados serão eliminados  eo arquivo anterior sera substituido!</t
         <translation type="obsolete">Carregando ...</translation>
     </message>
     <message>
-        <location filename="../../__init__.py" line="184"/>
+        <location filename="../../__init__.py" line="186"/>
         <source>No se ha podido mostrar la web:
 %s</source>
         <translation type="unfinished"></translation>
@@ -1140,67 +1150,67 @@ Os recibos guardados serão eliminados  eo arquivo anterior sera substituido!</t
         </translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/csv_imports.py" line="29"/>
+        <location filename="../../packages/base/csv_imports.py" line="28"/>
         <source>Elija un archivo .csv cuyas columnas sean:
 Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/csv_imports.py" line="224"/>
+        <location filename="../../packages/base/csv_imports.py" line="223"/>
         <source>Abrir archivo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="446"/>
+        <location filename="../../packages/base/products.py" line="473"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/csv_imports.py" line="200"/>
+        <location filename="../../packages/base/csv_imports.py" line="199"/>
         <source>%s clientes agregados
 %s modificados
 %s descartados por código incorrecto</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/csv_imports.py" line="281"/>
+        <location filename="../../packages/base/csv_imports.py" line="280"/>
         <source>%s proveedores agregados
 %s modificados
 %s descartados por código incorrecto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="445"/>
+        <location filename="../../packages/base/products.py" line="472"/>
         <source>Guardar Reporte</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="139"/>
+        <location filename="../../packages/base/bills.py" line="141"/>
         <source>Código del cliente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="142"/>
+        <location filename="../../packages/base/bills.py" line="144"/>
         <source>Nombre del cliente</source>
         <translation>Nome do Cliente</translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="194"/>
+        <location filename="../../packages/base/bills.py" line="196"/>
         <source>Banta - Imprimir</source>
         <translation>Banta - Imprimir</translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="185"/>
+        <location filename="../../packages/base/bills.py" line="187"/>
         <source>No se ha indicado el cliente</source>
         <translation>Selecione um Cliente primeiro</translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="194"/>
+        <location filename="../../packages/base/bills.py" line="196"/>
         <source>¿Desea imprimir?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="167"/>
+        <location filename="../../packages/base/bills.py" line="169"/>
         <source>Esta factura ya ha sido impresa.</source>
         <translation>Esta fatura ja foi impressa.</translation>
     </message>
@@ -1210,32 +1220,27 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation>Banta - Exportar</translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="289"/>
+        <location filename="../../packages/base/bills.py" line="291"/>
         <source>Debe seleccionar un producto.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="226"/>
+        <location filename="../../packages/base/bills.py" line="228"/>
         <source>No se ha podido realizar la impresión
 {0}
 ¿Desea volver a editar la factura?
 Si elige NO, la factura NO se guardará.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../packages/base/bills.py" line="88"/>
-        <source>Nuevo cliente casual</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message utf8="true">
-        <location filename="../../packages/base/csv_imports.py" line="113"/>
+        <location filename="../../packages/base/csv_imports.py" line="112"/>
         <source>%s productos agregados
 %s modificados
 %s descartados por código incorrecto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/csv_imports.py" line="122"/>
+        <location filename="../../packages/base/csv_imports.py" line="121"/>
         <source>Ha ocurrido un error:
 %s</source>
         <translation type="unfinished"></translation>
@@ -1254,7 +1259,7 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.dialog</name>
     <message>
-        <location filename="../../packages/base/tpay.py" line="97"/>
+        <location filename="../../packages/base/tpay.py" line="98"/>
         <source>Tipos de Pago</source>
         <translation>Tipos de pagamentos</translation>
     </message>
@@ -1264,12 +1269,12 @@ Si elige NO, la factura NO se guardará.</source>
         <translation>Impressora</translation>
     </message>
     <message>
-        <location filename="../../packages/optional/users.py" line="117"/>
+        <location filename="../../packages/optional/users.py" line="114"/>
         <source>Usuarios</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/optional/limits.py" line="196"/>
+        <location filename="../../packages/optional/limits.py" line="194"/>
         <source>Límites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1278,26 +1283,36 @@ Si elige NO, la factura NO se guardará.</source>
         <source>Rubros</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../packages/base/bills.py" line="90"/>
+        <source>Nuevo cliente casual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../packages/optional/client_details.py" line="26"/>
+        <source>Detalles de cliente</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>self.widget</name>
     <message>
-        <location filename="../../packages/optional/reports.py" line="40"/>
+        <location filename="../../packages/optional/reports.py" line="39"/>
         <source>Reportes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="87"/>
+        <location filename="../../packages/optional/reports.py" line="86"/>
         <source>Sin rubro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="106"/>
+        <location filename="../../packages/optional/reports.py" line="105"/>
         <source>Guardar Reporte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="107"/>
+        <location filename="../../packages/optional/reports.py" line="106"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1305,17 +1320,17 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.window</name>
     <message utf8="true">
-        <location filename="../../__init__.py" line="102"/>
+        <location filename="../../__init__.py" line="104"/>
         <source>Banta versión %s listo.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../__init__.py" line="105"/>
+        <location filename="../../__init__.py" line="107"/>
         <source>Usuario no registrado. Considere registrarse para obtener mejor soporte y contribuir a un mejor producto.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../__init__.py" line="107"/>
+        <location filename="../../__init__.py" line="109"/>
         <source>Usuario registrado. Muchas gracias por contribuir a un mejor producto.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1323,19 +1338,14 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>typebill</name>
     <message>
-        <location filename="../../packages/base/tbill.py" line="16"/>
+        <location filename="../../packages/base/tbill.py" line="10"/>
         <source>Nombre</source>
         <translation>Nome</translation>
     </message>
     <message>
         <location filename="../../packages/base/tbill.py" line="17"/>
         <source>IVA</source>
-        <translation>IVA</translation>
-    </message>
-    <message>
-        <location filename="../../packages/base/tbill.py" line="19"/>
-        <source>Actual</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">IVA</translation>
     </message>
 </context>
 <context>
@@ -1354,7 +1364,7 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>users</name>
     <message>
-        <location filename="../../packages/optional/users.py" line="20"/>
+        <location filename="../../packages/optional/users.py" line="17"/>
         <source>Nombre</source>
         <translation>Nome</translation>
     </message>

@@ -16,12 +16,12 @@
         <translation>Acerca de Banta</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="-23"/>
         <source>Entre en nostro sítio</source>
         <translation type="obsolete">Visite nuestro sitio</translation>
     </message>
     <message>
-        <location line="+134"/>
+        <location line="+157"/>
         <source>OK</source>
         <translation>Aceptar</translation>
     </message>
@@ -89,7 +89,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>App</name>
     <message>
-        <location filename="../../__init__.py" line="+70"/>
+        <location filename="../../__init__.py" line="+72"/>
         <source>Loading ...</source>
         <translation>Cargando ...</translation>
     </message>
@@ -110,7 +110,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ClientModel</name>
     <message>
-        <location filename="../../packages/base/clients.py" line="+208"/>
+        <location filename="../../packages/base/clients.py" line="+217"/>
         <source>Nuevo Cliente</source>
         <translation>Nuevo Cliente</translation>
     </message>
@@ -664,12 +664,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-75"/>
+        <location line="+365"/>
         <source>Cuentas</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+423"/>
+        <location line="-17"/>
         <source>Cliente Casual</source>
         <translation></translation>
     </message>
@@ -683,16 +683,26 @@ p, li { white-space: pre-wrap; }
         <source>F10</source>
         <translation></translation>
     </message>
+    <message>
+        <location line="+100"/>
+        <source>SameGame</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Ctrl+S, Ctrl+G</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>ProductModel</name>
     <message utf8="true">
-        <location filename="../../packages/base/products.py" line="+310"/>
+        <location filename="../../packages/base/products.py" line="+325"/>
         <source>Ya existe un producto con ese código.</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-41"/>
+        <location line="-43"/>
         <source>Modificar Stock</source>
         <translation></translation>
     </message>
@@ -702,7 +712,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+33"/>
+        <location line="+35"/>
         <source>Nuevo Producto</source>
         <translation></translation>
     </message>
@@ -715,7 +725,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ProviderModel</name>
     <message>
-        <location filename="../../packages/base/providers.py" line="+104"/>
+        <location filename="../../packages/base/providers.py" line="+105"/>
         <source>Nuevo Proveedor</source>
         <translation></translation>
     </message>
@@ -737,7 +747,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UserModel</name>
     <message>
-        <location filename="../../packages/optional/users.py" line="+80"/>
+        <location filename="../../packages/optional/users.py" line="+77"/>
         <source>Usuarios</source>
         <translation></translation>
     </message>
@@ -750,7 +760,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>app</name>
     <message>
-        <location line="-80"/>
         <source>Bill module loaded</source>
         <translation type="obsolete">cargando modulo de bill</translation>
     </message>
@@ -758,7 +767,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>bill</name>
     <message>
-        <location line="+0"/>
+        <location line="-77"/>
         <source>Bill module loaded</source>
         <translation type="obsolete">cargando modulo de bill</translation>
     </message>
@@ -766,7 +775,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>categories</name>
     <message>
-        <location filename="../../packages/optional/categories.py" line="-59"/>
+        <location filename="../../packages/optional/categories.py" line="-60"/>
         <source>Nombre</source>
         <translation></translation>
     </message>
@@ -774,7 +783,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>clients</name>
     <message>
-        <location filename="../../packages/base/clients.py" line="-148"/>
+        <location filename="../../packages/base/clients.py" line="-158"/>
         <source>DirecciÃ³n</source>
         <translation>Dirección</translation>
     </message>
@@ -812,7 +821,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>limits</name>
     <message>
-        <location filename="../../packages/optional/limits.py" line="+61"/>
+        <location filename="../../packages/optional/limits.py" line="+59"/>
         <source>Producto</source>
         <translation></translation>
     </message>
@@ -838,7 +847,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>products</name>
     <message>
-        <location filename="../../packages/base/products.py" line="-204"/>
+        <location filename="../../packages/base/products.py" line="-219"/>
         <source>CÃ³digo</source>
         <translation>Código</translation>
     </message>
@@ -901,7 +910,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>providers</name>
     <message>
-        <location filename="../../packages/base/providers.py" line="-92"/>
+        <location filename="../../packages/base/providers.py" line="-93"/>
         <source>CÃ³digo</source>
         <translation>Código</translation>
     </message>
@@ -962,7 +971,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>self.app</name>
     <message>
-        <location filename="../../__init__.py" line="-7"/>
         <source>Loading ...</source>
         <translation type="obsolete">Cargando ...</translation>
     </message>
@@ -977,13 +985,13 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Su licencia es válida por %n solo día más.</translation>
     </message>
     <message>
-        <location filename="../../packages/base/csv_imports.py" line="+291"/>
+        <location filename="../../packages/base/csv_imports.py" line="+290"/>
         <source>Ha ocurrido un error:
 %s</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../__init__.py" line="+121"/>
+        <location filename="../../__init__.py" line="+114"/>
         <source>No se ha podido mostrar la web:
 %s</source>
         <translation></translation>
@@ -1000,7 +1008,7 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message numerus="yes">
-        <location line="+0"/>
+        <location line="-55"/>
         <source>Su licencia es válida por %n día(s) más.</source>
         <comment>licencia</comment>
         <translation type="obsolete">
@@ -1009,7 +1017,7 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="+228"/>
+        <location filename="../../packages/base/bills.py" line="+230"/>
         <source>Impresión Fallida </source>
         <translation></translation>
     </message>
@@ -1025,7 +1033,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="+335"/>
+        <location filename="../../packages/base/products.py" line="+362"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation></translation>
     </message>
@@ -1091,11 +1099,6 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
 Si elige NO, la factura NO se guardará.</source>
         <translation></translation>
     </message>
-    <message>
-        <location line="-138"/>
-        <source>Nuevo cliente casual</source>
-        <translation></translation>
-    </message>
     <message utf8="true">
         <location filename="../../packages/base/csv_imports.py" line="-168"/>
         <source>%s productos agregados
@@ -1128,12 +1131,12 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.dialog</name>
     <message>
-        <location filename="../../packages/base/tpay.py" line="+97"/>
+        <location filename="../../packages/base/tpay.py" line="+98"/>
         <source>Tipos de Pago</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/users.py" line="+117"/>
+        <location filename="../../packages/optional/users.py" line="+114"/>
         <source>Usuarios</source>
         <translation></translation>
     </message>
@@ -1148,15 +1151,25 @@ Si elige NO, la factura NO se guardará.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/categories.py" line="+96"/>
+        <location filename="../../packages/optional/categories.py" line="+97"/>
         <source>Rubros</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../packages/base/bills.py" line="-138"/>
+        <source>Nuevo cliente casual</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../../packages/optional/client_details.py" line="+26"/>
+        <source>Detalles de cliente</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>self.widget</name>
     <message>
-        <location filename="../../packages/optional/reports.py" line="+15"/>
+        <location filename="../../packages/optional/reports.py" line="+14"/>
         <source>Reportes</source>
         <translation></translation>
     </message>
@@ -1179,7 +1192,6 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.window</name>
     <message>
-        <location line="-106"/>
         <source>Loading ...</source>
         <translation type="obsolete">cargando ...</translation>
     </message>
@@ -1202,25 +1214,15 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>typebill</name>
     <message>
-        <location filename="../../packages/base/tbill.py" line="+16"/>
+        <location filename="../../packages/base/tbill.py" line="+10"/>
         <source>Nombre</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>IVA</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Actual</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>typepay</name>
     <message>
-        <location filename="../../packages/base/tpay.py" line="-85"/>
+        <location filename="../../packages/base/tpay.py" line="-86"/>
         <source>Nombre</source>
         <translation></translation>
     </message>
