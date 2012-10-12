@@ -201,9 +201,40 @@ class TestBanta:
 		_qc.QTimer().singleShot(200, __enterProvider)
 		_qtt.mouseClick(w.bProvNew,  _qc.Qt.LeftButton)
 		assert tp_code in banta.db.DB.providers
-		#idx = mod.
 		#assertions are lazy so we need to copy the value
 		e = EXCEPTIONS
+		assert not e
+
+	def test_delProvider(self):
+		global EXCEPTIONS
+		EXCEPTIONS = 0
+		code = 'test11'
+		#test previous existance
+		assert code in banta.db.DB.providers
+
+		#test search
+		mod = w.v_providers.model()
+		i_start = mod.index(0, 0)
+		#hit =-1 on purpose
+		matches = mod.match(i_start, _qc.Qt.UserRole, code, -1)
+		assert (len(matches))
+
+		#test getting data
+		i = matches[0]
+		p = mod.data(i, _qc.Qt.EditRole)
+		assert tp_code == p
+
+		#test deletion
+		#selects it
+		w.v_clients.selectionModel().clearSelection()
+		w.v_clients.selectRow(i.row())
+		w.v_clients.scrollTo(i)
+		#deletes it like a user (tests bindings, and stuff)
+		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
+		#checks non-existance
+		assert tp_code not in banta.db.DB.clients
+		e = EXCEPTIONS
+		#check exceptions
 		assert not e
 
 	def setup_method(self, method):

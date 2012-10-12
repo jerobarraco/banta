@@ -25,8 +25,9 @@ class ClientDetails(_pkg.GenericModule):
 		self.dialog.setWindowIcon(w.windowIcon())
 		self.dialog.setWindowTitle(self.dialog.tr('Detalles de cliente'))
 		w.bClientAccount.setDefaultAction(w.acShowClientDetails)
-		w.acShowClientDetails.triggered.connect(self.showDetails)
-		w.bClientAccount.setVisible(True)
+		#Not ready for release yet
+		#w.acShowClientDetails.triggered.connect(self.showDetails)
+		#w.bClientAccount.setVisible(True)
 
 
 	@_qc.Slot()
@@ -47,7 +48,7 @@ class ClientDetails(_pkg.GenericModule):
 		#TODO use the model to work with the db instead of using it directly????
 		cli_code = r.data(_qc.Qt.UserRole)
 		cli = _db.DB.clients[cli_code]
-		print (cli)
+		d.balance.setText(str(cli.balance))
 		"""r.data()
 		d.balance.setText(str())
 		d.eName.setText("")

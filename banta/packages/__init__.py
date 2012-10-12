@@ -6,7 +6,6 @@ retaining the control on stuff like user permission and license.
 
 Notice that license types only HIDES data and methods to the user, it NEVER deletes nor fails to create certain stuff.
 This is an important strategy.
-
 """
 from __future__ import absolute_import, print_function, unicode_literals
 import banta.db.models as _mods
@@ -58,16 +57,16 @@ class GenericModule(object):
 
 	def load(self):
 		"""Loads the module
-		this is only called if the module is avialable for that license"""
+		this is only called if the module being loaded"""
 		pass
 
 def getPackages():
 	"""This function will search for new packages and list them.
 	returns a list of packages.
 	"""
-	from banta.packages import base, optional, experimental
-	import banta.db
+	from banta.packages import base, optional#, experimental
+	#import banta.db
 	packs = [base, optional]
-	if banta.db.CONF.DEBUG:
-		packs.append(experimental)
+	#if banta.db.CONF.DEBUG:
+	#	packs.append(experimental)
 	return packs
