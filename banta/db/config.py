@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Module for configuration on a .ini file.
-#This is important for stuff that could break the app"""
+The class in this module should be instantiated before loading the rest of the app.
+Because it holds the criticial configuration for the app, the one that could be used as a safenet.
+This is important for stuff that could break the app"""
 from __future__ import absolute_import, print_function, unicode_literals
 import ConfigParser, os
 

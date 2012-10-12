@@ -213,7 +213,7 @@ class TestBanta:
 		assert code in banta.db.DB.providers
 
 		#test search
-		mod = w.v_providers.model()
+		mod = w.vProviders.model()
 		i_start = mod.index(0, 0)
 		#hit =-1 on purpose
 		matches = mod.match(i_start, _qc.Qt.UserRole, code, -1)
@@ -221,18 +221,19 @@ class TestBanta:
 
 		#test getting data
 		i = matches[0]
-		p = mod.data(i, _qc.Qt.EditRole)
-		assert tp_code == p
+		p = i.data(_qc.Qt.EditRole)
+		#p = mod.data(i, _qc.Qt.EditRole)
+		assert code == p
 
 		#test deletion
 		#selects it
-		w.v_clients.selectionModel().clearSelection()
-		w.v_clients.selectRow(i.row())
-		w.v_clients.scrollTo(i)
+		w.vProviders.selectionModel().clearSelection()
+		w.vProviders.selectRow(i.row())
+		w.vProviders.scrollTo(i)
 		#deletes it like a user (tests bindings, and stuff)
-		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
+		_qtt.mouseClick(w.bProvDelete, _qc.Qt.LeftButton)
 		#checks non-existance
-		assert tp_code not in banta.db.DB.clients
+		assert code not in banta.db.DB.providers
 		e = EXCEPTIONS
 		#check exceptions
 		assert not e

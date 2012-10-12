@@ -14,15 +14,16 @@ import PySide.QtGui as _qg
 import PySide.QtCore as _qc
 import PySide.QtUiTools
 
-
-
-#The call to basicConfig() should come before any calls to debug(), info() etc. As it’s intended as a one-off simple configuration facility, only the first call will actually do anything: subsequent calls are effectively no-ops.
 #db is needed for loading the config
 #to avoid circular reference we should use always "import banta.x.y" (full scope names) never use relative imports
 #(like import db or from . import db) ESPECIALLY if we are inside a __init__
 #never import anything except a module
 from banta import db
-#Logger is available after loading the config
+#The call to basicConfig() should come before any calls to debug(), info() etc.
+# As it’s intended as a one-off simple configuration facility, only the first call will actually do anything:
+# subsequent calls are effectively no-ops.
+
+#Logger is available after loading the config which is loaded on the db
 logger = logging.getLogger(__name__)
 
 #ours
@@ -34,6 +35,7 @@ from banta import packages
 #TODO subclass qapplication
 class App(_qg.QApplication):
 	#A main class for the whole app, it divides the features in several modules
+
 	#this doesnt work, it only catch c++ exceptions
 	#"def notify(self, rec, ev):
 	#	try:
@@ -228,10 +230,10 @@ def runWrapped():
 		raise e
 
 def run():
-	if not db.CONF.DEBUG:
-		return runWrapped()
-	else:
+	if db.CONF.DEBUG:
 		return runApp()
+	else:
+		return runWrapped()
 
 if __name__=='__main__':
 	sys.exit(run())
