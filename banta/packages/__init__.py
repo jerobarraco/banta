@@ -64,9 +64,12 @@ def getPackages():
 	"""This function will search for new packages and list them.
 	returns a list of packages.
 	"""
-	from banta.packages import base, optional#, experimental
-	#import banta.db
+	from banta.packages import base, optional
 	packs = [base, optional]
-	#if banta.db.CONF.DEBUG:
-	#	packs.append(experimental)
+
+	import banta.db
+	if banta.db.CONF.EXPERIMANTAL:
+		from banta.packages import experimental
+		packs.append(experimental)
+		
 	return packs

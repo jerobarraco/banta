@@ -13,6 +13,7 @@ class Config:
 			'profiling':str(False),
 			'persistent_printer':str(False),
 			'debug':str(False),
+			'experimental':str(False),
 			'server':'',
 		}
 
@@ -26,6 +27,7 @@ class Config:
 		self.DEBUG = self.config.getboolean(sect, 'debug')
 		self.PERSISTENT_PRINTER = self.config.getboolean(sect, 'persistent_printer')
 		self.SERVER = self.config.get(sect, 'server')
+		self.EXPERIMENTAL = self.config.get(sect, 'experimental')
 
 	def get(self, section, key):
 		return self.config.get(section, key)
@@ -51,7 +53,10 @@ class Config:
 		"""
 		self.set('profiling', self.PROFILING)
 		self.set('debug', self.DEBUG)
+		self.set('experimental', self.EXPERIMENTAL)
 		self.set('persistent_printer', self.PERSISTENT_PRINTER)
 		self.set('server', self.SERVER)
+
+
 		if self.config:
 			self.config.write(open(self.filename, 'w'))

@@ -20,7 +20,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 		_qg.QStyledItemDelegate.__init__(self, parent)
 	
 	def createEditor(self, parent, option, index):
-		self.initStyleOption(option, index)
+		#self.initStyleOption(option, index)
 		col = index.column()
 		if col == 6:
 			#Provider
@@ -47,7 +47,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			return editor
 		else:
 			#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
-			return super(ProductDelegate, self).createEditor(parent, option, index)
+			return _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
 
 	def setEditorData(self, editor, index):
 		#Sets de data to the editor (current item)
@@ -77,7 +77,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			if i< 0: return None
 			editor.setCurrentIndex(i)
 		else:
-			super(ProductDelegate, self).setEditorData(editor, index)
+			_qg.QStyledItemDelegate.setEditorData(self, editor, index)
 
 	def setModelData(self, editor, model, index):
 		#Set the data from the editor back to the model (usually changed)
@@ -92,8 +92,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			i = editor.currentIndex()
 			model.setData(index, editor.itemData(i), _qc.Qt.EditRole)
 		else:
-			super(ProductDelegate, self).setModelData(editor, model, index)
-		#_qg.QStyledItemDelegate.setModelData(editor, model, index)
+			_qg.QStyledItemDelegate.setModelData(self, editor, model, index)
 
 class ProductModel(_qc.QAbstractTableModel):
 	HEADERS = (
