@@ -5,7 +5,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 import sys
 import logging
 
-__version__ = '1.16.0'
+__version__ = '1.17.0'
 
 #3rd party
 ##for pyinstaller
@@ -216,11 +216,11 @@ def runApp():
 		import cProfile
 		cProfile.runctx('app.run()', globals(), locals(), filename='profile')
 	else:
-		app.run()
+		return app.run()
 
 def runWrapped():
 	try:
-		runApp()
+		return runApp()
 	except Exception, e:
 		import traceback
 		#log if there's an error with initialization, remember that this will run with no console in windows

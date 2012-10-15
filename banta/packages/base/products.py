@@ -51,6 +51,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 
 	def setEditorData(self, editor, index):
 		#Sets de data to the editor (current item)
+		print(index.column(), editor)
 		if index.column() in (8, 9, 10):
 			#Ingresos Brutos, Category, Tax Types
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether

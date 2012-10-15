@@ -68,8 +68,8 @@ def getPackages():
 	packs = [base, optional]
 
 	import banta.db
-	if banta.db.CONF.EXPERIMANTAL:
+	if banta.db.CONF.EXPERIMENTAL:
 		from banta.packages import experimental
 		packs.append(experimental)
-		
+
 	return packs

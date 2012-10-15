@@ -7,6 +7,11 @@ from __future__ import absolute_import, print_function, unicode_literals
 import ConfigParser, os
 
 class Config:
+	EXPERIMENTAL = False
+	PERSISTENT_PRINTER = False
+	DEBUG = False
+	PROFILING = False
+	SERVER = ''
 	def __init__(self, cfg = 'banta.cfg'):
 		self.filename = os.path.join(os.path.abspath('.'), cfg)
 		self.defaults = {
