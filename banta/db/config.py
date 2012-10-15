@@ -31,8 +31,8 @@ class Config:
 		self.PROFILING = self.config.getboolean(sect, 'profiling')
 		self.DEBUG = self.config.getboolean(sect, 'debug')
 		self.PERSISTENT_PRINTER = self.config.getboolean(sect, 'persistent_printer')
+		self.EXPERIMENTAL = self.config.getboolean(sect, 'experimental')
 		self.SERVER = self.config.get(sect, 'server')
-		self.EXPERIMENTAL = self.config.get(sect, 'experimental')
 
 	def get(self, section, key):
 		return self.config.get(section, key)
