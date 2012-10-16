@@ -16,60 +16,63 @@ import banta.utils
 
 class ProductDelegate(_qg.QStyledItemDelegate):
 	#Handles the edition on the table for each column
-	def __init__(self, parent = None):
-		_qg.QStyledItemDelegate.__init__(self, parent)
-		#self.closeEditor.connect(self.close)
-	
+	#def __init__(self, parent = None):
+	#	_qg.QStyledItemDelegate.__init__(self, parent)
+
 	def createEditor(self, parent, option, index):
-		#self.initStyleOption(option, index)
+		self.initStyleOption(option, index)
 		col = index.column()
-		res = None
-		if col == 6:
+		editor = None
+		if col in (0, 1, 2, 11):
+			#Code , internal code, name, descripcion
+			editor = _qg.QLineEdit(parent)
+		elif col in (3, 4, 5):
+			#price, buyprice, stock
+			editor = _qg.QDoubleSpinBox(parent)
+		elif col == 6:
 			#Provider
 			editor = _qg.QComboBox(parent)
 			#TODO use getmodel.?¿
 			editor.setModel(_pack.base.providers.MODEL)
 			editor.setModelColumn(1)
-			res =  editor
+		elif col == 7:
+			#this little bastar has all the blame
+			editor = _qg.QSpinBox(parent)
 		elif col == 8:
 			#Category
 			editor = _qg.QComboBox(parent)
 			#todo use getmodel here too maybe..
 			editor.setModel(_pack.optional.categories.MODEL)
-			res =  editor
 		elif col == 9:
 			#TaxType
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.TYPE_NAMES)
-			res =  editor
 		elif col == 10:
 			#Ingresos Brutos
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.IB_NAMES)
-			res =  editor
-		else:
+		#else:
+			#Theres a bug in pyside with this and spinboxes
 			#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
-			res =  _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
-		print ('c', index, res)
-		res.destroyed.connect(self.editorGone)
-		return res
-
-	@_qc.Slot()
-	def editorGone(self):
-		print ('gone', self.sender())
+			#editor = _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
+		return editor
 
 	@_qc.Slot()
 	def setEditorData(self, editor, index):
 		#Sets de data to the editor (current item)
-		print('r', index, editor)
 		col = index.column()
-		if col in (8, 9, 10):
+		er = _qc.Qt.EditRole
+		#Gets the data for the item, in edit mode
+		#same as: d = index.model().data(index, _qc.Qt.EditRole)
+		d = index.data(er)
+		if col in (0, 1, 2, 11):
+			editor.setText(d)
+		elif col in (3, 4, 5, 7):
+			editor.setValue(d)
+		elif col in (8, 9, 10):
 			#Ingresos Brutos, Category, Tax Types
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether
-			#Gets the data for the item, in edit mode
-			d = index.data(_qc.Qt.EditRole)
-			#same as
-			#d = index.model().data(index, _qc.Qt.EditRole)
+
 			#sets the current index (data for this column is just the index)
 			#Notice this is the model for products (even on column 5)
 			if d:
@@ -77,10 +80,9 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 		elif col == 6:
 			#Provider
 			#Not very efficient
-			#Gets the data in the product model. EditRole returns the provider code.
+			#d is the data in the product model. EditRole returns the provider code.
 			#remember that this index belongs to the product list, not to the provider,
 			# so we need the code in provider column, which is EditRole
-			d = index.data(_qc.Qt.EditRole)
 
 			#Searchs the code in the combo, (which uses the provider model)
 			if d< 0: return None
@@ -88,27 +90,26 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			i = editor.findData(d)
 			if i< 0: return None
 			editor.setCurrentIndex(i)
-		else:
-			_qg.QStyledItemDelegate.setEditorData(self, editor, index)
 
 	def setModelData(self, editor, model, index):
 		#Set the data from the editor back to the model (usually changed)
 		col = index.column()
-		if col in (8, 9, 10):
+		er = _qc.Qt.EditRole
+		if col in (0, 1, 2, 11):
+			model.setData(index, editor.text(), er)
+		elif col in (3, 4, 5, 7):
+			model.setData(index, editor.value(), er)
+		elif col in (8, 9, 10):
 			#Ingresos Brutos, Category, Tax Types
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether
 			#tells the model to change de data for the item in index, the data is the index of the editor, in editrole
-			model.setData(index, editor.currentIndex(), _qc.Qt.EditRole)
+			model.setData(index, editor.currentIndex(), er)
 		elif col == 6:
 			#Provider
 			i = editor.currentIndex()
-			model.setData(index, editor.itemData(i), _qc.Qt.EditRole)
-		else:
-			_qg.QStyledItemDelegate.setModelData(self, editor, model, index)
-		#self.closeEditor.emmit(editor, _qg.QStyledItemDelegate.NoHint)
-		@_qc.Slot(object, object)
-		def close(self, o, o1):
-			print ('closed', o, o1)
+			#itemData returns the userRole (if i remember well)
+			model.setData(index, editor.itemData(i), er)
+
 class ProductModel(_qc.QAbstractTableModel):
 	HEADERS = (
 		_qc.QT_TRANSLATE_NOOP('products', "Código"),
@@ -126,19 +127,6 @@ class ProductModel(_qc.QAbstractTableModel):
 	)
 	max_rows = 0
 	columns = 12
-
-	"""loaded = 0
-	def canFetchMore(self, *args, **kwargs):
-		return self.loaded < self.max_rows
-
-	def fetchMore(self, parent, **kwargs):
-		o = self.loaded
-		self.loaded += 1000
-		if self.loaded > self.max_rows:
-			self.loaded = self.max_rows
-		self.beginInsertRows(parent, o+1, self.loaded)
-		self.endInsertRows()
-		pass"""
 
 	def __init__(self, parent = None):
 		_qc.QAbstractTableModel.__init__(self, parent)
@@ -366,13 +354,6 @@ class ProductModel(_qc.QAbstractTableModel):
 		self._setMaxRows()
 		self.endRemoveRows()
 		return True
-
-	"""def submit(self, *args, **kwargs):
-		try:
-			_db.DB.commit('products')
-		except:
-			return False
-		return True"""
 
 MODEL = ProductModel()
 class Products(_pack.GenericModule):

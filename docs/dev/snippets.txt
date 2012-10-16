@@ -43,3 +43,23 @@ translation
 		
 		QT_TRANSLATE_NOOP("bill", "Bill module loaded")
         print  app.translate("bill", "Bill module loaded")
+
+class ProductModel(_qc.QAbstractTableModel):
+	loaded = 0
+	def canFetchMore(self, *args, **kwargs):
+		return self.loaded < self.max_rows
+
+	def fetchMore(self, parent, **kwargs):
+		o = self.loaded
+		self.loaded += 1000
+		if self.loaded > self.max_rows:
+			self.loaded = self.max_rows
+		self.beginInsertRows(parent, o+1, self.loaded)
+		self.endInsertRows()
+
+	def submit(self, *args, **kwargs):
+		try:
+			_db.DB.commit('products')
+		except:
+			return False
+		return True
