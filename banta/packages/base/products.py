@@ -18,41 +18,52 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 	#Handles the edition on the table for each column
 	def __init__(self, parent = None):
 		_qg.QStyledItemDelegate.__init__(self, parent)
+		#self.closeEditor.connect(self.close)
 	
 	def createEditor(self, parent, option, index):
 		#self.initStyleOption(option, index)
 		col = index.column()
+		res = None
 		if col == 6:
 			#Provider
 			editor = _qg.QComboBox(parent)
 			#TODO use getmodel.?¿
 			editor.setModel(_pack.base.providers.MODEL)
 			editor.setModelColumn(1)
-			return editor
+			res =  editor
 		elif col == 8:
 			#Category
 			editor = _qg.QComboBox(parent)
 			#todo use getmodel here too maybe..
 			editor.setModel(_pack.optional.categories.MODEL)
-			return editor
+			res =  editor
 		elif col == 9:
 			#TaxType
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.TYPE_NAMES)
-			return editor
+			res =  editor
 		elif col == 10:
 			#Ingresos Brutos
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.IB_NAMES)
-			return editor
+			res =  editor
 		else:
 			#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
-			return _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
+			res =  _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
+		print ('c', index, res)
+		res.destroyed.connect(self.editorGone)
+		return res
 
+	@_qc.Slot()
+	def editorGone(self):
+		print ('gone', self.sender())
+
+	@_qc.Slot()
 	def setEditorData(self, editor, index):
 		#Sets de data to the editor (current item)
-		print(index.column(), editor)
-		if index.column() in (8, 9, 10):
+		print('r', index, editor)
+		col = index.column()
+		if col in (8, 9, 10):
 			#Ingresos Brutos, Category, Tax Types
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether
 			#Gets the data for the item, in edit mode
@@ -63,7 +74,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			#Notice this is the model for products (even on column 5)
 			if d:
 				editor.setCurrentIndex(d)
-		elif index.column() == 6:
+		elif col == 6:
 			#Provider
 			#Not very efficient
 			#Gets the data in the product model. EditRole returns the provider code.
@@ -94,7 +105,10 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			model.setData(index, editor.itemData(i), _qc.Qt.EditRole)
 		else:
 			_qg.QStyledItemDelegate.setModelData(self, editor, model, index)
-
+		#self.closeEditor.emmit(editor, _qg.QStyledItemDelegate.NoHint)
+		@_qc.Slot(object, object)
+		def close(self, o, o1):
+			print ('closed', o, o1)
 class ProductModel(_qc.QAbstractTableModel):
 	HEADERS = (
 		_qc.QT_TRANSLATE_NOOP('products', "Código"),

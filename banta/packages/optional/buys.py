@@ -56,6 +56,8 @@ class Buys(_pack.GenericModule):
 	def prodChanged(self, i):
 		if i<0: return
 		code = self.app.window.cb_billProds.itemData(i, _qc.Qt.UserRole)
+		if not code in _db.DB.products:
+			return #todo clear
 		self.prod = _db.DB.products[code]
 		self.pack_units = self.prod.pack_units
 		self.buy_price = self.prod.buy_price
