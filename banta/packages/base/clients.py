@@ -11,47 +11,61 @@ import banta.db as _db
 import banta.packages as _pkg
 
 class ClientDelegate(_qg.QStyledItemDelegate):
-	def __init__(self, parent = None):
-		_qg.QStyledItemDelegate.__init__(self, parent)
-
 	def createEditor(self, parent, option, index):
 		self.initStyleOption(option, index)
 		col = index.column()
-		if col == 3:
+		editor = None
+		if col in (0, 1, 2):
+			editor = _qg.QLineEdit(parent)
+		elif col == 3:
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Client.TAX_NAMES)
-			return editor
 		elif col == 4:
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Client.DOC_NAMES)
-			return editor
 		elif col == 5:
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Client.IB_NAMES)
-			return editor
-		else:
-			return super(ClientDelegate, self).createEditor(parent, option, index)
+		elif col == 6:
+			editor = _qg.QDoubleSpinBox(parent)
+
+		#else:
+			#bug
+			#return super(ClientDelegate, self).createEditor(parent, option, index)
+		return editor
 
 	def setEditorData(self, editor, index):
 		#Sets de dat to the editor (current item)
-		if index.column() in (3, 4, 5):#columns 3, 4, 5 works the same
-			#Gets the data for the item, in edit mode
-			d = index.data(_qc.Qt.EditRole)
-			#same as
-			#d = index.model().data(index, _qc.Qt.EditRole)
+		col = index.column()
+		#Gets the data for the item, in edit mode
+		d = index.data(_qc.Qt.EditRole)
+		#same as
+		#d = index.model().data(index, _qc.Qt.EditRole)
+		if col in (0, 1, 2):
+			editor.setText(d)
+		elif col in (3, 4, 5):#columns 3, 4, 5 works the same
 			#sets the current index (data for this column is just the index)
 			editor.setCurrentIndex(d)
-		else:
-			super(ClientDelegate, self).setEditorData(editor, index)
+		elif col == 6:
+			editor.setValue(d)
+		#else:
+		#	super(ClientDelegate, self).setEditorData(editor, index)
 
 	def setModelData(self, editor, model, index):
 		#Set the data from the editor back to the model (usually changed)
-		if index.column() in (3,4,5):
+		col = index.column()
+		data = None
+		if col in (0, 1, 2):
+			data = editor.text()
+		elif col in (3,4,5):
 			#tells the model to change de data for the item in index, the data is the index of the editor, in editrole
-			model.setData(index, editor.currentIndex(), _qc.Qt.EditRole)
-		else:
-			super(ClientDelegate, self).setModelData(editor, model, index)
+			data = 	editor.currentIndex()
+		elif col == 6:
+			data = editor.value()
+		#else:
+			#super(ClientDelegate, self).setModelData(editor, model, index)
 			#_qg.QStyledItemDelegate.setModelData(editor, model, index)
+		model.setData(index, data, _qc.Qt.EditRole)
 
 class ClientModel(_qc.QAbstractTableModel):
 	HEADERS = (

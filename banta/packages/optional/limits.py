@@ -14,45 +14,53 @@ import banta.db as _db
 
 class LimitDelegate(_qg.QStyledItemDelegate):
 	#Handles the edition on the table for each column
-	def __init__(self, parent = None):
-		_qg.QStyledItemDelegate.__init__(self, parent)
-
 	def createEditor(self, parent, option, index):
 		self.initStyleOption(option, index)
 		col = index.column()
+		editor = None
 		if col == 0:
 			editor = _qg.QComboBox(parent)
 			editor.setModel(_pack.base.products.MODEL)
 			editor.setModelColumn(0)
-			return editor
-		else:
-			#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
-			return _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
+		elif col in (1, 2):
+			editor = _qg.QDoubleSpinBox(parent)
+
+		#else:
+		#	#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
+		#	return _qg.QStyledItemDelegate.createEditor(self, parent, option, index)
+		return editor
 
 	def setEditorData(self, editor, index):
 		#Sets de data to the editor (current item)
-		if index.column() == 0:
-			#Not very efficient
-			#Product code
-			d = index.data(_qc.Qt.EditRole)
-
+		col = index.column()
+		d = index.data(_qc.Qt.EditRole)
+		if col == 0:
+			#d is Product code
 			#Searchs the code in the combo, (which uses the provider model)
 			if d< 0: return None
 			#BUT findData will look the code "d" in HIS model (products) using the qt.UserRole (user role is used for this)
 			i = editor.findData(d)
 			if i< 0: return None
 			editor.setCurrentIndex(i)
-		else:
-			_qg.QStyledItemDelegate.setEditorData(self, editor, index)
+		elif col in (1, 2):
+			editor.setValue(d)
+		#else:
+		#	_qg.QStyledItemDelegate.setEditorData(self, editor, index)
 
 	def setModelData(self, editor, model, index):
 		#Set the data from the editor back to the model (usually changed)
 		col = index.column()
+		data = None
 		if col == 0:
 			i = editor.currentIndex()
-			model.setData(index, editor.itemData(i), _qc.Qt.EditRole)
-		else:
-			_qg.QStyledItemDelegate.setModelData(self, editor, model, index)
+			data = editor.itemData(i)
+		elif col in (1, 2):
+			data = editor.value()
+
+			#model.setData(index, editor.itemData(i), _qc.Qt.EditRole)
+		#else:
+		#	_qg.QStyledItemDelegate.setModelData(self, editor, model, index)
+		model.setData(index, data, _qc.Qt.EditRole)
 
 class LimitModel(_qc.QAbstractTableModel):
 	HEADERS = (#el encode es UNICAMENTE para el tr
