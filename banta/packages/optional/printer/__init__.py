@@ -108,7 +108,7 @@ class ThreadPrinter(QtCore.QObject):
 					letter = 'B'
 				printer.openBillTicket(letter, cli.name, cli.address, doc, doc_type_code, tax_type_code)
 			elif btype == bill.TYPE_C:
-				#Tickets are only for Monotributists, be carefull with this.
+				#Tickets are only for Monotributists seller, be carefull with this.
 				printer.openTicket()
 			elif btype in ( bill.TYPE_NOTA_CRED_A , bill.TYPE_NOTA_CRED_B):
 				letter = ((btype== bill.TYPE_NOTA_CRED_A) and 'A' ) or 'B' #same as the if before, but more compact

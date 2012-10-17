@@ -65,12 +65,14 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		#itemAdd will be called and set the focus back to the combo
 		#lineEdit() is only available for editable comboboxes
 		w.cb_billProds.lineEdit().returnPressed.connect(self.itemAdd)
-
+		w.eProdDetail.returnPressed.connect(self.itemAdd)
 		v = _qg.QTableView()#Todo think to do this same to products
 		v.setSelectionMode(_qg.QTableView.SingleSelection)
 		v.setSelectionBehavior(_qg.QTableView.SelectRows)
 		w.cb_clients.setView(v)
-		w.cb_clients.setModelColumn(0)
+		#petruccio says that normally the client comes with his NAME not his CODE
+		#though is way more prone to errors...
+		w.cb_clients.setModelColumn(1)
 
 		w.eBProdQuant.valueChanged.connect(self.prodQuantChanged)
 		#example of how to set a locale for just one widget
@@ -134,7 +136,7 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 
 	@_qc.Slot()
 	def changeClientSearch(self):
-		col= self.app.window.cb_clients.modelColumn()
+		col = self.app.window.cb_clients.modelColumn()
 		if (col==1):
 			col = 0
 			text = self.app.window.tr("Código del cliente")
@@ -307,10 +309,9 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 
 		#important, otherwise the same instance will be overwritten and bill.addItem will return false
 		self.item = _db.models.Item(markup=self.bill.markup)
-		#TODO use .clear (AND TEST!) (also do the same everywhere where used -1)
+		#dont use .clear it'll delete every product
 		self.app.window.cb_billProds.setCurrentIndex(-1)
 		self.app.window.eBProdQuant.setValue(1)
-		#self.app.window.eBProdMarkup.setValue(self.bill.markup)
 		self.app.window.dsPrice.setValue(0.0)
 		self.updateItem()
 		self.showInfo()
@@ -450,11 +451,14 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 
 	def setClient(self, client):
 		"Sets a client to the current bill"
-		"""The client can be a existing client in the database or a new one
+		_info="""The client can be a existing client in the database or a new one
 		Look at the beauty of zodb, we can assign a new instance without having to
 		put it on the clients tree. Using a correct logic in the code this will
 		make everything run as expected without any drawback.
 		"""
+		if not self.bill:
+			#TODO check why this happens on load
+			return
 		self.bill.setClient(client)
 		d = (client.code, client.name, client.taxStr())
 		self.app.window.lBCliDetail.setText("[%s] %s (%s)"%d)

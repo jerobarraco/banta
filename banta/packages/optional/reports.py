@@ -7,8 +7,6 @@ import datetime
 import PySide.QtCore as _qc
 import PySide.QtGui as _qg
 
-from PySide.QtCore import QT_TRANSLATE_NOOP
-
 import banta.packages as _packs
 import banta.utils as _utils
 import banta.db as _db

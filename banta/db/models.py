@@ -250,12 +250,13 @@ class Client(_per.Persistent):
 	def getPossibleBillTypes(self):
 		#Todo ask jorge for the exact values
 		#Always return a list even if there's not value, or just one
+		#TODO filter in case the seller is Responsable or not
 		if self.tax_type == self.TAX_RESPONSABLE_INSCRIPTO :
 			return (Bill.TYPE_A, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_DEB_A )
 		elif self.tax_type in (self.TAX_MONOTRIBUTO, self.TAX_MONOTRIBUTISTA_SOCIAL):
 			return (Bill.TYPE_B,  Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
 		elif self.tax_type in (self.TAX_CONSUMIDOR_FINAL, self.TAX_NO_CATEGORIZADO, self.TAX_NO_RESPONSABLE):
-			return (Bill.TYPE_C, Bill.TYPE_B, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
+			return (Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
 		else:
 			return (Bill.TYPE_A, Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
 
@@ -377,7 +378,8 @@ class Bill(_per.Persistent):
 		ADDS THE BILL TO THE DATABASE
 		Reduces the stock, sets the bill date
 		and add it to the bill list
-		if the bill is already closed, it does nothing
+		if the bill is already closed, it does nothing.
+		Notice this is pretty destructive and has side-effects, so be careful when using it
 		"""
 		#TODO disable all functions if the bill is closed
 		if self.closed:
@@ -397,7 +399,7 @@ class Bill(_per.Persistent):
 		#let's reduce the stock :D
 		for item in self.items:
 			prod = item.product
-			prod.stock = sign* item.quantity
+			prod.stock += sign* item.quantity
 			#TODO ask the client if adding a "Move" for each returned item would be a good feature
 		#check that there's not another bill with the same key (should not happen unless using several clients at once)
 		#though that's not possible YET, let's be prepared (also if some stupid person changes the system date)
@@ -413,7 +415,9 @@ class Bill(_per.Persistent):
 		Returns True if ok. 
 		If the item is already on the bill, or there's an error it returns False."""
 		
-		if self.printed:#this means the bill has been printed fiscally
+		if self.printed:
+			#this means the bill has been printed fiscally
+			#by no means we should modify printed bills
 			return False
 		
 		if item in self.items:

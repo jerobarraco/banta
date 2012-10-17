@@ -7,6 +7,13 @@ and easy_install
 
 MoonGate http://MoonGate.com.ar
 
+1.17
+	- Mejorada aún más la estabilidad y velocidad en grandes listados.
+	- Mejor control del stock
+	- Mejor flujo de carga de factura. Por defecto se muestra el nombre del cliente en vez del código.
+	- Mejora en usabilidad.
+		El total se muestra más grande para permitir al vendedor y al comprador de manera clara.
+
 1.16
 	- Quitado límite al exportar listado de facturas
 	- Mejoras internas
