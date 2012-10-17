@@ -24,6 +24,7 @@ class LimitDelegate(_qg.QStyledItemDelegate):
 			editor.setModelColumn(0)
 		elif col in (1, 2):
 			editor = _qg.QDoubleSpinBox(parent)
+			editor.setRange(-2147483646, +2147483646)
 
 		#else:
 		#	#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.

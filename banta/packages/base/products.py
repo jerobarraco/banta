@@ -29,6 +29,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 		elif col in (3, 4, 5):
 			#price, buyprice, stock
 			editor = _qg.QDoubleSpinBox(parent)
+			editor.setRange(-2147483646, +2147483646)
 		elif col == 6:
 			#Provider
 			editor = _qg.QComboBox(parent)
@@ -38,6 +39,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 		elif col == 7:
 			#this little bastar has all the blame
 			editor = _qg.QSpinBox(parent)
+			editor.setRange(-2147483646, +2147483646)
 		elif col == 8:
 			#Category
 			editor = _qg.QComboBox(parent)

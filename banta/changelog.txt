@@ -13,6 +13,7 @@ MoonGate http://MoonGate.com.ar
 	- Mejor flujo de carga de factura. Por defecto se muestra el nombre del cliente en vez del código.
 	- Mejora en usabilidad.
 		El total se muestra más grande para permitir al vendedor y al comprador de manera clara.
+	Gracias a Avaris @ irc.freenode.net / PySide por su ayuda.
 
 1.16
 	- Quitado límite al exportar listado de facturas

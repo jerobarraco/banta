@@ -28,7 +28,7 @@ class ClientDelegate(_qg.QStyledItemDelegate):
 			editor.addItems(_db.models.Client.IB_NAMES)
 		elif col == 6:
 			editor = _qg.QDoubleSpinBox(parent)
-
+			editor.setRange(-2147483646, +2147483646)
 		#else:
 			#bug
 			#return super(ClientDelegate, self).createEditor(parent, option, index)
