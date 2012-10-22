@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>643</width>
-    <height>595</height>
+    <height>618</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -86,6 +86,12 @@
           </item>
           <item>
            <widget class="QLabel" name="lBCliDetail">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -135,6 +141,12 @@
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="title">
              <string>Nuevo Ítem</string>
             </property>
@@ -188,6 +200,20 @@
                 </widget>
                </item>
                <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Detalle</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="eProdDetail"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
                 <widget class="QLabel" name="label_3">
                  <property name="enabled">
                   <bool>true</bool>
@@ -205,6 +231,12 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="dsPrice">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimum">
                   <double>-999999999.000000000000000</double>
                  </property>
@@ -213,35 +245,23 @@
                  </property>
                 </widget>
                </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <item>
-                <widget class="QLabel" name="label_2">
-                 <property name="text">
-                  <string>Detalle</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="eProdDetail"/>
-               </item>
                <item>
                 <widget class="QCheckBox" name="chBProdReducible">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="text">
                   <string>Iva Reducido</string>
                  </property>
                 </widget>
                </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_12">
                <item>
                 <widget class="QLabel" name="label_19">
                  <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
@@ -253,12 +273,31 @@
                </item>
                <item>
                 <widget class="QLabel" name="lBItemTotal">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>10</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
                  <property name="text">
                   <string>0.0</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
               </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_12"/>
              </item>
             </layout>
            </widget>
@@ -387,6 +426,12 @@
         </item>
         <item row="1" column="1">
          <widget class="QGroupBox" name="groupBox_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="title">
            <string/>
           </property>
@@ -1058,15 +1103,14 @@
  </widget>
  <tabstops>
   <tabstop>cb_clients</tabstop>
-  <tabstop>bChangeType</tabstop>
   <tabstop>cb_tbill</tabstop>
-  <tabstop>cb_tpay</tabstop>
   <tabstop>eBProdQuant</tabstop>
   <tabstop>cb_billProds</tabstop>
-  <tabstop>dsPrice</tabstop>
   <tabstop>eProdDetail</tabstop>
+  <tabstop>dsPrice</tabstop>
   <tabstop>chBProdReducible</tabstop>
   <tabstop>bBillAdd</tabstop>
+  <tabstop>cb_tpay</tabstop>
   <tabstop>bBillNew</tabstop>
   <tabstop>tb_bill</tabstop>
   <tabstop>bBillDelete</tabstop>
@@ -1074,6 +1118,7 @@
   <tabstop>bDraft</tabstop>
   <tabstop>cb_billUser</tabstop>
   <tabstop>bNewCasualClient</tabstop>
+  <tabstop>bChangeType</tabstop>
   <tabstop>eCliCode</tabstop>
   <tabstop>bCliNew</tabstop>
   <tabstop>bCliDelete</tabstop>

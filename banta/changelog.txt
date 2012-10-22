@@ -1,18 +1,22 @@
 ﻿For the linux/mac version check out http://pypi.python.org/pypi/banta/ 
 and easy_install
 (
-	execute: easy_install banta
+	execute: easy_install -U banta
 	to run execute: banta
 )
 
 MoonGate http://MoonGate.com.ar
 
 1.17
-	- Mejorada aún más la estabilidad y velocidad en grandes listados.
-	- Mejor control del stock
-	- Mejor flujo de carga de factura. Por defecto se muestra el nombre del cliente en vez del código.
 	- Mejora en usabilidad.
-		El total se muestra más grande para permitir al vendedor y al comprador de manera clara.
+		- Mejor flujo de carga de factura.
+		- Por defecto se muestra el nombre del cliente en vez del código.
+		- El total a cobrar se muestra más grande para permitir al vendedor y al comprador
+			verlo de manera clara.
+	- Mejorada aún más la estabilidad y velocidad en grandes listados.
+		- Solucionado posible bug que cerraría la aplicación.
+	- Mejor control del stock
+
 	Gracias a Avaris @ irc.freenode.net / PySide por su ayuda.
 
 1.16

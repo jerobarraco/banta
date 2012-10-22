@@ -58,9 +58,16 @@ class TestBanta:
 		#_qtt.keyClicks(dialog, 's', 0, 10)
 
 	def test_print(self):
+		global EXCEPTIONS
+		EXCEPTIONS = 0
 		#set focus on cbclient
+		try :
+			last_bill = banta.db.DB.bills.maxKey()
+		except ValueError: #i dont really like using try/catchs.. but you can use it like this.
+			last_bill = 0
+		#todo assert client exists
 		_qtt.mouseClick(w.cb_clients,  _qc.Qt.LeftButton)
-		_qtt.keyClicks( w.cb_clients, "00000000\t", 0, 1)
+		_qtt.keyClicks( w.cb_clients, "Consumidor \t", 0, 1)
 		assert w.lBCliDetail.text() == '[00000000] Consumidor Final (Consumidor Final)'
 		self.results = None
 		self.el = _qc.QEventLoop()
@@ -72,9 +79,16 @@ class TestBanta:
 		#sspy = _qc.QSignalSpy(a.modules['printer'].printer_thread, "printingFinished" )
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
 		self.el.exec_()
+		#tests that there are results
 		assert self.results
+		#test that there is a possitive result
 		assert self.results[0]
-		#todo check if bill gets saved
+		#test for a saved bill
+		assert last_bill < banta.db.DB.bills.maxKey()
+		#checks exceptions
+		e = EXCEPTIONS
+		assert not e
+
 
 	def test_printA(self):
 		pass
@@ -177,7 +191,7 @@ class TestBanta:
 		w.v_clients.selectRow(i.row())
 		w.v_clients.scrollTo(i)
 		#deletes it like a user (tests bindings, and stuff)
-		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
+		_qtt.mouseClick(w.bProdDelete,  _qc.Qt.LeftButton)
 		#checks non-existance
 		assert tp_code not in banta.db.DB.clients
 		e = EXCEPTIONS
