@@ -70,6 +70,14 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		v.setSelectionMode(_qg.QTableView.SingleSelection)
 		v.setSelectionBehavior(_qg.QTableView.SelectRows)
 		w.cb_clients.setView(v)
+		#hides the columns that aren't needed
+		#another way using the horizontal header.
+		#must be done AFTER setting the view to cb_clients. otherway it wont hide them
+		#h = v.horizontalHeader()
+		for c in (2,4,5,6):
+			#h.hideSection(c)
+			v.setColumnHidden(c, True)
+
 		#petruccio says that normally the client comes with his NAME not his CODE
 		#though is way more prone to errors...
 		w.cb_clients.setModelColumn(1)
