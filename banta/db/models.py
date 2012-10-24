@@ -225,6 +225,8 @@ class Client(_per.Persistent):
 	IB_EXEMPT = 2
 	IB_NAMES = ('No registrado', 'Registrado', 'Exento')
 
+	idn = -1
+	#great, you can have two peoples with the same code in this country, ain't it bad?
 	name = ""
 	code = ""
 	address = ""
@@ -259,6 +261,22 @@ class Client(_per.Persistent):
 			return (Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
 		else:
 			return (Bill.TYPE_A, Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
+
+	def putInDB(self):
+		"""Saves a client into the database and returns an id.
+		selff.idn holds the key for the inserted client
+		"""
+		#This is needed for a weird requeriment, that needs the client to have different codes.
+		#Also some clients wont be saved in the db, the key shoudlnt be generated for every client
+		if self.idn >-1:
+			return #the client is already saved
+		import banta.db
+		if len(banta.db.DB.clients):
+			self.idn = banta.db.DB.clients.maxKey()+1
+		else :
+			self.idn = 0
+		banta.db.DB.clients[self.idn] = self
+		return self.idn
 
 	def taxStr(self):
 		return self.TAX_NAMES[self.tax_type]

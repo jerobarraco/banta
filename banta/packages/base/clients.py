@@ -237,7 +237,7 @@ class ClientModel(_qc.QAbstractTableModel):
 			endpos = len(_db.DB.clients.keys(max=code, excludemax=True))
 			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
 			cli = _db.models.Client(code, "-")
-			_db.DB.clients[cli.code] = cli
+			cli.putInDB()
 			self._setMaxRows()
 			self.endInsertRows()
 			position+=1

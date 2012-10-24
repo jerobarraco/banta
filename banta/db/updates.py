@@ -303,6 +303,13 @@ def v8(root):
 		root['bills'][bill.time] = bill
 	root._p_changed = True
 
+def v9(root):
+	old_clients = root['clients']
+	new_clients = _io.IOBTree()
+	for i, c in enumerate(old_clients.values()):
+		c.idn = i
+		new_clients[i]  = c
+	root['clients'] = new_clients
 #Convert all the objects to the new namespace
 def blankInit(root):
 	"""Initializes the database from zero.
@@ -319,10 +326,11 @@ def blankInit(root):
 
 	root['products'] = _oo.OOBTree()
 
-	root['clients'] = _oo.OOBTree()
+	root['clients'] = _io.IOBTree()
 	cli_code = '00000000'
 	cli = _mods.Client(cli_code, "Consumidor Final", doc_type=_mods.Client.DOC_DNI)
-	root['clients'][cli_code] = cli
+	cli.idn = 0
+	root['clients'][cli.idn] = cli
 
 	root['bills'] = _io.IOBTree()
 	#for security we set the expire date 5 days in past, so if something happens to the database the license is invalidated
@@ -357,7 +365,8 @@ UPDATES = {
 	#4: v5,
 	#5: v6,
 	#6: v7,
-	7: v8
+	7: v8,
+	8: v9,
 }
 
 def init(zodb):
