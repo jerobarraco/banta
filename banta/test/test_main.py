@@ -95,49 +95,47 @@ class TestBanta:
 
 	#···· CLIENT
 	def test_newClient(self):
-		global EXCEPTIONS
+		#todo fix
+		global EXCEPTIONS, w
 		EXCEPTIONS = 0
-		if 'testing' in banta.db.DB.clients:
-			print("YA HABIA UN CLIENTE")
-			del banta.db.DB.clients['testing']
-		def _enterNewClient():
-			dialog = app.activeWindow()
-			dialog.setTextValue('testing')
-			#_qtt.keyClicks(dialog, "testing")
-			_qtt.keyClick(dialog, _qc.Qt.Key_Enter)
-			#yes_button = dialog.button(_qg.QMessageBox.Yes)
-			#_qtt.mouseClick(yes_button, _qc.Qt.LeftButton)
-			#_qtt.keyClick(dialog, _qc.Qt.Key_Enter, 0, 10)
-			#dialog.accept() #also does it
-		_qc.QTimer().singleShot(200, _enterNewClient)
 		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
-		assert 'testing' in banta.db.DB.clients
+		#gets the last client
+		#checks the selection is correct
+		new_idx = w.v_clients.selectedIndexes()[0]
+		#gets internal id
+		idn = new_idx.data(_qc.Qt.UserRole)
+		#check correct id
+		assert idn > -1
+		#check existence
+		assert idn in banta.db.DB.clients
+
 		e = EXCEPTIONS
 		assert not e
 
 	def test_delClient(self):
+		#todo fix
 		global EXCEPTIONS
 		EXCEPTIONS = 0
-		t_cli = 'testing'
-		assert t_cli in banta.db.DB.clients
+		t_cli = 'Nuevo Cliente'
+		#assert t_cli in banta.db.DB.clients
 		#is better to use the model() from the view, because it could change, in this case the model is
 		#a proxy model, so be carefull not to mix db indexes with view indexes
 		cli_mod = w.v_clients.model()
-		i_start = cli_mod.index(0, 0)
+		i_start = cli_mod.index(0, 1)
 		#hit =-1 on purpose
-		matches = cli_mod.match(i_start, _qc.Qt.UserRole, t_cli, -1)
+		matches = cli_mod.match(i_start, _qc.Qt.EditRole, t_cli, -1)
 		assert (len(matches))
 
 		i = matches[0]
 		c = cli_mod.data(i, _qc.Qt.EditRole)
 		assert t_cli == c
-
+		idn = cli_mod.data(i, _qc.Qt.UserRole)
 		w.v_clients.selectionModel().clearSelection()
 		w.v_clients.selectRow(i.row())
 		w.v_clients.scrollTo(i)
 
 		_qtt.mouseClick(w.bCliDelete,  _qc.Qt.LeftButton)
-		assert t_cli not in banta.db.DB.clients
+		assert idn not in banta.db.DB.clients
 		e = EXCEPTIONS
 		assert not e
 

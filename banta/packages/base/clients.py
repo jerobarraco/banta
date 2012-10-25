@@ -108,12 +108,7 @@ class ClientModel(_qc.QAbstractTableModel):
 		if (row<0) or (col<0) or (row >= self.max_rows):
 			return self.createIndex(row, col)#returns an invalid index
 		else:
-			try:
-				pro = _db.DB.clients.values()[row]
-			except Exception, e:
-				logger.exception(str(e) )
-				logger.exception(str(list(_db.DB.clients.values() )))
-
+			pro = _db.DB.clients.values()[row]
 			return self.createIndex(row, col, pro)
 
 	def data(self, index, role=0):
@@ -130,7 +125,10 @@ class ClientModel(_qc.QAbstractTableModel):
 		#User role is usually for searching
 		#so we put it outside to speed up a little, it could slow down if search is not common
 		if role == _qc.Qt.UserRole:
-			return cli.code
+			#idn is the internal identifier for a client stored in the clients vector (IOBtree)
+			#there will be "casual" clients without a valid idn (-1)
+			#as this model is made to handle clients that arent casual, is ok to asume we'll use valid idns
+			return cli.idn
 		#actually calling index.column is slow, so we avoid it in case we only wanted the userrrole
 		col = index.column()
 		#Most probably is a display role
@@ -190,20 +188,8 @@ class ClientModel(_qc.QAbstractTableModel):
 			cli = index.internalPointer()
 			col = index.column()
 			if col == 0:
-				#"move" a client in the table
-				#check if the code has changed, so it dont delete it accidentally
-				if cli.code == value:
-					return False
-				#also check to NOT replace another product
-				if value in _db.DB.clients.keys():
-					#if the pro.code != value, but value is in the db, then they are 2 different products..
-					_qg.QMessageBox.warning(self.parent_widget, "Banta", self.tr("Ya existe un cliente con ese código."))
-					return False
-				#The del must come BEFORE!! there's a chance that the code hasn't changed, in which case it'll end up DELETING the product
-				#it should be fixed with the if
-				del _db.DB.clients[cli.code]
+				#code is not a KEY field anymore, most of this checks are useless now
 				cli.code = value
-				_db.DB.clients[value] = cli
 			elif col ==1:
 				cli.name = value
 			elif col ==2:
@@ -223,20 +209,12 @@ class ClientModel(_qc.QAbstractTableModel):
 
 	def insertRows(self, position, rows, index=None):
 		for i in range(rows):
-			code, ok = _qg.QInputDialog.getText(self.parent_widget, self.tr("Nuevo Cliente"),
-				self.tr("Ingrese el DNI/CUIT/CUIL"), _qg.QLineEdit.Normal, "")
-			if not ok:
-				continue
-			if code in _db.DB.clients.keys():
-				_qg.QMessageBox.information(self.parent_widget, self.tr("Nuevo Cliente"),
-					self.tr( "Ya existe un cliente con ese código."))
-				continue
-			#this would be slow, because it'll convert all the keys to a list, also can oly be called after inserting
-			#endpos = tuple(_db.DB.clients.keys()).index(code)
-			#this is faster, also, it can be called before inserting. is a little trick, basically we count all the items before
-			endpos = len(_db.DB.clients.keys(max=code, excludemax=True))
+			#Now the code in the client is a serial id. so it'll always gets inserted on the bottom
+			endpos = len(_db.DB.clients)
 			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
-			cli = _db.models.Client(code, "-")
+			#we put a useful name for the client, so the user can find it easily
+			cli = _db.models.Client('',  self.tr("Nuevo cliente") )
+			#putInDB will create a new id and adds it to the database IOBTree
 			cli.putInDB()
 			self._setMaxRows()
 			self.endInsertRows()
@@ -249,7 +227,8 @@ class ClientModel(_qc.QAbstractTableModel):
 		for i in range(rows):
 			#i use values and c.code in case .keys() return the items in different order
 			c = _db.DB.clients.values()[position]
-			del _db.DB.clients[c.code] #when i remove one item, the next takes it index
+			#when i remove one item, the next takes it index
+			del _db.DB.clients[c.idn]
 		_db.DB.commit()
 		#important
 		self._setMaxRows()
@@ -270,7 +249,8 @@ class Clients(_pkg.GenericModule):
 		self.proxy_model.setFilterCaseSensitivity(_qc.Qt.CaseInsensitive)
 		#This is important so when a row is inserted, it is selected, so the client dont have to scroll 300000 items
 		# to change the basic info of a new (and blank) item (so it has no name either)
-		self.proxy_model.rowsInserted.connect(self.rowInserted)
+		#There's a small problem using this singal to update the view. QueuedConnection might solve it
+		self.proxy_model.rowsInserted.connect(self.rowInserted, _qc.Qt.QueuedConnection)
 		self.app.window.v_clients.setModel(self.proxy_model)
 
 		delegate = ClientDelegate(self.app.window)
@@ -291,9 +271,20 @@ class Clients(_pkg.GenericModule):
 	def rowInserted(self, parent, start, end):
 		"""This slot gets called when a row is inserted (read new) when a row is inserted, we dont actually know where
 		 it gets inserted because keys are sorted, and key bounds position """
+		#selects the new client
 		self.app.window.v_clients.selectRow(start)
+		#gets the index of the selected row
 		i = self.app.window.v_clients.selectedIndexes()[0]
-		self.app.window.v_clients.scrollTo(i)
+		#scrolls to it
+		self.app.window.v_clients.scrollTo(i, _qg.QTableView.EnsureVisible)
+		#self.app.window.v_clients.scrollToBottom()
+		#_qc.QTimer().singleShot(100, lambda i=i: self.app.window.v_clients.scrollTo(i))
+		#The signal connected to this function is the same as the signal used to insert the item in the view
+		#so we have a race-situation with the view, that ends up not scrolling.
+		#for that we've changed the connection to this slot as a QueuedConnection, if that fails
+		#we'll have to go back to the timmer solution
+		#Thanks to Avaris @ irc.freenode.net/#pyside
+
 
 	@_qc.Slot()
 	def delete(self):
