@@ -310,6 +310,15 @@ def v9(root):
 		c.idn = i
 		new_clients[i]  = c
 	root['clients'] = new_clients
+
+	for prod in root['products'].values():
+		#reseting the name will ensure that the names doesnt have non-printable characters
+		prod.setName(prod.name)
+
+	for cli in root['clients'].values():
+		cli.setName(cli.name)
+		cli.setAddress(cli.address)
+
 #Convert all the objects to the new namespace
 def blankInit(root):
 	"""Initializes the database from zero.

@@ -13,6 +13,7 @@ decimal.getcontext().prec = 4
 
 import persistent as _per
 #DO NOT IMPORT DB or DB.CNX or DB.ZODB DIRECTLY HERE!
+import banta.utils
 
 #Constants
 #license types
@@ -74,7 +75,7 @@ class Product(_per.Persistent):
 	def __init__(self, code, name="", price=0.0, stock=0, tax_type=0):
 		_per.Persistent.__init__(self)
 		self.code = code
-		self.name = name
+		self.setName(name)
 		self.price = price
 		self.stock = stock
 		self.tax_type = tax_type
@@ -87,6 +88,9 @@ class Product(_per.Persistent):
 
 	def __str__(self):
 		return "[%s] $%s %s"%(self.code, self.price, self.name)
+
+	def setName(self, name):
+		self.name = banta.utils.printable(name)
 	pass
 
 class Item(_per.Persistent):
@@ -242,12 +246,19 @@ class Client(_per.Persistent):
 	def __init__(self, code, name="", address="", doc_type=DOC_SIN_CALIFICADOR, tax_type=TAX_CONSUMIDOR_FINAL,
 							 ib_type=IB_UNREGISTERED):
 		_per.Persistent.__init__(self)
-		self.name = name
 		self.code = code
+		self.setName(name)
+		self.setAddress(address)
 		self.address = address
 		self.tax_type = tax_type
 		self.doc_type = doc_type
 		self.ib_type = ib_type
+
+	def setName(self, name):
+		self.name = banta.utils.printable(name)
+
+	def setAddress(self, address):
+		self.address = banta.utils.printable(address)
 
 	def getPossibleBillTypes(self):
 		#Todo ask jorge for the exact values
@@ -507,7 +518,6 @@ class Move(_per.Persistent):
 		 so it could break several stuff if its saved 2 times
 		 (still you have to commit)"""
 		_per.Persistent.__init__(self)
-		import banta.utils
 		self.reason = reason
 		self.product = product
 		self.diff = diff

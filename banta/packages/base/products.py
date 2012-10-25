@@ -377,7 +377,8 @@ class Products(_pack.GenericModule):
 		self.proxy_model = _qg.QSortFilterProxyModel(self.app.window.v_products)
 		self.proxy_model.setSourceModel(self.model)
 		self.proxy_model.setFilterCaseSensitivity(_qc.Qt.CaseInsensitive)
-		self.proxy_model.rowsInserted.connect(self.rowInserted)
+		#read base/clients to know why is using QueuedConnection
+		self.proxy_model.rowsInserted.connect(self.rowInserted, _qc.Qt.QueuedConnection)
 		#Makes no sense, keys are strings anyways... this would be usefull for integer keys..
 		#self.proxy_model.setSortRole(_qc.Qt.EditRole)
 		self.app.window.v_products.setModel(self.proxy_model)
@@ -450,7 +451,8 @@ class Products(_pack.GenericModule):
 		#in the model and the source
 		self.app.window.v_products.selectRow(start)
 		i = self.app.window.v_products.selectedIndexes()[0]
-		self.app.window.v_products.scrollTo(i)
+		self.app.window.v_products.scrollTo(i, _qg.QTableView.EnsureVisible)
+		#See base/clients.py:rowInserted for more details
 
 	@_qc.Slot()
 	def delete(self):

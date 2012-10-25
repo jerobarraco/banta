@@ -4,9 +4,21 @@ Some utility stuff
 """
 import datetime
 import time
+import csv
+import codecs
+import cStringIO
+
 """import PySide.QtGui
 def utr(u):
 	return PySide.QtGui.qApp.tr(u.encode('utf-8'))"""
+
+FORBIDDEN_CHARACTERS = ('\n', '\t', '\r')
+def printable(string):
+	#not the fastet way but..
+	for c in FORBIDDEN_CHARACTERS:
+		string.replace(c, ' ')
+	return string
+
 
 def unitr(oldtr):#i dont like to return a function with an enclosed global.. but , is faster than the other option and i dont have to import PySide here
 	def utr(u, *args):
@@ -46,7 +58,7 @@ def getTimesFromFilters(date_min, date_max):
 	tmax = dateTimeToInt(dmax)
 	return (tmin, tmax)
 
-import csv, codecs, cStringIO
+
 
 class UTF8Recoder:
 	"""

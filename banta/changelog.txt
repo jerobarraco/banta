@@ -13,11 +13,14 @@ MoonGate http://MoonGate.com.ar
 		- Por defecto se muestra el nombre del cliente en vez del código.
 		- El total a cobrar se muestra más grande para permitir al vendedor y al comprador
 			verlo de manera clara.
+		- Al crear un nuevo cliente la lista lo muestra automáticamente
 	- Mejorada aún más la estabilidad y velocidad en grandes listados.
 		- Solucionado posible bug que cerraría la aplicación.
+		- Más robusto al importar artículos o copiar texto de otras fuentes
+			(Compatibilidad de impresoras fiscales)
 	- Mejor control del stock
 
-	Gracias a Avaris @ irc.freenode.net / PySide por su ayuda.
+	Gracias a Avaris @ irc.freenode.net / #PySide por su ayuda.
 
 1.16
 	- Quitado límite al exportar listado de facturas
