@@ -162,7 +162,7 @@ class Printer(GenericModule):
 		speed_texts = map(str, printer.SPEEDS)
 		self.dialog.cbSpeed.addItems(speed_texts)
 		#TODO poner el currentIndex en -1 en los demas combobox al crearlo/vaciarlo, arregla el probleam de la signal not emmited
-		#todo use .clear AND TEST!
+		#dont use clear
 		self.dialog.cbBrands.setCurrentIndex(-1)
 		self.dialog.cbBrands.currentIndexChanged.connect(self.brandChanged)
 		

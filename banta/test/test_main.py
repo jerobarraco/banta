@@ -21,6 +21,7 @@ import banta
 
 app = None
 w = None
+print_result = None
 def setup_module(module):
 	global app, w
 	if app is None:
@@ -46,7 +47,7 @@ class TestBanta:
 	#########PRINT
 	@_qc.Slot(list)
 	def printing_finished (self, results):
-		self.results = results
+		self.print_results = results
 		self.el.quit()
 
 	def close_dialog_yes(self):
@@ -67,9 +68,9 @@ class TestBanta:
 			last_bill = 0
 		#todo assert client exists
 		_qtt.mouseClick(w.cb_clients,  _qc.Qt.LeftButton)
-		_qtt.keyClicks( w.cb_clients, "Consumidor \t", 0, 1)
+		_qtt.keyClicks( w.cb_clients, "Consumidor\t", 0, 1)
 		assert w.lBCliDetail.text() == '[00000000] Consumidor Final (Consumidor Final)'
-		self.results = None
+		self.print_results = None
 		self.el = _qc.QEventLoop()
 		timer = _qc.QTimer()
 		timer.timeout.connect(self.el.quit)
@@ -80,11 +81,15 @@ class TestBanta:
 		_qtt.mouseClick( w.bBillPrint, _qc.Qt.LeftButton)
 		self.el.exec_()
 		#tests that there are results
-		assert self.results
+		assert self.print_results
 		#test that there is a possitive result
-		assert self.results[0]
+		assert self.print_results[0]
 		#test for a saved bill
 		assert last_bill < banta.db.DB.bills.maxKey()
+		assert self.print_results[1].idn == banta.db.DB.bills.maxKey()
+		global print_results
+		#for the mostrarFacturas
+		print_resutls = self.print_results
 		#checks exceptions
 		e = EXCEPTIONS
 		assert not e
@@ -257,6 +262,19 @@ class TestBanta:
 		#check exceptions
 		assert not e
 
+	def test_mostrarFacturas(self):
+		global EXCEPTIONS
+		EXCEPTIONS = 0
+		#(asumes it printed)
+		success, bill, number, error = self.print_results
+		assert bill.idn #the id for the bill
+		#in theory the dateedits shows the current month, so the bill should show up by default
+		_qtt.mouseClick(w.bProvDelete, _qc.Qt.LeftButton)
+		bill_mod = app.modules['bill list']
+		#bill_mod.tBList.
+		e = EXCEPTIONS
+		#check exceptions
+		assert not e
 	def setup_method(self, method):
 		pass
 
@@ -273,7 +291,6 @@ class TestBanta:
 		setup_class.
 		"""
 		pass
-
 
 	def setup_method(self, method):
 		""" setup any state tied to the execution of the given method in a
