@@ -95,28 +95,32 @@ class TestBanta:
 
 	#···· CLIENT
 	def test_newClient(self):
-		#todo fix
 		global EXCEPTIONS, w
 		EXCEPTIONS = 0
 		_qtt.mouseClick(w.bCliNew,  _qc.Qt.LeftButton)
 		#gets the last client
 		#checks the selection is correct
-		new_idx = w.v_clients.selectedIndexes()[0]
-		#gets internal id
-		idn = new_idx.data(_qc.Qt.UserRole)
-		#check correct id
+		mod = w.v_clients.model()
+		r = mod.rowCount()
+		idx = mod.index(r-1, 1)
+		idn = idx.data(_qc.Qt.UserRole)
 		assert idn > -1
 		#check existence
 		assert idn in banta.db.DB.clients
+
+		name = idx.data()
+		assert name == 'Nuevo cliente'
+		mod.setData(idx, """Juan\n\t\rMocho""")
+		name = idx.data()
+		assert name == "Juan   Mocho"
 
 		e = EXCEPTIONS
 		assert not e
 
 	def test_delClient(self):
-		#todo fix
 		global EXCEPTIONS
 		EXCEPTIONS = 0
-		t_cli = 'Nuevo Cliente'
+		t_cli = 'Juan   Mocho'
 		#assert t_cli in banta.db.DB.clients
 		#is better to use the model() from the view, because it could change, in this case the model is
 		#a proxy model, so be carefull not to mix db indexes with view indexes
@@ -185,13 +189,13 @@ class TestBanta:
 
 		#test deletion
 		#selects it
-		w.v_clients.selectionModel().clearSelection()
-		w.v_clients.selectRow(i.row())
-		w.v_clients.scrollTo(i)
+		w.v_products.selectionModel().clearSelection()
+		w.v_products.selectRow(i.row())
+		w.v_products.scrollTo(i)
 		#deletes it like a user (tests bindings, and stuff)
 		_qtt.mouseClick(w.bProdDelete,  _qc.Qt.LeftButton)
 		#checks non-existance
-		assert tp_code not in banta.db.DB.clients
+		assert tp_code not in banta.db.DB.products
 		e = EXCEPTIONS
 		#check exceptions
 		assert not e
@@ -215,6 +219,9 @@ class TestBanta:
 		assert tp_code in banta.db.DB.providers
 		#assertions are lazy so we need to copy the value
 		e = EXCEPTIONS
+		if e:
+			import traceback
+			traceback.print_last()
 		assert not e
 
 	def test_delProvider(self):

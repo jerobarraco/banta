@@ -13,11 +13,11 @@ def utr(u):
 	return PySide.QtGui.qApp.tr(u.encode('utf-8'))"""
 
 FORBIDDEN_CHARACTERS = ('\n', '\t', '\r')
-def printable(string):
+def printable(text):
 	#not the fastet way but..
 	for c in FORBIDDEN_CHARACTERS:
-		string.replace(c, ' ')
-	return string
+		text = text.replace(c, ' ')
+	return text
 
 
 def unitr(oldtr):#i dont like to return a function with an enclosed global.. but , is faster than the other option and i dont have to import PySide here

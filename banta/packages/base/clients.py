@@ -191,9 +191,9 @@ class ClientModel(_qc.QAbstractTableModel):
 				#code is not a KEY field anymore, most of this checks are useless now
 				cli.code = value
 			elif col ==1:
-				cli.name = value
+				cli.setName(value)
 			elif col ==2:
-				cli.address = value
+				cli.setAddress(value)
 			elif col == 3:
 				cli.tax_type = value
 			elif col == 4:
@@ -273,10 +273,14 @@ class Clients(_pkg.GenericModule):
 		 it gets inserted because keys are sorted, and key bounds position """
 		#selects the new client
 		self.app.window.v_clients.selectRow(start)
-		#gets the index of the selected row
-		i = self.app.window.v_clients.selectedIndexes()[0]
-		#scrolls to it
-		self.app.window.v_clients.scrollTo(i, _qg.QTableView.EnsureVisible)
+		sel = self.app.window.v_clients.selectedIndexes()
+		#we need the "if sel" because of the nature of QueuedConnection, when this module
+		#is being tested, it will call rowInserted in the wrong moment
+		if sel:
+			#gets the index of the selected row
+			i = sel[0]
+			#scrolls to it
+			self.app.window.v_clients.scrollTo(i, _qg.QTableView.EnsureVisible)
 		#self.app.window.v_clients.scrollToBottom()
 		#_qc.QTimer().singleShot(100, lambda i=i: self.app.window.v_clients.scrollTo(i))
 		#The signal connected to this function is the same as the signal used to insert the item in the view

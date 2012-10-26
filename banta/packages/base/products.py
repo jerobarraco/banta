@@ -275,7 +275,7 @@ class ProductModel(_qc.QAbstractTableModel):
 			elif col == 1:
 				pro.external_code = value
 			elif col == 2:
-				pro.name = value
+				pro.setName(value)
 			elif col == 3:
 				pro.price = value
 			elif col == 4:
@@ -450,8 +450,10 @@ class Products(_pack.GenericModule):
 		#we could use maptosource but as the index is inserted at the end is coincidently the same
 		#in the model and the source
 		self.app.window.v_products.selectRow(start)
-		i = self.app.window.v_products.selectedIndexes()[0]
-		self.app.window.v_products.scrollTo(i, _qg.QTableView.EnsureVisible)
+		sel = self.app.window.v_products.selectedIndexes()
+		if sel:
+			i = sel[0]
+			self.app.window.v_products.scrollTo(i, _qg.QTableView.EnsureVisible)
 		#See base/clients.py:rowInserted for more details
 
 	@_qc.Slot()
