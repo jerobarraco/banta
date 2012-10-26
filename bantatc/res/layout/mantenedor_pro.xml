@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="278dp"
+        android:layout_height="378dp"
+        android:layout_x="18dp"
+        android:layout_y="96dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/Btn_Scan_Mod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="86dp"
+        android:layout_y="16dp"
+        android:gravity="center"
+        android:text="Scanear y Modificar" />
+
+    <TextView
+        android:id="@+id/cdHttp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="18dp"
+        android:layout_y="70dp"
+        android:text="Cargando Datos" />
+
+</AbsoluteLayout>

@@ -29,8 +29,8 @@ dats = [
 	('gpl-3.0.txt', 'banta\\gpl-3.0.txt', 'DATA'),
 	('user.qss', 'banta\\user.qss', 'DATA'),
 	#particles for samegame
-	#('Qt/labs/particles/qmldir',  'C:\\Python27\\Lib\\site-packages\\PySide\\imports\\Qt\\labs\\particles\\qmldir', 'DATA'),
-	#('Qt/labs/particles/qmlparticlesplugin.dll', 'C:\\Python27\\Lib\\site-packages\\PySide\\imports\\Qt\\labs\\particles\\qmlparticlesplugin.dll', 'DATA'),
+	('Qt/labs/particles/qmldir',  'C:\\Python27\\Lib\\site-packages\\PySide\\imports\\Qt\\labs\\particles\\qmldir', 'DATA'),
+	('Qt/labs/particles/qmlparticlesplugin.dll', 'C:\\Python27\\Lib\\site-packages\\PySide\\imports\\Qt\\labs\\particles\\qmlparticlesplugin.dll', 'DATA'),
 	('imageformats/qgif4.dll',
 		'C:\\Python27\\Lib\\site-packages\\PySide\\plugins\\imageformats\\qgif4.dll', 'DATA'),
  	('imageformats/qico4.dll',

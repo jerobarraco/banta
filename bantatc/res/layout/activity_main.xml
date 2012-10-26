@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    tools:context=".Mantenedor_Producto" >
+	<EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <requestFocus />
+	</EditText>
+    <Button
+        android:id="@+id/Btn_Adm_Pro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:onClick="man_pro"
+        android:text="Administración de Productos" />
+
+    <Button
+        android:id="@+id/Btn_Ctr_Stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Btn_Adm_Pro"
+        android:layout_alignRight="@+id/Btn_Adm_Pro"
+        android:layout_below="@+id/Btn_Adm_Pro"
+        android:layout_marginTop="40dp"
+        android:text="Control de Stock" />
+
+    <Button
+        android:id="@+id/Btn_Rep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Btn_Ctr_Stock"
+        android:layout_alignRight="@+id/Btn_Ctr_Stock"
+        android:layout_centerVertical="true"
+        android:text="Reportes" />
+
+    <Button
+        android:id="@+id/Btn_Gra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Btn_Rep"
+        android:layout_alignRight="@+id/Btn_Rep"
+        android:layout_below="@+id/Btn_Rep"
+        android:layout_marginTop="30dp"
+        android:text="Gráficos" />
+
+</RelativeLayout>

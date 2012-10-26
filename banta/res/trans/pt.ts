@@ -115,17 +115,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../packages/base/clients.py" line="231"/>
         <source>Nuevo Cliente</source>
-        <translation>Novo Cliente</translation>
+        <translation type="obsolete">Novo Cliente</translation>
     </message>
     <message>
         <location filename="../../packages/base/clients.py" line="227"/>
         <source>Ingrese el DNI/CUIT/CUIL</source>
-        <translation>Insira o DNI/CUIT/CUIL</translation>
+        <translation type="obsolete">Insira o DNI/CUIT/CUIL</translation>
     </message>
-    <message utf8="both">
+    <message>
         <location filename="../ui/about.ui" line="64"/>
         <source>Ya existe un cliente con ese código.</source>
         <translation type="obsolete">Codigo de cliente ja existente.</translation>
+    </message>
+    <message>
+        <location filename="../../packages/base/clients.py" line="216"/>
+        <source>Nuevo cliente</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -387,12 +392,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Cliente</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="105"/>
+        <location filename="../ui/main.ui" line="111"/>
         <source>Tipo</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="124"/>
+        <location filename="../ui/main.ui" line="130"/>
         <source>Pago</source>
         <translation>Pago</translation>
     </message>
@@ -403,37 +408,37 @@ p, li { white-space: pre-wrap; }
 </translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="179"/>
+        <location filename="../ui/main.ui" line="191"/>
         <source>Producto</source>
         <translation>Produto</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="363"/>
+        <location filename="../ui/main.ui" line="402"/>
         <source>Cantidad</source>
         <translation>Quantidade</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="202"/>
+        <location filename="../ui/main.ui" line="228"/>
         <source>Precio</source>
         <translation>Preço</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="223"/>
+        <location filename="../ui/main.ui" line="205"/>
         <source>Detalle</source>
         <translation>Detalhe</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="233"/>
+        <location filename="../ui/main.ui" line="257"/>
         <source>Iva Reducido</source>
         <translation>Iva Reduzido</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="441"/>
+        <location filename="../ui/main.ui" line="486"/>
         <source>Subtotal</source>
         <translation>Subtotal</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="487"/>
+        <location filename="../ui/main.ui" line="532"/>
         <source>0.0</source>
         <translation></translation>
     </message>
@@ -443,12 +448,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Adicionar Item</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="941"/>
+        <location filename="../ui/main.ui" line="986"/>
         <source>Nueva Factura</source>
         <translation>Nova Fatura</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="956"/>
+        <location filename="../ui/main.ui" line="1001"/>
         <source>Borrar</source>
         <translation>Apagar</translation>
     </message>
@@ -458,22 +463,22 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Código</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="774"/>
+        <location filename="../ui/main.ui" line="819"/>
         <source>Nombre</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="358"/>
+        <location filename="../ui/main.ui" line="397"/>
         <source>Precio Unitario</source>
         <translation>Preço Unitário</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="474"/>
+        <location filename="../ui/main.ui" line="519"/>
         <source>IVA</source>
         <translation>IVA</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="383"/>
+        <location filename="../ui/main.ui" line="422"/>
         <source>Total</source>
         <translation>Total</translation>
     </message>
@@ -483,27 +488,27 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Número</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="421"/>
+        <location filename="../ui/main.ui" line="466"/>
         <source>0</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="971"/>
+        <location filename="../ui/main.ui" line="1016"/>
         <source>IMPRIMIR</source>
         <translation>Imprimir</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="784"/>
+        <location filename="../ui/main.ui" line="829"/>
         <source>Buscar</source>
         <translation>Buscar</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="791"/>
+        <location filename="../ui/main.ui" line="836"/>
         <source>Nuevo</source>
         <translation>Novo</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="575"/>
+        <location filename="../ui/main.ui" line="620"/>
         <source>Clientes</source>
         <translation>Clientes</translation>
     </message>
@@ -518,22 +523,22 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Principal</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="871"/>
+        <location filename="../ui/main.ui" line="916"/>
         <source>Ayuda</source>
         <translation>Ajuda</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="888"/>
+        <location filename="../ui/main.ui" line="933"/>
         <source>Cambiar Estilo</source>
         <translation>Trocar Tema</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="893"/>
+        <location filename="../ui/main.ui" line="938"/>
         <source>Soporte y Acerca de</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="901"/>
+        <location filename="../ui/main.ui" line="946"/>
         <source>Imprimir Cierre Z</source>
         <translation>Fechar Caixa</translation>
     </message>
@@ -543,73 +548,73 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Preferências</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="932"/>
+        <location filename="../ui/main.ui" line="977"/>
         <source>F2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="368"/>
+        <location filename="../ui/main.ui" line="407"/>
         <source>Recargo</source>
         <translation>Orçamentos</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="917"/>
+        <location filename="../ui/main.ui" line="962"/>
         <source>Cancelar Impresion</source>
         <translation>Cancelar Impressão</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="732"/>
+        <location filename="../ui/main.ui" line="777"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="285"/>
+        <location filename="../ui/main.ui" line="324"/>
         <source>add</source>
         <translation>Adicionar</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="304"/>
+        <location filename="../ui/main.ui" line="343"/>
         <source>new</source>
         <translation>Novo</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="320"/>
+        <location filename="../ui/main.ui" line="359"/>
         <source>delete</source>
         <translation>Apagar
 </translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="896"/>
+        <location filename="../ui/main.ui" line="941"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="988"/>
+        <location filename="../ui/main.ui" line="1033"/>
         <source>F6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="962"/>
+        <location filename="../ui/main.ui" line="1007"/>
         <source>F7</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="982"/>
+        <location filename="../ui/main.ui" line="1027"/>
         <source>Guardar Presupuesto</source>
         <translation>Guardar Recibo</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="977"/>
+        <location filename="../ui/main.ui" line="1022"/>
         <source>F5</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="545"/>
+        <location filename="../ui/main.ui" line="590"/>
         <source>Drafts</source>
         <translation>Recibos</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="766"/>
+        <location filename="../ui/main.ui" line="811"/>
         <source>Proveedores</source>
         <translation>Fornecedores</translation>
     </message>
@@ -619,12 +624,12 @@ p, li { white-space: pre-wrap; }
         <translation>Buscar pelo código</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="993"/>
+        <location filename="../ui/main.ui" line="1038"/>
         <source>Acerca de Qt</source>
         <translation>Sobre Qt</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1001"/>
+        <location filename="../ui/main.ui" line="1046"/>
         <source>Change Type</source>
         <translation>Escolha o tipo</translation>
     </message>
@@ -634,17 +639,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Código do cliente</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="998"/>
+        <location filename="../ui/main.ui" line="1043"/>
         <source>Cambiar</source>
         <translation>Trocar</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="654"/>
+        <location filename="../ui/main.ui" line="699"/>
         <source>Filtrar por Nombre</source>
         <translation>Filtrar por Nome</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="674"/>
+        <location filename="../ui/main.ui" line="719"/>
         <source>Filtrar por Proveedor</source>
         <translation>Filtrar por Fornecedor</translation>
     </message>
@@ -659,82 +664,82 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Número</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="857"/>
+        <location filename="../ui/main.ui" line="902"/>
         <source>Importar</source>
         <translation>Importar</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1011"/>
+        <location filename="../ui/main.ui" line="1056"/>
         <source>Importar Clientes</source>
         <translation>Importar Clientes</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1016"/>
+        <location filename="../ui/main.ui" line="1061"/>
         <source>Importar Proveedores</source>
         <translation>Importar Fornecedores</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="719"/>
+        <location filename="../ui/main.ui" line="764"/>
         <source>Exportar</source>
         <translation>Exportar</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1025"/>
+        <location filename="../ui/main.ui" line="1070"/>
         <source>Exportar Produtos</source>
         <translation>Exportar Produtos</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1033"/>
+        <location filename="../ui/main.ui" line="1078"/>
         <source>Nueva Compra</source>
         <translation>Nova Compra</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/main.ui" line="139"/>
+        <location filename="../ui/main.ui" line="151"/>
         <source>Nuevo Ítem</source>
         <translation>Novo Item</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/main.ui" line="850"/>
+        <location filename="../ui/main.ui" line="895"/>
         <source>Menú</source>
         <translation>Menu</translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/main.ui" line="926"/>
+        <location filename="../ui/main.ui" line="971"/>
         <source>Agregar Ítem</source>
         <translation>Adicionar Item</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="688"/>
+        <location filename="../ui/main.ui" line="733"/>
         <source>Limpiar Filtro</source>
         <translation>Limpar Filtro</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1055"/>
+        <location filename="../ui/main.ui" line="1100"/>
         <source>Cuentas</source>
         <translation>Contas</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1038"/>
+        <location filename="../ui/main.ui" line="1083"/>
         <source>Cliente Casual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="912"/>
+        <location filename="../ui/main.ui" line="957"/>
         <source>F12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="947"/>
+        <location filename="../ui/main.ui" line="992"/>
         <source>F10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1047"/>
+        <location filename="../ui/main.ui" line="1092"/>
         <source>SameGame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1050"/>
+        <location filename="../ui/main.ui" line="1095"/>
         <source>Ctrl+S, Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
@@ -744,7 +749,7 @@ p, li { white-space: pre-wrap; }
         <translation>Nome do Cliente</translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="527"/>
+        <location filename="../ui/main.ui" line="572"/>
         <source>$</source>
         <translation></translation>
     </message>
@@ -752,7 +757,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ProductModel</name>
     <message>
-        <location filename="../../packages/base/products.py" line="320"/>
+        <location filename="../../packages/base/products.py" line="322"/>
         <source>Nuevo Producto</source>
         <translation>Novo Produto</translation>
     </message>
@@ -767,12 +772,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ja Existe um produto com esse código.</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="284"/>
+        <location filename="../../packages/base/products.py" line="286"/>
         <source>Modificar Stock</source>
         <translation>Modificar Estoque</translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/products.py" line="285"/>
+        <location filename="../../packages/base/products.py" line="287"/>
         <source>Razón de la modificación:</source>
         <translation>Razão da Modificação:</translation>
     </message>
@@ -861,17 +866,17 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>limits</name>
     <message>
-        <location filename="../../packages/optional/limits.py" line="68"/>
+        <location filename="../../packages/optional/limits.py" line="69"/>
         <source>Cantidad</source>
         <translation>Quantidade</translation>
     </message>
     <message>
-        <location filename="../../packages/optional/limits.py" line="69"/>
+        <location filename="../../packages/optional/limits.py" line="70"/>
         <source>Monto</source>
         <translation>Total</translation>
     </message>
     <message>
-        <location filename="../../packages/optional/limits.py" line="67"/>
+        <location filename="../../packages/optional/limits.py" line="68"/>
         <source>Producto</source>
         <translation>Produto</translation>
     </message>
@@ -887,62 +892,62 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>products</name>
     <message>
-        <location filename="../../packages/base/products.py" line="117"/>
+        <location filename="../../packages/base/products.py" line="119"/>
         <source>Nombre</source>
         <translation>Nome</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="118"/>
+        <location filename="../../packages/base/products.py" line="120"/>
         <source>Precio</source>
         <translation>Preço</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="120"/>
+        <location filename="../../packages/base/products.py" line="122"/>
         <source>Stock</source>
         <translation>Estoque</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="121"/>
+        <location filename="../../packages/base/products.py" line="123"/>
         <source>Proveedor</source>
         <translation>Fornecedor</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="115"/>
+        <location filename="../../packages/base/products.py" line="117"/>
         <source>CÃ³digo</source>
         <translation>Código</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="124"/>
+        <location filename="../../packages/base/products.py" line="126"/>
         <source>Tipo</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="125"/>
+        <location filename="../../packages/base/products.py" line="127"/>
         <source>Ingresos Brutos</source>
         <translation>Renda Bruta</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="116"/>
+        <location filename="../../packages/base/products.py" line="118"/>
         <source>CÃ³digo Externo</source>
         <translation>Código Externo</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="119"/>
+        <location filename="../../packages/base/products.py" line="121"/>
         <source>Precio de Compra</source>
         <translation>Preço de Compra</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="122"/>
+        <location filename="../../packages/base/products.py" line="124"/>
         <source>Unidades por caja</source>
         <translation>Unidades por Caixa</translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="123"/>
+        <location filename="../../packages/base/products.py" line="125"/>
         <source>Rubro</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="126"/>
+        <location filename="../../packages/base/products.py" line="128"/>
         <source>DescripciÃ³n</source>
         <translation>Descrição</translation>
     </message>
@@ -1171,7 +1176,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="468"/>
+        <location filename="../../packages/base/products.py" line="474"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1190,37 +1195,37 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/products.py" line="467"/>
+        <location filename="../../packages/base/products.py" line="473"/>
         <source>Guardar Reporte</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="143"/>
+        <location filename="../../packages/base/bills.py" line="151"/>
         <source>Código del cliente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="146"/>
+        <location filename="../../packages/base/bills.py" line="154"/>
         <source>Nombre del cliente</source>
         <translation>Nome do Cliente</translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="198"/>
+        <location filename="../../packages/base/bills.py" line="206"/>
         <source>Banta - Imprimir</source>
         <translation>Banta - Imprimir</translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="189"/>
+        <location filename="../../packages/base/bills.py" line="197"/>
         <source>No se ha indicado el cliente</source>
         <translation>Selecione um Cliente primeiro</translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="198"/>
+        <location filename="../../packages/base/bills.py" line="206"/>
         <source>¿Desea imprimir?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="171"/>
+        <location filename="../../packages/base/bills.py" line="179"/>
         <source>Esta factura ya ha sido impresa.</source>
         <translation>Esta fatura ja foi impressa.</translation>
     </message>
@@ -1230,12 +1235,12 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <translation>Banta - Exportar</translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="293"/>
+        <location filename="../../packages/base/bills.py" line="301"/>
         <source>Debe seleccionar un producto.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/base/bills.py" line="230"/>
+        <location filename="../../packages/base/bills.py" line="238"/>
         <source>No se ha podido realizar la impresión
 {0}
 ¿Desea volver a editar la factura?
@@ -1284,7 +1289,7 @@ Si elige NO, la factura NO se guardará.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../../packages/optional/limits.py" line="202"/>
+        <location filename="../../packages/optional/limits.py" line="203"/>
         <source>Límites</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1294,7 +1299,7 @@ Si elige NO, la factura NO se guardará.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/base/bills.py" line="92"/>
+        <location filename="../../packages/base/bills.py" line="100"/>
         <source>Nuevo cliente casual</source>
         <translation type="unfinished"></translation>
     </message>
