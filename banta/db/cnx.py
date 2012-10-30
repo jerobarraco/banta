@@ -28,6 +28,7 @@ class MiZODB(object):
 			self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac
 		self.db = ZODB.DB(self.storage)
 		self.cnx = self.db.open()
+		print(self.cnx)
 		self.root = self.cnx.root()
 		#this method keps the database up to date, and initializes it in case of a new database
 		_up.init(self)
@@ -47,14 +48,17 @@ class MiZODB(object):
 		"""Esta funcion permite realizar un commit 
 		recibe como parametros el nombre de usuario y una nota
 		las que se guardan con el commit y se informan en el log"""
+
+		trans = transaction.get()
+		print(trans)
 		if user:
-			transaction.get().setUser(user)
+			trans.setUser(user)
 		if note:
-			transaction.get().note(note)
-		transaction.get().commit()
+			trans.note(note)
+		trans.commit()
 		
 	def abort(self):
-		transaction.abort()
+		transaction.get().abort()
 		
 	def close(self):
 		self.cnx.close()
