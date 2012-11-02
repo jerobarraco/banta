@@ -39,8 +39,8 @@ class ProductsList(tornado.web.RequestHandler):
 			products = root['products']
 			prod_cant = len(products)
 			prods = [
-				self.prod_as_dict(p)
-				for p in products.values()
+			self.prod_as_dict(p)
+			for p in products.values()
 			]
 			dict_res = {'prods':prods, 'count':len(prods), 'total':prod_cant}
 			json = tornado.escape.json_encode(dict_res)
@@ -60,83 +60,85 @@ class HProducts(tornado.web.RequestHandler):
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
-	def get(self, *args, **kwargs):
+	def _write_json(self, obj):
 		self.set_header('Content-Type', 'application/json; charset=utf-8')
+		json = tornado.escape.json_encode(obj)
+		self.write(json)
+
+	def get(self, *args, **kwargs):
+		"""Lists one or many products
+		depending on the parameters
+		"""
 		print (threading.currentThread(), threading.activeCount(), )
+		code = self.get_argument('code', None)
+		if code is not None:
+			self.getProduct(code)
+		else:
+			self.getProductList()
+
+	def getProduct(self, code):
 		cnx = _db.DB.getConnection()
-		print(cnx)
+		print ('getproduct ', cnx)
+		res = {'success':False}
+		try:
+			r = cnx.root()
+			prod = r['products'][code]
+			res ['data']
+		except Exception, e:
+			pass
+		finally:
+			pass
+
+	def getProductList(self):
+		cnx = _db.DB.getConnection()
+		print ('getproductlist', cnx)
+		res = {'success':False}
 		try:
 			start = int(self.get_argument('start', 0))
 			limit = int(self.get_argument('limit', 25))
 			root = cnx.root()
 			products = root['products']
 			prod_cant = len(products)
-			#prods = [
-			#	self._prodDict(p)
-			#	for p in list(products.values())[start:limit] #this could be slow, because list() could be converting everyobject in products
-			#]
 
 			if start >= prod_cant:
 				start = 0
+
 			end = start+limit
+
 			if end >=prod_cant:
 				end= prod_cant
 
 			prods = [
-				self._prodDict(products.values()[i])
-				for i in range(start, end) #this could be slow, because list() could be converting everyobject in products
+			self._prodDict(products.values()[i])
+			for i in range(start, end)
+
 			]
-			dict_res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
-			json = tornado.escape.json_encode(dict_res)
-			self.write(json)
-
+			res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
 		except Exception, e:
-			logger.exception(str(e))
-			self.write('{success:"false"}')
-
-		cnx.close()
-
-
-
-
-		"""$start = $request->query->get('start',0);
-	$limit = $request->query->get('limit',20);
-
-try {
-$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM usuarios LIMIT :atts,:attl";
-$sth = $app['db']->prepare($sql);
-$sth->bindValue(':atts',intval($start), PDO::PARAM_INT);
-$sth->bindValue(':attl',intval($limit), PDO::PARAM_INT);
-$sth->execute();
-
-$results = $sth->fetchAll();
-
-$sql = "SELECT FOUND_ROWS() cant";
-$sth = $app['db']->prepare($sql);
-$sth->execute();
-$result = $sth->fetch(PDO::FETCH_ASSOC);
-
-if(count($results) == 0) $response = new Response('',404);
-else {
-$response = new Response($app['twig']->render('list.json.twig',
-	array(
-		'usuarios' => $results,
-									 'total' => $result['cant']
-)),
-200
-);
-}
-}
-catch(PDOException $e) {
-$response = new Response('',404);
-}
-
-return $response;
-
-});"""
-		pass
+			error = str(e)
+			logger.exception(error)
+			res['exception'] = error
+			res['success'] = False
+		finally:
+			self._write_json(res)
+			cnx.close()
 
 	def post(self, *args, **kwargs):
+		"""inserts an element"""
+		res = {'success':False}
+		try:
+			print (threading.currentThread(), threading.activeCount(), )
+			cnx = _db.DB.getConnection()
+			print ('get', args, kwargs, cnx)
+			idn = self.get_argument('code')#code can't be None
+			#or not in db
+			#create new product
+			pass
+		except Exception, e:
+			res = {'success':False, 'exception':str(e)}
+		finally :
+			self._write_json(res)
+
 		"""$info = json_decode($request->getContent(),true);
 
 try {
@@ -187,7 +189,19 @@ return $response;"""
         """
 		pass
 
-	def delete(self, user_id):
+	def delete(self, *args, **kwargs):
+		print ("delete", args, kwargs)
+		res = {'success':False}
+		try:
+			idn = int(self.get_argument('id', None ))
+			print(idn)
+			res['success'] = True
+			res['id'] = idn
+		except Exception , e:
+			res['success'] = False
+			res['exception'] = str(e)
+		finally:
+			self.write (tornado.escape.json_encode(res))
 		"""try {
 		$sql = "DELETE FROM usuarios
 		WHERE id = :id";
@@ -214,10 +228,11 @@ class Server( _qc.QThread ):
 		application = tornado.web.Application(
 			[
 				(r'/prods/(.*)', HProducts),
+				(r'/prods(.*)', HProducts),
 				(r"/products/list", ProductsList),
 				(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": pth }),
-			],
-			debug = True
+				],
+			#debug = True
 		)
 		application.listen(8080)
 		tornado.ioloop.IOLoop.instance().start()

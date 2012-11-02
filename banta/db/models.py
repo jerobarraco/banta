@@ -268,10 +268,10 @@ class Client(_per.Persistent):
 			return (Bill.TYPE_A, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_DEB_A )
 		elif self.tax_type in (self.TAX_MONOTRIBUTO, self.TAX_MONOTRIBUTISTA_SOCIAL):
 			return (Bill.TYPE_B,  Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
-		elif self.tax_type in (self.TAX_CONSUMIDOR_FINAL, self.TAX_NO_CATEGORIZADO, self.TAX_NO_RESPONSABLE):
+		elif self.tax_type in (self.TAX_CONSUMIDOR_FINAL, self.TAX_NO_CATEGORIZADO, self.TAX_NO_RESPONSABLE, self.TAX_EXENTO):
 			return (Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
 		else:
-			return (Bill.TYPE_A, Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
+			return (Bill.TYPE_B, Bill.TYPE_A, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
 
 	def putInDB(self):
 		"""Saves a client into the database and returns an id.
