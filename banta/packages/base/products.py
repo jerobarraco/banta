@@ -180,7 +180,7 @@ class ProductModel(_qc.QAbstractTableModel):
 
 		#technically faster
 		pro = index.internalPointer()
-
+		#_db.DB.abort()
 		if role == _qc.Qt.UserRole:
 			return pro.code
 

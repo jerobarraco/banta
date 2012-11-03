@@ -50,7 +50,7 @@ class MiZODB(object):
 		las que se guardan con el commit y se informan en el log"""
 
 		trans = transaction.get()
-		print(trans)
+		print('comm', trans)
 		if user:
 			trans.setUser(user)
 		if note:

@@ -27,6 +27,7 @@ import banta.packages as _pack
 
 
 class ProductsList(tornado.web.RequestHandler):
+
 	def initialize2(self, server):
 		pass
 	def get(self, *args, **kwargs):
@@ -54,9 +55,15 @@ class ProductsList(tornado.web.RequestHandler):
 	def prod_as_dict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
-class HProducts(tornado.web.RequestHandler):
+class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT",
 											 "OPTIONS")
+	changed = _qc.Signal(int)
+
+	def initialize(self, server_thread):
+		self.server_thread = server_thread
+		self.server_thread.syncDB.connect(self.changed, _qc.Qt.QueuedConnection)
+
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
@@ -150,6 +157,10 @@ class HProducts(tornado.web.RequestHandler):
 			prod.price = float(self.get_argument('price', 0.0))
 			prod.stock = float(self.get_argument('stock', 0.0))
 			_db.DB.commit()
+			cnx.close()
+
+			self.changed.emit(0)
+
 			res['product'] = self._prodFullDict(prod)
 			res['success'] = True
 		except Exception, e:
@@ -207,14 +218,22 @@ class Server( _qc.QThread ):
 		_qc.QThread.__init__(self)
 		self.parent = parent
 
+	#called from main loop
+	@_qc.Slot(int)
+	def syncDB(self, i):
+		print ("sync", threading.currentThread(), threading.activeCount())
+		_db.DB.abort()
+		_db.DB.cnx.sync()
+		_pack.base.products.MODEL.dataChanged.emit()
+
 	def run(self, *args, **kwargs):
 		print (threading.currentThread(), threading.activeCount(), )
 		pth = os.path.split(__file__)[0]
 		pth = os.path.join(pth, 'static')
 		application = tornado.web.Application(
 			[
-				(r'/prods/(.*)', HProducts),
-				(r'/prods(.*)', HProducts),
+				(r'/prods/(.*)', HProducts, {'server_thread':self}),
+				(r'/prods(.*)', HProducts,{'server_thread':self}),
 				(r"/products/list", ProductsList),
 				(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": pth }),
 				],
@@ -227,6 +246,7 @@ class HTTPInterface(_pack.GenericModule):
 	REQUIRES = []
 	NAME = "HTTPI"
 	products = _qc.Signal(int)
+
 	def __init__(self, app):
 		super(HTTPInterface, self).__init__(app)
 
