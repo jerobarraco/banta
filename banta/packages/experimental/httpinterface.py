@@ -58,11 +58,11 @@ class ProductsList(tornado.web.RequestHandler):
 class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT",
 											 "OPTIONS")
-	changed = _qc.Signal(int)
+	changed = _qc.Signal(str)
 
 	def initialize(self, server_thread):
 		self.server_thread = server_thread
-		self.server_thread.syncDB.connect(self.changed, _qc.Qt.QueuedConnection)
+		self.changed.connect(self.server_thread.syncDB, _qc.Qt.QueuedConnection)
 
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
@@ -159,7 +159,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			_db.DB.commit()
 			cnx.close()
 
-			self.changed.emit(0)
+			self.changed.emit(code)
 
 			res['product'] = self._prodFullDict(prod)
 			res['success'] = True
@@ -219,12 +219,19 @@ class Server( _qc.QThread ):
 		self.parent = parent
 
 	#called from main loop
-	@_qc.Slot(int)
-	def syncDB(self, i):
+	@_qc.Slot(str)
+	def syncDB(self, code):
 		print ("sync", threading.currentThread(), threading.activeCount())
 		_db.DB.abort()
 		_db.DB.cnx.sync()
-		_pack.base.products.MODEL.dataChanged.emit()
+
+		if code in _db.DB.products.keys():
+			'haszode'
+			r = list(_db.DB.products.keys()).index(code)
+			m = _pack.base.products.MODEL
+			start = m.index(r, 0)
+			end = m.index(r, m.columnCount())
+			m.dataChanged.emit(start, end)
 
 	def run(self, *args, **kwargs):
 		print (threading.currentThread(), threading.activeCount(), )
