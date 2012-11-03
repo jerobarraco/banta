@@ -144,7 +144,12 @@ class HProducts(tornado.web.RequestHandler):
 			if code in r['products']:
 				prod = r['products'][code]
 			else:
-				prod = _db.models.Product()
+				prod = _db.models.Product(code)
+				r['products'][code] = prod
+			prod.name = self.get_argument ('name', "")
+			prod.price = float(self.get_argument('price', 0.0))
+			prod.stock = float(self.get_argument('stock', 0.0))
+			_db.DB.commit()
 			res['product'] = self._prodFullDict(prod)
 			res['success'] = True
 		except Exception, e:
