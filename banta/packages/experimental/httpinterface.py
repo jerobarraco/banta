@@ -190,28 +190,26 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		print ("delete", args, kwargs)
 		res = {'success':False}
 		try:
-			idn = int(self.get_argument('id', None ))
-			print(idn)
+			cnx = _db.DB.getConnection()
+			print ("delete", threading.currentThread(), threading.activeCount(), cnx)
+			r = cnx.root()
+
+			code = self.get_argument('code')#code can't be None
+
+			if code not in r['products']:
+				raise Exception("Product does not exists")
+
+			del r['products'][code]
+			_db.DB.commit()
+			cnx.close()
+
+			self.changed.emit(code)
 			res['success'] = True
-			res['id'] = idn
 		except Exception , e:
 			res['success'] = False
 			res['exception'] = str(e)
 		finally:
 			self.write (tornado.escape.json_encode(res))
-		"""try {
-		$sql = "DELETE FROM usuarios
-		WHERE id = :id";
-		$sth = $app['db']->prepare($sql);
-		$sth->bindValue(':id',intval($id),PDO::PARAM_INT);
-		$sth->execute();
-		$response = new Response('',204);
-		}
-	catch(PDOException $e) {
-	$response = new Response('', 404);
-	}
-
-	return $response;"""
 
 class Server( _qc.QThread ):
 	def __init__(self, parent):
