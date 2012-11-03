@@ -60,6 +60,9 @@ class HProducts(tornado.web.RequestHandler):
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
+	def _prodFullDict(self, p):
+		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
+
 	def _write_json(self, obj):
 		self.set_header('Content-Type', 'application/json; charset=utf-8')
 		json = tornado.escape.json_encode(obj)
@@ -82,12 +85,18 @@ class HProducts(tornado.web.RequestHandler):
 		res = {'success':False}
 		try:
 			r = cnx.root()
+			code = self.get_argument('code')
+			print('code', code)
 			prod = r['products'][code]
-			res ['data']
+			res['data'] = self._prodFullDict(prod)
+			res['success']  = True
 		except Exception, e:
-			pass
+			error = str(e)
+			logger.exception(error)
+			res['success']=False
+			res['exception'] = error
 		finally:
-			pass
+			self._write_json(res)
 
 	def getProductList(self):
 		cnx = _db.DB.getConnection()
@@ -109,9 +118,8 @@ class HProducts(tornado.web.RequestHandler):
 				end= prod_cant
 
 			prods = [
-			self._prodDict(products.values()[i])
-			for i in range(start, end)
-
+				self._prodDict(products.values()[i])
+				for i in range(start, end)
 			]
 			res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
 		except Exception, e:
@@ -124,58 +132,32 @@ class HProducts(tornado.web.RequestHandler):
 			cnx.close()
 
 	def post(self, *args, **kwargs):
-		"""inserts an element"""
+		"""inserts or modify element"""
 		res = {'success':False}
 		try:
-			print (threading.currentThread(), threading.activeCount(), )
 			cnx = _db.DB.getConnection()
-			print ('get', args, kwargs, cnx)
-			idn = self.get_argument('code')#code can't be None
-			#or not in db
-			#create new product
-			pass
+			print ("post", threading.currentThread(), threading.activeCount(), cnx)
+			r = cnx.root()
+
+			code = self.get_argument('code')#code can't be None
+			print ('code:',code)
+			if code in r['products']:
+				prod = r['products'][code]
+			else:
+				prod = _db.models.Product()
+			res['product'] = self._prodFullDict(prod)
+			res['success'] = True
 		except Exception, e:
-			res = {'success':False, 'exception':str(e)}
-		finally :
+			error = str(e).encode('ascii', 'replace')
+			logger.exception(error)
+			res['success']=False
+			res['exception'] = error
+		finally:
 			self._write_json(res)
 
-		"""$info = json_decode($request->getContent(),true);
-
-try {
-$sql = "INSERT INTO usuarios(nombre,email,fecha_alta) VALUES
-	(:nombre,:email,:falta)";
-$sth = $app['db']->prepare($sql);
-$sth->bindValue(':nombre',$info['nombre']);
-$sth->bindValue(':email',$info['email']);
-$sth->bindValue(':falta',DateTime::createFromFormat('d/m/Y',$info['fecha_alta'])->format('Y-m-d'));
-$sth->execute();
-
-$sql = "SELECT * FROM usuarios WHERE
-id = :id";
-$sth = $app['db']->prepare($sql);
-$sth->bindValue(':id',intval($app['db']->lastInsertId('id')),PDO::PARAM_INT);
-$sth->execute();
-
-$results = $sth->fetchAll();
-if(count($results) == 0) $response = new Response('',404);
-else {
-$response = new Response($app['twig']->render('usuarios.json.twig',
-	array(
-		'usuarios' => $results
-)),
-201
-);
-}
-}
-catch(PDOException $e) {
-$response = new Response('', 404);
-}
-
-return $response;"""
-		pass
-	def put (self, user_id):
+	"""def put (self, user_id):
 		#updates
-		""" $sql = "UPDATE usuarios SET
+		 $sql = "UPDATE usuarios SET
                     nombre = :nombre,
                     email= :email,
                     fecha_alta = :fecha_alta
@@ -187,7 +169,6 @@ return $response;"""
         $sth->bindValue(':id',intval($info['id']),PDO::PARAM_INT);
         $sth->execute();
         """
-		pass
 
 	def delete(self, *args, **kwargs):
 		print ("delete", args, kwargs)
