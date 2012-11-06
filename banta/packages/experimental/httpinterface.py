@@ -25,44 +25,19 @@ import banta.packages as _pack
 #TODO use the (qt)model in product module, and be sure to be calling the slot in queued connection
 #This module can be completely wrong, we might be calling the other thread directly
 
-
-class ProductsList(tornado.web.RequestHandler):
-
-	def initialize2(self, server):
-		pass
-	def get(self, *args, **kwargs):
-		self.set_header('Content-Type', 'application/json; charset=utf-8')
-		print (threading.currentThread(), threading.activeCount(), )
-		cnx = _db.DB.getConnection()
-		print(cnx)
-		try:
-			root = cnx.root()
-			products = root['products']
-			prod_cant = len(products)
-			prods = [
-			self.prod_as_dict(p)
-			for p in products.values()
-			]
-			dict_res = {'prods':prods, 'count':len(prods), 'total':prod_cant}
-			json = tornado.escape.json_encode(dict_res)
-			self.write(json)
-
-		except Exception, e:
-			logger.exception(str(e))
-
-		cnx.close()
-
-	def prod_as_dict(self, p):
-		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
-
 class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT",
 											 "OPTIONS")
-	changed = _qc.Signal(str)
+	changed = _qc.Signal(int)
+	deleteProduct = _qc.Signal(int)
 
 	def initialize(self, server_thread):
 		self.server_thread = server_thread
 		self.changed.connect(self.server_thread.syncDB, _qc.Qt.QueuedConnection)
+		#i could delete from here.. but to be honest, is safer to do it in the main thread
+		#beause of signals needed to be emited and models and modelproxies
+		#notice the blocking queued
+		self.deleteProduct.connect(self.server_thread.deleteProduct, _qc.Qt.QueuedConnection)
 
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
@@ -146,7 +121,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			print ("post", threading.currentThread(), threading.activeCount(), cnx)
 			r = cnx.root()
 
-			code = self.get_argument('code', "")#code can't be None
+			code = self.get_argument('code', "")
 			old_code = self.get_argument ('old_code', "")
 
 			print ('code:',code)
@@ -183,7 +158,8 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				r['products'][code] = prod
 
 			_db.DB.commit()
-			self.changed.emit(code)
+			row = list(r['products'].keys()).index(code)
+			self.changed.emit(row)
 
 			res['product'] = self._prodFullDict(prod)
 			res['success'] = True
@@ -198,40 +174,22 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			self._write_json(res)
 			cnx.close()
 
-	"""def put (self, user_id):
-		#updates
-		 $sql = "UPDATE usuarios SET
-                    nombre = :nombre,
-                    email= :email,
-                    fecha_alta = :fecha_alta
-                WHERE id = :id";
-        $sth = $app['db']->prepare($sql);
-        $sth->bindValue(':nombre',$info['nombre']);
-        $sth->bindValue(':email',$info['email']);
-        $sth->bindValue(':fecha_alta',$info['fecha_alta']);
-        $sth->bindValue(':id',intval($info['id']),PDO::PARAM_INT);
-        $sth->execute();
-        """
-
 	def delete(self, *args, **kwargs):
-		print ("delete", args, kwargs)
 		res = {'success':False}
 		try:
 			cnx = _db.DB.getConnection()
-			print ("delete", threading.currentThread(), threading.activeCount(), cnx)
+			print ("delete",  args, kwargs, threading.currentThread(), threading.activeCount(), cnx)
 			r = cnx.root()
 
 			code = self.get_argument('code')#code can't be None
-
+			print ('code', code)
 			if code not in r['products']:
 				raise Exception("Product does not exists")
 
-			del r['products'][code]
-			_db.DB.commit()
-			cnx.close()
-
-			self.changed.emit(code)
+			row = list(r['products'].keys()).index(code)
+			ret = self.deleteProduct.emit(row)
 			res['success'] = True
+			res['return'] = ret
 		except Exception , e:
 			res['success'] = False
 			res['exception'] = str(e)
@@ -244,23 +202,21 @@ class Server( _qc.QThread ):
 		self.parent = parent
 
 	#called from main loop
-	@_qc.Slot(str)
-	def syncDB(self, code):
+	@_qc.Slot(int)
+	def syncDB(self, row):
 		print ("sync", threading.currentThread(), threading.activeCount())
 		_db.DB.abort()
 		_db.DB.cnx.sync()
+		print(row)
+		m = _pack.base.products.MODEL
+		start = m.index(row, 0)
+		end = m.index(row, m.columnCount())
+		m.dataChanged.emit(start, end)
 
-		if code in _db.DB.products.keys():
-			'haszode'
-			r = list(_db.DB.products.keys()).index(code)
-			m = _pack.base.products.MODEL
-			start = m.index(r, 0)
-			end = m.index(r, m.columnCount())
-			m.dataChanged.emit(start, end)
-
-	@_qc.Slot(str)
+	@_qc.Slot(int)
 	def deleteProduct(self, row):
-		pass
+		model = _pack.base.products.MODEL
+		model.removeRows(row, 1)
 
 	def run(self, *args, **kwargs):
 		print (threading.currentThread(), threading.activeCount(), )
@@ -268,11 +224,9 @@ class Server( _qc.QThread ):
 		pth = os.path.join(pth, 'static')
 		application = tornado.web.Application(
 			[
-				(r'/prods/(.*)', HProducts, {'server_thread':self}),
-				(r'/prods(.*)', HProducts,{'server_thread':self}),
-				(r"/products/list", ProductsList),
+				(r'/prods(.*)', HProducts, {'server_thread':self}),
 				(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": pth }),
-				],
+			],
 			#debug = True
 		)
 		application.listen(8080)
@@ -284,18 +238,6 @@ class HTTPInterface(_pack.GenericModule):
 	NAME = "HTTPI"
 	products = _qc.Signal(int)
 
-	def __init__(self, app):
-		super(HTTPInterface, self).__init__(app)
-
 	def load(self):
 		self.server = Server(self)
 		self.server.start()
-
-	@_qc.Slot()
-	def productCount(self):
-		print('2', threading.currentThread())
-		return len(_db.DB.products)
-
-	@_qc.Slot(int)
-	def getProduct(self, i):
-		return _db.DB.products.values()[i]

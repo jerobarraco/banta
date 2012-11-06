@@ -360,7 +360,7 @@ class ProductModel(_qc.QAbstractTableModel):
 MODEL = ProductModel()
 class Products(_pack.GenericModule):
 	REQUIRES = (_pack.GenericModule.P_ADMIN, )
-	NAME = 'Products'
+	NAME = 'products'
 	#needed for limits delegate. think of a way to solve the delegate crossover stuff and model sharing
 	def __init__(self, app):
 		super(Products, self).__init__(app)
