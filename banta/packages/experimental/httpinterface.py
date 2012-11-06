@@ -146,30 +146,57 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			print ("post", threading.currentThread(), threading.activeCount(), cnx)
 			r = cnx.root()
 
-			code = self.get_argument('code')#code can't be None
+			code = self.get_argument('code', "")#code can't be None
+			old_code = self.get_argument ('old_code', "")
+
 			print ('code:',code)
-			if code in r['products']:
-				prod = r['products'][code]
-			else:
+			print ('oldcode', old_code)
+
+			if code.strip() == "":
+				raise Exception ("Code can't be empty")
+
+			if (old_code.strip() == "") or (old_code not in r['products']):
+				#inserting
 				prod = _db.models.Product(code)
-				r['products'][code] = prod
+			else:
+				#modifying
+				#notice "old_code"
+				prod = r['products'][old_code]
+
 			prod.name = self.get_argument ('name', "")
 			prod.price = float(self.get_argument('price', 0.0))
 			prod.stock = float(self.get_argument('stock', 0.0))
-			_db.DB.commit()
-			cnx.close()
 
+
+			#trying to re-code or insert
+			if (code != old_code):
+				if (code in r['products']):
+					#If someone tries to change the code, but the new code is already on the db
+					#fail gloriously
+					raise Exception("The new code already exists")
+				if (old_code in r['products']):
+					#is a recode
+					#todo emit delete
+					del r['products'][old_code]
+				#finally inserts the new one (notice is code)
+				prod.code = code
+				r['products'][code] = prod
+
+			_db.DB.commit()
 			self.changed.emit(code)
 
 			res['product'] = self._prodFullDict(prod)
 			res['success'] = True
+
 		except Exception, e:
 			error = str(e).encode('ascii', 'replace')
 			logger.exception(error)
-			res['success']=False
+			res['success'] = False
 			res['exception'] = error
+			_db.DB.abort()
 		finally:
 			self._write_json(res)
+			cnx.close()
 
 	"""def put (self, user_id):
 		#updates
@@ -231,6 +258,10 @@ class Server( _qc.QThread ):
 			end = m.index(r, m.columnCount())
 			m.dataChanged.emit(start, end)
 
+	@_qc.Slot(str)
+	def deleteProduct(self, row):
+		pass
+
 	def run(self, *args, **kwargs):
 		print (threading.currentThread(), threading.activeCount(), )
 		pth = os.path.split(__file__)[0]
@@ -247,6 +278,7 @@ class Server( _qc.QThread ):
 		application.listen(8080)
 		tornado.ioloop.IOLoop.instance().start()
 
+#TODO use qt signnls on the model to delete and insert
 class HTTPInterface(_pack.GenericModule):
 	REQUIRES = []
 	NAME = "HTTPI"
