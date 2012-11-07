@@ -69,7 +69,7 @@ class MiZODB(object):
 		self.storage.close()
 
 	@contextlib.contextmanager
-	def threadedDB(self):
+	def threaded(self):
 		"""
 		A context manager for connections outside the main thread
 		This is meant to be used on functions that need to use the database from another thread

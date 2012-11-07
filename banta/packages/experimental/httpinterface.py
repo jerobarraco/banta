@@ -52,7 +52,7 @@ def jsonwriter(func):
  	"""
 	def jsonify(*args, **kwargs ):
 		self = args[0]
-		self.res ={'success':False}
+		self.res = {'success':False}
 		try:
 			func(*args, **kwargs)
 			self.res['success'] = True
@@ -88,44 +88,27 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	def _prodFullDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
-	def _write_json(self, obj):
-		self.set_header('Content-Type', 'application/json; charset=utf-8')
-		json = tornado.escape.json_encode(obj)
-		self.write(json)
-
+	@jsonwriter
 	def get(self, *args, **kwargs):
 		"""Lists one or many products
 		depending on the parameters
 		"""
-		print (threading.currentThread(), threading.activeCount(), )
+		print ('get', threading.currentThread(), threading.activeCount(), )
 		code = self.get_argument('code', None)
 		if code is not None:
-			self.getProduct(code)
+			self._getProduct(code)
 		else:
-			self.getProductList()
+			self._getProductList()
 
-	def getProduct(self, code):
-		cnx = _db.DB.getConnection()
-		print ('getproduct ', cnx)
-		res = {'success':False}
-		try:
-			r = cnx.root()
+	def _getProduct(self, code):
+		with _db.DB.threaded() as root:
 			code = self.get_argument('code')
 			print('code', code)
-			prod = r['products'][code]
-			res['data'] = self._prodFullDict(prod)
-			res['success']  = True
-		except Exception, e:
-			error = str(e)
-			logger.exception(error)
-			res['success']=False
-			res['exception'] = error
-		finally:
-			self._write_json(res)
+			prod = root['products'][code]
+			self.res['data'] = self._prodFullDict(prod)
 
-	@jsonwriter
-	def getProductList(self):
-		with _db.DB.threadedDB() as root:
+	def _getProductList(self):
+		with _db.DB.threaded() as root:
 			start = int(self.get_argument('start', 0))
 			limit = int(self.get_argument('limit', 25))
 			products = root['products']
@@ -142,38 +125,33 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				self._prodDict( products.values()[i] )
 				for i in range(start, end)
 			]
-			#raise Exception ("Dam")
 			self.res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
 
+	@jsonwriter
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""
-		res = {'success':False}
-		try:
-			cnx = _db.DB.getConnection()
-			print ("post", threading.currentThread(), threading.activeCount(), cnx)
-			r = cnx.root()
+		with _db.DB.threaded() as root:
+			print ("post", threading.currentThread(), threading.activeCount())
 
 			code = self.get_argument('code', "")
 			old_code = self.get_argument ('old_code', "")
 
-			print ('code:',code)
-			print ('oldcode', old_code)
+			print ('code: ',code, 'oldcode', old_code)
 
 			if code.strip() == "":
 				raise Exception ("Code can't be empty")
 
-			if (old_code.strip() == "") or (old_code not in r['products']):
+			if (old_code.strip() == "") or (old_code not in root['products']):
 				#inserting
 				prod = _db.models.Product(code)
 			else:
 				#modifying
 				#notice "old_code"
-				prod = r['products'][old_code]
+				prod = root['products'][old_code]
 
 			prod.name = self.get_argument ('name', "")
 			prod.price = float(self.get_argument('price', 0.0))
 			prod.stock = float(self.get_argument('stock', 0.0))
-
 
 			#trying to re-code or insert
 			if (code != old_code):
@@ -181,30 +159,23 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 					#If someone tries to change the code, but the new code is already on the db
 					#fail gloriously
 					raise Exception("The new code already exists")
-				if (old_code in r['products']):
+				if (old_code in root['products']):
 					#is a recode
 					#todo emit delete
-					del r['products'][old_code]
+					del row['products'][old_code]
 				#finally inserts the new one (notice is code)
 				prod.code = code
-				r['products'][code] = prod
+				root['products'][code] = prod
 
-			_db.DB.commit()
-			row = list(r['products'].keys()).index(code)
+				row = list(root['products'].keys()).index(code)
+
+				self.res['product'] = self._prodFullDict(prod)
+			#Outside with
+			#we emit the signal now, because the changes must be commited
+			#Is a queued connection, it shouln't care,
+			# BUT in the rare case its trapped before the thread is commited, it will be no good
 			self.changed.emit(row)
-
-			res['product'] = self._prodFullDict(prod)
-			res['success'] = True
-
-		except Exception, e:
-			error = str(e).encode('ascii', 'replace')
-			logger.exception(error)
-			res['success'] = False
-			res['exception'] = error
-			_db.DB.abort()
-		finally:
-			self._write_json(res)
-			cnx.close()
+		#end
 
 	def delete(self, *args, **kwargs):
 		res = {'success':False}
@@ -257,9 +228,12 @@ class Server( _qc.QThread ):
 		application = tornado.web.Application(
 			[
 				(r'/prods(.*)', HProducts, {'server_thread':self}),
-				(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": pth }),
+				#(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": pth }),
 			],
 			#debug = True
+			gzip = True,
+			static_path= pth,
+
 		)
 		application.listen(8080)
 		tornado.ioloop.IOLoop.instance().start()
