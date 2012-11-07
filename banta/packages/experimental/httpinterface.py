@@ -13,17 +13,60 @@ except:
 
 import PySide.QtCore as _qc
 
+import os
+import contextlib
+
 import tornado
 import tornado.web
 import tornado.escape
 import threading
-import os
+
 
 import banta.db as _db
 import banta.packages as _pack
 
-#TODO use the (qt)model in product module, and be sure to be calling the slot in queued connection
-#This module can be completely wrong, we might be calling the other thread directly
+#This module can be completely wrong, we might be calling the other thread directly,
+#so be sure to check the threads!
+
+import time
+@contextlib.contextmanager
+def timer():
+	s = None
+	try:
+		s = time.time()
+		yield
+		r = time.time() -s
+		print ('time:', r)
+	except:
+		print ("error")
+		pass
+
+def jsonwriter(func):
+	"""Decorator,
+	the decorated function must be a method of a class inherinting RequestHandler
+	(or implementing write)
+	it must have at least 1 parameter (self),
+	and it will create a dictionary self.res in where the data should be stored
+	When it finishes it writes everything back as a json, and sets the headers.
+	if there where any exception, it sets the success flag to False, and logs the exception
+ 	"""
+	def jsonify(*args, **kwargs ):
+		self = args[0]
+		self.res ={'success':False}
+		try:
+			func(*args, **kwargs)
+			self.res['success'] = True
+		except Exception, e:
+			error = str(e)
+			logger.exception(error)
+			self.res['exception'] = error
+			self.res['success'] = False
+
+		self.set_header('Content-Type', 'application/json; charset=utf-8')
+		json = tornado.escape.json_encode(self.res)
+		self.write(json)
+	#outside jsonify
+	return jsonify
 
 class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT",
@@ -80,17 +123,13 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		finally:
 			self._write_json(res)
 
+	@jsonwriter
 	def getProductList(self):
-		cnx = _db.DB.getConnection()
-		print ('getproductlist', cnx)
-		res = {'success':False}
-		try:
+		with _db.DB.threadedDB() as root:
 			start = int(self.get_argument('start', 0))
 			limit = int(self.get_argument('limit', 25))
-			root = cnx.root()
 			products = root['products']
 			prod_cant = len(products)
-
 			if start >= prod_cant:
 				start = 0
 
@@ -100,18 +139,11 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				end= prod_cant
 
 			prods = [
-				self._prodDict(products.values()[i])
+				self._prodDict( products.values()[i] )
 				for i in range(start, end)
 			]
-			res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
-		except Exception, e:
-			error = str(e)
-			logger.exception(error)
-			res['exception'] = error
-			res['success'] = False
-		finally:
-			self._write_json(res)
-			cnx.close()
+			#raise Exception ("Dam")
+			self.res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
 
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""

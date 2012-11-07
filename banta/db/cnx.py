@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """This module handles the conection to the database"""
 from __future__ import absolute_import, unicode_literals, print_function
+import contextlib
 import ZODB.DB, ZODB.FileStorage
 
 import transaction
@@ -28,7 +29,7 @@ class MiZODB(object):
 			self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac
 		self.db = ZODB.DB(self.storage)
 		self.cnx = self.db.open()
-		print(self.cnx)
+		print('initial connection', self.cnx)
 		self.root = self.cnx.root()
 		#this method keps the database up to date, and initializes it in case of a new database
 		_up.init(self)
@@ -50,7 +51,7 @@ class MiZODB(object):
 		las que se guardan con el commit y se informan en el log"""
 
 		trans = transaction.get()
-		print('comm', trans)
+		print('commit', trans)
 		if user:
 			trans.setUser(user)
 		if note:
@@ -58,19 +59,54 @@ class MiZODB(object):
 		trans.commit()
 		
 	def abort(self):
-		transaction.get().abort()
+		trans = transaction.get()
+		print ("abort!", trans)
+		trans.abort()
 		
 	def close(self):
 		self.cnx.close()
 		self.db.close()
 		self.storage.close()
 
-	def getConnection(self):
-		"""EXPERIMENTAL!
+	@contextlib.contextmanager
+	def threadedDB(self):
+		"""
+		A context manager for connections outside the main thread
+		This is meant to be used on functions that need to use the database from another thread
+		ensures that the transaction will always be commited, or aborted in case of an exception.
+
+		use like:
+
+		with banta.db.DB.threadedDB() as root:
+			if 'something' in root['products']:
+				raise ....
+
+		if an exception occurs inside the "with", the transaction will get aborted
+		else, the transaction gets commited.
 		a new connection has its own root object.
 		in theory you can use another connection in another thread to allow a better threading usability
-		the returning object is a new connection, the consumer should close it and take care of it.
-		Not sure, but probably there shouldnt be two connections on the same thread.
-		And also i dont exactly knows how to get the transaction for the current connection
+
+		the returning object is a new root object.
 		"""
-		return self.db.open()
+		#this is another way to implement a context manager, but i dont actually like it much...
+		#i sense the Object way is kinda faster...
+		#The speed difference is very small and it seems like this way is a little faster..
+		# no way to test that really
+		#but anyway this way leaves the code more organized...
+		#also i can access self.* objects directly, like self.db.open and self.commit
+
+		cnx = self.db.open()
+		root = cnx.root()
+		try:
+			yield root
+			self.commit()
+		except Exception, e:
+			self.abort()
+			#Sorry but we are not hidding exceptions!
+			cnx.close()
+			raise e
+		cnx.close()
+		#This is unneded. because the cnx will (in theory) close itself.
+		#And also because ZODB is smart enough to pool/cache the connections per thread! (Damm i love ZODB!)
+		#but we do no harm in doing the "correct" stuff...
+		#in case ZODB doesnt cache connections, this COULD be a speeddown, but i rather lower speed than crashing software

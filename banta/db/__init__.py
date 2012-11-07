@@ -31,3 +31,25 @@ if 'DB' not in globals():
 	else:
 		f_name = "d"
 	DB = cnx.MiZODB(file_name=f_name, server=CONF.SERVER)
+
+"""Another way to create a context manager...
+it could be a little slower
+class threadedDB(object):
+	def __enter__(self):
+		global DB
+		self.cnx = DB.getConnection()
+		self.root = self.cnx.root()
+		return self.root
+
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		ret = False
+		if exc_type is not None:
+			DB.abort()
+			ret = False
+		else:
+			DB.commit()
+			ret = True
+		self.cnx.close()
+		return ret
+
+"""
