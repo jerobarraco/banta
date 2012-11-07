@@ -130,6 +130,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	@jsonwriter
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""
+		row = -1
 		with _db.DB.threaded() as root:
 			print ("post", threading.currentThread(), threading.activeCount())
 
@@ -169,7 +170,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 
 				row = list(root['products'].keys()).index(code)
 
-				self.res['product'] = self._prodFullDict(prod)
+			self.res['product'] = self._prodFullDict(prod)
 			#Outside with
 			#we emit the signal now, because the changes must be commited
 			#Is a queued connection, it shouln't care,
@@ -177,27 +178,23 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			self.changed.emit(row)
 		#end
 
+	@jsonwriter
 	def delete(self, *args, **kwargs):
-		res = {'success':False}
-		try:
-			cnx = _db.DB.getConnection()
-			print ("delete",  args, kwargs, threading.currentThread(), threading.activeCount(), cnx)
-			r = cnx.root()
-
-			code = self.get_argument('code')#code can't be None
-			print ('code', code)
-			if code not in r['products']:
+		row = -1
+		code = self.get_argument('code')#code can't be None
+		print ("delete", threading.currentThread(), threading.activeCount())
+		print ('code', code)
+		with _db.DB.threaded() as root:
+			if code not in root['products']:
 				raise Exception("Product does not exists")
+			#no need to care of special cases, this will raise an exception if not in list
+			row = list(root['products'].keys()).index(code)
 
-			row = list(r['products'].keys()).index(code)
-			ret = self.deleteProduct.emit(row)
-			res['success'] = True
-			res['return'] = ret
-		except Exception , e:
-			res['success'] = False
-			res['exception'] = str(e)
-		finally:
-			self.write (tornado.escape.json_encode(res))
+		ret = self.deleteProduct.emit(row)
+		self.res['row']= row
+		self.res['code'] = code
+		self.res['return'] = ret
+
 
 class Server( _qc.QThread ):
 	def __init__(self, parent):
