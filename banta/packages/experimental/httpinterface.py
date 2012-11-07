@@ -155,14 +155,14 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 
 			#trying to re-code or insert
 			if (code != old_code):
-				if (code in r['products']):
+				if (code in root['products']):
 					#If someone tries to change the code, but the new code is already on the db
 					#fail gloriously
 					raise Exception("The new code already exists")
 				if (old_code in root['products']):
 					#is a recode
 					#todo emit delete
-					del row['products'][old_code]
+					del root['products'][old_code]
 				#finally inserts the new one (notice is code)
 				prod.code = code
 				root['products'][code] = prod
