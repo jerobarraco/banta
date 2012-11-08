@@ -109,8 +109,15 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			with _db.DB.threaded() as root:
 				code = self.get_argument('code')
 				print('code', code)
-				prod = root['products'][code]
-				res['data'] = self._prodFullDict(prod)
+				prods = []
+				if code in root['products']:
+					prod = root['products'][code]
+					#to allow a "search" function later
+					prods.append(self._prodFullDict(prod))
+
+				res['count'] = len(prods)
+				res['total'] = len(root['products'])
+				res['data'] = prods
 
 	def _getProductList(self):
 		with JsonWriter(self) as res:
@@ -133,7 +140,6 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				]
 				res['count'] = len(prods)
 				res['total'] = prod_cant
-				res['success'] = True
 				res['data'] = prods
 
 	def post(self, *args, **kwargs):
