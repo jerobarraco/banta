@@ -29,7 +29,7 @@ class MiZODB(object):
 			self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac
 		self.db = ZODB.DB(self.storage)
 		self.cnx = self.db.open()
-		print('initial connection', self.cnx)
+		#print('initial connection', self.cnx)
 		self.root = self.cnx.root()
 		#this method keps the database up to date, and initializes it in case of a new database
 		_up.init(self)
@@ -51,7 +51,7 @@ class MiZODB(object):
 		las que se guardan con el commit y se informan en el log"""
 
 		trans = transaction.get()
-		print('commit', trans)
+		#print('commit', trans)
 		if user:
 			trans.setUser(user)
 		if note:
@@ -60,7 +60,7 @@ class MiZODB(object):
 		
 	def abort(self):
 		trans = transaction.get()
-		print ("abort!", trans)
+		#print ("abort!", trans)
 		trans.abort()
 		
 	def close(self):
@@ -106,7 +106,7 @@ class MiZODB(object):
 			cnx.close()
 			raise e
 		cnx.close()
-		#This is unneded. because the cnx will (in theory) close itself.
+		#This should not be needed. because the cnx will (in theory) close itself.
 		#And also because ZODB is smart enough to pool/cache the connections per thread! (Damm i love ZODB!)
 		#but we do no harm in doing the "correct" stuff...
 		#in case ZODB doesnt cache connections, this COULD be a speeddown, but i rather lower speed than crashing software

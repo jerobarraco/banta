@@ -8,10 +8,14 @@ and easy_install
 MoonGate http://MoonGate.com.ar
 
 1.18
-	- Mejorado el webservice incluido. (Se necesita activar los módulos experimentales)
-	- Cliente android Banta Touch Control disponible en fase beta.
 	- Mejorado el cuadro de dialogo para exportar listado de productos como .csv (Excel)
 	- Posibilidad de deshabilitar la carga de un módulo preciso en caso de extrema necesidad
+
+	¡NUEVO! - Beta:
+	- Mejorado el webservice incluido.
+	- Cliente android Banta Touch Control disponible en fase beta.
+	Para poder utilizarlo es necesario modificar el archivo "banta.cfg" con algún editor de texto, y activar los módulos experimentales colocando "True" en la opción "Experimental". Por favor tengan en cuenta que estas son funciones en etapa de prueba. Se recomienda hacer un backup de la base de datos antes de probarlo. En caso de error, solo se necesita colocar "False" en "Experimental" en el archivo de configuración. 
+
 
 
 1.17

@@ -6,16 +6,14 @@ from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
+import os
+import contextlib
 try:
 	from cStringIO import StringIO
 except:
 	from StringIO import StringIO
 
 import PySide.QtCore as _qc
-
-import os
-import contextlib
-
 import tornado
 import tornado.web
 import tornado.escape
@@ -97,7 +95,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		"""Lists one or many products
 		depending on the parameters
 		"""
-		print ('get', threading.currentThread(), threading.activeCount(), )
+		#print ('get', threading.currentThread(), threading.activeCount(), )
 		code = self.get_argument('code', None)
 		if code is not None:
 			self._getProduct(code)
@@ -108,7 +106,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
 				code = self.get_argument('code')
-				print('code', code)
+				#print('code', code)
 				prods = []
 				if code in root['products']:
 					prod = root['products'][code]
@@ -147,12 +145,12 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		row = -1
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
-				print ("post", threading.currentThread(), threading.activeCount())
+				#print ("post", threading.currentThread(), threading.activeCount())
 
 				code = self.get_argument('code', "")
 				old_code = self.get_argument ('old_code', "")
 
-				print ('code: ',code, 'oldcode', old_code)
+				#print ('code: ',code, 'oldcode', old_code)
 
 				if code.strip() == "":
 					raise Exception ("Code can't be empty")
@@ -200,8 +198,8 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		row = -1
 		with JsonWriter(self) as res:
 			code = self.get_argument('code')#code can't be None
-			print ("delete", threading.currentThread(), threading.activeCount())
-			print ('code', code)
+			#print ("delete", threading.currentThread(), threading.activeCount())
+			#print ('code', code)
 			with _db.DB.threaded() as root:
 				if code not in root['products']:
 					raise Exception("Product does not exists")
@@ -222,10 +220,9 @@ class Server( _qc.QThread ):
 	@_qc.Slot(int)
 	def syncDB(self, row):
 		#call from main loop only (use queued connection)
-		print ("sync", threading.currentThread(), threading.activeCount())
+		#print ("sync", threading.currentThread(), threading.activeCount())
 		_db.DB.abort()
 		_db.DB.cnx.sync()
-		print(row)
 		m = _pack.base.products.MODEL
 		m._setMaxRows()
 		start = m.index(row, 0)
@@ -238,7 +235,7 @@ class Server( _qc.QThread ):
 		model.removeRows(row, 1)
 
 	def run(self, *args, **kwargs):
-		print (threading.currentThread(), threading.activeCount(), )
+		#print (threading.currentThread(), threading.activeCount(), )
 		#pth = os.path.split(__file__)[0]
 		pth = os.getcwd()
 		pth = os.path.join(pth, 'static')
