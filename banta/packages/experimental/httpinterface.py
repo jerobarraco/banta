@@ -41,6 +41,9 @@ def timer():
 		print ("error")
 		pass
 
+#I dont really like decorators, i think they are a bad idea and can be supplied by other means...
+# like passing results to a function.
+#so i think i'll convert this to a context manager which does the same thing but less cumbersome
 def jsonwriter(func):
 	"""Decorator,
 	the decorated function must be a method of a class inherinting RequestHandler
@@ -68,6 +71,35 @@ def jsonwriter(func):
 	#outside jsonify
 	return jsonify
 
+class JsonWriter(object):
+	"""Context manager for a json writer.
+	needs an argument, an instance that inherits from RequestHandler
+	(which must implement the method write and set_header)
+	it will create a dictionary in where the data should be stored
+	When it finishes it writes everything back as a json, and sets the headers.
+	if there where any exception, it sets the success flag to False, and logs the exception
+	"""
+	def __init__(self, instance=None):
+		self.ins = instance
+
+	def __enter__(self, instance=None):
+		self.res = res = {'success':False}
+		return self.res
+
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		if exc_type is None:
+			self.res['success']= True
+		else:
+			error = str(exc_val)
+			logger.exception(error)
+			self.res['exception'] = error
+			self.res['success'] = False
+
+		self.ins.set_header('Content-Type', 'application/json; charset=utf-8')
+		json = tornado.escape.json_encode(self.res)
+		self.ins.write(json)
+		return True
+
 class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT",
 											 "OPTIONS")
@@ -88,7 +120,6 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	def _prodFullDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
-	@jsonwriter
 	def get(self, *args, **kwargs):
 		"""Lists one or many products
 		depending on the parameters
@@ -101,99 +132,105 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			self._getProductList()
 
 	def _getProduct(self, code):
-		with _db.DB.threaded() as root:
-			code = self.get_argument('code')
-			print('code', code)
-			prod = root['products'][code]
-			self.res['data'] = self._prodFullDict(prod)
+		with JsonWriter(self) as res:
+			with _db.DB.threaded() as root:
+				code = self.get_argument('code')
+				print('code', code)
+				prod = root['products'][code]
+				res['data'] = self._prodFullDict(prod)
 
 	def _getProductList(self):
-		with _db.DB.threaded() as root:
-			start = int(self.get_argument('start', 0))
-			limit = int(self.get_argument('limit', 25))
-			products = root['products']
-			prod_cant = len(products)
-			if start >= prod_cant:
-				start = 0
+		with JsonWriter(self) as res:
+			with _db.DB.threaded() as root:
+				start = int(self.get_argument('start', 0))
+				limit = int(self.get_argument('limit', 25))
+				products = root['products']
+				prod_cant = len(products)
+				if start >= prod_cant:
+					start = 0
 
-			end = start+limit
+				end = start+limit
 
-			if end >=prod_cant:
-				end= prod_cant
+				if end >= prod_cant:
+					end = prod_cant
 
-			prods = [
-				self._prodDict( products.values()[i] )
-				for i in range(start, end)
-			]
-			self.res = {'count':len(prods), 'total':prod_cant, 'success':True, 'data':prods}
+				prods = [
+					self._prodDict( products.values()[i] )
+					for i in range(start, end)
+				]
+				res['count'] = len(prods)
+				res['total'] = prod_cant
+				res['success'] = True
+				res['data'] = prods
 
-	@jsonwriter
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""
 		row = -1
-		with _db.DB.threaded() as root:
-			print ("post", threading.currentThread(), threading.activeCount())
+		with JsonWriter(self) as res:
+			with _db.DB.threaded() as root:
+				print ("post", threading.currentThread(), threading.activeCount())
 
-			code = self.get_argument('code', "")
-			old_code = self.get_argument ('old_code', "")
+				code = self.get_argument('code', "")
+				old_code = self.get_argument ('old_code', "")
 
-			print ('code: ',code, 'oldcode', old_code)
+				print ('code: ',code, 'oldcode', old_code)
 
-			if code.strip() == "":
-				raise Exception ("Code can't be empty")
+				if code.strip() == "":
+					raise Exception ("Code can't be empty")
 
-			if (old_code.strip() == "") or (old_code not in root['products']):
-				#inserting
-				prod = _db.models.Product(code)
-			else:
-				#modifying
-				#notice "old_code"
-				prod = root['products'][old_code]
+				if (old_code.strip() == "") or (old_code not in root['products']):
+					#inserting
+					prod = _db.models.Product(code)
+				else:
+					#modifying
+					#notice "old_code"
+					prod = root['products'][old_code]
 
-			prod.name = self.get_argument ('name', "")
-			prod.price = float(self.get_argument('price', 0.0))
-			prod.stock = float(self.get_argument('stock', 0.0))
+				prod.name = self.get_argument ('name', "")
+				prod.price = float(self.get_argument('price', 0.0))
+				prod.stock = float(self.get_argument('stock', 0.0))
 
-			#trying to re-code or insert
-			if (code != old_code):
-				if (code in root['products']):
-					#If someone tries to change the code, but the new code is already on the db
-					#fail gloriously
-					raise Exception("The new code already exists")
-				if (old_code in root['products']):
-					#is a recode
-					#todo emit delete
-					del root['products'][old_code]
-				#finally inserts the new one (notice is code)
-				prod.code = code
-				root['products'][code] = prod
+				#trying to re-code or insert
+				if (code != old_code):
+					if (code in root['products']):
+						#If someone tries to change the code, but the new code is already on the db
+						#fail gloriously
+						raise Exception("The new code already exists")
+					if (old_code in root['products']):
+						#is a recode
+						#todo emit delete
+						del root['products'][old_code]
+					#finally inserts the new one (notice is code)
+					prod.code = code
+					root['products'][code] = prod
 
-				row = list(root['products'].keys()).index(code)
+					row = list(root['products'].keys()).index(code)
 
-			self.res['product'] = self._prodFullDict(prod)
-			#Outside with
-			#we emit the signal now, because the changes must be commited
-			#Is a queued connection, it shouln't care,
-			# BUT in the rare case its trapped before the thread is commited, it will be no good
-			self.changed.emit(row)
-		#end
+				res['product'] = self._prodFullDict(prod)
+				#Outside with
+				#we emit the signal now, because the changes must be commited
+				#Is a queued connection, it shouln't care,
+				# BUT in the rare case its trapped before the thread is commited, it will be no good
+				self.changed.emit(row)
+			#end db
+		#endjson
+	#endfunc
 
-	@jsonwriter
 	def delete(self, *args, **kwargs):
 		row = -1
-		code = self.get_argument('code')#code can't be None
-		print ("delete", threading.currentThread(), threading.activeCount())
-		print ('code', code)
-		with _db.DB.threaded() as root:
-			if code not in root['products']:
-				raise Exception("Product does not exists")
-			#no need to care of special cases, this will raise an exception if not in list
-			row = list(root['products'].keys()).index(code)
+		with JsonWriter(self) as res:
+			code = self.get_argument('code')#code can't be None
+			print ("delete", threading.currentThread(), threading.activeCount())
+			print ('code', code)
+			with _db.DB.threaded() as root:
+				if code not in root['products']:
+					raise Exception("Product does not exists")
+				#no need to care of special cases, this will raise an exception if not in list
+				row = list(root['products'].keys()).index(code)
 
-		ret = self.deleteProduct.emit(row)
-		self.res['row']= row
-		self.res['code'] = code
-		self.res['return'] = ret
+			res['return'] = self.deleteProduct.emit(row)
+			res['row']= row
+			res['code'] = code
 
 
 class Server( _qc.QThread ):
