@@ -12,14 +12,24 @@ class Config:
 	DEBUG = False
 	PROFILING = False
 	SERVER = ''
+	DISABLED_MODULES = [ ]
+
+	K_EXPERIMENTAL = 'experimental'
+	K_PERSISTENT_PRINTER = 'persistent_printer'
+	K_DEBUG = 'debug'
+	K_PROFILING = 'profiling'
+	K_DISABLED_MODULES = 'disabled_modules'
+	K_SERVER = 'server'
+
 	def __init__(self, cfg = 'banta.cfg'):
 		self.filename = os.path.join(os.path.abspath('.'), cfg)
 		self.defaults = {
-			'profiling':str(False),
-			'persistent_printer':str(False),
-			'debug':str(False),
-			'experimental':str(False),
-			'server':'',
+			self.K_DEBUG : str(self.DEBUG),
+			self.K_PROFILING : str(self.PROFILING),
+			self.K_PERSISTENT_PRINTER : str(self.PERSISTENT_PRINTER),
+			self.K_EXPERIMENTAL : str(self.EXPERIMENTAL),
+			self.K_DISABLED_MODULES : ','.join(self.DISABLED_MODULES),
+			self.K_SERVER : self.SERVER,
 		}
 
 		self.config = ConfigParser.SafeConfigParser(self.defaults)
@@ -28,11 +38,17 @@ class Config:
 
 	def load(self):
 		sect = 'DEFAULT'
-		self.PROFILING = self.config.getboolean(sect, 'profiling')
-		self.DEBUG = self.config.getboolean(sect, 'debug')
-		self.PERSISTENT_PRINTER = self.config.getboolean(sect, 'persistent_printer')
-		self.EXPERIMENTAL = self.config.getboolean(sect, 'experimental')
-		self.SERVER = self.config.get(sect, 'server')
+		self.PROFILING = self.config.getboolean(sect, self.K_PROFILING)
+		self.DEBUG = self.config.getboolean(sect, self.K_DEBUG)
+		self.PERSISTENT_PRINTER = self.config.getboolean(sect, self.K_PERSISTENT_PRINTER)
+		self.EXPERIMENTAL = self.config.getboolean(sect, self.K_EXPERIMENTAL)
+		d_modules = self.config.get(sect, self.K_DISABLED_MODULES)
+		self.DISABLED_MODULES = [
+			m.strip()
+			for m in d_modules.split(',')
+		]
+		self.SERVER = self.config.get(sect, self.K_SERVER)
+
 
 	def get(self, section, key):
 		return self.config.get(section, key)
@@ -56,12 +72,12 @@ class Config:
 		so , if the software crashes is better not to write that configuration..
 
 		"""
-		self.set('profiling', self.PROFILING)
-		self.set('debug', self.DEBUG)
-		self.set('experimental', self.EXPERIMENTAL)
-		self.set('persistent_printer', self.PERSISTENT_PRINTER)
-		self.set('server', self.SERVER)
-
+		self.set(self.K_PROFILING, self.PROFILING)
+		self.set(self.K_DEBUG, self.DEBUG)
+		self.set(self.K_EXPERIMENTAL, self.EXPERIMENTAL)
+		self.set(self.K_PERSISTENT_PRINTER, self.PERSISTENT_PRINTER)
+		self.set(self.K_DISABLED_MODULES, ','.join(self.DISABLED_MODULES))
+		self.set(self.K_SERVER, self.SERVER)
 
 		if self.config:
 			self.config.write(open(self.filename, 'w'))

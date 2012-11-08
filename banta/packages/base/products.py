@@ -479,7 +479,7 @@ class Products(_pack.GenericModule):
 			return False
 		delimit = ';'.encode('utf-8')
 		quote = '"'.encode('utf-8')
-		writer = csv.writer(open(name, 'wb'), delimiter=delimit, quotechar=quote,  quoting=csv.QUOTE_MINIMAL)
+		writer = csv.writer(open(fname, 'wb'), delimiter=delimit, quotechar=quote,  quoting=csv.QUOTE_MINIMAL)
 		#Write headers
 		row = []
 		for c in range (self.app.window.v_products.model().columnCount()):

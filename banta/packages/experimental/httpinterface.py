@@ -28,9 +28,9 @@ import banta.packages as _pack
 #This module can be completely wrong, we might be calling the other thread directly,
 #so be sure to check the threads!
 
-import time
 @contextlib.contextmanager
 def timer():
+	import time
 	s = None
 	try:
 		s = time.time()
@@ -44,33 +44,6 @@ def timer():
 #I dont really like decorators, i think they are a bad idea and can be supplied by other means...
 # like passing results to a function.
 #so i think i'll convert this to a context manager which does the same thing but less cumbersome
-def jsonwriter(func):
-	"""Decorator,
-	the decorated function must be a method of a class inherinting RequestHandler
-	(or implementing write)
-	it must have at least 1 parameter (self),
-	and it will create a dictionary self.res in where the data should be stored
-	When it finishes it writes everything back as a json, and sets the headers.
-	if there where any exception, it sets the success flag to False, and logs the exception
- 	"""
-	def jsonify(*args, **kwargs ):
-		self = args[0]
-		self.res = {'success':False}
-		try:
-			func(*args, **kwargs)
-			self.res['success'] = True
-		except Exception, e:
-			error = str(e)
-			logger.exception(error)
-			self.res['exception'] = error
-			self.res['success'] = False
-
-		self.set_header('Content-Type', 'application/json; charset=utf-8')
-		json = tornado.escape.json_encode(self.res)
-		self.write(json)
-	#outside jsonify
-	return jsonify
-
 class JsonWriter(object):
 	"""Context manager for a json writer.
 	needs an argument, an instance that inherits from RequestHandler
@@ -238,9 +211,10 @@ class Server( _qc.QThread ):
 		_qc.QThread.__init__(self)
 		self.parent = parent
 
-	#called from main loop
+
 	@_qc.Slot(int)
 	def syncDB(self, row):
+		#call from main loop only (use queued connection)
 		print ("sync", threading.currentThread(), threading.activeCount())
 		_db.DB.abort()
 		_db.DB.cnx.sync()
@@ -257,12 +231,12 @@ class Server( _qc.QThread ):
 
 	def run(self, *args, **kwargs):
 		print (threading.currentThread(), threading.activeCount(), )
-		pth = os.path.split(__file__)[0]
+		#pth = os.path.split(__file__)[0]
+		pth = os.getcwd()
 		pth = os.path.join(pth, 'static')
 		application = tornado.web.Application(
 			[
 				(r'/prods(.*)', HProducts, {'server_thread':self}),
-				#(r"/static/(.*)", tornado.web.StaticFileHandler, {"path": pth }),
 			],
 			#debug = True
 			gzip = True,
@@ -276,7 +250,6 @@ class Server( _qc.QThread ):
 class HTTPInterface(_pack.GenericModule):
 	REQUIRES = []
 	NAME = "HTTPI"
-	products = _qc.Signal(int)
 
 	def load(self):
 		self.server = Server(self)

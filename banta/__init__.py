@@ -156,7 +156,10 @@ class App(_qg.QApplication):
 		#Now we load all modules 
 		#Do it in different loop so each module can search for other modules
 		for mod in self.avail: #so we can retain the load order
-			if mod.NAME in self.modules:
+			name = mod.NAME
+			if name in db.CONF.DISABLED_MODULES:
+				logger.debug("About to load module '%s' but it is disabled from banta.cfg" %name)
+			elif name in self.modules:
 				logger.debug( "Loading module %s"%mod.NAME )
 				try:
 					self.modules[mod.NAME].load()
