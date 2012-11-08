@@ -1,38 +1,28 @@
 package com.moongate.bantatc;
-
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.moongate.bantatc.R;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.json.JSONException;
-
 
 public class mantenedor_pro extends Activity {
 		ArrayList<Product> products;
-		private String ip;
+		public String ip;
+		TextView cdHttp ;
+		ListView lv;
+		TextView prodCode;
+		public String search_code;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mantenedor_pro);
+				cdHttp = (TextView) this.findViewById(R.id.cdHttp);
+				prodCode= (TextView) this.findViewById(R.id.ProductCode);
 				
 				Bundle extras = getIntent().getExtras();
 				
@@ -40,68 +30,66 @@ public class mantenedor_pro extends Activity {
 					ip = "192.168.1.99";
 				}
 				else{
-						ip = extras.getString("ip");
+					ip = extras.getString("ip");
 				}
-				loadProds();
-    }
-		public void loadProds(){
-			String response = this.readProductList();
-			JSONObject responseObj = null; 
-			try {
-				responseObj = new JSONObject(response); 
-				JSONArray prodList;
-				prodList = responseObj.getJSONArray("prods");
-	
-				products = new ArrayList<Product>();
-				for (int i=0; i<prodList.length(); i++){
-					//get the country information JSON object
-					 JSONObject prod_info = prodList.getJSONObject(i);
-					//create java object from the JSON object
-					Product prod = new Product();
-					prod.name = prod_info.getString("name");
-					prod.code = prod_info.getString("code");
-					prod.price = prod_info.getDouble("price");
-					prod.stock = prod_info.getDouble("stock");
-					//add to country array list
-					products.add(prod);
-				}
-			} catch (JSONException ex) {
-					Logger.getLogger(mantenedor_pro.class.getName()).log(Level.SEVERE, null, ex);
-			}
-   //create an ArrayAdaptar from the String Array
-		ListView listView = (ListView) findViewById(R.id.listView1);
-		listView.setAdapter(
-					 new ArrayAdapter(
-					 this, android.R.layout.simple_list_item_1, products));
-		}
-    public String readProductList(){
-			//this is completely inneficient, storing the whole string in memory sucks :D
-			StringBuilder builder = new StringBuilder();
-			HttpClient client = new DefaultHttpClient();
-			//harcoded urls sucks too, we need to create a new url.
-			//we will probably have to let the user put the ip of the server
-			HttpGet httpGet = new HttpGet("http://"+ip+":8080/products/list");
-			//HttpGet httpGet = new HttpGet("http://192.168.1.99:8080/products/list");
-			try {
-				HttpResponse response = client.execute(httpGet);
-				StatusLine statusLine = response.getStatusLine();
-				int statusCode = statusLine.getStatusCode();
-				if (statusCode == 200) {
-					HttpEntity entity = response.getEntity();
-					InputStream content = entity.getContent();
-					BufferedReader reader = new BufferedReader(new InputStreamReader(content));
-					String line;
-					while ((line = reader.readLine()) != null) {
-						builder.append(line);
+				this.prodCode = (TextView) this.findViewById(com.moongate.bantatc.R.id.ProductCode);
+				this.lv = (ListView) findViewById(R.id.listView1);
+				this.lv.setClickable(true);
+				
+				this.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						Product p = (Product) parent.getItemAtPosition(position);
+						Toast.makeText(
+								mantenedor_pro.this, 
+								"Clicked!  " +p.code+ " - " + String.valueOf(position)+ ","+ String.valueOf(id),
+								Toast.LENGTH_LONG).show();
+						mantenedor_pro.this.verProducto(p.code);
 					}
-				} else {
-					Log.e(mantenedor_pro.class.toString(), "Failed to download file");
-				}
-			} catch (ClientProtocolException e) {
-				e.printStackTrace();
-			} catch (java.io.IOException e) {
-				e.printStackTrace();
-			}
-			return builder.toString();
+				});
+
+				new wsListProducts().execute(this);
+    } 
+		private void verProducto(String code){
+			Intent adm_prod = new Intent(this, Adm_Pro.class);
+				adm_prod.putExtra("search_code", code);
+				adm_prod.putExtra("ip", this.ip);
+				startActivityForResult(adm_prod, 0);
+				mantenedor_pro.this.finish();
 		}
+		public void buscar(View v){
+			this.search_code = this.prodCode.getText().toString();
+			verProducto(this.search_code);
+		}
+    public void escanear(View v){
+			// intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			//   intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+			//intent.putExtra("SCAN_FORMATS", "CODE_39,CODE_93,CODE_128,DATA_MATRIX,ITF,CODABAR");
+			intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+			startActivityForResult(intent, 0);    //Barcode Scanner to scan for us
+		}
+
+    @Override 
+		public void onActivityResult(int requestCode, int resultCode, Intent data) {     
+			super.onActivityResult(requestCode, resultCode, data); 
+			if (data == null){
+				//if data == null es para el finish de AdmPro
+				mantenedor_pro.this.finish();
+			}else{
+				if (resultCode == RESULT_OK) {
+						String format = data.getStringExtra("SCAN_RESULT_FORMAT");
+						String result = data.getStringExtra("SCAN_RESULT");
+						Toast.makeText(
+								mantenedor_pro.this, 
+								"Code " + result + " ["+format+"]",
+								Toast.LENGTH_LONG
+						).show();
+						//TextView pcode = 
+						prodCode.setText(result);
+						mantenedor_pro.this.buscar(lv);
+					} else if (resultCode == RESULT_CANCELED) {
+
+					}
+			}
+		}	
 }

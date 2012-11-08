@@ -3,6 +3,7 @@
 ####################### 		E X P E R I M E N T A L
 #######################
 from __future__ import absolute_import, print_function, unicode_literals
+# system
 import logging
 logger = logging.getLogger(__name__)
 
@@ -13,31 +14,20 @@ try:
 except:
 	from StringIO import StringIO
 
+# 3rd party
 import PySide.QtCore as _qc
 import tornado
 import tornado.web
 import tornado.escape
 import threading
 
+#internal
 
 import banta.db as _db
 import banta.packages as _pack
 
 #This module can be completely wrong, we might be calling the other thread directly,
 #so be sure to check the threads!
-
-@contextlib.contextmanager
-def timer():
-	import time
-	s = None
-	try:
-		s = time.time()
-		yield
-		r = time.time() -s
-		print ('time:', r)
-	except:
-		print ("error")
-		pass
 
 #I dont really like decorators, i think they are a bad idea and can be supplied by other means...
 # like passing results to a function.
@@ -121,7 +111,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
 				start = int(self.get_argument('start', 0))
-				limit = int(self.get_argument('limit', 25))
+				limit = int(self.get_argument('limit', 100))
 				products = root['products']
 				prod_cant = len(products)
 				if start >= prod_cant:
