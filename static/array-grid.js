@@ -19,7 +19,7 @@ Ext.onReady(function() {
 			actionMethods: {
 				create: 'POST', read: 'GET', update: 'POST', destroy: 'POST'
 			},
-			extraParams: { test: 'test' }
+			//extraParams: { test: 'test' }
 		},
 		autoLoad: true,
         fields: [
