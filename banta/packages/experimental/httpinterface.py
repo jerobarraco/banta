@@ -160,6 +160,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				if (old_code.strip() == "") or (old_code not in root['products']):
 					#inserting
 					prod = _db.models.Product(code)
+
 				else:
 					#modifying
 					#notice "old_code"
@@ -179,19 +180,19 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 						#is a recode
 						#todo emit delete
 						del root['products'][old_code]
-					#finally inserts the new one (notice is code)
-					prod.code = code
-					root['products'][code] = prod
+				#finally inserts the new one (notice is code)
+				prod.code = code
+				root['products'][code] = prod
 
-					row = list(root['products'].keys()).index(code)
+				row = list(root['products'].keys()).index(code)
 
 				res['product'] = self._prodFullDict(prod)
-				#Outside with
-				#we emit the signal now, because the changes must be commited
-				#Is a queued connection, it shouln't care,
-				# BUT in the rare case its trapped before the thread is commited, it will be no good
-				self.changed.emit(row)
 			#end db
+			#Outside with
+			#we emit the signal now, because the changes must be commited
+			#Is a queued connection, it shouln't care,
+			# BUT in the rare case its trapped before the thread is commited, it will be no good
+			self.changed.emit(row)
 		#endjson
 	#endfunc
 
@@ -226,6 +227,7 @@ class Server( _qc.QThread ):
 		_db.DB.cnx.sync()
 		print(row)
 		m = _pack.base.products.MODEL
+		m._setMaxRows()
 		start = m.index(row, 0)
 		end = m.index(row, m.columnCount())
 		m.dataChanged.emit(start, end)
