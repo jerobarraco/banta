@@ -153,8 +153,8 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 					#modifying
 					#notice "old_code"
 					prod = root['products'][old_code]
-
-				prod.name = self.get_argument ('name', "")
+				prod.setName(self.get_argument ('name', ""))
+				#prod.name = self.get_argument ('name', "")
 				prod.price = float(self.get_argument('price', 0.0))
 				prod.stock = float(self.get_argument('stock', 0.0))
 
