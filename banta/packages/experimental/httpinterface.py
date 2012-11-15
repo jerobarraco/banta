@@ -86,7 +86,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		depending on the parameters
 		"""
 		#print ('get', threading.currentThread(), threading.activeCount(), )
-		code = self.get_argument('code', None)
+		code = self.get_argument('search_code', None)
 		if code is not None:
 			self._getProduct(code)
 		else:
@@ -112,6 +112,8 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 			with _db.DB.threaded() as root:
 				start = int(self.get_argument('start', 0))
 				limit = int(self.get_argument('limit', 100))
+				search_name = self.get_argument('search_name', "").lower()
+
 				products = root['products']
 				prod_cant = len(products)
 				if start >= prod_cant:
@@ -123,8 +125,9 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 					end = prod_cant
 
 				prods = [
-					self._prodDict( products.values()[i] )
-					for i in range(start, end)
+					self._prodDict( p )
+					for p in products.values()[start:end]
+					if (not search_name) or (search_name in p.name.lower())
 				]
 				res['count'] = len(prods)
 				res['total'] = prod_cant
