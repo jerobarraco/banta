@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 
 import os
 import contextlib
+from operator import itemgetter, attrgetter
 try:
 	from cStringIO import StringIO
 except:
@@ -95,8 +96,6 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	def _getProduct(self, code):
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
-				code = self.get_argument('code')
-				#print('code', code)
 				prods = []
 				if code in root['products']:
 					prod = root['products'][code]
@@ -113,9 +112,12 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				start = int(self.get_argument('start', 0))
 				limit = int(self.get_argument('limit', 100))
 				search_name = self.get_argument('search_name', "").lower()
+				order_by = self.get_argument("order_by", "").lower()
+				reversed = self.get_argument('order_asc', "1").lower() != "1"
 
 				products = root['products']
 				prod_cant = len(products)
+
 				if start >= prod_cant:
 					start = 0
 
@@ -124,11 +126,18 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				if end >= prod_cant:
 					end = prod_cant
 
-				prods = [
-					self._prodDict( p )
-					for p in products.values()[start:end]
-					if (not search_name) or (search_name in p.name.lower())
-				]
+				prod_list = products.values()
+
+				if order_by == 'stock':
+					prod_list = sorted(prod_list, key=attrgetter('stock'), reverse=reversed)
+
+				def filter_name(p):
+					return search_name in p.name.lower()
+
+				if search_name:
+					prod_list = filter(filter_name, prod_list)
+
+				prods = map(self._prodDict, prod_list[start:end])
 				res['count'] = len(prods)
 				res['total'] = prod_cant
 				res['data'] = prods
@@ -158,7 +167,6 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 					prod = root['products'][old_code]
 
 				prod.setName(self.get_argument ('name', ""))
-				#prod.name = self.get_argument ('name', "")
 				prod.price = float(self.get_argument('price', 0.0))
 				prod.stock = float(self.get_argument('stock', 0.0))
 

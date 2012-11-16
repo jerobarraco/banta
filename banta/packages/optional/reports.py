@@ -11,6 +11,47 @@ import banta.packages as _packs
 import banta.utils as _utils
 import banta.db as _db
 
+class ResultProduct:
+	#These objects are necesary so we can acumulate values in an ordered way
+	code = ""
+	name = ""
+	#like acumulating here
+	count = 0
+	#and here
+	total_sold = 0.0
+	def toStringList(self):
+		return (self.code, self.name, str(self.count), str(self.total_sold))
+
+def reportProducts(times=list((0, 0)), root=None):
+	"""Calculates a report of products and returns a list of results
+	times is a tuple with the min and max time (as int objects) (utils.dateTimeToInt)
+	root is the root of the database, this is needed so this report can be generated from several threads
+	"""
+	tmin, tmax = times
+	#Define the collection
+	#define the header
+	results = {'_headers': ('Código', 'Nombre', 'Cantidad', 'Total Vendido') }
+	#cache the bills list
+	bills = root['bills']
+	for b in bills.values(min = tmin, max = tmax):
+		for i in b.items:
+			prod = i.product
+			if not prod:
+				#shouldnt happen
+				continue
+			pcode = prod.code
+			if pcode not in results:
+				#if the code is not already in the results we create a new result for the product
+				res = ResultProduct()
+				res.name = prod.name#i use prod here, carefull, either way a null product is nonsense
+				res.code = pcode#for the toStringList
+				results[pcode] = res
+
+			r = results[pcode]
+			r.count += i.quantity
+			r.total_sold += i.price
+	return results
+
 class Reports(_packs.GenericModule):
 	REQUIRES = (_packs.GenericModule.P_ADMIN, )
 	NAME = "reports"
@@ -22,11 +63,12 @@ class Reports(_packs.GenericModule):
 		_qc.QT_TRANSLATE_NOOP('reports', 'Movimientos'),
 		_qc.QT_TRANSLATE_NOOP('reports', 'Compras'),
 	)
+
 	def load(self):
 		#define here, so we use "self." notation, which means a bounded method, also avoid problems
 		self.REPORT_FUNCS = (
 			self._showCategories,
-			self._showProducts,
+			reportProducts,
 			self._showUsers,
 			self._showClients,
 			self._showMovements,
@@ -48,7 +90,10 @@ class Reports(_packs.GenericModule):
 		rep_type = self.widget.cb_type.currentIndex()
 		if rep_type < 0 : return
 		self.widget.v_list.clear()
-		self.REPORT_FUNCS[rep_type]()
+		times = self.getTimesFromFilters()
+		#we pass the times and the root of the db to allow to call the reports from another thread
+		results = self.REPORT_FUNCS[rep_type](times, _db.DB.root )
+		self._showResults(results)
 
 	def getTimesFromFilters(self):
 		"""Returns a touple of times from the date widgets.
@@ -93,7 +138,7 @@ class Reports(_packs.GenericModule):
 				r.total_sold += i.price
 				r.total_tax += i.tax_total
 
-		self._showResults(results)
+		return results
 
 	@_qc.Slot()
 	def export(self):
@@ -130,15 +175,29 @@ class Reports(_packs.GenericModule):
 				pass
 
 	def _showResults(self, results):
+		"""Shows the result in the view.
+		results is a dictionary.
+		the key "_headers" is a list of strings for the headers.
+		the other keys represents other rows, must be of a type of Result* with a toStringList() method
+	 	"""
 		v = self.widget.v_list
-		for k in results:
-			res = results[k]
-			r = v.rowCount()
-			v.setRowCount(r+1)
+		#we use pop to remove from the dictionary
+		headers = results.pop('_headers')
+
+		#v = self.widget.v_list
+		v.setColumnCount(len(headers))
+		v.setHorizontalHeaderLabels(headers)
+
+		v.setRowCount( len(results) )
+
+		for r, res in enumerate(results.values()):
+			#res = results[k]
+			#r = v.rowCount()
+			#v.setRowCount(r+1)
 			for c, t in enumerate(res.toStringList()):
 				self.widget.v_list.setItem(r, c, _qg.QTableWidgetItem(t))
 
-	def _showProducts(self):
+	def _showProducts(self, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			code = ""
@@ -175,9 +234,9 @@ class Reports(_packs.GenericModule):
 				r.count += i.quantity
 				r.total_sold += i.price
 
-		self._showResults(results)
+		return results
 
-	def _showUsers(self):
+	def _showUsers(self, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			name = ""
@@ -213,9 +272,9 @@ class Reports(_packs.GenericModule):
 			r.prod_count += sum([i.quantity for i in b.items])
 			r.total_sold += b.total
 
-		self._showResults(results)
+		return results
 
-	def _showClients(self):
+	def _showClients(self, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			code = ""
@@ -254,9 +313,9 @@ class Reports(_packs.GenericModule):
 			r.prod_count += sum([i.quantity for i in b.items])
 			r.total_bought += b.total
 
-		self._showResults(results)
+		return results
 
-	def _showMovements(self):
+	def _showMovements(self, root = None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			date = ""
@@ -283,9 +342,9 @@ class Reports(_packs.GenericModule):
 			r.diff =  m.diff
 			r.reason = m.reason
 			results[r.date] = r
-		self._showResults(results)
+		return results
 
-	def _showBuys(self):
+	def _showBuys(self, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			date = 0
@@ -312,4 +371,4 @@ class Reports(_packs.GenericModule):
 			r.quantity =  m.quantity
 			r.total = m.total
 			results[r.date] = r
-		self._showResults(results)
+		return results
