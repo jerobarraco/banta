@@ -27,29 +27,33 @@ def reportProducts(times=list((0, 0)), root=None):
 	times is a tuple with the min and max time (as int objects) (utils.dateTimeToInt)
 	root is the root of the database, this is needed so this report can be generated from several threads
 	"""
+	print (times, root)
 	tmin, tmax = times
 	#Define the collection
 	#define the header
 	results = {'_headers': ('Código', 'Nombre', 'Cantidad', 'Total Vendido') }
 	#cache the bills list
 	bills = root['bills']
-	for b in bills.values(min = tmin, max = tmax):
-		for i in b.items:
-			prod = i.product
-			if not prod:
-				#shouldnt happen
-				continue
-			pcode = prod.code
-			if pcode not in results:
-				#if the code is not already in the results we create a new result for the product
-				res = ResultProduct()
-				res.name = prod.name#i use prod here, carefull, either way a null product is nonsense
-				res.code = pcode#for the toStringList
-				results[pcode] = res
+	try:
+		for b in bills.values(min = tmin, max = tmax):
+			for i in b.items:
+				prod = i.product
+				if not prod:
+					#shouldnt happen
+					continue
+				pcode = prod.code
+				if pcode not in results:
+					#if the code is not already in the results we create a new result for the product
+					res = ResultProduct()
+					res.name = prod.name#i use prod here, carefull, either way a null product is nonsense
+					res.code = pcode#for the toStringList
+					results[pcode] = res
 
-			r = results[pcode]
-			r.count += i.quantity
-			r.total_sold += i.price
+				r = results[pcode]
+				r.count += i.quantity
+				r.total_sold += i.price
+	except Exception, e:
+		logger.exception('Error when generating the report\n'+str(e))
 	return results
 
 class Reports(_packs.GenericModule):
@@ -92,7 +96,8 @@ class Reports(_packs.GenericModule):
 		self.widget.v_list.clear()
 		times = self.getTimesFromFilters()
 		#we pass the times and the root of the db to allow to call the reports from another thread
-		results = self.REPORT_FUNCS[rep_type](times, _db.DB.root )
+		#todo , we can use a worker thread
+		results = self.REPORT_FUNCS[rep_type](times, _db.DB.root)
 		self._showResults(results)
 
 	def getTimesFromFilters(self):
@@ -101,7 +106,7 @@ class Reports(_packs.GenericModule):
  		"""
 		return _utils.getTimesFromFilters(self.widget.dMin, self.widget.dMax)
 
-	def _showCategories(self):
+	def _showCategories(self, times, root):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			prod_count = 0
@@ -111,32 +116,30 @@ class Reports(_packs.GenericModule):
 			def toStringList(self):
 				return (self.name, str(self.prod_count), str(self.total_sold), str(self.total_tax))
 
-		headers = ('Rubro', 'Productos', 'Total Vendido', 'Impuesto')
-		v = self.widget.v_list
-		v.setColumnCount(len(headers))
-		v.setHorizontalHeaderLabels(headers)
+		results = {'headers': ('Rubro', 'Productos', 'Total Vendido', 'Impuesto')}
 
-		v.setRowCount(0)
-		tmin, tmax = self.getTimesFromFilters()
+		tmin, tmax = times #self.getTimesFromFilters()
 		#Define the collection
-		results = {}
-		#TODO use a worker thread
-		for b in _db.DB.bills.values(min = tmin, max = tmax):
-			for i in b.items:
-				cat = i.product.category
-				if not cat:
-					cname = self.widget.tr("Sin rubro")
-				else:
-					cname = cat.name
-				if cname not in results:
-					res = Result()
-					res.name = cname
-					results[cname] = res
+		bills = root['bills']
+		try:
+			for b in bills.values(min = tmin, max = tmax):
+				for i in b.items:
+					cat = i.product.category
+					if not cat:
+						cname = "Sin rubro"
+					else:
+						cname = cat.name
+					if cname not in results:
+						res = Result()
+						res.name = cname
+						results[cname] = res
 
-				r = results[cname]
-				r.prod_count += i.quantity
-				r.total_sold += i.price
-				r.total_tax += i.tax_total
+					r = results[cname]
+					r.prod_count += i.quantity
+					r.total_sold += i.price
+					r.total_tax += i.tax_total
+		except Exception, e:
+			logger.exception('Error when generating the report\n'+str(e))
 
 		return results
 
@@ -197,46 +200,7 @@ class Reports(_packs.GenericModule):
 			for c, t in enumerate(res.toStringList()):
 				self.widget.v_list.setItem(r, c, _qg.QTableWidgetItem(t))
 
-	def _showProducts(self, root=None):
-		class Result:
-			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
-			code = ""
-			name = ""
-			count = 0
-			total_sold = 0.0
-			def toStringList(self):
-				return (self.code, self.name, str(self.count), str(self.total_sold))
-
-		headers  = ('Código', 'Nombre', 'Cantidad', 'Total Vendido')
-		v = self.widget.v_list
-		v.setColumnCount(len(headers))
-		v.setHorizontalHeaderLabels(headers)
-
-		v.setRowCount(0)
-		tmin, tmax = self.getTimesFromFilters()
-		#Define the collection
-		results = {}
-		#TODO use a worker thread
-		for b in _db.DB.bills.values(min = tmin, max = tmax):
-			for i in b.items:
-				prod = i.product
-				if not prod:
-					#shouldnt happen
-					continue
-				pcode = prod.code
-				if pcode not in results:
-					res = Result()
-					res.name = prod.name#i use prod here, carefull, either way a null product is nonsense
-					res.code = pcode#for the toStringList
-					results[pcode] = res
-
-				r = results[pcode]
-				r.count += i.quantity
-				r.total_sold += i.price
-
-		return results
-
-	def _showUsers(self, root=None):
+	def _showUsers(self, times, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			name = ""
@@ -245,6 +209,7 @@ class Reports(_packs.GenericModule):
 			total_sold = 0.0
 			def toStringList(self):
 				return (self.name, str(self.count), str(self.prod_count), str(self.total_sold))
+
 		#TODO Translate
 		headers  = ('Usuario', 'Facturas', 'Productos', 'Total Vendido')
 		v = self.widget.v_list
@@ -274,7 +239,7 @@ class Reports(_packs.GenericModule):
 
 		return results
 
-	def _showClients(self, root=None):
+	def _showClients(self, times, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			code = ""
@@ -315,7 +280,7 @@ class Reports(_packs.GenericModule):
 
 		return results
 
-	def _showMovements(self, root = None):
+	def _showMovements(self, times, root = None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			date = ""
@@ -344,7 +309,7 @@ class Reports(_packs.GenericModule):
 			results[r.date] = r
 		return results
 
-	def _showBuys(self, root=None):
+	def _showBuys(self, times, root=None):
 		class Result:
 			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
 			date = 0

@@ -26,6 +26,7 @@ import threading
 
 import banta.db as _db
 import banta.packages as _pack
+import banta.utils as _utils
 
 #This module can be completely wrong, we might be calling the other thread directly,
 #so be sure to check the threads!
@@ -86,7 +87,6 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		"""Lists one or many products
 		depending on the parameters
 		"""
-		#print ('get', threading.currentThread(), threading.activeCount(), )
 		code = self.get_argument('search_code', None)
 		if code is not None:
 			self._getProduct(code)
@@ -209,15 +209,29 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				row = list(root['products'].keys()).index(code)
 
 			res['return'] = self.deleteProduct.emit(row)
-			res['row']= row
+			res['row'] = row
 			res['code'] = code
 
+class Reports(tornado.web.RequestHandler, _qc.QObject):
+	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
+
+	def initialize(self, server_thread):
+		self.server_thread = server_thread
+
+	def get(self, *args, **kwargs):
+		with JsonWriter(self) as res:
+			self.get_argument('start', 0)
+			start, today, end = _utils.currentMonthDates()
+			with _db.DB.threaded() as root:
+
+				results = _pack.optional.reports.reportProducts((start, end), root)
+				res['headers'] = results.pop('_headers')
+				res['data'] = results.values()
 
 class Server( _qc.QThread ):
 	def __init__(self, parent):
 		_qc.QThread.__init__(self)
 		self.parent = parent
-
 
 	@_qc.Slot(int)
 	def syncDB(self, row):
@@ -244,16 +258,15 @@ class Server( _qc.QThread ):
 		application = tornado.web.Application(
 			[
 				(r'/prods(.*)', HProducts, {'server_thread':self}),
+				(r'/reports(.*)', Reports, {'server_thread':self}),
 			],
 			#debug = True
 			gzip = True,
 			static_path= pth,
-
 		)
 		application.listen(8080)
 		tornado.ioloop.IOLoop.instance().start()
 
-#TODO use qt signnls on the model to delete and insert
 class HTTPInterface(_pack.GenericModule):
 	REQUIRES = []
 	NAME = "HTTPI"
