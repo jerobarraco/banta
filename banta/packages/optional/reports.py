@@ -26,6 +26,10 @@ class ResultProduct:
 				self.toStringList()
 			)
 		)
+
+	def toList(self):
+		return self.name, self.total_sold
+
 	def toStringList(self):
 		return (self.code, self.name, str(self.count), str(self.total_sold))
 
@@ -34,6 +38,8 @@ class ResultCategory:
 	total_sold = 0.0
 	total_tax = 0.0
 	name = ""
+	def toList(self):
+		return self.name, self.total_sold
 	def toStringList(self):
 		return (self.name, str(self.prod_count), str(self.total_sold), str(self.total_tax))
 
@@ -43,6 +49,9 @@ class ResultUser:
 	count = 0
 	prod_count = 0
 	total_sold = 0.0
+	def toList(self):
+		return self.name, self.total_sold
+
 	def toStringList(self):
 		return (self.name, str(self.count), str(self.prod_count), str(self.total_sold))
 
@@ -53,6 +62,9 @@ class ResultClient:
 	count = 0
 	prod_count = 0
 	total_bought = 0.0
+	def toList(self):
+		return self.name, self.total_bought
+
 	def toStringList(self):
 		return (str(self.code), str(self.ctype), self.name, str(self.count), str(self.prod_count), str(self.total_bought))
 
@@ -62,6 +74,9 @@ class ResultMove:
 	name = ""
 	diff = 0
 	reason = ""
+	def toList(self):
+		return self.name, self.diff
+
 	def toStringList(self):
 		return (_qc.QDateTime(self.date).toString(), self.code, self.name, str(self.diff), self.reason)
 
@@ -71,6 +86,9 @@ class ResultBuy:
 	prod_name = ""
 	quantity = 0.0
 	total = 0.0
+	def toList(self):
+		return self.prod_name, self.total
+
 	def toStringList(self):
 		return (_qc.QDateTime(self.date).toString(), self.prod_code, self.prod_name, unicode(self.quantity), unicode(self.total))
 
@@ -117,17 +135,18 @@ def reportClient(times, root=None):
 			if not cli:
 				continue #ASDF WARNING!
 			ccode = cli.code
-			if ccode not in results:
+			if ccode in results:
+				res = results[ccode]
+			else:
 				res = ResultClient()
 				res.code = ccode
 				res.name = cli.name
 				res.ctype = cli.DOC_NAMES[cli.doc_type]
 				results[ccode] = res
 
-			r = results[ccode]
-			r.count += 1
-			r.prod_count += sum([i.quantity for i in b.items])
-			r.total_bought += b.total
+			res.count += 1
+			res.prod_count += sum([i.quantity for i in b.items])
+			res.total_bought += b.total
 	except Exception, e:
 		logger.exception('Error when generating the report\n'+str(e))
 	return results

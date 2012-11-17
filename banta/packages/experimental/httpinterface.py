@@ -226,8 +226,8 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 			#gets the start and end from the current date
 			rep_mod = _pack.optional.reports
 			reports = {
-				'category': rep_mod.reportCategory,
 				'product':rep_mod.reportProduct,
+				'category': rep_mod.reportCategory,
 				'user':rep_mod.reportUser,
 				'client':rep_mod.reportClient,
 				'move':rep_mod.reportMove,
@@ -240,7 +240,7 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 				res['headers'] = results.pop('_headers')
 				res['data'] = []
 				for i in results.values():
-					res['data'].append(i.toStringList())
+					res['data'].append(i.toList())
 
 
 class Server( _qc.QThread ):
