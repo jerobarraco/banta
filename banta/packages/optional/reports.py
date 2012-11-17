@@ -19,15 +19,88 @@ class ResultProduct:
 	count = 0
 	#and here
 	total_sold = 0.0
+	def toDict(self):
+		return dict(
+			zip(
+				('code', 'name', 'count', 'total'),
+				self.toStringList()
+			)
+		)
 	def toStringList(self):
 		return (self.code, self.name, str(self.count), str(self.total_sold))
 
-def reportProducts(times=list((0, 0)), root=None):
+class ResultCategory:
+	prod_count = 0
+	total_sold = 0.0
+	total_tax = 0.0
+	name = ""
+	def toStringList(self):
+		return (self.name, str(self.prod_count), str(self.total_sold), str(self.total_tax))
+
+class ResultUser:
+	#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
+	name = ""
+	count = 0
+	prod_count = 0
+	total_sold = 0.0
+	def toStringList(self):
+		return (self.name, str(self.count), str(self.prod_count), str(self.total_sold))
+
+def reportUser(times, root):
+	results = {'_headers':  ('Usuario', 'Facturas', 'Productos', 'Total Vendido')}
+	tmin, tmax = times
+	bills = root['bills']
+	try:
+		for b in bills.values(min = tmin, max = tmax):
+			user = b.user
+			if not user:
+				uname = "No especificado"
+			else:
+				uname = user.name
+			if uname not in results:
+				res = ResultUser()
+				res.name = uname
+				results[uname] = res
+
+			r = results[uname]
+			r.count += 1
+			r.prod_count += sum([i.quantity for i in b.items])
+			r.total_sold += b.total
+
+	except Exception, e:
+		logger.exception('Error when generating the report\n'+str(e))
+	return results
+
+def reportCategory(times, root):
+	results = {'_headers': ('Rubro', 'Productos', 'Total Vendido', 'Impuesto')}
+	tmin, tmax = times
+	bills = root['bills']
+	try:
+		for b in bills.values(min = tmin, max = tmax):
+			for i in b.items:
+				cat = i.product.category
+				if not cat:
+					cname = "Sin rubro"
+				else:
+					cname = cat.name
+				if cname not in results:
+					res = ResultCategory()
+					res.name = cname
+					results[cname] = res
+
+				r = results[cname]
+				r.prod_count += i.quantity
+				r.total_sold += i.price
+				r.total_tax += i.tax_total
+	except Exception, e:
+		logger.exception('Error when generating the report\n'+str(e))
+	return results
+
+def reportProduct(times=list((0, 0)), root=None):
 	"""Calculates a report of products and returns a list of results
 	times is a tuple with the min and max time (as int objects) (utils.dateTimeToInt)
 	root is the root of the database, this is needed so this report can be generated from several threads
 	"""
-	print (times, root)
 	tmin, tmax = times
 	#Define the collection
 	#define the header
@@ -71,9 +144,9 @@ class Reports(_packs.GenericModule):
 	def load(self):
 		#define here, so we use "self." notation, which means a bounded method, also avoid problems
 		self.REPORT_FUNCS = (
-			self._showCategories,
-			reportProducts,
-			self._showUsers,
+			reportCategory,
+			reportProduct,
+			reportUser,
 			self._showClients,
 			self._showMovements,
 			self._showBuys,
@@ -105,43 +178,6 @@ class Reports(_packs.GenericModule):
 			 The data format is the same as the key in move_list
  		"""
 		return _utils.getTimesFromFilters(self.widget.dMin, self.widget.dMax)
-
-	def _showCategories(self, times, root):
-		class Result:
-			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
-			prod_count = 0
-			total_sold = 0.0
-			total_tax = 0.0
-			name = ""
-			def toStringList(self):
-				return (self.name, str(self.prod_count), str(self.total_sold), str(self.total_tax))
-
-		results = {'headers': ('Rubro', 'Productos', 'Total Vendido', 'Impuesto')}
-
-		tmin, tmax = times #self.getTimesFromFilters()
-		#Define the collection
-		bills = root['bills']
-		try:
-			for b in bills.values(min = tmin, max = tmax):
-				for i in b.items:
-					cat = i.product.category
-					if not cat:
-						cname = "Sin rubro"
-					else:
-						cname = cat.name
-					if cname not in results:
-						res = Result()
-						res.name = cname
-						results[cname] = res
-
-					r = results[cname]
-					r.prod_count += i.quantity
-					r.total_sold += i.price
-					r.total_tax += i.tax_total
-		except Exception, e:
-			logger.exception('Error when generating the report\n'+str(e))
-
-		return results
 
 	@_qc.Slot()
 	def export(self):
@@ -199,45 +235,6 @@ class Reports(_packs.GenericModule):
 			#v.setRowCount(r+1)
 			for c, t in enumerate(res.toStringList()):
 				self.widget.v_list.setItem(r, c, _qg.QTableWidgetItem(t))
-
-	def _showUsers(self, times, root=None):
-		class Result:
-			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
-			name = ""
-			count = 0
-			prod_count = 0
-			total_sold = 0.0
-			def toStringList(self):
-				return (self.name, str(self.count), str(self.prod_count), str(self.total_sold))
-
-		#TODO Translate
-		headers  = ('Usuario', 'Facturas', 'Productos', 'Total Vendido')
-		v = self.widget.v_list
-		v.setColumnCount(len(headers))
-		v.setHorizontalHeaderLabels(headers)
-
-		v.setRowCount(0)
-		tmin, tmax = self.getTimesFromFilters()
-		#Define the collection
-		results = {}
-		#TODO use a worker thread
-		for b in _db.DB.bills.values(min = tmin, max = tmax):
-			user = b.user
-			if not user:
-				uname = "No especificado"
-			else:
-				uname = user.name
-			if uname not in results:
-				res = Result()
-				res.name = uname
-				results[uname] = res
-
-			r = results[uname]
-			r.count += 1
-			r.prod_count += sum([i.quantity for i in b.items])
-			r.total_sold += b.total
-
-		return results
 
 	def _showClients(self, times, root=None):
 		class Result:

@@ -220,13 +220,25 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 
 	def get(self, *args, **kwargs):
 		with JsonWriter(self) as res:
+			#try to get the start and end parameter
 			self.get_argument('start', 0)
-			start, today, end = _utils.currentMonthDates()
+			report_type = self.get_argument('type', 'product')
+			#gets the start and end from the current date
+			rep_mod = _pack.optional.reports
+			reports = {
+				'category': rep_mod.reportCategory,
+				'product':rep_mod.reportProduct,
+				'user':rep_mod.reportUser,
+			}
+			start, today, end = map(_utils.dateTimeToInt, _utils.currentMonthDates())
+			gen_report = reports[report_type]
 			with _db.DB.threaded() as root:
-
-				results = _pack.optional.reports.reportProducts((start, end), root)
+				results = gen_report((start, end), root)
 				res['headers'] = results.pop('_headers')
-				res['data'] = results.values()
+				res['data'] = []
+				for i in results.values():
+					res['data'].append(i.toStringList())
+
 
 class Server( _qc.QThread ):
 	def __init__(self, parent):
