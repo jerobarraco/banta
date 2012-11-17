@@ -46,6 +46,46 @@ class ResultUser:
 	def toStringList(self):
 		return (self.name, str(self.count), str(self.prod_count), str(self.total_sold))
 
+class Result:
+	code = ""
+	ctype = ""
+	name = ""
+	count = 0
+	prod_count = 0
+	total_bought = 0.0
+	def toStringList(self):
+		return (str(self.code), str(self.ctype), self.name, str(self.count), str(self.prod_count), str(self.total_bought))
+
+def reportClient(self, times, root=None):
+	results = {'_headers': ('Código', 'Tipo', 'Nombre', 'Compras', 'Items', 'Total Comprado') }
+	v = self.widget.v_list
+	v.setColumnCount(len(headers))
+	v.setHorizontalHeaderLabels(headers)
+
+	v.setRowCount(0)
+	tmin, tmax = self.getTimesFromFilters()
+	#Define the collection
+	results = {}
+	#TODO use a worker thread
+	for b in _db.DB.bills.values(min = tmin, max = tmax):
+		cli = b.client
+		if not cli:
+			continue #ASDF WARNING!
+		ccode = cli.code
+		if ccode not in results:
+			res = Result()
+			res.code = ccode
+			res.name = cli.name
+			res.ctype = cli.DOC_NAMES[cli.doc_type]
+			results[ccode] = res
+
+		r = results[ccode]
+		r.count += 1
+		r.prod_count += sum([i.quantity for i in b.items])
+		r.total_bought += b.total
+
+	return results
+
 def reportUser(times, root):
 	results = {'_headers':  ('Usuario', 'Facturas', 'Productos', 'Total Vendido')}
 	tmin, tmax = times
@@ -147,7 +187,7 @@ class Reports(_packs.GenericModule):
 			reportCategory,
 			reportProduct,
 			reportUser,
-			self._showClients,
+			reportClient,
 			self._showMovements,
 			self._showBuys,
 		)
@@ -235,47 +275,6 @@ class Reports(_packs.GenericModule):
 			#v.setRowCount(r+1)
 			for c, t in enumerate(res.toStringList()):
 				self.widget.v_list.setItem(r, c, _qg.QTableWidgetItem(t))
-
-	def _showClients(self, times, root=None):
-		class Result:
-			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
-			code = ""
-			ctype = ""
-			name = ""
-			count = 0
-			prod_count = 0
-			total_bought = 0.0
-			def toStringList(self):
-				return (str(self.code), str(self.ctype), self.name, str(self.count), str(self.prod_count), str(self.total_bought))
-		#TODO Translate
-		headers  = ('Código', 'Tipo', 'Nombre', 'Compras', 'Items', 'Total Comprado')
-		v = self.widget.v_list
-		v.setColumnCount(len(headers))
-		v.setHorizontalHeaderLabels(headers)
-
-		v.setRowCount(0)
-		tmin, tmax = self.getTimesFromFilters()
-		#Define the collection
-		results = {}
-		#TODO use a worker thread
-		for b in _db.DB.bills.values(min = tmin, max = tmax):
-			cli = b.client
-			if not cli:
-				continue #ASDF WARNING!
-			ccode = cli.code
-			if ccode not in results:
-				res = Result()
-				res.code = ccode
-				res.name = cli.name
-				res.ctype = cli.DOC_NAMES[cli.doc_type]
-				results[ccode] = res
-
-			r = results[ccode]
-			r.count += 1
-			r.prod_count += sum([i.quantity for i in b.items])
-			r.total_bought += b.total
-
-		return results
 
 	def _showMovements(self, times, root = None):
 		class Result:
