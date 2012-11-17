@@ -229,6 +229,9 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 				'category': rep_mod.reportCategory,
 				'product':rep_mod.reportProduct,
 				'user':rep_mod.reportUser,
+				'client':rep_mod.reportClient,
+				'move':rep_mod.reportMove,
+				'buy':rep_mod.reportBuy
 			}
 			start, today, end = map(_utils.dateTimeToInt, _utils.currentMonthDates())
 			gen_report = reports[report_type]

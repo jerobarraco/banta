@@ -46,7 +46,7 @@ class ResultUser:
 	def toStringList(self):
 		return (self.name, str(self.count), str(self.prod_count), str(self.total_sold))
 
-class Result:
+class ResultClient:
 	code = ""
 	ctype = ""
 	name = ""
@@ -56,34 +56,80 @@ class Result:
 	def toStringList(self):
 		return (str(self.code), str(self.ctype), self.name, str(self.count), str(self.prod_count), str(self.total_bought))
 
-def reportClient(self, times, root=None):
+class ResultMove:
+	date = ""
+	code = ""
+	name = ""
+	diff = 0
+	reason = ""
+	def toStringList(self):
+		return (_qc.QDateTime(self.date).toString(), self.code, self.name, str(self.diff), self.reason)
+
+class ResultBuy:
+	date = 0
+	prod_code = ""
+	prod_name = ""
+	quantity = 0.0
+	total = 0.0
+	def toStringList(self):
+		return (_qc.QDateTime(self.date).toString(), self.prod_code, self.prod_name, unicode(self.quantity), unicode(self.total))
+
+def reportBuy(times, root):
+	results = {'_headers':(u'Fecha', u'Código', u'Producto', u'Cantidad', u'Total')}
+	tmin, tmax = times
+	try:
+		for m in _db.DB.buys.values(min = tmin, max = tmax):
+			r = ResultBuy()
+			r.date = m.date
+			r.prod_code = m.product.code
+			r.prod_name = m.product.name
+			r.quantity =  m.quantity
+			r.total = m.total
+			results[r.date] = r
+	except Exception, e:
+		logger.exception('Error when generating the report\n'+str(e))
+	return results
+
+def reportMove(times, root):
+	results = {'_headers': ('Fecha', 'Código', 'Producto', 'Diferencia', 'Razón')}
+	tmin, tmax = times
+	try:
+		moves = root['moves']
+		for m in moves.values(min = tmin, max = tmax):
+			r = ResultMove()
+			r.date = m.date
+			r.code = m.product.code
+			r.name = m.product.name
+			r.diff =  m.diff
+			r.reason = m.reason
+			results[r.date] = r
+	except Exception, e:
+		logger.exception('Error when generating the report\n'+str(e))
+	return results
+
+def reportClient(times, root=None):
 	results = {'_headers': ('Código', 'Tipo', 'Nombre', 'Compras', 'Items', 'Total Comprado') }
-	v = self.widget.v_list
-	v.setColumnCount(len(headers))
-	v.setHorizontalHeaderLabels(headers)
+	tmin, tmax = times
+	try:
+		bills = root['bills']
+		for b in bills.values(min = tmin, max = tmax):
+			cli = b.client
+			if not cli:
+				continue #ASDF WARNING!
+			ccode = cli.code
+			if ccode not in results:
+				res = ResultClient()
+				res.code = ccode
+				res.name = cli.name
+				res.ctype = cli.DOC_NAMES[cli.doc_type]
+				results[ccode] = res
 
-	v.setRowCount(0)
-	tmin, tmax = self.getTimesFromFilters()
-	#Define the collection
-	results = {}
-	#TODO use a worker thread
-	for b in _db.DB.bills.values(min = tmin, max = tmax):
-		cli = b.client
-		if not cli:
-			continue #ASDF WARNING!
-		ccode = cli.code
-		if ccode not in results:
-			res = Result()
-			res.code = ccode
-			res.name = cli.name
-			res.ctype = cli.DOC_NAMES[cli.doc_type]
-			results[ccode] = res
-
-		r = results[ccode]
-		r.count += 1
-		r.prod_count += sum([i.quantity for i in b.items])
-		r.total_bought += b.total
-
+			r = results[ccode]
+			r.count += 1
+			r.prod_count += sum([i.quantity for i in b.items])
+			r.total_bought += b.total
+	except Exception, e:
+		logger.exception('Error when generating the report\n'+str(e))
 	return results
 
 def reportUser(times, root):
@@ -136,7 +182,7 @@ def reportCategory(times, root):
 		logger.exception('Error when generating the report\n'+str(e))
 	return results
 
-def reportProduct(times=list((0, 0)), root=None):
+def reportProduct(times, root):
 	"""Calculates a report of products and returns a list of results
 	times is a tuple with the min and max time (as int objects) (utils.dateTimeToInt)
 	root is the root of the database, this is needed so this report can be generated from several threads
@@ -188,8 +234,8 @@ class Reports(_packs.GenericModule):
 			reportProduct,
 			reportUser,
 			reportClient,
-			self._showMovements,
-			self._showBuys,
+			reportMove,
+			reportBuy,
 		)
 		self.widget = self.app.uiLoader.load(":/data/ui/reports.ui")
 		self.widget.tr = _utils.unitr(self.widget.trUtf8)
@@ -275,61 +321,4 @@ class Reports(_packs.GenericModule):
 			#v.setRowCount(r+1)
 			for c, t in enumerate(res.toStringList()):
 				self.widget.v_list.setItem(r, c, _qg.QTableWidgetItem(t))
-
-	def _showMovements(self, times, root = None):
-		class Result:
-			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
-			date = ""
-			code = ""
-			name = ""
-			diff = 0
-			reason = ""
-			def toStringList(self):
-				return (_qc.QDateTime(self.date).toString(), self.code, self.name, str(self.diff), self.reason)
-
-		headers  = ('Fecha', 'Código', 'Producto', 'Diferencia', 'Razón')
-		v = self.widget.v_list
-		v.setColumnCount(len(headers))
-		v.setHorizontalHeaderLabels(headers)
-
-		v.setRowCount(0)
-		tmin, tmax = self.getTimesFromFilters()
-		results ={}
-		for m in _db.DB.moves.values(min = tmin, max = tmax):
-			r = Result()
-			r.date = m.date
-			r.code = m.product.code
-			r.name = m.product.name
-			r.diff =  m.diff
-			r.reason = m.reason
-			results[r.date] = r
-		return results
-
-	def _showBuys(self, times, root=None):
-		class Result:
-			#Inner classes sucks but is better than other approach. also this wont (and must not) be used any place else
-			date = 0
-			prod_code = u""
-			prod_name = u""
-			quantity = 0.0
-			total = 0.0
-			def toStringList(self):
-				return (_qc.QDateTime(self.date).toString(), self.prod_code, self.prod_name, unicode(self.quantity), unicode(self.total))
-
-		headers  = (u'Fecha', u'Código', u'Producto', u'Cantidad', u'Total')
-		v = self.widget.v_list
-		v.setColumnCount(len(headers))
-		v.setHorizontalHeaderLabels(headers)
-
-		v.setRowCount(0)
-		tmin, tmax = self.getTimesFromFilters()
-		results ={}
-		for m in _db.DB.buys.values(min = tmin, max = tmax):
-			r = Result()
-			r.date = m.date
-			r.prod_code = m.product.code
-			r.prod_name = m.product.name
-			r.quantity =  m.quantity
-			r.total = m.total
-			results[r.date] = r
-		return results
+	#end
