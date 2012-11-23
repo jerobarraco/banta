@@ -5,7 +5,6 @@
 # .qml as extension instead of .py. You can override
 # this by setting an explicit filename here.
 import PySide.QtCore as _qc
-import PySide.QtDeclarative
 import banta.packages as _pack
 #todo add in the pyinstaller the dll for particle system
 class QMLSame(_pack.GenericModule):
@@ -16,6 +15,7 @@ class QMLSame(_pack.GenericModule):
 		super(QMLSame, self).__init__(app)
 
 	def load(self):
+		import PySide.QtDeclarative
 		#the reader will fetch the news from internet, or fail-to if there's no internet
 		self.f = PySide.QtDeclarative.QDeclarativeView()
 		self.f.setSource("qrc:same/samegame.qml")
@@ -27,7 +27,6 @@ class QMLSame(_pack.GenericModule):
 		#self.app.window.acSameGame.setShortcutContext(_qc.Qt.ApplicationShortcut)
 		self.app.window.acSameGame.triggered.connect(self.show)
 		self.f.engine().quit.connect(self.f.close)
-
 
 	@_qc.Slot()
 	def show(self):
