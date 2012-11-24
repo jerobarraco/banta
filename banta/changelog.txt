@@ -6,6 +6,9 @@ and easy_install
 )
 
 MoonGate http://MoonGate.com.ar
+1.19
+	- I.V.A. para clientes exentos
+	- Mejora en el webservice, mayor velocidad y confiabilidad. (API disponible para desarrolladores)
 
 1.18
 	- Mejorado el cuadro de dialogo para exportar listado de productos como .csv (Excel)

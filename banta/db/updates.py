@@ -11,6 +11,7 @@ import BTrees.IOBTree as _io
 import persistent.list as _pl
 #when we can run into cyclic imports (or unloaded parent module problem) is always better to use "from" and only then
 from banta.db import models as _mods
+#TODO pasar los updates estos a otro archivo y sacarlos de aca
 
 def v1(root):
 	import banta.utils

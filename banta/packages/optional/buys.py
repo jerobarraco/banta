@@ -51,6 +51,8 @@ class Buys(_pack.GenericModule):
 		#Beware, a new buy triggers a new movement
 		b = _db.models.Buy(self.prod, self.units)
 		_db.DB.commit()
+		#todo, update the cell in the view
+		#TODO VERY IMPORTANT!!! SET THE CODE IN THE WINDOW!
 
 	@_qc.Slot(int)
 	def prodChanged(self, i):

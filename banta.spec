@@ -8,7 +8,7 @@ a = Analysis(
 		],
         hiddenimports=[
 			'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
-			'zope.event', 'zope.interface', 'ZEO'
+			'zope.event', 'zope.interface', 'ZEO', 'tornado'
 		],
         #hookspath='C:\\Svn\\moongate\\bantapkg\\hooks'
 	)

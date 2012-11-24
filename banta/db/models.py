@@ -149,7 +149,8 @@ class Item(_per.Persistent):
 		#"self.product and" will prevent checking when there's no product set
 		prod_exempt = self.product and (self.product.tax_type == self.product.TYPE_EXEMPT)
 
-		if self.client_exempt or prod_exempt:
+		#if self.client_exempt or prod_exempt:
+		if prod_exempt:
 			self.tax = 0.0
 		elif self.reducible:
 			self.tax = TAX_REDUCED
