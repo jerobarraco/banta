@@ -55,7 +55,7 @@ class JsonWriter(object):
 		else:
 			error = str(exc_val)
 			logger.exception(error)
-			self.res['exception'] = error
+			self.res['error'] = error
 			self.res['success'] = False
 
 		self.ins.set_header('Content-Type', 'application/json; charset=utf-8')
