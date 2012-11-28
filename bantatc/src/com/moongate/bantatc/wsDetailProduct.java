@@ -29,6 +29,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+import java.net.URLEncoder;
 import org.apache.http.client.methods.HttpGet;
 
 public class wsDetailProduct extends AsyncTask<Adm_Pro, Void, Product>{
@@ -73,12 +74,13 @@ public class wsDetailProduct extends AsyncTask<Adm_Pro, Void, Product>{
 				//this is completely inneficient, storing the whole string in memory sucks :D
 				StringBuilder builder = new StringBuilder();
 				HttpClient client = new DefaultHttpClient();
+				client.getParams().setParameter("http.protocol.content-charset", "UTF-8");
 				//harcoded urls sucks too, we need to create a new url.
 				//we will probably have to let the user put the ip of the server
 				Uri.Builder b = Uri.parse("http://"+this.ip+":8080").buildUpon();
 				b.path("/prods");
-				b.appendQueryParameter("code", this.code);
-				String url = b.build().toString();
+				b.appendQueryParameter("search_code", this.code );
+				String url =b.build().toString();
 				
 				HttpGet httpGet = new HttpGet(url);
 				try {

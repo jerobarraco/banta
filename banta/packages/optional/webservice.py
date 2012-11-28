@@ -71,6 +71,7 @@ class BasicAuthHandler(tornado.web.RequestHandler):
 		print ('aut', scheme, sep, token)
 		if scheme.lower() == 'basic':
 			username, a, pwd = token.decode('base64').partition(':')
+			print ('user', username, pwd)
 			#base64.decodestring(token).partition(':')
 			#
 			# if pwd matches user:
@@ -78,14 +79,13 @@ class BasicAuthHandler(tornado.web.RequestHandler):
 				if user.name == username:
 					#and user.password == pwd
 					return user
-			self.set_status(401)
-			self.set_header('WWW-Authenticate:','basic realm="Banta"')
-			raise Exception("Wrong username or password")
+			#self.set_status(401)
+			#self.set_header('WWW-Authenticate:','basic realm="Banta"')
+			#raise Exception("Wrong username or password")
 
 		self.set_status(500)
 		self.set_header('WWW-Authenticate', 'basic realm="Banta"')
 		raise Exception("Schema not supported, only Basic.")
-		return None
 
 class HProducts(BasicAuthHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")

@@ -1,5 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_settings"
-        android:title="@string/menu_settings"
-        android:orderInCategory="100" />
+	<item 
+		android:id="@+id/mpmenu_refresh"
+		android:icon="@drawable/ic_menu_refresh"
+		android:title="@string/mpmenu_refresh"
+	/>
+	<item 
+	   
+		android:id="@+id/mpmenu_change"
+		android:icon="@drawable/ic_menu_orden"
+		android:title="@string/mpmenu_change"
+	/>
+	<item 
+			android:id="@+id/mpmenu_by_name"
+			android:icon="@drawable/ic_menu_nombre"
+			android:title="@string/mpmenu_by_name"
+		/>
+	<item android:id="@+id/mpmenu_by_price" 
+	      android:title="@string/mpmenu_by_price" 
+	      android:icon="@drawable/ic_menu_precio"></item>
+	<item android:id="@+id/mpmenu_by_stock" android:title="@string/mpmenu_by_stock" android:icon="@drawable/ic_menu_stock"></item>
+	<item android:id="@+id/mpmenu_by_code" android:title="@string/mpmenu_by_code" android:icon="@drawable/ic_menu_codigo"></item>
 </menu>

@@ -494,6 +494,7 @@ class Provider(_per.Persistent):
 
 class User(_per.Persistent):
 	name = ""
+	password = ""
 	def __init__(self, name=""):
 		_per.Persistent.__init__(self)
 		self.name = name

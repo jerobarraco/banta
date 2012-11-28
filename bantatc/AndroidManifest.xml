@@ -1,15 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.moongate.bantatc"
-    android:versionCode="6"
-    android:versionName="0.6" >
+    android:versionCode="8"
+    android:versionName="0.8" >
 		<uses-permission 
 			android:name="android.permission.INTERNET" />
+
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
 
     <application
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/bantatc2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -20,8 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-				<activity android:name=".Adm_Pro"></activity>
+		<activity android:name=".Adm_Pro"></activity>
         <activity android:name=".mantenedor_pro"></activity>
+		<activity android:name=".reportes"></activity>
+		<activity android:name=".Graficos"></activity>
     </application>
 
 </manifest>

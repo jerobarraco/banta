@@ -1,11 +1,12 @@
 package com.moongate.bantatc;
-import com.moongate.bantatc.R;
 
+import java.util.regex.Pattern;
+import com.moongate.bantatc.R;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Adm_Pro extends Activity {
 	public String search_code;
@@ -16,10 +17,12 @@ public class Adm_Pro extends Activity {
 	public Double price;
 	public String ip;
 	
+	Pattern pattern = Pattern.compile("^([A-Za-z]|[0-9])+$");
 	TextView cdt_code;
 	TextView cdt_name;
 	TextView cdt_price;
 	TextView cdt_stock;
+	
 /**
   * Called when the activity is first created.
   */
@@ -29,14 +32,14 @@ public class Adm_Pro extends Activity {
   setContentView(R.layout.adm_pro);
 	Bundle extras = getIntent().getExtras();
 	
-	if(extras ==null) {
+	if(extras == null) {
 		search_code = "";
 		old_code = "";
 		code = "";
 		name = "";
 		price = 0d;
 		stock = 0d;
-		ip = "192.168.1.99";
+		ip = getResources().getString(R.string.default_ip);
 	}
 	else{
 		search_code = extras.getString("search_code");
@@ -48,10 +51,10 @@ public class Adm_Pro extends Activity {
 		ip = extras.getString("ip");
 	}
 	
-	cdt_code = (TextView) this.findViewById(com.moongate.bantatc.R.id.Txt_codigo);
-	cdt_name = (TextView) this.findViewById(com.moongate.bantatc.R.id.txt_nombre);
-	cdt_price = (TextView) this.findViewById(com.moongate.bantatc.R.id.txt_precio);
-	cdt_stock = (TextView) this.findViewById(com.moongate.bantatc.R.id.txt_stock);
+	cdt_code = (TextView) this.findViewById(R.id.Txt_codigo);
+	cdt_name = (TextView) this.findViewById(R.id.txt_nombre);
+	cdt_price = (TextView) this.findViewById(R.id.txt_precio);
+	cdt_stock = (TextView) this.findViewById(R.id.txt_stock);
 	
 	this.cargar();
  }
@@ -61,14 +64,21 @@ public class Adm_Pro extends Activity {
 		old_code = code ; //esto es por si el user cambio el codigo
 		code = cdt_code.getText().toString();
 		name = cdt_name.getText().toString();
-		//y lo mismo con las otras variables
 		stock = Double.valueOf(cdt_stock.getText().toString());
 		price = Double.valueOf(cdt_price.getText().toString());
+		if (! pattern.matcher(code).find()){
+			   Toast.makeText(this, "El codigo solo admite letras de la A a la Z y numeros", Toast.LENGTH_LONG).show();
+			   return ;
+		}
+		if (name.equals("")){
+		  Toast.makeText(this, "No puede estar vacio el nombre", Toast.LENGTH_LONG).show();
+		  return;
+		}
+		//finalmente si no hubo problemas, llamamos al webservice que enviara los datos
 	  new wsModProducts().execute(this);
 	}
 	public void eliminar(View v){
 		new wsDelProducts().execute(this);
-		
 	}
 	public void cargar(){
 		new wsDetailProduct().execute(this);

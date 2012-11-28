@@ -14,7 +14,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 				eIP = (EditText) findViewById(R.id.editText);
-				eIP.setText("192.168.1.99");
     }
 
     @Override
@@ -28,6 +27,12 @@ public class MainActivity extends Activity {
 			mantenedorP.putExtra("ip", eIP.getText().toString() );
     	startActivity(mantenedorP);
     }
-    
-    
+    public void graficos(View v) {
+    	Intent reportP = new Intent(MainActivity.this, Graficos.class);
+			reportP.putExtra("ip", eIP.getText().toString());
+    	startActivity(reportP);
+    }
+    public void reportes(View v){
+			
+		}
 }

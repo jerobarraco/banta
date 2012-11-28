@@ -1,49 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ListView
-        android:id="@+id/listView1"
-        android:layout_width="278dp"
-        android:layout_height="257dp"
-        android:layout_x="23dp"
-        android:layout_y="204dp" >
-    </ListView>
+    <Button
+        android:id="@+id/Btn_Scan"
+        android:layout_width="226dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:onClick="escanear"
+        android:text="Escanear" />
 
     <TextView
         android:id="@+id/cdHttp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="28dp"
-        android:layout_y="170dp"
-        android:text="Cargando Datos" />
+        android:layout_below="@+id/Btn_Scan"
+        android:layout_marginTop="42dp"
+        android:text="Cargando datos..." />
 
     <AutoCompleteTextView
         android:id="@+id/ProductCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="10dp"
-        android:layout_y="79dp"
-        android:ems="10" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Btn_Scan"
+        android:ems="10" >
 
-    <Button
-        android:id="@+id/Btn_Scan"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_x="50dp"
-        android:layout_y="16dp"
-        android:onClick="escanear"
-        android:text="Escanear" />
+        <requestFocus />
+    </AutoCompleteTextView>
 
     <Button
         android:id="@+id/Btn_Buscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="248dp"
-        android:layout_y="76dp"
+        android:layout_alignBaseline="@+id/ProductCode"
+        android:layout_alignBottom="@+id/ProductCode"
+        android:layout_marginLeft="18dp"
+        android:layout_toRightOf="@+id/ProductCode"
         android:gravity="center"
         android:onClick="buscar"
         android:text="Buscar" />
 
-</AbsoluteLayout>
+
+
+    <AbsoluteLayout
+        android:id="@+id/AbsoluteLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="287dp"
+            android:layout_height="330dp"
+            android:layout_marginBottom="20dp"
+            android:layout_x="-2dp"
+            android:layout_y="131dp"
+            android:headerDividersEnabled="true" >
+            
+        </ListView>
+
+    </AbsoluteLayout>
+
+</RelativeLayout>
