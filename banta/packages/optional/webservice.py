@@ -7,8 +7,10 @@ from __future__ import absolute_import, print_function, unicode_literals
 import logging
 logger = logging.getLogger(__name__)
 
+import base64
 import os
 import contextlib
+
 from operator import itemgetter, attrgetter
 try:
 	from cStringIO import StringIO
@@ -63,9 +65,30 @@ class JsonWriter(object):
 		self.ins.write(json)
 		return True
 
-class HProducts(tornado.web.RequestHandler, _qc.QObject):
-	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT",
-											 "OPTIONS")
+class BasicAuthHandler(tornado.web.RequestHandler):
+	def get_current_user(self, root):
+		scheme, sep, token= self.request.headers.get('Authorization', '').partition(' ')
+		print ('aut', scheme, sep, token)
+		if scheme.lower() == 'basic':
+			username, a, pwd = token.decode('base64').partition(':')
+			#base64.decodestring(token).partition(':')
+			#
+			# if pwd matches user:
+			for user in root['users']:
+				if user.name == username:
+					#and user.password == pwd
+					return user
+			self.set_status(401)
+			self.set_header('WWW-Authenticate:','basic realm="Banta"')
+			raise Exception("Wrong username or password")
+
+		self.set_status(500)
+		self.set_header('WWW-Authenticate', 'basic realm="Banta"')
+		raise Exception("Schema not supported, only Basic.")
+		return None
+
+class HProducts(BasicAuthHandler, _qc.QObject):
+	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
 	changed = _qc.Signal(int)
 	deleteProduct = _qc.Signal(int)
 
@@ -109,6 +132,7 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 	def _getProductList(self):
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
+
 				start = int(self.get_argument('start', 0))
 				limit = int(self.get_argument('limit', 100))
 				search_name = self.get_argument('search_name', "").lower()
@@ -128,8 +152,9 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 
 				prod_list = products.values()
 
-				if order_by == 'stock':
-					prod_list = sorted(prod_list, key=attrgetter('stock'), reverse=reversed)
+				if order_by in ('stock', 'name', 'price', 'code'):
+					prod_list = sorted(prod_list, key=attrgetter(order_by), reverse=reversed)
+
 
 				def filter_name(p):
 					return search_name in p.name.lower()
@@ -147,6 +172,8 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 		row = -1
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
+				user = self.get_current_user(root)
+				print('user ', user)
 				#print ("post", threading.currentThread(), threading.activeCount())
 
 				code = self.get_argument('code', "")
@@ -160,7 +187,6 @@ class HProducts(tornado.web.RequestHandler, _qc.QObject):
 				if (old_code.strip() == "") or (old_code not in root['products']):
 					#inserting
 					prod = _db.models.Product(code)
-
 				else:
 					#modifying
 					#notice "old_code"

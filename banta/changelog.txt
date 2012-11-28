@@ -6,6 +6,14 @@ and easy_install
 )
 
 MoonGate http://MoonGate.com.ar
+
+TC 0.9
+	- UTF8 modificar y al buscar
+	- Codigo de producto solo alfanumerico.
+	- Nombre de producto no puede estar vacio
+	- Password en BantaTC
+	- Digito 9 en la IP
+
 1.19
 	- I.V.A. para clientes exentos
 	- Mejora en el webservice, mayor velocidad y confiabilidad. (API disponible para desarrolladores)
