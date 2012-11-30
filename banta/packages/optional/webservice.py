@@ -50,7 +50,6 @@ class JsonWriter(object):
 
 	def __enter__(self):
 		self.res = res = {'success':False}
-		self.ins.onAct.emit(0)
 		return self.res
 
 	def __exit__(self, exc_type, exc_val, exc_tb):
@@ -287,11 +286,18 @@ class Server( _qc.QThread ):
 		self.parent = parent
 		#notice this is in the main thread
 		self.lbs = self.parent.app.window.lb_server
+		self.blue = _qg.QPixmap(":/same/SamegameCore/pics/blueStone.png")
+		self.blue = self.blue.scaled(self.blue.size()/2.0)
 
-		self.blue_star = _qg.QPixmap(":/same/SamegameCore/pics/blueStar.png")
-		self.red_star = _qg.QPixmap(":/same/SamegameCore/pics/redStar.png")
-		self.green_star = _qg.QPixmap(":/same/SamegameCore/pics/greenStar.png")
-		self.pixs = [self.green_star, self.red_star]
+		self.red = _qg.QPixmap(":/same/SamegameCore/pics/redStone.png")
+		self.red = self.red.scaled(self.red.size()/2.0)
+
+		self.green = _qg.QPixmap(":/same/SamegameCore/pics/greenStone.png")
+		self.green = self.green.scaled(self.green.size()/2.0)
+
+		self.yellow = _qg.QPixmap(":/same/SamegameCore/pics/yellowStone.png")
+		self.yellow = self.yellow.scaled(self.yellow.size()/2.0)
+		self.pixs = [self.green, self.red, self.yellow, self.blue]
 		self.timer = _qc.QTimer()
 		self.timer.setInterval(500)
 		self.timer.setSingleShot(True)
@@ -313,7 +319,7 @@ class Server( _qc.QThread ):
 		if old<new:
 			#cuold be (.., old, new-1), but it could crash the whole banta if there's an error
 			#either way you can only add one item at a time
-			#and SHOULD.. 
+			#and SHOULD..
 			m.beginInsertRows(_qc.QModelIndex(), old, old)
 			m.endInsertRows()
 		else:
@@ -334,7 +340,7 @@ class Server( _qc.QThread ):
 	@_qc.Slot()
 	def blingOut(self):
 		#is single shot so we dont need to stop the timer
-		self.lbs.setPixmap(self.blue_star)
+		self.lbs.setPixmap(self.blue)
 
 	def run(self, *args, **kwargs):
 		#print (threading.currentThread(), threading.activeCount(), )

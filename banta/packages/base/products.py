@@ -341,7 +341,6 @@ class ProductModel(_qc.QAbstractTableModel):
 			self.endInsertRows()
 			position+=1
 		_db.DB.commit()
-
 		return True
 
 	def removeRows(self, position, rows, index=None):
