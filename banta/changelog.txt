@@ -23,6 +23,13 @@ TC 0.9
 	- Ver reportes en modo Gráfico y Reportes
 	- Menú en administrador de productos que permite elegir forma de ordenar y dirección.
 	- Lista que carga dinámicamente.
+	- Velocidad de carga y consumo de memoria mejorada dramáticamente
+	- Mejor manejo de errores
+
+1.20
+	- Mejorada la velocidad del webservice
+	- Actualizadas bibliotecas internas
+	- Indicador de actividad de red
 
 1.19
 	- I.V.A. para clientes exentos

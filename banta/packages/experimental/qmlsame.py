@@ -13,12 +13,13 @@ class QMLSame(_pack.GenericModule):
 	products = _qc.Signal(int)
 	def __init__(self, app):
 		super(QMLSame, self).__init__(app)
+		self.app.window.acSameGame.setEnabled(False)
 
 	def load(self):
 		import PySide.QtDeclarative
 		#the reader will fetch the news from internet, or fail-to if there's no internet
 		self.f = PySide.QtDeclarative.QDeclarativeView()
-		self.f.setSource("qrc:same/samegame.qml")
+		self.f.setSource("qrc:/same/samegame.qml")
 		self.f.setWindowTitle("Iguales")
 		self.f.setWindowIcon(self.app.window.windowIcon())
 		#none of this works
@@ -26,6 +27,7 @@ class QMLSame(_pack.GenericModule):
 		#self.app.window.acSameGame.setShortcut(self.key_sequence)
 		#self.app.window.acSameGame.setShortcutContext(_qc.Qt.ApplicationShortcut)
 		self.app.window.acSameGame.triggered.connect(self.show)
+		self.app.window.acSameGame.setEnabled(True)
 		self.f.engine().quit.connect(self.f.close)
 
 	@_qc.Slot()

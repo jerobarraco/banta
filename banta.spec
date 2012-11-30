@@ -8,7 +8,8 @@ a = Analysis(
 		],
         hiddenimports=[
 			'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
-			'zope.event', 'zope.interface', 'ZEO', 'tornado'
+			'zope.event', 'zope.interface', 'ZEO', 'tornado', 'zope',
+			'zc.lockfile',
 		],
         #hookspath='C:\\Svn\\moongate\\bantapkg\\hooks'
 	)
@@ -18,8 +19,8 @@ exe = EXE(
         a.scripts + [('O', '', 'OPTION')],
         exclude_binaries=1,
         name=os.path.join('build\\pyi.win32\\banta', 'banta.exe'), 
-        debug=False,
-        console=False,
+        debug=True,
+        console=True,
         strip=None,
         upx=False,
 		icon='banta\\ico.ico'

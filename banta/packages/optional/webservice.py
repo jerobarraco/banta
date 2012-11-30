@@ -19,6 +19,7 @@ except:
 
 # 3rd party
 import PySide.QtCore as _qc
+import PySide.QtGui as _qg
 import tornado
 import tornado.web
 import tornado.escape
@@ -47,22 +48,25 @@ class JsonWriter(object):
 	def __init__(self, instance=None):
 		self.ins = instance
 
-	def __enter__(self, instance=None):
+	def __enter__(self):
 		self.res = res = {'success':False}
+		self.ins.onAct.emit(0)
 		return self.res
 
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		if exc_type is None:
-			self.res['success']= True
+			self.res['success'] = True
+			act = 0
 		else:
 			error = str(exc_val)
 			logger.exception(error)
 			self.res['error'] = error
 			self.res['success'] = False
-
+			act = 1
 		self.ins.set_header('Content-Type', 'application/json; charset=utf-8')
 		json = tornado.escape.json_encode(self.res)
 		self.ins.write(json)
+		self.ins.onAct.emit(act)
 		return True
 
 class BasicAuthHandler(tornado.web.RequestHandler):
@@ -92,7 +96,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
 	changed = _qc.Signal(int)
 	deleteProduct = _qc.Signal(int)
-
+	onAct = _qc.Signal(int)
 	def initialize(self, server_thread):
 		self.server_thread = server_thread
 		self.changed.connect(self.server_thread.syncDB, _qc.Qt.QueuedConnection)
@@ -100,6 +104,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 		#beause of signals needed to be emited and models and modelproxies
 		#notice the blocking queued
 		self.deleteProduct.connect(self.server_thread.deleteProduct, _qc.Qt.QueuedConnection)
+		self.onAct.connect(self.server_thread.bling, _qc.Qt.QueuedConnection)
 
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
@@ -173,7 +178,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 		with JsonWriter(self) as res, _utils.Timer("post"):
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
-				print('user ', user)
+				print('user: ', user)
 				#print ("post", threading.currentThread(), threading.activeCount())
 
 				code = self.get_argument('code', "").strip()
@@ -194,7 +199,11 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 
 				prod.setName(self.get_argument ('name', ""))
 				prod.price = float(self.get_argument('price', 0.0))
-				prod.stock = float(self.get_argument('stock', 0.0))
+				#if stock differs add a Move
+				nstock = float(self.get_argument('stock', 0.0))
+				if nstock!= prod.stock:
+					print ("Stock changed!")
+				prod.stock = nstock
 
 				#trying to re-code or insert
 				if (code != old_code):
@@ -240,9 +249,10 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 
 class Reports(tornado.web.RequestHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
-
+	onAct = _qc.Signal(int)
 	def initialize(self, server_thread):
 		self.server_thread = server_thread
+		self.onAct.connect(self.server_thread.bling, _qc.Qt.QueuedConnection)
 
 	def get(self, *args, **kwargs):
 		with JsonWriter(self) as res, _utils.Timer('reports'):
@@ -275,6 +285,18 @@ class Server( _qc.QThread ):
 	def __init__(self, parent):
 		_qc.QThread.__init__(self)
 		self.parent = parent
+		#notice this is in the main thread
+		self.lbs = self.parent.app.window.lb_server
+
+		self.blue_star = _qg.QPixmap(":/same/SamegameCore/pics/blueStar.png")
+		self.red_star = _qg.QPixmap(":/same/SamegameCore/pics/redStar.png")
+		self.green_star = _qg.QPixmap(":/same/SamegameCore/pics/greenStar.png")
+		self.pixs = [self.green_star, self.red_star]
+		self.timer = _qc.QTimer()
+		self.timer.setInterval(500)
+		self.timer.setSingleShot(True)
+		self.timer.timeout.connect(self.blingOut)
+		self.blingOut()
 
 	@_qc.Slot(int)
 	def syncDB(self, row):
@@ -283,19 +305,41 @@ class Server( _qc.QThread ):
 		_db.DB.abort()
 		_db.DB.cnx.sync()
 		m = _pack.base.products.MODEL
+		old = m.rowCount()
 		m._setMaxRows()
+		new = m.rowCount()
 		start = m.index(row, 0)
-		end = m.index(row, m.columnCount())
-		m.dataChanged.emit(start, end)
+		end = m.index(row+1, m.columnCount())
+		if old<new:
+			#cuold be (.., old, new-1), but it could crash the whole banta if there's an error
+			#either way you can only add one item at a time
+			#and SHOULD.. 
+			m.beginInsertRows(_qc.QModelIndex(), old, old)
+			m.endInsertRows()
+		else:
+			m.dataChanged.emit(start, end)
+
 
 	@_qc.Slot(int)
 	def deleteProduct(self, row):
 		model = _pack.base.products.MODEL
 		model.removeRows(row, 1)
 
+	@_qc.Slot(int)
+	def bling(self, activity=0):
+		self.timer.stop()
+		self.lbs.setPixmap(self.pixs[activity])
+		self.timer.start()
+
+	@_qc.Slot()
+	def blingOut(self):
+		#is single shot so we dont need to stop the timer
+		self.lbs.setPixmap(self.blue_star)
+
 	def run(self, *args, **kwargs):
 		#print (threading.currentThread(), threading.activeCount(), )
 		#pth = os.path.split(__file__)[0]
+
 		pth = os.getcwd()
 		pth = os.path.join(pth, 'static')
 		application = tornado.web.Application(
@@ -307,7 +351,7 @@ class Server( _qc.QThread ):
 			gzip = True,
 			static_path= pth,
 		)
-		application.listen(8080)
+		application.listen(8080, '0.0.0.0')
 		tornado.ioloop.IOLoop.instance().start()
 
 class WebService(_pack.GenericModule):
@@ -317,3 +361,4 @@ class WebService(_pack.GenericModule):
 	def load(self):
 		self.server = Server(self)
 		self.server.start()
+

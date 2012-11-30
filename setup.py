@@ -41,7 +41,7 @@ setup (
   #scripts = ['bin/banta.py'],
   # Declare your packages' dependencies here, for eg:
   #transaction is needed in 1.2 for mac
-  install_requires=['transaction==1.2.0', 'ZODB3', 'pyserial', 'feedparser', 'pyside', 'tornado'],
+  install_requires=['transaction>=1.2.0', 'ZODB3', 'pyserial', 'feedparser', 'pyside', 'tornado'],
   provides = ['banta'],
   package_data={'':
 		['gpl-3.0.txt', 'changelog.txt', 'user.qss']
