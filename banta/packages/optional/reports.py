@@ -19,13 +19,6 @@ class ResultProduct:
 	count = 0
 	#and here
 	total_sold = 0.0
-	def toDict(self):
-		return dict(
-			zip(
-				('code', 'name', 'count', 'total'),
-				self.toStringList()
-			)
-		)
 
 	def toList(self):
 		return self.name, self.total_sold
@@ -40,6 +33,7 @@ class ResultCategory:
 	name = ""
 	def toList(self):
 		return self.name, self.total_sold
+
 	def toStringList(self):
 		return (self.name, str(self.prod_count), str(self.total_sold), str(self.total_tax))
 
@@ -93,7 +87,12 @@ class ResultBuy:
 		return (_qc.QDateTime(self.date).toString(), self.prod_code, self.prod_name, unicode(self.quantity), unicode(self.total))
 
 def reportBuy(times, root):
-	results = {'_headers':(u'Fecha', u'Código', u'Producto', u'Cantidad', u'Total')}
+	results = {
+		'_headers':('Fecha', 'Código', 'Producto', 'Cantidad', 'Total'),
+		'_idx_tag':2, #index of the tag column for the graphic
+		'_idx_val':4, #index of the value column for the graphic
+
+	}
 	tmin, tmax = times
 	try:
 		for m in _db.DB.buys.values(min = tmin, max = tmax):
@@ -109,7 +108,11 @@ def reportBuy(times, root):
 	return results
 
 def reportMove(times, root):
-	results = {'_headers': ('Fecha', 'Código', 'Producto', 'Diferencia', 'Razón')}
+	results = {
+		'_headers': ('Fecha', 'Código', 'Producto', 'Diferencia', 'Razón'),
+		'_idx_tag':2, #index of the tag column for the graphic
+		'_idx_val':3, #index of the value column for the graphic
+	}
 	tmin, tmax = times
 	try:
 		moves = root['moves']
@@ -126,7 +129,11 @@ def reportMove(times, root):
 	return results
 
 def reportClient(times, root=None):
-	results = {'_headers': ('Código', 'Tipo', 'Nombre', 'Compras', 'Items', 'Total Comprado') }
+	results = {
+		'_headers': ('Código', 'Tipo', 'Nombre', 'Compras', 'Items', 'Total Comprado'),
+		'_idx_tag':2, #index of the tag column for the graphic
+		'_idx_val':5, #index of the value column for the graphic
+	}
 	tmin, tmax = times
 	try:
 		bills = root['bills']
@@ -152,7 +159,11 @@ def reportClient(times, root=None):
 	return results
 
 def reportUser(times, root):
-	results = {'_headers':  ('Usuario', 'Facturas', 'Productos', 'Total Vendido')}
+	results = {
+		'_headers':  ('Usuario', 'Facturas', 'Productos', 'Total Vendido'),
+		'_idx_tag':0, #index of the tag column for the graphic
+		'_idx_val':3, #index of the value column for the graphic
+	}
 	tmin, tmax = times
 	bills = root['bills']
 	try:
@@ -177,7 +188,11 @@ def reportUser(times, root):
 	return results
 
 def reportCategory(times, root):
-	results = {'_headers': ('Rubro', 'Productos', 'Total Vendido', 'Impuesto')}
+	results = {
+		'_headers': ('Rubro', 'Productos', 'Total Vendido', 'Impuesto'),
+	 	'_idx_tag':0, #index of the tag column for the graphic
+ 		'_idx_val':2, #index of the value column for the graphic
+	}
 	tmin, tmax = times
 	bills = root['bills']
 	try:
@@ -209,7 +224,11 @@ def reportProduct(times, root):
 	tmin, tmax = times
 	#Define the collection
 	#define the header
-	results = {'_headers': ('Código', 'Nombre', 'Cantidad', 'Total Vendido') }
+	results = {
+		'_headers': ('Código', 'Nombre', 'Cantidad', 'Total Vendido'),
+		'_idx_tag':1, #index of the tag column for the graphic
+		'_idx_val':3, #index of the value column for the graphic
+	}
 	#cache the bills list
 	bills = root['bills']
 	try:
@@ -327,7 +346,8 @@ class Reports(_packs.GenericModule):
 		v = self.widget.v_list
 		#we use pop to remove from the dictionary
 		headers = results.pop('_headers')
-
+		idx_tag = results.pop('_idx_tag')
+		idx_val = results.pop('_idx_val')
 		#v = self.widget.v_list
 		v.setColumnCount(len(headers))
 		v.setHorizontalHeaderLabels(headers)

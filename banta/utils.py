@@ -12,6 +12,25 @@ import cStringIO
 def utr(u):
 	return PySide.QtGui.qApp.tr(u.encode('utf-8'))"""
 
+class Timer(object):
+	# Python Timer Class - Context Manager for Timing Code Blocks
+	# Corey Goldberg - 2012 /Modified by Jerónimo Barraco Mármol
+	def __init__(self,name="-", verbose=True):
+		from timeit import default_timer
+		self.verbose = verbose
+		self.timer = default_timer
+		self.name = name
+
+	def __enter__(self):
+		self.start = self.timer()
+		return self
+
+	def __exit__(self, *args):
+		self.elapsed_secs = self.timer() - self.start
+		self.elapsed = self.elapsed_secs * 1000 # millisecs
+		if self.verbose:
+			print '[%s] Elapsed: %f ms' % (self.name, self.elapsed)
+
 FORBIDDEN_CHARACTERS = ('\n', '\t', '\r')
 def printable(text):
 	#not the fastet way but..

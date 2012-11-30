@@ -28,7 +28,7 @@ class UserModel(_qc.QAbstractTableModel):
 		return len(_db.DB.users)
 
 	def columnCount(self, parent=None):
-		return 1
+		return 2
 
 	def data(self, index, role=0):
 		if not index.isValid():

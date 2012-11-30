@@ -83,9 +83,10 @@ class BasicAuthHandler(tornado.web.RequestHandler):
 			#self.set_header('WWW-Authenticate:','basic realm="Banta"')
 			#raise Exception("Wrong username or password")
 
-		self.set_status(500)
-		self.set_header('WWW-Authenticate', 'basic realm="Banta"')
-		raise Exception("Schema not supported, only Basic.")
+		#self.set_status(500)
+		#self.set_header('WWW-Authenticate', 'basic realm="Banta"')
+		#raise Exception("Schema not supported, only Basic.")
+		return "default"
 
 class HProducts(BasicAuthHandler, _qc.QObject):
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
@@ -111,10 +112,11 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 		depending on the parameters
 		"""
 		code = self.get_argument('search_code', None)
-		if code is not None:
-			self._getProduct(code)
-		else:
-			self._getProductList()
+		with _utils.Timer(verbose = True, name='prodlist [%s]'%code):
+			if code is not None:
+				self._getProduct(code)
+			else:
+				self._getProductList()
 
 	def _getProduct(self, code):
 		with JsonWriter(self) as res:
@@ -170,21 +172,21 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""
 		row = -1
-		with JsonWriter(self) as res:
+		with JsonWriter(self) as res, _utils.Timer("post"):
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
 				print('user ', user)
 				#print ("post", threading.currentThread(), threading.activeCount())
 
-				code = self.get_argument('code', "")
-				old_code = self.get_argument ('old_code', "")
+				code = self.get_argument('code', "").strip()
+				old_code = self.get_argument ('old_code', "").strip()
 
 				#print ('code: ',code, 'oldcode', old_code)
 
-				if code.strip() == "":
+				if code == "":
 					raise Exception ("Code can't be empty")
 
-				if (old_code.strip() == "") or (old_code not in root['products']):
+				if (old_code == "") or (old_code not in root['products']):
 					#inserting
 					prod = _db.models.Product(code)
 				else:
@@ -245,7 +247,7 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 		self.server_thread = server_thread
 
 	def get(self, *args, **kwargs):
-		with JsonWriter(self) as res:
+		with JsonWriter(self) as res, _utils.Timer('reports'):
 			#try to get the start and end parameter
 			self.get_argument('start', 0)
 			report_type = self.get_argument('type', 'product')
@@ -263,10 +265,12 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 			gen_report = reports[report_type]
 			with _db.DB.threaded() as root:
 				results = gen_report((start, end), root)
-				res['headers'] = results.pop('_headers')
-				res['data'] = []
-				for i in results.values():
-					res['data'].append(i.toList())
+				#ponemos los headers en su propia clave
+				heads = results.pop('_headers')
+				res['headers'] = heads
+				res['idx_tag'] = results.pop('_idx_tag')
+				res['idx_val'] = results.pop('_idx_val')
+				res['data'] = list(i.toStringList() for i in results.values())
 
 
 class Server( _qc.QThread ):

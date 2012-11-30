@@ -1,8 +1,14 @@
 ﻿For the linux/mac version check out http://pypi.python.org/pypi/banta/ 
 and easy_install
+
 (
+
 	execute: easy_install -U banta
 	to run execute: banta
+	you might need to install python-setuptools if you don't have easy_install
+	some other modules required are:
+	feedparser, tornado, pyside, ZODB3, transaction == 1.2.0, pyserial,
+	if you can install them with your package manager is the best option, if not, use easy_install
 )
 
 MoonGate http://MoonGate.com.ar
