@@ -14,11 +14,15 @@ and easy_install
 MoonGate http://MoonGate.com.ar
 
 TC 0.9
+	- Interfaz ampliamente mejorada
 	- UTF8 modificar y al buscar
 	- Codigo de producto solo alfanumerico.
 	- Nombre de producto no puede estar vacio
 	- Password en BantaTC
 	- Digito 9 en la IP
+	- Ver reportes en modo Gráfico y Reportes
+	- Menú en administrador de productos que permite elegir forma de ordenar y dirección.
+	- Lista que carga dinámicamente.
 
 1.19
 	- I.V.A. para clientes exentos

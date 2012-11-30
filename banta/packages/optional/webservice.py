@@ -142,16 +142,6 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 				reversed = self.get_argument('order_asc', "1").lower() != "1"
 
 				products = root['products']
-				prod_cant = len(products)
-
-				if start >= prod_cant:
-					start = 0
-
-				end = start+limit
-
-				if end >= prod_cant:
-					end = prod_cant
-
 				prod_list = products.values()
 
 				if order_by in ('stock', 'name', 'price', 'code'):
@@ -164,7 +154,15 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 				if search_name:
 					prod_list = filter(filter_name, prod_list)
 
-				prods = map(self._prodDict, prod_list[start:end])
+				prod_cant = len(prod_list)
+				end = start+limit
+				if end >= prod_cant:
+					end = prod_cant
+
+				if start >=prod_cant:
+					prods = []
+				else:
+					prods = map(self._prodDict, prod_list[start:end])
 				res['count'] = len(prods)
 				res['total'] = prod_cant
 				res['data'] = prods
