@@ -2,9 +2,9 @@
 a = Analysis(
 		['C:\\Svn\\moongate\\bantapkg\\banta_run.py'],
         pathex=[
-		'C:\\Svn\\moongate\\bantapkg',
-		#'C:\\Python27\\lib\\site-packages\\zope.interface-4.0.1-py2.7-win32.egg',
-		#'C:\\Python27\\lib\\site-packages\\zope.event-4.0.0-py2.7.egg'
+			'C:\\Svn\\moongate\\bantapkg',
+			#'C:\\Python27\\lib\\site-packages\\zope.interface-4.0.1-py2.7-win32.egg',
+			#'C:\\Python27\\lib\\site-packages\\zope.event-4.0.0-py2.7.egg'
 		],
         hiddenimports=[
 			'PySide.QtXml', 'PySide.QtNetwork', 'PySide.QtGui',
@@ -46,6 +46,13 @@ dats = [
 		'C:\\Python27\\Lib\\site-packages\\PySide\\plugins\\imageformats\\qtiff4.dll', 'DATA'),
     ('imageformats/qtga4.dll',
 		'C:\\Python27\\Lib\\site-packages\\PySide\\plugins\\imageformats\\qtga4.dll', 'DATA'),
+	#Static stuff
+		('static/index.html', 'static/index.html', 'DATA'),
+		('static/array-grid.js', 'static/array-grid.js', 'DATA'),
+		('static/bootstrap.js', 'static/bootstrap.js', 'DATA'),
+		('static/example.css', 'static/example.css', 'DATA'),
+		('static/ext-all.css', 'static/ext-all.css', 'DATA'),
+		('static/eext-all-debug.js', 'static/ext-all-debug.js', 'DATA'),	
 	]
 coll = COLLECT(
 		exe,

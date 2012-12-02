@@ -54,7 +54,13 @@ def currentMonthDates():
 	today = datetime.date.today()
 	#calculate the start of the month by simply substracting the days that have passed
 	month_start = today - datetime.timedelta(days=(today.day-1))
-	month_end = datetime.date(today.year, today.month+1, 1)
+	year = today.year
+	month = today.month+1
+	if month > 12:
+		month = 1
+		year += 1
+
+	month_end = datetime.date(year,month , 1)
 	return (month_start, today, month_end)
 
 def dateTimeToInt(d):
