@@ -30,6 +30,7 @@ class ThreadPrinter(QtCore.QObject):
 		#TODO implement this (option in settings called "Stay connected to the printer" that forces that the printer is created only once)
 		self._persistent = _db.CONF.PERSISTENT_PRINTER
 
+	#TODO quitar el try aca, y ponerlo donde se llama
 	def _getPrinter(self):
 		#if the printer is persistent, return it
 		if self._printer:
@@ -222,7 +223,7 @@ class Printer(GenericModule):
 			#It must be done here, to retain sanity. the tprinter object is local to this module,
 			#also the most logic thing is to make this module resposable for printing stuff
 			#to print with the fiscal printer
-			bill_mod.startPrinting.connect(self.tprinter.printBill)#, QtCore.Qt.DirectConnection) careful with this
+			bill_mod.startPrinting.connect(self.tprinter.printBill)
 			#to print a draft on the normal printer
 			bill_mod.startPrintingDraft.connect(self.printDraft)
 

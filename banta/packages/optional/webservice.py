@@ -57,7 +57,7 @@ class JsonWriter(object):
 			self.res['success'] = True
 			act = 0
 		else:
-			error = str(exc_val)
+			error = unicode(exc_val)
 			logger.exception(error)
 			self.res['error'] = error
 			self.res['success'] = False
@@ -84,7 +84,7 @@ class BasicAuthHandler(tornado.web.RequestHandler):
 					return user
 			#self.set_status(401)
 			#self.set_header('WWW-Authenticate:','basic realm="Banta"')
-			#raise Exception("Wrong username or password")
+			#raise Exception("Usuario o contraseña incorrecta!")
 
 		#self.set_status(500)
 		#self.set_header('WWW-Authenticate', 'basic realm="Banta"')
@@ -129,7 +129,8 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 					prod = root['products'][code]
 					#to allow a "search" function later
 					prods.append(self._prodFullDict(prod))
-
+				else:
+					raise Exception("Producto no encontrado")
 				res['count'] = len(prods)
 				res['total'] = len(root['products'])
 				res['data'] = prods
@@ -142,7 +143,6 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 				search_name = self.get_argument('search_name', "").lower()
 				order_by = self.get_argument("order_by", "").lower()
 				reversed = self.get_argument('order_asc', "1").lower() != "1"
-
 				products = root['products']
 				prod_list = products.values()
 
@@ -198,8 +198,9 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 				prod.price = float(self.get_argument('price', 0.0))
 				#if stock differs add a Move
 				nstock = float(self.get_argument('stock', 0.0))
-				if nstock!= prod.stock:
-					print ("Stock changed!")
+				if nstock != prod.stock:
+					#todo, ver como hacer con el tema de los threads
+					move = _db.models.Move(prod, "Modificado con Banta Touch Control", nstock-prod.stock, root=root)
 				prod.stock = nstock
 
 				#trying to re-code or insert
@@ -236,7 +237,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 			#print ('code', code)
 			with _db.DB.threaded() as root:
 				if code not in root['products']:
-					raise Exception("Product does not exists")
+					raise Exception("No existe el producto.")
 				#no need to care of special cases, this will raise an exception if not in list
 				row = list(root['products'].keys()).index(code)
 
@@ -279,6 +280,8 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 
 
 class Server( _qc.QThread ):
+	gotIP = _qc.Signal(str)
+
 	def __init__(self, parent):
 		_qc.QThread.__init__(self)
 		self.parent = parent
@@ -301,6 +304,7 @@ class Server( _qc.QThread ):
 		self.timer.setSingleShot(True)
 		self.timer.timeout.connect(self.blingOut)
 		self.blingOut()
+		self.gotIP.connect(self.showIP)
 
 	@_qc.Slot(int)
 	def syncDB(self, row):
@@ -340,10 +344,45 @@ class Server( _qc.QThread ):
 		#is single shot so we dont need to stop the timer
 		self.lbs.setPixmap(self.blue)
 
+	@_qc.Slot(str)
+	def showIP(self, ip):
+		#Main thread
+		self.lbs.setToolTip("IP: "+ip)
+
+	def _getIP(self):
+		#Tries to get the ip on the local machine
+		import socket
+		n = "No se pudo detectar"
+		s = None
+
+		try:
+			#first it tries to get it through the internet connection
+			#this is good because it will show the ip associated to an interface connected to internet
+			s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+			s.connect(("gmail.com", 80))
+			n = s.getsockname()[0]
+		except Exception, e:
+			logger.exception("Error when trying to get the local ip: "+ unicode(e))
+		finally:
+			if s: s.close()
+
+		try:
+			#and then tries using gethostbyname
+			#this could fail and get nothing
+			if not n:
+				ips = [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")]
+				ips = ips[:1]
+				if ips:
+					n = ips[0]
+		except Exception , e:
+			logger.exception("Error when trying to get the local ip 2: "+ unicode(e))
+		return n
+
 	def run(self, *args, **kwargs):
 		#print (threading.currentThread(), threading.activeCount(), )
 		#pth = os.path.split(__file__)[0]
-
+		ip  = self._getIP()
+		self.gotIP.emit(ip)
 		pth = os.getcwd()
 		pth = os.path.join(pth, 'static')
 		application = tornado.web.Application(

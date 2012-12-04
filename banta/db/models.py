@@ -512,13 +512,16 @@ class Move(_per.Persistent):
 	product = None
 	diff = 0
 	reason = ""
-	def __init__(self, product, reason, diff):
+	def __init__(self, product, reason, diff, root=None):
 		"""
 		Represents a movement in stock
 		stores the product changed, the reason, and the diff in quantity (relative number)
 		Instantiating a move adds it on the db, that's important because when you add it, it depends on the time
-		 so it could break several stuff if its saved 2 times
-		 (still you have to commit)"""
+	 	so it could break several stuff if its saved 2 times
+	 	If the object is created from another thread, the parameter "root" is needed, which is the root dictionary for
+	 	the current thread.
+	 	(still you have to commit)
+		 """
 		_per.Persistent.__init__(self)
 		self.reason = reason
 		self.product = product
@@ -527,11 +530,16 @@ class Move(_per.Persistent):
 
 		#Saves the move, as the key is time based, we need to do some calculations before saving
 		self.time = banta.utils.dateTimeToInt(self.date)
+		#If no root is assigned,
+		if not root:
+			#use the main root. this is only safe from the main thread
+			root = banta.db.DB.root
 		#check that there's not another move with the same key (should not happen unless using several clients at once)
 		#though that's not possible YET, let's be prepared (also if some stupid person changes the system date)
-		while (self.time in banta.db.DB.moves):
+		moves = root['moves']
+		while (self.time in moves):
 			self.time += 1
-		banta.db.DB.moves[self.time] = self
+		moves[self.time] = self
 
 class Buy(_per.Persistent):
 	date = 0
