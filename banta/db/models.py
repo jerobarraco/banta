@@ -212,15 +212,15 @@ class Client(_per.Persistent):
 	TAX_NO_RESPONSABLE = 4
 	TAX_RESPONSABLE_NO_INSCRIPTO_BIENES_DE_USO = 5
 	TAX_RESPONSABLE_MONOTRIBUTO = 6
-	TAX_MONOTRIBUTO = 7
-	TAX_MONOTRIBUTISTA_SOCIAL = 8
-	TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL = 9
-	TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL_SOCIAL = 10
-	TAX_NO_CATEGORIZADO = 11
+	TAX_MONOTRIBUTISTA_SOCIAL = 7
+	TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL = 8
+	TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL_SOCIAL = 9
+	TAX_NO_CATEGORIZADO = 10
 	TAX_NAMES = (
 		"Consumidor Final", "Responsable Inscripto", "Responsable no Inscripto", "Exento", "No Responsable",
-		"Responsable No Inscripto Bienes de Uso", "Responsable Monotributo", "Monotributo",
-		"Monotributista Social", "Pequeño Contribuyente Eventual", "Pequeño Contribuyente Eventual Social",
+		"Responsable No Inscripto Bienes de Uso",
+		"Monotributista", "Monotributista Social", "Pequeño Contribuyente Eventual",
+		"Pequeño Contribuyente Eventual Social",
 		"No categorizado"
 	)
 
@@ -267,7 +267,7 @@ class Client(_per.Persistent):
 		#TODO filter in case the seller is Responsable or not
 		if self.tax_type == self.TAX_RESPONSABLE_INSCRIPTO :
 			return (Bill.TYPE_A, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_DEB_A )
-		elif self.tax_type in (self.TAX_MONOTRIBUTO, self.TAX_MONOTRIBUTISTA_SOCIAL):
+		elif self.tax_type in (self.TAX_RESPONSABLE_MONOTRIBUTO, self.TAX_MONOTRIBUTISTA_SOCIAL):
 			return (Bill.TYPE_B,  Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
 		elif self.tax_type in (self.TAX_CONSUMIDOR_FINAL, self.TAX_NO_CATEGORIZADO, self.TAX_NO_RESPONSABLE, self.TAX_EXENTO):
 			return (Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )

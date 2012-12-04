@@ -30,6 +30,7 @@ TC 0.9
 	- Mejorada la velocidad del webservice
 	- Actualizadas bibliotecas internas
 	- Indicador de actividad de red
+	- Posible problemas de impresión con monotributistas
 
 1.19
 	- I.V.A. para clientes exentos

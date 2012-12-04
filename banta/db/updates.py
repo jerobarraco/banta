@@ -29,9 +29,17 @@ def v9(root):
 		cli.setName(cli.name)
 		cli.setAddress(cli.address)
 
+
 def v10(root):
 	for u in root['users']:
+		#preparandonos para el user y password del banta-tc
 		u.password = ""
+
+	#campos erroneos de tipo de iva
+	for cli in root['clients'].values():
+		if cli.tax_type >5:
+			#quitamos el campo monotributista que aparentemente es responsable monotributista
+			cli.tax_type -= 1
 
 #Convert all the objects to the new namespace
 def blankInit(root):

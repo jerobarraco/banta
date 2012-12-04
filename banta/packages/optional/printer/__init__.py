@@ -45,14 +45,13 @@ class ThreadPrinter(QtCore.QObject):
 			elif self._brand == _db.models.Printer.BRAND_EPSON:
 				from banta.packages.optional.printer.epsonPrinter import EpsonPrinter
 				printer = EpsonPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
-
 			else:
 				raise Exception("No se configuró ninguna impresora")
 		except Exception as e:
 			emsg = str(e).decode('utf-8', 'ignore')
 			msg = self.tr("No se ha podido conectar con la impresora\n{0}").format(emsg)
 			#no qmessageboxses here! we're in another thread! can't do gui stuff.
-			logger.error(msg)
+			logger.exception(msg)
 
 		if self._persistent :
 			self._printer = printer
@@ -80,6 +79,7 @@ class ThreadPrinter(QtCore.QObject):
 		del self._printer
 		self._printer = None
 
+	#TODO change this urgently, the exceptions are not passed so debuggin is really hard and this is the most critical part
 	@QtCore.Slot(object)
 	#Passing the bill object is kinda dangerous, because zodb is not thread safe. so we shouldnt modify it here
 	def printBill(self, bill):
@@ -90,9 +90,9 @@ class ThreadPrinter(QtCore.QObject):
 			self.statusChanged.emit("Conectando con la impresora")
 			printer = self._getPrinter()
 			cli = bill.client
+
 			doc_type_code = getattr(printer, DOC_TYPE_ATTRS[cli.doc_type], ' ')
 			tax_type_code = getattr(printer, IVA_TYPE_ATTRS[cli.tax_type], ' ')
-
 			#Checks the type of the bill.
 			#This defines what function and with what parameters is called on the printer device interface
 
@@ -139,6 +139,7 @@ class ThreadPrinter(QtCore.QObject):
 			self.printingFinished.emit( (True, bill, int(number), '') )
 		except Exception, e:
 			#Something GROOSSS just happend, gotta notify the other thread!
+			logger.exception(str(e))
 			self.printingFinished.emit( (False, bill, -1, str(e)) )
 		finally:
 			if (not self._persistent )and printer:
