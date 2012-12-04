@@ -124,7 +124,7 @@ p, li { white-space: pre-wrap; }
 
 class Feeds(banta.packages.GenericModule):
 	REQUIRES = []
-	NAME = "Feeds"
+	NAME = "feeds"
 	last_message = 0
 	def __init__(self, app):
 		super(Feeds, self).__init__(app)

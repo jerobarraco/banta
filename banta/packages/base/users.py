@@ -46,6 +46,8 @@ class UserModel(_qc.QAbstractTableModel):
 		col = index.column()
 		if col == 0 :
 			return user.name
+		elif col ==1:
+			return user.password
 
 		return None
 
@@ -68,7 +70,8 @@ class UserModel(_qc.QAbstractTableModel):
 			col = index.column()
 			if col == 0:
 				user.name = value
-
+			elif col ==1:
+				user.password = value
 			_db.DB.commit()
 			return True
 		return False

@@ -81,6 +81,8 @@ class BasicAuthHandler(tornado.web.RequestHandler):
 			for user in root['users']:
 				if user.name == username:
 					#and user.password == pwd
+					if user.password == pwd:
+						print ("login correcto")
 					return user
 			#self.set_status(401)
 			#self.set_header('WWW-Authenticate:','basic realm="Banta"')
@@ -116,11 +118,11 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 		depending on the parameters
 		"""
 		code = self.get_argument('search_code', None)
-		with _utils.Timer(verbose = True, name='prodlist [%s]'%code):
-			if code is not None:
-				self._getProduct(code)
-			else:
-				self._getProductList()
+		if code:
+			self._getProduct(code)
+		else:
+			self._getProductList()
+
 
 	def _getProduct(self, code):
 		with JsonWriter(self) as res:
@@ -174,7 +176,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""
 		row = -1
-		with JsonWriter(self) as res, _utils.Timer("post"):
+		with JsonWriter(self) as res:#, _utils.Timer("post"):
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
 				print('user: ', user)
@@ -254,7 +256,7 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 		self.onAct.connect(self.server_thread.bling, _qc.Qt.QueuedConnection)
 
 	def get(self, *args, **kwargs):
-		with JsonWriter(self) as res, _utils.Timer('reports'):
+		with JsonWriter(self) as res:#, _utils.Timer('reports'):
 			#try to get the start and end parameter
 			self.get_argument('start', 0)
 			report_type = self.get_argument('type', 'product')

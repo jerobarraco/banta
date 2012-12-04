@@ -2,7 +2,6 @@
 and easy_install
 
 (
-
 	execute: easy_install -U banta
 	to run execute: banta
 	you might need to install python-setuptools if you don't have easy_install
@@ -31,6 +30,8 @@ TC 0.9
 	- Actualizadas bibliotecas internas
 	- Indicador de actividad de red
 	- Posible problemas de impresión con monotributistas
+	- Mejora con el manejo de impresoras fiscales
+	- Impresoras fiscales persistentes (mayor velocidad al imprimir)
 
 1.19
 	- I.V.A. para clientes exentos

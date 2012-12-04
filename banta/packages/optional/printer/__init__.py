@@ -10,6 +10,8 @@ from banta.db.models import LICENSES_NOT_FREE
 
 import banta.db as _db
 import banta.utils
+#TODO use a context manager for getting the printer.
+
 #Create a separate class that will handle the actual printing
 class ThreadPrinter(QtCore.QObject):
 	#Emited to update the status when printing
@@ -26,7 +28,7 @@ class ThreadPrinter(QtCore.QObject):
 		self._device = str(printer.device)
 		self._model = printer.model
 		#TODO implement this (option in settings called "Stay connected to the printer" that forces that the printer is created only once)
-		self._persistent = False #self._persistent = printer.persistent
+		self._persistent = _db.CONF.PERSISTENT_PRINTER
 
 	def _getPrinter(self):
 		#if the printer is persistent, return it
@@ -53,8 +55,7 @@ class ThreadPrinter(QtCore.QObject):
 			#no qmessageboxses here! we're in another thread! can't do gui stuff.
 			logger.exception(msg)
 
-		if self._persistent :
-			self._printer = printer
+		self._printer = printer
 		return printer
 
 	@QtCore.Slot()
@@ -63,6 +64,8 @@ class ThreadPrinter(QtCore.QObject):
 		if printer is None: return
 		printer.cancelDocument()
 		logger.debug("cancelling bill")
+		self.statusChanged.emit("Documento cancelado")
+		self.closePrinter(False)
 
 	@QtCore.Slot()
 	def dailyCloseZ(self):
@@ -70,16 +73,31 @@ class ThreadPrinter(QtCore.QObject):
 		if printer is None: return
 		ret = printer.dailyClose(printer.DAILY_CLOSE_Z)
 		logger.debug("daily close z: %s"% ret)
+		self.statusChanged.emit("Cierre impreso")
+		self.closePrinter(False)
 
 	@QtCore.Slot()
-	def closePrinter(self):
-		"""just in case"""
+	def closePrinter(self, force=True):
+		"""Tries to close the printer,
+		If force is false, it won't close it if the printer is persistent.
+		Normally it should be called with False as parameter
+		"""
+		if (not force) and self._persistent:
+			logger.debug ("Printer not closed for being persistent")
+			return
+		#gets a printer . but we dont actually care about the return value
+		printer = self._getPrinter()
 		if self._printer :
+			#try to close it
 			self._printer.close()
-		del self._printer
-		self._printer = None
+			#and deletes it from the cache
+			#del is needed
+			del self._printer
+			self._printer = None
+			logger.debug("Printer closed")
+		else:
+			logger.debug("There was no printer to be closed!")
 
-	#TODO change this urgently, the exceptions are not passed so debuggin is really hard and this is the most critical part
 	@QtCore.Slot(object)
 	#Passing the bill object is kinda dangerous, because zodb is not thread safe. so we shouldnt modify it here
 	def printBill(self, bill):
@@ -110,7 +128,7 @@ class ThreadPrinter(QtCore.QObject):
 			elif btype == bill.TYPE_C:
 				#Tickets are only for Monotributists seller, be carefull with this.
 				printer.openTicket()
-			elif btype in ( bill.TYPE_NOTA_CRED_A , bill.TYPE_NOTA_CRED_B):
+			elif btype in ( bill.TYPE_NOTA_CRED_A, bill.TYPE_NOTA_CRED_B):
 				letter = ((btype== bill.TYPE_NOTA_CRED_A) and 'A' ) or 'B' #same as the if before, but more compact
 				#TODO add reference
 				# type, name, address, doc, docType, ivaType, reference="NC"
@@ -120,6 +138,7 @@ class ThreadPrinter(QtCore.QObject):
 				#type, name, address, doc, docType, ivaType
 				printer.openDebitNoteTicket(letter, cli.name, cli.address, doc, doc_type_code, tax_type_code )
 			else:
+				#printing finished is MANDATORY
 				self.printingFinished.emit(
 					(False, bill, -1, 'Tipo de factura incorrecto')
 				)
@@ -140,10 +159,11 @@ class ThreadPrinter(QtCore.QObject):
 		except Exception, e:
 			#Something GROOSSS just happend, gotta notify the other thread!
 			logger.exception(str(e))
+			#printing finished is MANDATORY (we might as well use a context manager)
 			self.printingFinished.emit( (False, bill, -1, str(e)) )
+
 		finally:
-			if (not self._persistent )and printer:
-				printer.close()
+			self.closePrinter(False)
 
 #The purpose of this module is to connect the threadedprinter with the bill, and also set some stuff.
 class Printer(GenericModule):
@@ -194,6 +214,7 @@ class Printer(GenericModule):
 		#and connect the stuff
 		self.app.window.acCloseZ.triggered.connect(self.tprinter.dailyCloseZ)
 		self.app.window.acCancelPrinter.triggered.connect(self.tprinter.cancel)
+		self.app.window.acClosePrinter.triggered.connect(self.tprinter.closePrinter)
 		#now we try to get the bill module
 		bill_mod = self.app.modules.get(bills.Bills.NAME, None)
 		if bill_mod:

@@ -947,6 +947,7 @@
     <addaction name="acChangeStyle"/>
     <addaction name="mnuImport"/>
     <addaction name="acScan"/>
+    <addaction name="acClosePrinter"/>
    </widget>
    <widget class="QMenu" name="menuAcerca_de">
     <property name="title">
@@ -1121,6 +1122,9 @@
    </property>
   </action>
   <action name="acSameGame">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../rc.qrc">
      <normaloff>:/same/SamegameCore/pics/greenStone.png</normaloff>:/same/SamegameCore/pics/greenStone.png</iconset>
@@ -1132,7 +1136,7 @@
     <string>Ctrl+S, Ctrl+G</string>
    </property>
    <property name="visible">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
   </action>
   <action name="acShowClientDetails">
@@ -1143,6 +1147,14 @@
   <action name="acScan">
    <property name="text">
     <string>Scan</string>
+   </property>
+   <property name="visible">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="acClosePrinter">
+   <property name="text">
+    <string>Cerrar Impresora</string>
    </property>
   </action>
  </widget>
