@@ -71,12 +71,10 @@ class JsonWriter(object):
 class BasicAuthHandler(tornado.web.RequestHandler):
 	def get_current_user(self, root):
 		scheme, sep, token= self.request.headers.get('Authorization', '').partition(' ')
-		print ('aut', scheme, sep, token)
+		#print ('aut', scheme, sep, token)
 		if scheme.lower() == 'basic':
 			username, a, pwd = token.decode('base64').partition(':')
-			print ('user', username, pwd)
-			#base64.decodestring(token).partition(':')
-			#
+			#print ('user', username, pwd)
 			# if pwd matches user:
 			for user in root['users']:
 				if user.name == username:
@@ -123,7 +121,6 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 		else:
 			self._getProductList()
 
-
 	def _getProduct(self, code):
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
@@ -140,7 +137,6 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 	def _getProductList(self):
 		with JsonWriter(self) as res:
 			with _db.DB.threaded() as root:
-
 				start = int(self.get_argument('start', 0))
 				limit = int(self.get_argument('limit', 100))
 				search_name = self.get_argument('search_name', "").lower()

@@ -5,7 +5,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 import sys
 import logging
 
-__version__ = '1.19'
+__version__ = '1.19.1'
 
 #3rd party
 ##for pyinstaller
@@ -210,7 +210,7 @@ class App(_qg.QApplication):
 	def quitting(self):
 		logging.debug("quitting")
 		self.window.acClosePrinter.trigger()
-		feed_mod = self.modules.get('Feeds')
+		feed_mod = self.modules.get('feeds')
 		if feed_mod: feed_mod.wait()
 		else: logger.debug("feeds module is not loaded")
 		#the config is written on last, so if there's an error, the config is not ovewritten

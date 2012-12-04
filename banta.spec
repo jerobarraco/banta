@@ -19,8 +19,8 @@ exe = EXE(
         a.scripts + [('O', '', 'OPTION')],
         exclude_binaries=1,
         name=os.path.join('build\\pyi.win32\\banta', 'banta.exe'), 
-        debug=True,
-        console=True,
+        debug=False,
+        console=False,
         strip=None,
         upx=False,
 		icon='banta\\ico.ico'
