@@ -8,6 +8,7 @@ It should be imported in a controller. Using _instances_ of objects from this mo
 from __future__ import absolute_import, unicode_literals, print_function
 import datetime
 import decimal
+import sha
 #4 decimal places precition
 decimal.getcontext().prec = 4
 
@@ -498,6 +499,9 @@ class User(_per.Persistent):
 	def __init__(self, name=""):
 		_per.Persistent.__init__(self)
 		self.name = name
+
+	def setPassword(self, pwd):
+		self.password = sha.new(pwd).hexdigest()
 
 class Category(_per.Persistent):
 	name = ""

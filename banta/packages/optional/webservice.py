@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 import base64
 import os
 import contextlib
+import sha
 
 from operator import itemgetter, attrgetter
 try:
@@ -68,42 +69,56 @@ class JsonWriter(object):
 		self.ins.onAct.emit(act)
 		return True
 
-class BasicAuthHandler(tornado.web.RequestHandler):
+class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
+	#Avoid creating the signal per class, as this class will be inherited, it could lead
+	#to duplicated connections and problems,
+	#even though it seems to be fixed but, better to be explicit
+	#http://stackoverflow.com/questions/7577290/pyside-signal-duplicating-behavior
+	onAct = _qc.Signal(int)
+	#looks like there  is no other way to create signals
+	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
+
+	def initialize(self, server_thread, *args, **kwargs):
+		self.server_thread = server_thread
+		#we cant create the signal here, because error
+		self.onAct.connect(self.server_thread.bling, _qc.Qt.QueuedConnection)
+
 	def get_current_user(self, root):
 		scheme, sep, token= self.request.headers.get('Authorization', '').partition(' ')
 		#print ('aut', scheme, sep, token)
-		if scheme.lower() == 'basic':
-			username, a, pwd = token.decode('base64').partition(':')
-			#print ('user', username, pwd)
-			# if pwd matches user:
-			for user in root['users']:
-				if user.name == username:
-					#and user.password == pwd
-					if user.password == pwd:
-						print ("login correcto")
+		#if the scheme is wrong (or have nothing
+		if scheme.lower() != 'basic':
+			self.set_status(500)
+			self.set_header('WWW-Authenticate', 'basic realm="Banta"')
+			raise Exception("Schema not supported, only Basic.")
+
+		username, a, pwd = token.decode('base64').partition(':')
+		# if pwd matches user:
+		logger.debug("Login attempt [%s] [%s]" %( username, pwd))
+		for user in root['users']:
+			if user.name == username:
+				#and user.password == pwd
+				if user.password == pwd:
+					logger.debug("login correcto")
 					return user
-			#self.set_status(401)
-			#self.set_header('WWW-Authenticate:','basic realm="Banta"')
-			#raise Exception("Usuario o contraseña incorrecta!")
+		#if there is no user, or the user or passwrd is incorrect, it'll fail
+		self.set_status(401)
+		self.set_header('WWW-Authenticate:','basic realm="Banta"')
+		raise Exception("Usuario o contraseña incorrecta!")
 
-		#self.set_status(500)
-		#self.set_header('WWW-Authenticate', 'basic realm="Banta"')
-		#raise Exception("Schema not supported, only Basic.")
-		return "default"
 
-class HProducts(BasicAuthHandler, _qc.QObject):
-	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
+class HProducts(BasicAuthHandler):
 	changed = _qc.Signal(int)
 	deleteProduct = _qc.Signal(int)
-	onAct = _qc.Signal(int)
+
 	def initialize(self, server_thread):
-		self.server_thread = server_thread
+		BasicAuthHandler.initialize(self, server_thread)
 		self.changed.connect(self.server_thread.syncDB, _qc.Qt.QueuedConnection)
 		#i could delete from here.. but to be honest, is safer to do it in the main thread
 		#beause of signals needed to be emited and models and modelproxies
 		#notice the blocking queued
 		self.deleteProduct.connect(self.server_thread.deleteProduct, _qc.Qt.QueuedConnection)
-		self.onAct.connect(self.server_thread.bling, _qc.Qt.QueuedConnection)
+
 
 	def _prodDict(self, p):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
@@ -175,8 +190,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 		with JsonWriter(self) as res:#, _utils.Timer("post"):
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
-				print('user: ', user)
-				#print ("post", threading.currentThread(), threading.activeCount())
+				logger.debug('got user: '+ str(user))
 
 				code = self.get_argument('code', "").strip()
 				old_code = self.get_argument ('old_code', "").strip()
@@ -184,7 +198,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 				#print ('code: ',code, 'oldcode', old_code)
 
 				if code == "":
-					raise Exception ("Code can't be empty")
+					raise Exception ("El código no puede estar vacio")
 
 				if (old_code == "") or (old_code not in root['products']):
 					#inserting
@@ -199,7 +213,6 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 				#if stock differs add a Move
 				nstock = float(self.get_argument('stock', 0.0))
 				if nstock != prod.stock:
-					#todo, ver como hacer con el tema de los threads
 					move = _db.models.Move(prod, "Modificado con Banta Touch Control", nstock-prod.stock, root=root)
 				prod.stock = nstock
 
@@ -208,10 +221,10 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 					if (code in root['products']):
 						#If someone tries to change the code, but the new code is already on the db
 						#fail gloriously
-						raise Exception("The new code already exists")
+						raise Exception("El código ya existe")
 					if (old_code in root['products']):
 						#is a recode
-						#todo emit delete
+						#todo emit delete ??
 						del root['products'][old_code]
 				#finally inserts the new one (notice is code)
 				prod.code = code
@@ -236,6 +249,8 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 			#print ("delete", threading.currentThread(), threading.activeCount())
 			#print ('code', code)
 			with _db.DB.threaded() as root:
+				user = self.get_current_user(root)
+				logger.debug('got user: '+ str(user))
 				if code not in root['products']:
 					raise Exception("No existe el producto.")
 				#no need to care of special cases, this will raise an exception if not in list
@@ -245,13 +260,7 @@ class HProducts(BasicAuthHandler, _qc.QObject):
 			res['row'] = row
 			res['code'] = code
 
-class Reports(tornado.web.RequestHandler, _qc.QObject):
-	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
-	onAct = _qc.Signal(int)
-	def initialize(self, server_thread):
-		self.server_thread = server_thread
-		self.onAct.connect(self.server_thread.bling, _qc.Qt.QueuedConnection)
-
+class Reports(BasicAuthHandler):
 	def get(self, *args, **kwargs):
 		with JsonWriter(self) as res:#, _utils.Timer('reports'):
 			#try to get the start and end parameter
@@ -281,7 +290,6 @@ class Reports(tornado.web.RequestHandler, _qc.QObject):
 
 class Server( _qc.QThread ):
 	gotIP = _qc.Signal(str)
-
 	def __init__(self, parent):
 		_qc.QThread.__init__(self)
 		self.parent = parent

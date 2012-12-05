@@ -46,9 +46,14 @@ class UserModel(_qc.QAbstractTableModel):
 		col = index.column()
 		if col == 0 :
 			return user.name
-		elif col ==1:
-			return user.password
-
+		elif col == 1:
+			if role == _qc.Qt.DisplayRole :
+				return "\u2605\u2605\u2605\u2605\u2605" #five black stars
+				#return "\u2666"*5
+				#return "*****"
+			else:
+				return ""
+			#return user.password
 		return None
 
 	def headerData(self, section=0, orientation=None, role=0):
@@ -70,8 +75,10 @@ class UserModel(_qc.QAbstractTableModel):
 			col = index.column()
 			if col == 0:
 				user.name = value
-			elif col ==1:
-				user.password = value
+			elif col == 1:
+				value = value.strip()
+				if value:
+					user.setPassword(value)
 			_db.DB.commit()
 			return True
 		return False
