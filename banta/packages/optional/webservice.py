@@ -94,12 +94,10 @@ class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
 
 		username, a, pwd = token.decode('base64').partition(':')
 		# if pwd matches user:
-		logger.debug("Login attempt [%s] [%s]" %( username, pwd))
 		for user in root['users']:
 			if user.name == username:
 				#and user.password == pwd
 				if user.password == pwd:
-					logger.debug("login correcto")
 					return user
 		#if there is no user, or the user or passwrd is incorrect, it'll fail
 		self.set_status(401)
