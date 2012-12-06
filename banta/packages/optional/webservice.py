@@ -164,7 +164,6 @@ class HProducts(BasicAuthHandler):
 				if order_by in ('stock', 'name', 'price', 'code'):
 					prod_list = sorted(prod_list, key=attrgetter(order_by), reverse=reversed)
 
-
 				def filter_name(p):
 					return search_name in p.name.lower()
 
@@ -289,11 +288,10 @@ class Reports(BasicAuthHandler):
 				#converts the list of Results* to lists of strings, now l_results is a matrix (table)
 				#sorted is used here to not speed down the reports in the main window...
 				#is possible only because we defined __lt__ in the result* classes
-				l_results = (i.toStringList() for i in sorted(results.values(), reverse=True))
+				l_results = [i.toStringList() for i in sorted(results.values(), reverse=True)]
 				#we sort them by the column for the graphic
 				#s_res = sorted(l_results, key=itemgetter(res['idx_val']))
-				res['data'] = list(l_results)
-				print ( res['data'] )
+				res['data'] = l_results
 
 
 class Server( _qc.QThread ):

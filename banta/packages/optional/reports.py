@@ -374,7 +374,7 @@ class Reports(_packs.GenericModule):
 
 		v.setRowCount( len(results) )
 
-		for r, res in enumerate(results.values()):
+		for r, res in enumerate(sorted(results.values(), reverse=True)):
 			#res = results[k]
 			#r = v.rowCount()
 			#v.setRowCount(r+1)

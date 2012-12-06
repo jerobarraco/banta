@@ -25,6 +25,8 @@ TC 0.9
 	- Velocidad de carga y consumo de memoria mejorada dramáticamente.
 	- Drásticas mejoras en manejo e informes de errores
 	- Registro cuando se modifica el stock de algún producto
+	- Password para modificar/eliminar productos
+	- Mejorados reportes gráficos
 
 1.20
 	- Mejorada la velocidad del webservice
