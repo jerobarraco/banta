@@ -19,6 +19,10 @@ class ResultProduct:
 	count = 0
 	#and here
 	total_sold = 0.0
+	def __lt__(self, other):
+		#comparison (less than) to allow sorting once the item is handled outside the reportProduct function
+		return self.total_sold < other.total_sold
+
 
 	def toList(self):
 		return self.name, self.total_sold
@@ -34,6 +38,9 @@ class ResultCategory:
 	def toList(self):
 		return self.name, self.total_sold
 
+	def __lt__(self, other):
+		return self.total_sold < other.total_sold
+
 	def toStringList(self):
 		return (self.name, str(self.prod_count), str(self.total_sold), str(self.total_tax))
 
@@ -43,6 +50,10 @@ class ResultUser:
 	count = 0
 	prod_count = 0
 	total_sold = 0.0
+
+	def __lt__(self, other):
+		return self.total_sold< other.total_sold
+
 	def toList(self):
 		return self.name, self.total_sold
 
@@ -56,6 +67,9 @@ class ResultClient:
 	count = 0
 	prod_count = 0
 	total_bought = 0.0
+	def __lt__(self, other):
+		return self.total_bought<other.total_bought
+
 	def toList(self):
 		return self.name, self.total_bought
 
@@ -68,6 +82,9 @@ class ResultMove:
 	name = ""
 	diff = 0
 	reason = ""
+	def __lt__(self, other):
+		return self.diff < other.diff
+
 	def toList(self):
 		return self.name, self.diff
 
@@ -80,6 +97,9 @@ class ResultBuy:
 	prod_name = ""
 	quantity = 0.0
 	total = 0.0
+	def __lt__(self, other):
+		return self.total < other.total
+
 	def toList(self):
 		return self.prod_name, self.total
 

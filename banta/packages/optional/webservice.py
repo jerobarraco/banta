@@ -104,7 +104,7 @@ class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
 		#if there is no user, or the user or passwrd is incorrect, it'll fail
 		self.set_status(401)
 		self.set_header('WWW-Authenticate:','basic realm="Banta"')
-		raise Exception("Usuario o contraseña incorrecta!")
+		raise Exception("Usuario y/o contraseña incorrecta!")
 
 
 class HProducts(BasicAuthHandler):
@@ -269,23 +269,31 @@ class Reports(BasicAuthHandler):
 			#gets the start and end from the current date
 			rep_mod = _pack.optional.reports
 			reports = {
-				'product':rep_mod.reportProduct,
+				'product': rep_mod.reportProduct,
 				'category': rep_mod.reportCategory,
-				'user':rep_mod.reportUser,
-				'client':rep_mod.reportClient,
-				'move':rep_mod.reportMove,
-				'buy':rep_mod.reportBuy
+				'user': rep_mod.reportUser,
+				'client': rep_mod.reportClient,
+				'move': rep_mod.reportMove,
+				'buy': rep_mod.reportBuy
 			}
 			start, today, end = map(_utils.dateTimeToInt, _utils.currentMonthDates())
 			gen_report = reports[report_type]
 			with _db.DB.threaded() as root:
 				results = gen_report((start, end), root)
+
 				#ponemos los headers en su propia clave
 				heads = results.pop('_headers')
 				res['headers'] = heads
 				res['idx_tag'] = results.pop('_idx_tag')
 				res['idx_val'] = results.pop('_idx_val')
-				res['data'] = list(i.toStringList() for i in results.values())
+				#converts the list of Results* to lists of strings, now l_results is a matrix (table)
+				#sorted is used here to not speed down the reports in the main window...
+				#is possible only because we defined __lt__ in the result* classes
+				l_results = (i.toStringList() for i in sorted(results.values(), reverse=True))
+				#we sort them by the column for the graphic
+				#s_res = sorted(l_results, key=itemgetter(res['idx_val']))
+				res['data'] = list(l_results)
+				print ( res['data'] )
 
 
 class Server( _qc.QThread ):
