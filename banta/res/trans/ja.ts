@@ -387,12 +387,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1023"/>
+        <location filename="../ui/main.ui" line="1024"/>
         <source>Nueva Factura</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1038"/>
+        <location filename="../ui/main.ui" line="1039"/>
         <source>Borrar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -422,7 +422,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1053"/>
+        <location filename="../ui/main.ui" line="1054"/>
         <source>IMPRIMIR</source>
         <translation type="unfinished"></translation>
     </message>
@@ -442,27 +442,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="953"/>
+        <location filename="../ui/main.ui" line="954"/>
         <source>Ayuda</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="970"/>
+        <location filename="../ui/main.ui" line="971"/>
         <source>Cambiar Estilo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="975"/>
+        <location filename="../ui/main.ui" line="976"/>
         <source>Soporte y Acerca de</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="983"/>
+        <location filename="../ui/main.ui" line="984"/>
         <source>Imprimir Cierre Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1014"/>
+        <location filename="../ui/main.ui" line="1015"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -472,7 +472,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="999"/>
+        <location filename="../ui/main.ui" line="1000"/>
         <source>Cancelar Impresion</source>
         <translation></translation>
     </message>
@@ -497,27 +497,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="978"/>
+        <location filename="../ui/main.ui" line="979"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1070"/>
+        <location filename="../ui/main.ui" line="1071"/>
         <source>F6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1044"/>
+        <location filename="../ui/main.ui" line="1045"/>
         <source>F7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1064"/>
+        <location filename="../ui/main.ui" line="1065"/>
         <source>Guardar Presupuesto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1059"/>
+        <location filename="../ui/main.ui" line="1060"/>
         <source>F5</source>
         <translation type="unfinished"></translation>
     </message>
@@ -532,7 +532,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1075"/>
+        <location filename="../ui/main.ui" line="1076"/>
         <source>Acerca de Qt</source>
         <translation type="unfinished"></translation>
     </message>
@@ -542,12 +542,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1083"/>
+        <location filename="../ui/main.ui" line="1084"/>
         <source>Change Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1080"/>
+        <location filename="../ui/main.ui" line="1081"/>
         <source>Cambiar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -567,12 +567,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1093"/>
+        <location filename="../ui/main.ui" line="1094"/>
         <source>Importar Clientes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1098"/>
+        <location filename="../ui/main.ui" line="1099"/>
         <source>Importar Proveedores</source>
         <translation type="unfinished"></translation>
     </message>
@@ -582,12 +582,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1107"/>
+        <location filename="../ui/main.ui" line="1108"/>
         <source>Exportar Produtos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1115"/>
+        <location filename="../ui/main.ui" line="1116"/>
         <source>Nueva Compra</source>
         <translation type="unfinished"></translation>
     </message>
@@ -617,17 +617,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/main.ui" line="988"/>
+        <location filename="../ui/main.ui" line="989"/>
         <source>Configuración</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/main.ui" line="1008"/>
+        <location filename="../ui/main.ui" line="1009"/>
         <source>Agregar Ítem</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="../ui/main.ui" line="1088"/>
+        <location filename="../ui/main.ui" line="1089"/>
         <source>Importar Artículos</source>
         <translation type="unfinished"></translation>
     </message>
@@ -637,32 +637,32 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1140"/>
+        <location filename="../ui/main.ui" line="1144"/>
         <source>Cuentas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1120"/>
+        <location filename="../ui/main.ui" line="1121"/>
         <source>Cliente Casual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="994"/>
+        <location filename="../ui/main.ui" line="995"/>
         <source>F12</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1029"/>
+        <location filename="../ui/main.ui" line="1030"/>
         <source>F10</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1129"/>
+        <location filename="../ui/main.ui" line="1133"/>
         <source>SameGame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1132"/>
+        <location filename="../ui/main.ui" line="1136"/>
         <source>Ctrl+S, Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
@@ -677,8 +677,13 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../ui/main.ui" line="1145"/>
+        <location filename="../ui/main.ui" line="1149"/>
         <source>Scan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ui/main.ui" line="1157"/>
+        <source>Cerrar Impresora</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -726,7 +731,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ThreadPrinter</name>
     <message>
-        <location filename="../../packages/optional/printer/__init__.py" line="53"/>
+        <location filename="../../packages/optional/printer/__init__.py" line="55"/>
         <source>No se ha podido conectar con la impresora
 {0}</source>
         <translation type="unfinished"></translation>
@@ -898,32 +903,32 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>reports</name>
     <message>
-        <location filename="../../packages/optional/reports.py" line="260"/>
+        <location filename="../../packages/optional/reports.py" line="280"/>
         <source>Por Rubro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="261"/>
+        <location filename="../../packages/optional/reports.py" line="281"/>
         <source>Por Producto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="262"/>
+        <location filename="../../packages/optional/reports.py" line="282"/>
         <source>Por Usuario</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="263"/>
+        <location filename="../../packages/optional/reports.py" line="283"/>
         <source>Por Cliente</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="264"/>
+        <location filename="../../packages/optional/reports.py" line="284"/>
         <source>Movimientos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="265"/>
+        <location filename="../../packages/optional/reports.py" line="285"/>
         <source>Compras</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1070,7 +1075,7 @@ Si elige NO, la factura NO se guardará.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/printer/__init__.py" line="159"/>
+        <location filename="../../packages/optional/printer/__init__.py" line="181"/>
         <source>Impresora</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1098,17 +1103,17 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.widget</name>
     <message>
-        <location filename="../../packages/optional/reports.py" line="280"/>
+        <location filename="../../packages/optional/reports.py" line="300"/>
         <source>Reportes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="311"/>
+        <location filename="../../packages/optional/reports.py" line="331"/>
         <source>Guardar Reporte</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/reports.py" line="312"/>
+        <location filename="../../packages/optional/reports.py" line="332"/>
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation type="unfinished"></translation>
     </message>

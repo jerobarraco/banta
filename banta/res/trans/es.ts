@@ -16,12 +16,11 @@
         <translation>Acerca de Banta</translation>
     </message>
     <message>
-        <location line="-23"/>
         <source>Entre en nostro sítio</source>
         <translation type="obsolete">Visite nuestro sitio</translation>
     </message>
     <message>
-        <location line="+157"/>
+        <location line="+134"/>
         <source>OK</source>
         <translation>Aceptar</translation>
     </message>
@@ -404,7 +403,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+491"/>
+        <location line="+492"/>
         <source>Nueva Factura</source>
         <translation></translation>
     </message>
@@ -414,7 +413,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-219"/>
+        <location line="-220"/>
         <source>Nombre</source>
         <translation></translation>
     </message>
@@ -439,12 +438,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+587"/>
+        <location line="+588"/>
         <source>IMPRIMIR</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-224"/>
+        <location line="-225"/>
         <source>Buscar</source>
         <translation></translation>
     </message>
@@ -459,7 +458,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+333"/>
+        <location line="+334"/>
         <source>Ayuda</source>
         <translation></translation>
     </message>
@@ -484,17 +483,17 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-607"/>
+        <location line="-608"/>
         <source>Recargo</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+592"/>
+        <location line="+593"/>
         <source>Cancelar Impresion</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-222"/>
+        <location line="-223"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -514,7 +513,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+619"/>
+        <location line="+620"/>
         <source>F1</source>
         <translation></translation>
     </message>
@@ -539,7 +538,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-469"/>
+        <location line="-470"/>
         <source>Drafts</source>
         <translation></translation>
     </message>
@@ -549,17 +548,17 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+264"/>
+        <location line="+265"/>
         <source>Acerca de Qt</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-1001"/>
+        <location line="-1002"/>
         <source>Search by Code</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+1009"/>
+        <location line="+1010"/>
         <source>Change Type</source>
         <translation>Cambiar tipo</translation>
     </message>
@@ -569,7 +568,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-381"/>
+        <location line="-382"/>
         <source>Filtrar por Nombre</source>
         <translation></translation>
     </message>
@@ -584,7 +583,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+155"/>
+        <location line="+156"/>
         <source>Importar Clientes</source>
         <translation></translation>
     </message>
@@ -594,12 +593,12 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-334"/>
+        <location line="-335"/>
         <source>Exportar</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+343"/>
+        <location line="+344"/>
         <source>Exportar Produtos</source>
         <translation></translation>
     </message>
@@ -609,7 +608,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message utf8="true">
-        <location line="-964"/>
+        <location line="-965"/>
         <source>Nuevo Ítem</source>
         <translation></translation>
     </message>
@@ -634,7 +633,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message utf8="true">
-        <location line="+57"/>
+        <location line="+58"/>
         <source>Configuración</source>
         <translation></translation>
     </message>
@@ -649,17 +648,17 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-355"/>
+        <location line="-356"/>
         <source>Limpiar Filtro</source>
         <translation></translation>
     </message>
     <message>
-        <location line="+407"/>
+        <location line="+411"/>
         <source>Cuentas</source>
         <translation></translation>
     </message>
     <message>
-        <location line="-20"/>
+        <location line="-23"/>
         <source>Cliente Casual</source>
         <translation></translation>
     </message>
@@ -674,7 +673,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+100"/>
+        <location line="+103"/>
         <source>SameGame</source>
         <translation></translation>
     </message>
@@ -684,7 +683,7 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="-1078"/>
+        <location line="-1082"/>
         <source>Nombre del cliente</source>
         <translation></translation>
     </message>
@@ -694,8 +693,13 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location line="+573"/>
+        <location line="+577"/>
         <source>Scan</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Cerrar Impresora</source>
         <translation></translation>
     </message>
 </context>
@@ -743,7 +747,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ThreadPrinter</name>
     <message>
-        <location filename="../../packages/optional/printer/__init__.py" line="+53"/>
+        <location filename="../../packages/optional/printer/__init__.py" line="+55"/>
         <source>No se ha podido conectar con la impresora
 {0}</source>
         <translation></translation>
@@ -752,7 +756,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>app</name>
     <message>
-        <location line="-53"/>
         <source>Bill module loaded</source>
         <translation type="obsolete">cargando modulo de bill</translation>
     </message>
@@ -760,7 +763,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>bill</name>
     <message>
-        <location line="+0"/>
+        <location line="-55"/>
         <source>Bill module loaded</source>
         <translation type="obsolete">cargando modulo de bill</translation>
     </message>
@@ -931,7 +934,7 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>reports</name>
     <message>
-        <location filename="../../packages/optional/reports.py" line="+260"/>
+        <location filename="../../packages/optional/reports.py" line="+280"/>
         <source>Por Rubro</source>
         <translation></translation>
     </message>
@@ -964,7 +967,6 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>self.app</name>
     <message>
-        <location line="-264"/>
         <source>Loading ...</source>
         <translation type="obsolete">Cargando ...</translation>
     </message>
@@ -1002,7 +1004,6 @@ p, li { white-space: pre-wrap; }
         </translation>
     </message>
     <message numerus="yes">
-        <location line="-55"/>
         <source>Su licencia es válida por %n día(s) más.</source>
         <comment>licencia</comment>
         <translation type="obsolete">
@@ -1130,7 +1131,7 @@ Si elige NO, la factura NO se guardará.</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../packages/optional/printer/__init__.py" line="+159"/>
+        <location filename="../../packages/optional/printer/__init__.py" line="+181"/>
         <source>Impresora</source>
         <translation></translation>
     </message>
@@ -1158,7 +1159,7 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.widget</name>
     <message>
-        <location filename="../../packages/optional/reports.py" line="+279"/>
+        <location filename="../../packages/optional/reports.py" line="+15"/>
         <source>Reportes</source>
         <translation></translation>
     </message>
@@ -1176,7 +1177,6 @@ Si elige NO, la factura NO se guardará.</source>
 <context>
     <name>self.window</name>
     <message>
-        <location line="-311"/>
         <source>Loading ...</source>
         <translation type="obsolete">cargando ...</translation>
     </message>

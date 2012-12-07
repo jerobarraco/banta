@@ -56,6 +56,7 @@ class JsonWriter(object):
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		if exc_type is None:
 			self.res['success'] = True
+			self.res['error'] = ""
 			act = 0
 		else:
 			error = unicode(exc_val)
@@ -91,8 +92,10 @@ class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
 			self.set_status(500)
 			self.set_header('WWW-Authenticate', 'basic realm="Banta"')
 			raise Exception("Schema not supported, only Basic.")
-
-		username, a, pwd = token.decode('base64').partition(':')
+		#first we decode the base64, it returns a bytestring (encoded) so we MUST decode it BEFORE spliting
+		#decoded = token.decode('base64') // recoded = decoded.decode('utf-8') // recoded.split(':', 1)
+		username, pwd = token.decode('base64').decode('utf-8').split(':', 1)
+		#print (("login attempt [%s] [%s]"%(username, pwd)))
 		# if pwd matches user:
 		for user in root['users']:
 			if user.name == username:
@@ -122,7 +125,13 @@ class HProducts(BasicAuthHandler):
 		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
 
 	def _prodFullDict(self, p):
-		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
+		return {
+			'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock,
+			'external_code':p.external_code, 'buy_price':p.buy_price,
+			'pack_units':p.pack_units,
+			'provider':p.provider and p.provider.name or "",
+			'category':p.category and p.category.name or "",
+		}
 
 	def get(self, *args, **kwargs):
 		"""Lists one or many products
@@ -141,7 +150,7 @@ class HProducts(BasicAuthHandler):
 				if code in root['products']:
 					prod = root['products'][code]
 					#to allow a "search" function later
-					prods.append(self._prodFullDict(prod))
+					prods.append(self._prodDict(prod))
 				else:
 					raise Exception("Producto no encontrado")
 				res['count'] = len(prods)
@@ -187,7 +196,6 @@ class HProducts(BasicAuthHandler):
 		with JsonWriter(self) as res:#, _utils.Timer("post"):
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
-				logger.debug('got user: '+ str(user))
 
 				code = self.get_argument('code', "").strip()
 				old_code = self.get_argument ('old_code', "").strip()
@@ -205,7 +213,7 @@ class HProducts(BasicAuthHandler):
 					#notice "old_code"
 					prod = root['products'][old_code]
 
-				prod.setName(self.get_argument ('name', ""))
+				prod.setName(self.get_argument('name', ""))
 				prod.price = float(self.get_argument('price', 0.0))
 				#if stock differs add a Move
 				nstock = float(self.get_argument('stock', 0.0))
@@ -228,8 +236,7 @@ class HProducts(BasicAuthHandler):
 				root['products'][code] = prod
 
 				row = list(root['products'].keys()).index(code)
-
-				res['product'] = self._prodFullDict(prod)
+				res['data']  = [self._prodDict(prod)]
 			#end db
 			#Outside with
 			#we emit the signal now, because the changes must be commited
@@ -247,21 +254,17 @@ class HProducts(BasicAuthHandler):
 			#print ('code', code)
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
-				logger.debug('got user: '+ str(user))
 				if code not in root['products']:
 					raise Exception("No existe el producto.")
 				#no need to care of special cases, this will raise an exception if not in list
 				row = list(root['products'].keys()).index(code)
 
-			res['return'] = self.deleteProduct.emit(row)
-			res['row'] = row
 			res['code'] = code
+			self.deleteProduct.emit(row)
 
 class Reports(BasicAuthHandler):
 	def get(self, *args, **kwargs):
 		with JsonWriter(self) as res:#, _utils.Timer('reports'):
-			#try to get the start and end parameter
-			self.get_argument('start', 0)
 			report_type = self.get_argument('type', 'product')
 			#gets the start and end from the current date
 			rep_mod = _pack.optional.reports
@@ -276,8 +279,9 @@ class Reports(BasicAuthHandler):
 			start, today, end = map(_utils.dateTimeToInt, _utils.currentMonthDates())
 			gen_report = reports[report_type]
 			with _db.DB.threaded() as root:
+				#Leer los reportes requiere autenticación
+				user = self.get_current_user(root)
 				results = gen_report((start, end), root)
-
 				#ponemos los headers en su propia clave
 				heads = results.pop('_headers')
 				res['headers'] = heads
@@ -290,6 +294,7 @@ class Reports(BasicAuthHandler):
 				#we sort them by the column for the graphic
 				#s_res = sorted(l_results, key=itemgetter(res['idx_val']))
 				res['data'] = l_results
+				res['count'] = len(l_results)
 
 
 class Server( _qc.QThread ):

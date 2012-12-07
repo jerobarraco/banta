@@ -8,7 +8,7 @@ import ConfigParser, os
 
 class Config:
 	EXPERIMENTAL = False
-	PERSISTENT_PRINTER = False
+	PERSISTENT_PRINTER = True
 	DEBUG = False
 	PROFILING = False
 	SERVER = ''
@@ -48,7 +48,6 @@ class Config:
 			for m in d_modules.split(',')
 		]
 		self.SERVER = self.config.get(sect, self.K_SERVER)
-
 
 	def get(self, section, key):
 		return self.config.get(section, key)

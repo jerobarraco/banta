@@ -34,7 +34,8 @@ TC 0.9
 	- Indicador de actividad de red
 	- Posible problemas de impresión con monotributistas
 	- Mejora con el manejo de impresoras fiscales
-	- Impresoras fiscales persistentes (mayor velocidad al imprimir)
+	- Impresoras fiscales persistentes (mayor velocidad al imprimir).
+		Por defecto mantiene la impresora fiscal conectada. Solo se conecta luego de imprimir la primer factura.
 
 1.19
 	- I.V.A. para clientes exentos
