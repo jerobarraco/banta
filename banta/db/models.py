@@ -26,8 +26,11 @@ LICENSES_ALL = (LICENSE_FREE, LICENSE_BASIC, LICENSE_POWER, LICENSE_ADVANCED)
 LICENSES_NOT_FREE = (LICENSE_BASIC, LICENSE_POWER, LICENSE_ADVANCED)
 LICENSES_NOT_BASIC = (LICENSE_POWER, LICENSE_ADVANCED)
 #This could be stored in the settings
+#TODO create a TaxType
 TAX_MAX = 0.21
 TAX_REDUCED = 0.105
+TAX_CIGAR = 0.0667
+TAX_PHONE = 0.27
 #DO NOT IMPORT DB or DB.CNX or DB.ZODB DIRECTLY HERE!
 
 #DO NOT IMPORT DB or DB.CNX or DB.ZODB DIRECTLY HERE!
@@ -63,10 +66,21 @@ class Product(_per.Persistent):
 	TYPE_EXEMPT = 0
 	TYPE_SELL_GOOD = 1
 	TYPE_USE_GOOD = 2
+	TYPE_CIGAR = 3
+	TYPE_PHONE = 4
 	TYPE_NAMES = (
 		'Exento (0%)',
 		'Bien de cambio (' + str(int(TAX_MAX*100))+'%)',
 		'Bien de uso (' + str(int(TAX_REDUCED*100))+'%)',
+		'Cigarrillos (' + str(int(TAX_CIGAR*100))+'%)',
+		'Teléfono (' + str(int(TAX_PHONE*100))+'%)',
+	)
+	TYPE_VALUES = (
+		0.0,
+		TAX_REDUCED,
+		TAX_MAX,
+		TAX_CIGAR,
+		TAX_PHONE
 	)
 	#Consts for Brute Income (Ingresos Brutos), defines what will be charged (depends on other stuff)
 	IB_NOT_EXEMPT = 0
@@ -150,13 +164,16 @@ class Item(_per.Persistent):
 		#"self.product and" will prevent checking when there's no product set
 		prod_exempt = self.product and (self.product.tax_type == self.product.TYPE_EXEMPT)
 
-		#if self.client_exempt or prod_exempt:
+		#if self.client_exempt or prod_exempt: #doesnt matter if the client is exempt
 		if prod_exempt:
 			self.tax = 0.0
 		elif self.reducible:
 			self.tax = TAX_REDUCED
 		else:
-			self.tax = TAX_MAX
+			if self.product :
+				self.tax = Product.TYPE_VALUES[self.product.tax_type]
+			else:
+				self.tax = TAX_MAX
 
 	def calculate(self):
 		"""Calculates the total
@@ -189,6 +206,8 @@ class TypePay(_per.Persistent):
 
 	def __str__(self):
 		return "%s - %s%%" % (self.name, self.markup*100)
+
+
 
 class Client(_per.Persistent):
 	"""Class for the Clients"""
