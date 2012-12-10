@@ -29,6 +29,7 @@ dats = [
 	('changelog.txt', 'banta\\changelog.txt', 'DATA'),
 	('gpl-3.0.txt', 'banta\\gpl-3.0.txt', 'DATA'),
 	('user.qss', 'banta\\user.qss', 'DATA'),
+	('static/API WebService.odt', 'docs/dev/API WebService.odt', 'DATA'),	
 	#particles for samegame
 	('Qt/labs/particles/qmldir',  'C:\\Python27\\Lib\\site-packages\\PySide\\imports\\Qt\\labs\\particles\\qmldir', 'DATA'),
 	('Qt/labs/particles/qmlparticlesplugin.dll', 'C:\\Python27\\Lib\\site-packages\\PySide\\imports\\Qt\\labs\\particles\\qmlparticlesplugin.dll', 'DATA'),
@@ -52,7 +53,8 @@ dats = [
 		('static/bootstrap.js', 'static/bootstrap.js', 'DATA'),
 		('static/example.css', 'static/example.css', 'DATA'),
 		('static/ext-all.css', 'static/ext-all.css', 'DATA'),
-		('static/eext-all-debug.js', 'static/ext-all-debug.js', 'DATA'),	
+		('static/ext-all-debug.js', 'static/ext-all-debug.js', 'DATA'),	
+		
 	]
 coll = COLLECT(
 		exe,

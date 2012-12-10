@@ -6,13 +6,15 @@ and easy_install
 	to run execute: banta
 	you might need to install python-setuptools if you don't have easy_install
 	some other modules required are:
-	feedparser, tornado, pyside, ZODB3, transaction == 1.2.0, pyserial,
+	feedparser, tornado, pyside, ZODB3, transaction >= 1.2.0, pyserial,
 	if you can install them with your package manager is the best option, if not, use easy_install
 )
 
 MoonGate http://MoonGate.com.ar
 
-TC 0.9
+1.21
+
+TC 1.0
 	- Interfaz ampliamente mejorada
 	- UTF8 modificar y al buscar
 	- Codigo de producto solo alfanumerico.
