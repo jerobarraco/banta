@@ -13,7 +13,4 @@ public class Product {
 	public String toString(){
 		return String.format("[%s] (%s) $%s %s", code, stock, price, name);
 	}
-	public void fromJSon(String json){
-		
-	}
 }

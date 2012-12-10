@@ -1,51 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="top"
-    tools:context=".Mantenedor_Producto" >
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent" >
+	<ImageView
+		android:id="@+id/logo"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:src="@drawable/logobanta"
+		android:scaleType="center"
+	/>
+	<TableRow
+		android:id="@+id/tableRow1"
+		android:layout_width="fill_parent"
+		android:layout_weight="1"
+		android:layout_marginTop="30dp"
+		>
+		<Button
+			android:id="@+id/Btn_Adm_Pro"
+			android:layout_weight="0.5"
+			android:onClick="man_pro"
+			android:text="Productos" 
+			android:background="@drawable/buttons" 
+			android:drawableTop="@drawable/btn_prod"
+			android:layout_marginTop="15dp"
+			android:textStyle="bold"
+			android:layout_margin="5dp"
+			/>
+		<Button
+			android:id="@+id/Btn_Config"
+			android:onClick="configuracion"
+			android:layout_weight="0.5"
+			android:text="Configuración"
+			android:layout_marginTop="15dp"
+			android:background="@drawable/buttons" 
+			android:textStyle="bold"
+			android:drawableTop="@drawable/btn_pref"
+			android:layout_margin="5dp"
+			/>
+	</TableRow>
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:digits="0123456789."
-        android:inputType="numberDecimal"
-        android:lines="1"
-        android:text="@string/default_ip">
-        <requestFocus />
-    </EditText>
+	<TableRow
+		android:id="@+id/tableRow2"
+		android:layout_width="fill_parent"
+		android:layout_weight="1"
+	>
 
-    <Button
-        android:id="@+id/Btn_Adm_Pro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:onClick="man_pro"
-        android:text="Administración de Productos" />
+		<Button
+			android:id="@+id/Btn_Rep"
+			android:layout_weight="0.5"
+			android:onClick="reportes"
+			android:text="Reportes"
+			android:background="@drawable/buttons" 
+			android:drawableTop="@drawable/btn_rep" 
+			android:textStyle="bold"
+			android:layout_margin="5dp"/>
+		<Button
+			android:id="@+id/Btn_Gra"
+			android:layout_weight="0.5"
+			android:onClick="graficos"
+			android:text="Gráficos"
+			android:background="@drawable/buttons" 
+			android:drawableTop="@drawable/btn_gra"
+			android:textStyle="bold"
+			android:layout_margin="5dp"
+		/>
 
-    <Button
-        android:id="@+id/Btn_Rep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Btn_Adm_Pro"
-        android:layout_alignRight="@+id/Btn_Adm_Pro"
-        android:layout_below="@+id/Btn_Adm_Pro"
-        android:layout_marginTop="15dp"
-        android:onClick="reportes"
-        android:text="Reportes" />
+	</TableRow>
 
-    <Button
-        android:id="@+id/Btn_Gra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Btn_Rep"
-        android:layout_alignRight="@+id/Btn_Rep"
-        android:layout_below="@+id/Btn_Rep"
-        android:layout_marginTop="14dp"
-		android:onClick="graficos"
-        android:text="Gráficos" />
-
-</RelativeLayout>
+</TableLayout>

@@ -2,10 +2,11 @@
 	<item 
 		android:id="@+id/mpmenu_refresh"
 		android:icon="@drawable/ic_menu_refresh"
-		android:title="@string/mpmenu_refresh"
+		android:title="@string/mpmenu_refresh" 
+		
 	/>
+<!-- esta wea solo esta definida pa android 4 .. android:showAsAction="ifRoom" -->
 	<item 
-	   
 		android:id="@+id/mpmenu_change"
 		android:icon="@drawable/ic_menu_orden"
 		android:title="@string/mpmenu_change"
@@ -17,7 +18,14 @@
 		/>
 	<item android:id="@+id/mpmenu_by_price" 
 	      android:title="@string/mpmenu_by_price" 
-	      android:icon="@drawable/ic_menu_precio"></item>
-	<item android:id="@+id/mpmenu_by_stock" android:title="@string/mpmenu_by_stock" android:icon="@drawable/ic_menu_stock"></item>
-	<item android:id="@+id/mpmenu_by_code" android:title="@string/mpmenu_by_code" android:icon="@drawable/ic_menu_codigo"></item>
+	      android:icon="@drawable/ic_menu_precio"
+	/>
+	<item android:id="@+id/mpmenu_by_stock" android:title="@string/mpmenu_by_stock" 
+				android:icon="@drawable/ic_menu_stock" 
+		
+	/>
+	<item android:id="@+id/mpmenu_by_code" android:title="@string/mpmenu_by_code" 
+				android:icon="@drawable/ic_menu_codigo"
+		
+/>
 </menu>

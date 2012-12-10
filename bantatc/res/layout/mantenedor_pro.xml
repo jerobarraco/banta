@@ -1,69 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent" 
+		xmlns:android="http://schemas.android.com/apk/res/android"
+>
+	<ImageButton
+			android:id="@+id/btn_menu"
+			android:layout_marginTop="17dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:src="@drawable/ic_menu_more"
+			android:onClick="menu"
+	/>
 
-    <Button
+<ImageButton
         android:id="@+id/Btn_Scan"
-        android:layout_width="226dp"
+				android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
+        android:layout_alignBaseline="@+id/btn_menu"
+				android:layout_toLeftOf="@+id/btn_menu"
+				android:layout_alignBottom="@+id/btn_menu"
+				android:src="@drawable/ic_menu_scan"
         android:onClick="escanear"
-        android:text="Escanear" />
-
-    <TextView
-        android:id="@+id/cdHttp"
-        android:layout_width="wrap_content"
+         /> 
+   <!-- <Button
+        android:id="@+id/Btn_Scan"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Btn_Scan"
-        android:layout_marginTop="42dp"
-        android:text="Cargando datos..." />
-
-    <AutoCompleteTextView
-        android:id="@+id/ProductCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Btn_Scan"
-        android:ems="10" >
-
-        <requestFocus />
+        android:layout_alignBaseline="@+id/btn_menu"
+				android:layout_alignParentLeft="true"
+				android:layout_toLeftOf="@+id/btn_menu"
+				android:layout_alignBottom="@+id/btn_menu"
+        android:onClick="escanear"
+        android:text="Escanear" /> -->
+		<ImageButton
+				android:id="@+id/Btn_Buscar"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_toLeftOf="@+id/Btn_Scan"
+				android:layout_alignBottom="@+id/btn_menu"
+				android:src="@drawable/ic_menu_search"
+				android:onClick="buscar"
+			/>
+		<AutoCompleteTextView
+			android:id="@+id/ProductCode"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentLeft="true"
+			android:layout_alignBottom="@+id/Btn_Buscar"
+			android:layout_toLeftOf="@+id/Btn_Buscar"
+		>
     </AutoCompleteTextView>
+		
+		
+	
 
-    <Button
-        android:id="@+id/Btn_Buscar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ProductCode"
-        android:layout_alignBottom="@+id/ProductCode"
-        android:layout_marginLeft="18dp"
-        android:layout_toRightOf="@+id/ProductCode"
-        android:gravity="center"
-        android:onClick="buscar"
-        android:text="Buscar" />
+    
+		<!--label-->
+    <TextView
+			android:id="@+id/cdHttp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/ProductCode"
+			android:text="Cargando datos..." />
 
-
-
-    <AbsoluteLayout
-        android:id="@+id/AbsoluteLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true" >
-
-        <ListView
-            android:id="@+id/listView1"
-            android:layout_width="287dp"
-            android:layout_height="330dp"
-            android:layout_marginBottom="20dp"
-            android:layout_x="-2dp"
-            android:layout_y="131dp"
-            android:headerDividersEnabled="true" >
+    <ListView
+			android:id="@+id/listView1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
+			android:headerDividersEnabled="true" 
+			android:layout_below="@+id/cdHttp"
+		>
             
-        </ListView>
+		</ListView>
 
-    </AbsoluteLayout>
-
+  
+<!-- android:drawableTop="@drawable/ic_menu_more" -->
 </RelativeLayout>

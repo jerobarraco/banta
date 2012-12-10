@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/Lv_pv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Codigo: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/Lv_pv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Lv_pv_code"
+        android:layout_below="@+id/Lv_pv_code"
+        android:text="Nombre: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/Lv_pv_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Lv_pv_name"
+        android:layout_below="@+id/Lv_pv_name"
+        android:text="Stock: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/Lv_pv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/Lv_pv_stock"
+        android:layout_below="@+id/Lv_pv_stock"
+        android:text="Precio: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    
+   
+    <TextView
+        android:id="@+id/Lv_pv_code1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+
+        android:layout_alignBaseline="@+id/Lv_pv_code"
+        android:layout_alignBottom="@+id/Lv_pv_code"
+        android:layout_toRightOf="@+id/Lv_pv_code"
+        android:text="No encontrado"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Lv_pv_name1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Lv_pv_name"
+        android:layout_alignBottom="@+id/Lv_pv_name"
+		android:layout_toRightOf="@+id/Lv_pv_name"
+        android:layout_alignRight="@+id/Lv_pv_code1"
+		android:layout_below="@+id/Lv_pv_code1"
+        android:text="No encontrado"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Lv_pv_stock1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+		android:layout_alignBaseline="@+id/Lv_pv_stock"
+        android:layout_alignBottom="@+id/Lv_pv_stock"
+		android:layout_toRightOf="@+id/Lv_pv_stock"
+        android:layout_below="@+id/Lv_pv_name1"
+        android:layout_alignRight="@+id/Lv_pv_name1"
+
+        android:text="No encontrado"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:id="@+id/Lv_pv_price1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/Lv_pv_price"
+        android:layout_alignBottom="@+id/Lv_pv_price"
+		android:layout_toRightOf="@+id/Lv_pv_price"
+
+		android:layout_below="@+id/Lv_pv_stock1"
+        android:layout_alignRight="@+id/Lv_pv_stock1"
+
+        android:text="No encontrado"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
+
+</RelativeLayout>

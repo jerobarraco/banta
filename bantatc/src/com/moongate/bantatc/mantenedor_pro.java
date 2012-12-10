@@ -6,17 +6,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.moongate.bantatc.R;
-import java.util.ArrayList;
 
-public class mantenedor_pro extends Activity {
-		ArrayList<Product> products;
-		public String ip;
+public class mantenedor_pro extends Activity implements OnScrollListener{
 		TextView cdHttp ;
 		ListView lv;
 		TextView prodCode;
@@ -25,12 +23,31 @@ public class mantenedor_pro extends Activity {
 		public String search_name = "";
 		public String order_by = ordenes[0];
 		public String order_asc = "1";
+		public Adapter_Pro adapter;
+		//para cargar al scrollear
+		//indica la cantidad de elementos a intenar cargar por pagina
+		public int cargar = 20;
+		//indica la pagina actual
+		public int pagina = 0;
+		//evita cargar 2 veces (aunque seria mejor utilizar una instancia de wsListProducts para evitar tener que usar un flag)
+		public boolean cargando = false;
+		//indica la cantidad minima visible antes de intentar cargar nueamente
+		private int visibles = 5;
+		
+		public int total = 0;
+		//indica si llegamos al fin de la lista... 
+		public boolean end;
+		
 		
 		@Override
 		public boolean onCreateOptionsMenu(Menu menu) {
 				MenuInflater inflater = getMenuInflater();
 				inflater.inflate(R.menu.activity_mantenedor__producto, menu);
+				//aca podriamos verificar si la versin del sdk es <14 entonces ocultamos el boton de menu que hicimos aparte
+				//o tamb podriamos poner a los items que se muestren en el action bar
+				
 				return true;
+				
 		}
 		@Override
 		public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,55 +76,43 @@ public class mantenedor_pro extends Activity {
 							this.order_by = ordenes[3];
 							break;
 						default:
-								return super.onOptionsItemSelected(item);
+							return super.onOptionsItemSelected(item);
 				}
-				this.recargar();
+				this.recargar(true);
 				return true;
 		}
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mantenedor_pro);
-				cdHttp = (TextView) this.findViewById(R.id.cdHttp);
-				prodCode= (TextView) this.findViewById(R.id.ProductCode);
-				
-				Bundle extras = getIntent().getExtras();
-				
-				this.prodCode = (TextView) this.findViewById(com.moongate.bantatc.R.id.ProductCode);
+				this.search_name = "";
+				this.search_code = "";
+				this.cargando = false;
+				this.cdHttp = (TextView) this.findViewById(R.id.cdHttp);
+				this.prodCode = (TextView) this.findViewById(R.id.ProductCode);
 				this.lv = (ListView) findViewById(R.id.listView1);
 				
-				if(extras ==null) {
-					ip = getResources().getString(R.string.default_ip);
-				}
-				else{
-					ip = extras.getString("ip");				
-				}
 				this.lv.setClickable(true);	
 				this.lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 						Product p = (Product) parent.getItemAtPosition(position);
-						/*Toast.makeText(
-								mantenedor_pro.this, 
-								"Clicked!  " +p.code+ " - " + String.valueOf(position)+ ","+ String.valueOf(id),
-								Toast.LENGTH_LONG).show();*/
 						mantenedor_pro.this.verProducto(p.code);
 					}
 				});
-				this.search_name = "";
-				this.search_code = "";
-				
-				recargar();
+				this.adapter = new Adapter_Pro(this, R.layout.productview);
+				this.lv.setAdapter(this.adapter);
+				//el orden de estas dos lineas es very muy important, sino la lista intentará cargar mas.. y eso hara macana
+				recargar(true);
+				this.lv.setOnScrollListener(this);
     } 
-		private void verProducto(String code){
-			Intent adm_prod = new Intent(this, Adm_Pro.class);
-			adm_prod.putExtra("search_code", code);
-			adm_prod.putExtra("ip", this.ip);
-			startActivityForResult(adm_prod, 0);
-		}
+	private void verProducto(String code){
+		Intent adm_prod = new Intent(this, Adm_Pro.class);
+		adm_prod.putExtra("search_code", code);
+		startActivityForResult(adm_prod, 0);
+	}
 	public void buscar(View v){
 		this.search_name = this.prodCode.getText().toString();
-		//verProducto(this.search_code);
-		recargar();
+		recargar(true);
 	}
 		
 	public void escanear(View v){
@@ -118,17 +123,34 @@ public class mantenedor_pro extends Activity {
 		intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
 		startActivityForResult(intent, 0);    //Barcode Scanner to scan for us
 	}
-	public void recargar(){
-		cdHttp.setText("Cargando...");
+	
+	public void recargar(boolean reset){
+		if (cargando){
+			//ojo con esto, si la flag cargando no se coloca a false, podemos quedar trabados eternametne
+			return;
+		}
+		if (reset){
+			cdHttp.setText("Cargando...");
+			this.pagina = 0;
+			this.end = false;
+		}else{
+				cdHttp.setText("Cargando más...");
+				this.pagina ++;
+		}
+		this.cargando = true;
 		new wsListProducts().execute(this);
 	}
+	
 	@Override 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {     
 		super.onActivityResult(requestCode, resultCode, data); 
 		if (data == null){
 			//if data == null es para el finish de AdmPro
 			//cuando vuelve de adm_pro, recargamos la lista
-			recargar();
+			//notar que ponemos true en reset porque si algun dato se modifico, pos, ya toda la lista cambia
+			//porque o se puede agregar o quitar un art (hay filtros)
+			//o la ubicacion puede cambiar (hay orden)
+			recargar(true);
 		}else{
 			if (resultCode == RESULT_OK) {
 				String format = data.getStringExtra("SCAN_RESULT_FORMAT");
@@ -138,12 +160,26 @@ public class mantenedor_pro extends Activity {
 						"Codigo: " + result + " ["+format+"]",
 						Toast.LENGTH_LONG
 				).show();
-				//TextView pcode = 
-				//prodCode.setText(result);
 				mantenedor_pro.this.verProducto(result);
 			} else if (resultCode == RESULT_CANCELED) {
 
 			}
 		}
 	}	
+
+	public void onScrollStateChanged(AbsListView alv, int i) {
+		//no necesitamos esta wea
+	}
+
+	public void onScroll(AbsListView view, int firstVisibleItem,
+                int visibleItemCount, int totalItemCount) {
+		//cuando la lista se scrollea
+		if ((!end) && (!cargando)  && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibles)) {
+			//si resulta que no estamos cargando... y resulta que la lista scrolleo tanto que estamos en los ultimso x items
+				recargar(false);
+		}
+	}
+	public void menu(View v){
+		mantenedor_pro.this.openOptionsMenu();
+	}
 }

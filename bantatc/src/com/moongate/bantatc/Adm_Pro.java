@@ -1,7 +1,6 @@
 package com.moongate.bantatc;
 
 import java.util.regex.Pattern;
-import com.moongate.bantatc.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,6 @@ public class Adm_Pro extends Activity {
 	public String name;
 	public Double stock;
 	public Double price;
-	public String ip;
 	
 	Pattern pattern = Pattern.compile("^([A-Za-z]|[0-9])+$");
 	TextView cdt_code;
@@ -26,40 +24,31 @@ public class Adm_Pro extends Activity {
 /**
   * Called when the activity is first created.
   */
- @Override
- public void onCreate(Bundle icicle) {
-  super.onCreate(icicle);
-  setContentView(R.layout.adm_pro);
-	Bundle extras = getIntent().getExtras();
-	
-	if(extras == null) {
-		search_code = "";
+	@Override
+	public void onCreate(Bundle icicle) {
+		super.onCreate(icicle);
+		setContentView(R.layout.adm_pro);
+		Bundle extras = getIntent().getExtras();
 		old_code = "";
 		code = "";
 		name = "";
 		price = 0d;
 		stock = 0d;
-		ip = getResources().getString(R.string.default_ip);
-	}
-	else{
-		search_code = extras.getString("search_code");
-	/*	old_code = extras.getString("code");
-		code = old_code;
-		name = extras.getString("name");
-		price = extras.getDouble("price");
-		stock = extras.getDouble("stock");*/
-		ip = extras.getString("ip");
-	}
-	
-	cdt_code = (TextView) this.findViewById(R.id.Txt_codigo);
-	cdt_name = (TextView) this.findViewById(R.id.txt_nombre);
-	cdt_price = (TextView) this.findViewById(R.id.txt_precio);
-	cdt_stock = (TextView) this.findViewById(R.id.txt_stock);
-	
-	this.cargar();
- }
+		if(extras == null) {
+			search_code = "";
+		}
+		else{
+			search_code = extras.getString("search_code");
+		}
 
-  public void modificar(View v) {
+		cdt_code = (TextView) this.findViewById(R.id.Txt_codigo);
+		cdt_name = (TextView) this.findViewById(R.id.txt_nombre);
+		cdt_price = (TextView) this.findViewById(R.id.txt_precio);
+		cdt_stock = (TextView) this.findViewById(R.id.txt_stock);
+	
+		this.cargar();
+	}
+	public void modificar(View v) {
 		//aca llamar al webservice
 		old_code = code ; //esto es por si el user cambio el codigo
 		code = cdt_code.getText().toString();
@@ -67,8 +56,8 @@ public class Adm_Pro extends Activity {
 		stock = Double.valueOf(cdt_stock.getText().toString());
 		price = Double.valueOf(cdt_price.getText().toString());
 		if (! pattern.matcher(code).find()){
-			   Toast.makeText(this, "El codigo solo admite letras de la A a la Z y numeros", Toast.LENGTH_LONG).show();
-			   return ;
+				Toast.makeText(this, "El codigo solo admite letras de la A a la Z y numeros", Toast.LENGTH_LONG).show();
+				return ;
 		}
 		if (name.equals("")){
 		  Toast.makeText(this, "No puede estar vacio el nombre", Toast.LENGTH_LONG).show();
@@ -78,7 +67,7 @@ public class Adm_Pro extends Activity {
 	  new wsModProducts().execute(this);
 	}
 	public void eliminar(View v){
-		new wsDelProducts().execute(this);
+		new wsDelProduct().execute(this);
 	}
 	public void cargar(){
 		new wsDetailProduct().execute(this);

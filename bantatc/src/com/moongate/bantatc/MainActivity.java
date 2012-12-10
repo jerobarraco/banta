@@ -1,38 +1,44 @@
 package com.moongate.bantatc;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import com.moongate.bantatc.R;
 
 public class MainActivity extends Activity {
-		private EditText eIP;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-				eIP = (EditText) findViewById(R.id.editText);
-    }
+	public String ip, user, password;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		//obtenemos las preferencias guardadas
+		//variable temporal con la ip default escrita en los resources
+		Pref.cargar(this);
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
-    }
-    
-    public void man_pro(View v) {
-    	Intent mantenedorP = new Intent(MainActivity.this, mantenedor_pro.class);
-			mantenedorP.putExtra("ip", eIP.getText().toString() );
-    	startActivity(mantenedorP);
-    }
-    public void graficos(View v) {
-    	Intent reportP = new Intent(MainActivity.this, Graficos.class);
-			reportP.putExtra("ip", eIP.getText().toString());
-    	startActivity(reportP);
-    }
-    public void reportes(View v){
-			
-		}
+  public void lanzar(Class c){
+		//funcion que lanza una activity (pone el ip del textbox en las preferencias antes
+		//Pref.ip = eIP.getText().toString() ;
+		startActivity(new Intent(MainActivity.this, c));
+	}
+	public void man_pro(View v) {
+		lanzar (mantenedor_pro.class);
+	}
+	public void graficos(View v) {
+		lanzar(Graficos.class);
+	}
+	public void reportes(View v){
+		lanzar(Reportes.class);
+	}
+	public void configuracion(View v){
+		lanzar(Configuracion.class);
+	}
+	@Override
+	protected void onStop(){
+		//Al termianr las guardamos
+		//esto no es muy necesario porque la config se guarda con el boton guardar en el activity configuracion
+		super.onStop();
+		Pref.guardar(this);
+	}
 }

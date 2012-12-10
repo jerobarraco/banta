@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+	<TextView
+		android:id="@+id/c_lb_server"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentTop="true"
+		android:text="Servidor:"
+	/>
+
+	<EditText
+		android:id="@+id/c_ed_server"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/c_lb_server"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="15dp"
+	>
+	</EditText>
+
+	<TextView
+		android:id="@+id/c_lb_user"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/c_ed_server"
+		android:layout_alignParentLeft="true"
+		android:text="Usuario:"
+	/>
+	<EditText
+		android:id="@+id/c_ed_user"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/c_lb_user"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="15dp"
+		>
+	</EditText>
+
+	<TextView
+		android:id="@+id/c_lb_pwd"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/c_ed_user"
+		android:layout_alignParentLeft="true"
+		android:text="Password:"
+ />
+
+	<EditText
+		android:id="@+id/c_ed_pwd"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/c_lb_pwd"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="15dp"
+	/>
+
+	<Button
+		android:id="@+id/c_b_mod"
+		android:layout_width="114dp"
+		android:layout_height="70dp"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentBottom="true"
+		android:onClick="guardar"
+		android:text="Guardar" 
+	/>
+
+</RelativeLayout>
