@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
-    <height>624</height>
+    <width>719</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -922,8 +922,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>622</width>
-     <height>22</height>
+     <width>719</width>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">
@@ -958,8 +958,14 @@
     <addaction name="separator"/>
     <addaction name="acSameGame"/>
    </widget>
+   <widget class="QMenu" name="menuTest">
+    <property name="title">
+     <string>Test</string>
+    </property>
+   </widget>
    <addaction name="menuMenu"/>
    <addaction name="menuAcerca_de"/>
+   <addaction name="menuTest"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="acChangeStyle">
@@ -1198,6 +1204,7 @@
  </tabstops>
  <resources>
   <include location="../rc.qrc"/>
+  <include location="../../../../../.designer/rc.qrc"/>
  </resources>
  <connections/>
 </ui>
