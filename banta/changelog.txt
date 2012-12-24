@@ -2,7 +2,6 @@
 and easy_install
 
 (
-
 	execute: easy_install -U banta
 	to run execute: banta
 	you might need to install python-setuptools if you don't have easy_install
@@ -18,18 +17,22 @@ TC 0.9
 	- UTF8 modificar y al buscar
 	- Codigo de producto solo alfanumerico.
 	- Nombre de producto no puede estar vacio
-	- Password en BantaTC
-	- Digito 9 en la IP
+	- Password en la conexión Banta <-> BantaTC
+	- IP de conexión, Ahora permite usar Nombres de Servidores
 	- Ver reportes en modo Gráfico y Reportes
 	- Menú en administrador de productos que permite elegir forma de ordenar y dirección.
-	- Lista que carga dinámicamente.
-	- Velocidad de carga y consumo de memoria mejorada dramáticamente
-	- Mejor manejo de errores
+	- Lista que carga dinámicamente. Permite cargar y navegar rápidamente, minimizando la transferencia de datos necesaria.
+	- Velocidad de carga y consumo de memoria mejorada dramáticamente.
+	- Drásticas mejoras en manejo e informes de errores
+	- Registro cuando se modifica el stock de algún producto
 
 1.20
 	- Mejorada la velocidad del webservice
 	- Actualizadas bibliotecas internas
 	- Indicador de actividad de red
+	- Posible problemas de impresión con monotributistas
+	- Mejora con el manejo de impresoras fiscales
+	- Impresoras fiscales persistentes (mayor velocidad al imprimir)
 
 1.19
 	- I.V.A. para clientes exentos
