@@ -13,7 +13,7 @@ cropped by date with BTree.values(min=someminddata, max=somemaxdate)
 (thansk kosh @ #zodb @irc.freenode.net)
 """
 class MiZODB(object):
-	def __init__(self, file_name= 'db', server=None, port=8090):
+	def __init__(self, file_name= 'd', server=None, port=8090):
 		"""Handles a ZODB connection"""
 		#We cant use import banda.db.updates here, because is probably still loading banta.db..
 		from banta.db import updates as _up
@@ -29,7 +29,6 @@ class MiZODB(object):
 			self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac
 		self.db = ZODB.DB(self.storage)
 		self.cnx = self.db.open()
-		#print('initial connection', self.cnx)
 		self.root = self.cnx.root()
 		#this method keps the database up to date, and initializes it in case of a new database
 		_up.init(self)

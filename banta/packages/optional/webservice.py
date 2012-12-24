@@ -31,6 +31,7 @@ import threading
 import banta.db as _db
 import banta.packages as _pack
 import banta.utils as _utils
+#todo check if the commit creates stores a new transaction, if so, modify to allow read-only access
 
 #This module can be completely wrong, we might be calling the other thread directly,
 #so be sure to check the threads!

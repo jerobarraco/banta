@@ -13,6 +13,7 @@
     <file alias="handle.png">handle.png</file>
   </qresource>
   <qresource prefix="data">
+    <file>ui/ttax.ui</file>
     <file>ui/temp_client.ui</file>
     <file>ui/limits.ui</file>
     <file>ui/client_details.ui</file>
