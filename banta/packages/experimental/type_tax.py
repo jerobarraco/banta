@@ -12,6 +12,6 @@ import banta.utils
 
 class TypeTax(GenericModule):
 	def load(self):
-		self.app.uiLoader.load(":/data/ui/ttax.ui", self.app.settings.tabWidget)
+		self.dialog = self.app.uiLoader.load(":/data/ui/ttax.ui", self.app.settings.tabWidget)
 		self.dialog.tr = banta.utils.unitr(self.dialog.trUtf8)
 		self.app.settings.tabWidget.addTab(self.dialog, self.dialog.tr("Alícuotas"))

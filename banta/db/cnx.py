@@ -43,6 +43,7 @@ class MiZODB(object):
 		self.categories = self.root.get('categories')
 		self.buys = self.root.get('buys')
 		self.limits = self.root.get('limits')
+		self.type_tax = self.root.get('typeTax')
 
 	def commit(self, user=None, note=None):
 		"""Esta funcion permite realizar un commit 
