@@ -43,6 +43,7 @@ class MiZODB(object):
 		self.categories = self.root.get('categories')
 		self.buys = self.root.get('buys')
 		self.limits = self.root.get('limits')
+		self.type_tax = self.root.get('typeTax')
 
 	def commit(self, user=None, note=None):
 		"""Esta funcion permite realizar un commit 
@@ -56,12 +57,12 @@ class MiZODB(object):
 		if note:
 			trans.note(note)
 		trans.commit()
-		
+
 	def abort(self):
 		trans = transaction.get()
 		#print ("abort!", trans)
 		trans.abort()
-		
+
 	def close(self):
 		self.cnx.close()
 		self.db.close()

@@ -99,14 +99,14 @@ def blankInit(root):
     root['typeTax'].append(_mods.TypeTax("Cigarrillos", 0.0667))
     root['typeTax'].append(_mods.TypeTax("telefono", 0.27))
 
-    root['version'] = 11
+    root['version'] = 10
 #List of updates functions
 #The key is the _base_ version from which it will be upgrading
 #it uses a dictionary because in the future, old updates will be deleted
 UPDATES = {
     8: v9,
     9: v10,
-		10: v11,
+	10: v11,
 }
 
 def init(zodb):
