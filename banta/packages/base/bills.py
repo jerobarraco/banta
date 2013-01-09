@@ -376,7 +376,7 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		t_tax = d.cbTaxType.currentIndex()
 		t_ib = d.cbIBType.currentIndex()
 		#Instantiate a new client with the correct data
-		c = _db.models.Client(code, name, address, t_code, t_tax, t_ib)
+		c = _db.models.Client(code, name, address, t_code, t_tax, t_ib, save=False)
 		#sets the client to the current bill (Performs sone validation and secondary effects)
 		self.setClient(c)
 

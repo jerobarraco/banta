@@ -356,6 +356,13 @@ class ProductModel(_qc.QAbstractTableModel):
 		self.endRemoveRows()
 		return True
 
+	def endResetModel(self, *args, **kwargs):
+		"""When there's a massive change in the model, allow the use of begin/endResetModel
+		"""
+		#recalculate the maximum rows
+		self._setMaxRows()
+		_qc.QAbstractTableModel.endResetModel(self, *args, **kwargs)
+
 MODEL = ProductModel()
 class Products(_pack.GenericModule):
 	REQUIRES = (_pack.GenericModule.P_ADMIN, )

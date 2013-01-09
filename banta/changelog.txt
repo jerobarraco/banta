@@ -13,6 +13,9 @@ and easy_install
 MoonGate http://MoonGate.com.ar
 
 1.21
+	- Mejorado información de conectividad de impresora fiscal.
+	- Nuevas alícuotas para Quioscos.
+	- Mejorada importacion de datos.
 
 TC 1.0
 	- Interfaz ampliamente mejorada

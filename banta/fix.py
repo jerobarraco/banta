@@ -131,16 +131,13 @@ def ImportClients():
 		try:		tax_type = int(tax_type)
 		except: tax_type = 0
 
-		if code in _db.DB.clients:
-			cli = _db.DB.clients[code]
-		else:
-			cli = Client(code)
-			_db.DB.clients[code] = cli
-			total +=1
+
+		cli = Client(code)
+
 		cli.name= name
 		cli.address= address
 		cli.tax_type = tax_type
-
+		total +=1
 	print ("Imported %s records"%(total))
 	_db.DB.commit('admin', 'client import')
 

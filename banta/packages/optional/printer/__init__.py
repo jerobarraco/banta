@@ -32,35 +32,31 @@ class ThreadPrinter(QtCore.QObject):
 
 	#TODO quitar el try aca, y ponerlo donde se llama
 	def _getPrinter(self):
+		"""Tries to get the current fiscal printer and returns it
+		Raises an exception if it's not found"""
+
 		#if the printer is persistent, return it
 		if self._printer:
 			return self._printer
 
-		printer = None
-		#get's the speed
-		try:
-			#check the brand
-			if self._brand == _db.models.Printer.BRAND_HASAR:
-				#import the related module
-				from banta.packages.optional.printer.hasarPrinter import HasarPrinter
-				#creates an instance of the printer and returns it
-				printer = HasarPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
-			elif self._brand == _db.models.Printer.BRAND_EPSON:
-				from banta.packages.optional.printer.epsonPrinter import EpsonPrinter
-				printer = EpsonPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
-			else:
-				raise Exception("No se configuró ninguna impresora")
-		except Exception as e:
-			emsg = str(e).decode('utf-8', 'ignore')
-			msg = self.tr("No se ha podido conectar con la impresora\n{0}").format(emsg)
-			#no qmessageboxses here! we're in another thread! can't do gui stuff.
-			logger.exception(msg)
+		self._printer = None
+		#check the brand
+		if self._brand == _db.models.Printer.BRAND_HASAR:
+			#import the related module
+			from banta.packages.optional.printer.hasarPrinter import HasarPrinter
+			#creates an instance of the printer and returns it
+			self._printer = HasarPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
+		elif self._brand == _db.models.Printer.BRAND_EPSON:
+			from banta.packages.optional.printer.epsonPrinter import EpsonPrinter
+			self._printer = EpsonPrinter(deviceFile=self._device, speed=self._speed, model = self._model)
+		else:
+			raise Exception("No se configuró ninguna impresora")
 
-		self._printer = printer
-		return printer
+		return self._printer
 
 	@QtCore.Slot()
 	def cancel(self):
+		#Catch printer exception and inform accordingly
 		printer = self._getPrinter()
 		if printer is None: return
 		printer.cancelDocument()
@@ -70,6 +66,7 @@ class ThreadPrinter(QtCore.QObject):
 
 	@QtCore.Slot()
 	def dailyCloseZ(self):
+		#Catch printer exception and inform accordingly
 		printer = self._getPrinter()
 		if printer is None: return
 		ret = printer.dailyClose(printer.DAILY_CLOSE_Z)
@@ -84,9 +81,10 @@ class ThreadPrinter(QtCore.QObject):
 		Normally it should be called with False as parameter
 		"""
 		if (not force) and self._persistent:
-			logger.debug ("Printer not closed for being persistent")
+			logger.debug("Printer not closed for being persistent")
 			return
 		#gets a printer . but we dont actually care about the return value
+		#todo try/catch
 		printer = self._getPrinter()
 		if self._printer :
 			#try to close it
@@ -100,7 +98,7 @@ class ThreadPrinter(QtCore.QObject):
 			logger.debug("There was no printer to be closed!")
 
 	@QtCore.Slot(object)
-	#Passing the bill object is kinda dangerous, because zodb is not thread safe. so we shouldnt modify it here
+	#Passing the bill object is kinda dangerous, because zodb is not thread safe. so we MUST NOT modify it here
 	def printBill(self, bill):
 		#this S$%& is dangerous!
 		#if ANYTHING happens, a printingFinished must be emited, or the other thread will stay waiting.. which sucks

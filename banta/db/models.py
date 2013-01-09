@@ -246,15 +246,18 @@ class Client(_per.Persistent):
     #stores the debt (or credit if negative)
     balance = 0.0
     def __init__(self, code, name="", address="", doc_type=DOC_SIN_CALIFICADOR, tax_type=TAX_CONSUMIDOR_FINAL,
-                             ib_type=IB_UNREGISTERED):
-        _per.Persistent.__init__(self)
-        self.code = code
-        self.setName(name)
-        self.setAddress(address)
-        self.address = address
-        self.tax_type = tax_type
-        self.doc_type = doc_type
-        self.ib_type = ib_type
+			 ib_type=IB_UNREGISTERED, save=True):
+			"""Creates a new instance of a client, it uses an internal id, so it's persisted in the db automatically"""
+			_per.Persistent.__init__(self)
+			self.code = code
+			self.setName(name)
+			self.setAddress(address)
+			self.address = address
+			self.tax_type = tax_type
+			self.doc_type = doc_type
+			self.ib_type = ib_type
+			if save:
+				self.save()
 
     def setName(self, name):
         self.name = banta.utils.printable(name)
@@ -275,7 +278,7 @@ class Client(_per.Persistent):
         else:
             return (Bill.TYPE_B, Bill.TYPE_A, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
 
-    def putInDB(self):
+    def save(self):
         """Saves a client into the database and returns an id.
         selff.idn holds the key for the inserted client
         """

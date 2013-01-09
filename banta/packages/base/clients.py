@@ -214,8 +214,6 @@ class ClientModel(_qc.QAbstractTableModel):
 			self.beginInsertRows(_qc.QModelIndex(), endpos, endpos)
 			#we put a useful name for the client, so the user can find it easily
 			cli = _db.models.Client('',  self.tr("Nuevo cliente") )
-			#putInDB will create a new id and adds it to the database IOBTree
-			cli.putInDB()
 			self._setMaxRows()
 			self.endInsertRows()
 			position+=1
@@ -234,6 +232,10 @@ class ClientModel(_qc.QAbstractTableModel):
 		self._setMaxRows()
 		self.endRemoveRows()
 		return True
+
+	def endResetModel(self, *args, **kwargs):
+		self._setMaxRows()
+		_qc.QAbstractTableModel.endResetModel(self, *args, **kwargs)
 
 class Clients(_pkg.GenericModule):
 	REQUIRES = (_pkg.GenericModule.P_ADMIN, )

@@ -51,55 +51,55 @@ def v11(root):
 
 #Convert all the objects to the new namespace
 def blankInit(root):
-    """Initializes the database from zero.
-    """
-    #initializes the database
+	"""Initializes the database from zero.
+	"""
+	#initializes the database
 
-    typePays = 'typePays'
-    root[typePays] = _pl.PersistentList()
-    root[typePays].append(_mods.TypePay("Efectivo"))
-    root[typePays].append(_mods.TypePay("Tarjeta de Crédito (con recargo)", 0.1))
-    root[typePays].append(_mods.TypePay("Cheque (con recargo)", 0.2))
+	typePays = 'typePays'
+	root[typePays] = _pl.PersistentList()
+	root[typePays].append(_mods.TypePay("Efectivo"))
+	root[typePays].append(_mods.TypePay("Tarjeta de Crédito (con recargo)", 0.1))
+	root[typePays].append(_mods.TypePay("Cheque (con recargo)", 0.2))
 
-    root['providers'] = _oo.OOBTree()
+	root['providers'] = _oo.OOBTree()
 
-    root['products'] = _oo.OOBTree()
+	root['products'] = _oo.OOBTree()
 
-    root['clients'] = _io.IOBTree()
-    cli_code = '00000000'
-    #Type DNI is important
-    cli = _mods.Client(cli_code, "Consumidor Final", doc_type=_mods.Client.DOC_DNI)
-    cli.idn = 0
-    root['clients'][cli.idn] = cli
+	root['clients'] = _io.IOBTree()
+	cli_code = '00000000'
+	#Type DNI is important
+	#save=False because the model cant access the db yet (is not fully instantiated)
+	cli = _mods.Client(cli_code, "Consumidor Final", doc_type=_mods.Client.DOC_DNI, save=False)
+	cli.idn = 0
+	root['clients'][cli.idn] = cli
+	root['bills'] = _io.IOBTree()
+	#for security we set the expire date 5 days in past, so if something happens to the database the license is invalidated
+	#TODO remove this
+	root['expire_date'] = datetime.date.today() - datetime.timedelta(days=5)
+	root['license'] = _mods.LICENSE_FREE
+	root['current_date'] = datetime.date.today()
 
-    root['bills'] = _io.IOBTree()
-    #for security we set the expire date 5 days in past, so if something happens to the database the license is invalidated
-    #TODO remove this
-    root['expire_date'] = datetime.date.today() - datetime.timedelta(days=5)
-    root['license'] = _mods.LICENSE_FREE
-    root['current_date'] = datetime.date.today()
+	#stores the config of the printer
+	root['printer'] = _mods.Printer()
+	#users
+	root['users'] = _pl.PersistentList()
+	root['users'].append(_mods.User("User"))
+	#Create stock movements
+	root['moves'] = _io.IOBTree()
+	#and buys
+	root['buys'] = _io.IOBTree()
+	#Categories
+	root['limits'] = _pl.PersistentList()
+	root['categories'] = _pl.PersistentList()
+	root['categories'].append(_mods.Category("Rubro principal"))
 
-    #stores the config of the printer
-    root['printer'] = _mods.Printer()
-    #users
-    root['users'] = _pl.PersistentList()
-    root['users'].append(_mods.User("User"))
-    #Create stock movements
-    root['moves'] = _io.IOBTree()
-    #and buys
-    root['buys'] = _io.IOBTree()
-    #Categories
-    root['limits'] = _pl.PersistentList()
-    root['categories'] = _pl.PersistentList()
-    root['categories'].append(_mods.Category("Rubro principal"))
+	root['typeTax'] = _pl.PersistentList()
+	root['typeTax'].append(_mods.TypeTax("Exento", 0))
+	root['typeTax'].append(_mods.TypeTax("Bien de uso", 0.105))
+	root['typeTax'].append(_mods.TypeTax("Cigarrillos", 0.0667))
+	root['typeTax'].append(_mods.TypeTax("telefono", 0.27))
 
-    root['typeTax'] = _pl.PersistentList()
-    root['typeTax'].append(_mods.TypeTax("Exento", 0))
-    root['typeTax'].append(_mods.TypeTax("Bien de uso", 0.105))
-    root['typeTax'].append(_mods.TypeTax("Cigarrillos", 0.0667))
-    root['typeTax'].append(_mods.TypeTax("telefono", 0.27))
-
-    root['version'] = 11
+	root['version'] = 11
 #List of updates functions
 #The key is the _base_ version from which it will be upgrading
 #it uses a dictionary because in the future, old updates will be deleted

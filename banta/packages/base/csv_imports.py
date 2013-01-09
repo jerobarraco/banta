@@ -8,6 +8,8 @@ import PySide.QtGui as _qg
 import banta.packages as _pkg
 import banta.db as _db
 
+#TODO move imports to the utils module
+
 
 class CSVImports(_pkg.GenericModule):
 	REQUIRES = (_pkg.GenericModule.P_ADMIN, )
@@ -121,6 +123,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 			_qg.QMessageBox.critical(self.app.window, "Banta", self.app.window.tr("Ha ocurrido un error:\n%s")% e.message)
 		#and after all (even if it commited or rolled-back) we finish resetting the model.
 		#best to leave this outside, because once we call begin, we must allways call end
+
 		prod_model.endResetModel()
 
 	@_qc.Slot()
@@ -183,16 +186,18 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor""")
 				try:		tax_type = int(tax_type)
 				except: tax_type = 0
 
-				if code in _db.DB.clients:
+				#Petruccio asked to use the same CUIT for different clients, thus, making this into nonsense
+				"""if code in _db.DB.clients:
 					cli = _db.DB.clients[code]
 					updated +=1
 				else:
 					cli = _db.models.Client(code)
 					_db.DB.clients[code] = cli
-					inserted +=1
-				cli.name= name
-				cli.address= address
-				cli.tax_type = tax_type
+					inserted +=1"""
+				#Creates a new client
+				#automatically saves in the db
+				cli = _db.models.Client(code, name=name, address=address, tax_type=tax_type)
+				inserted +=1
 			#COMMIT ONLY WHEN WE FINISHED IMPORTING!!!!
 			#if not the db will increase dramatically
 			msg = self.app.window.tr("""%s clientes agregados\n%s modificados\n%s descartados por código incorrecto""")
