@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>622</width>
-    <height>624</height>
+    <height>625</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -167,15 +167,12 @@
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="eBProdQuant">
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
+                <widget class="QDoubleSpinBox" name="eBProdQuant">
                  <property name="maximum">
-                  <number>9999999</number>
+                  <double>999999999.990000009536743</double>
                  </property>
                  <property name="value">
-                  <number>1</number>
+                  <double>1.000000000000000</double>
                  </property>
                 </widget>
                </item>

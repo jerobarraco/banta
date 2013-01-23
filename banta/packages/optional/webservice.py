@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-########################
-####################### 		E X P E R I M E N T A L
-#######################
 from __future__ import absolute_import, print_function, unicode_literals
 # system
 import logging
@@ -183,7 +180,7 @@ class HProducts(BasicAuthHandler):
 				if end >= prod_cant:
 					end = prod_cant
 
-				if start >=prod_cant:
+				if start >= prod_cant:
 					prods = []
 				else:
 					prods = map(self._prodDict, prod_list[start:end])

@@ -141,4 +141,3 @@ def update(zodb, version_key, init_callback, update_callbacks):
             msg = "Database upgraded to version '%s':%s "% (version_key, v_from+1)
             zodb.commit("system", msg)
             logger.info(msg)
-    zodb.commit()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>532</width>
-    <height>312</height>
+    <width>500</width>
+    <height>287</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,24 +24,24 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="eTPName"/>
+      <widget class="QLineEdit" name="eName"/>
      </item>
      <item>
-      <widget class="QPushButton" name="bTPSearch">
+      <widget class="QPushButton" name="bSearch">
        <property name="text">
         <string>Buscar</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="bTPNew">
+      <widget class="QPushButton" name="bNew">
        <property name="text">
         <string>Nuevo</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="bTPDelete">
+      <widget class="QPushButton" name="bDelete">
        <property name="text">
         <string>Borrar</string>
        </property>
@@ -50,7 +50,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableView" name="v_tpay">
+    <widget class="QTableView" name="v_ttax">
      <property name="selectionMode">
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
@@ -71,11 +71,11 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>eTPName</tabstop>
-  <tabstop>bTPSearch</tabstop>
-  <tabstop>bTPNew</tabstop>
-  <tabstop>v_tpay</tabstop>
-  <tabstop>bTPDelete</tabstop>
+  <tabstop>eName</tabstop>
+  <tabstop>bSearch</tabstop>
+  <tabstop>bNew</tabstop>
+  <tabstop>v_ttax</tabstop>
+  <tabstop>bDelete</tabstop>
  </tabstops>
  <resources/>
  <connections/>
