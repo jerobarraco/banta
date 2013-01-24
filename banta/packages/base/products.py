@@ -44,11 +44,12 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			#Category
 			editor = _qg.QComboBox(parent)
 			#todo use getmodel here too maybe..
+			#todo problema si categories no esta cargado, test
 			editor.setModel(_pack.optional.categories.MODEL)
 		elif col == 9:
 			#TaxType
 			editor = _qg.QComboBox(parent)
-			editor.addItems(_db.models.Product.TYPE_NAMES)
+			editor.setModel(_pack.optional.type_tax.MODEL)
 		elif col == 10:
 			#Ingresos Brutos
 			editor = _qg.QComboBox(parent)
@@ -72,7 +73,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 		elif col in (3, 4, 5, 7):
 			editor.setValue(d)
 		elif col in (8, 9, 10):
-			#Ingresos Brutos, Category, Tax Types
+			#Ingresos Brutos, Category
 			#As this comboboxes uses itemindex they share somewhat the same code, so i put them toghether
 
 			#sets the current index (data for this column is just the index)
@@ -187,7 +188,10 @@ class ProductModel(_qc.QAbstractTableModel):
 		col = index.column()
 		if role == _qc.Qt.EditRole:
 			if col == 9:
-				return pro.tax_type
+				try:
+					return _db.DB.type_tax.index(pro.tax_type)
+				except:
+					return -1
 			elif col == 10:
 				return pro.ib_type
 			elif col == 6:
@@ -231,7 +235,7 @@ class ProductModel(_qc.QAbstractTableModel):
 				return pro.category.name
 			return None
 		elif col == 9:
-			return pro.typeStr()
+			return str(pro.tax_type)
 		elif col == 10:
 			return pro.IBStr()
 		elif col == 11:
@@ -305,7 +309,7 @@ class ProductModel(_qc.QAbstractTableModel):
 			elif col == 8:
 				pro.category = _db.DB.categories[value]
 			elif col == 9:
-				pro.tax_type = value
+				pro.tax_type = _db.DB.type_tax[value]
 			elif col == 10:
 				pro.ib_type = value
 			elif col == 11:

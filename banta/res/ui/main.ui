@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
+    <width>654</width>
     <height>625</height>
    </rect>
   </property>
@@ -919,7 +919,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>622</width>
+     <width>654</width>
      <height>22</height>
     </rect>
    </property>
@@ -945,6 +945,7 @@
     <addaction name="mnuImport"/>
     <addaction name="acScan"/>
     <addaction name="acClosePrinter"/>
+    <addaction name="actionSalir"/>
    </widget>
    <widget class="QMenu" name="menuAcerca_de">
     <property name="title">
@@ -1154,6 +1155,11 @@
     <string>Cerrar Impresora</string>
    </property>
   </action>
+  <action name="actionSalir">
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>cb_clients</tabstop>
@@ -1196,5 +1202,22 @@
  <resources>
   <include location="../rc.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionSalir</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>312</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

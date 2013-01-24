@@ -77,7 +77,7 @@ class MiZODB(object):
 
 		use like:
 
-		with banta.db.DB.threadedDB() as root:
+		with banta.db.DB.threaded() as root:
 			if 'something' in root['products']:
 				raise ....
 

@@ -49,6 +49,14 @@ def v11(root):
 	root['typeTax'].append(_mods.TypeTax("Cigarrillos", 0.0667))
 	root['typeTax'].append(_mods.TypeTax("telefono", 0.27))
 
+def v12(root):
+	taxes = root['typeTax']
+	for pro in root["products"].values():
+		indice = pro.tax_type
+		if isinstance(indice, int):
+			tax = taxes[indice]
+			pro.tax_type = tax
+
 #Convert all the objects to the new namespace
 def blankInit(root):
 	"""Initializes the database from zero.
@@ -107,6 +115,7 @@ UPDATES = {
     8: v9,
     9: v10,
 		10: v11,
+		11: v12,
 }
 
 def init(zodb):

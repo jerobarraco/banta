@@ -84,9 +84,6 @@ class Product(_per.Persistent):
     def IBStr(self):
         return self.IB_NAMES[self.ib_type]
 
-    def typeStr(self):
-        return self.TYPE_NAMES[self.tax_type]
-
     def __str__(self):
         return "[%s] $%s %s"%(self.code, self.price, self.name)
 
@@ -593,3 +590,6 @@ class TypeTax(_per.Persistent):
 		_per.Persistent.__init__(self)
 		self.name = name
 		self.tax = tax
+
+	def __str__(self):
+		return "{:} ({:.2%})".format(self.name, self.tax)
