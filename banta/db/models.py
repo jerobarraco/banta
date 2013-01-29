@@ -33,148 +33,155 @@ TAX_REDUCED = 0.105
 #DO NOT IMPORT DB or DB.CNX or DB.ZODB DIRECTLY HERE!
 
 class Product(_per.Persistent):
-    """Each of the product in the store.
-    It can have stock, or not. It can be available or not.
-    It just store the properties for each product (like a 'class' for real products)
-    """
-    name = ""
-    code = ""
-    #External/Provider code
-    external_code = ""
-    #sold price, SOLD price
-    price = 0.0
-    #Price at which is (usually) bought
-    buy_price = 0.0
-    ib_type = 0
-    prod_type = 0
-    #Available stock
-    stock = 0
-    #Units PER (bought) Package (box)
-    pack_units = 1
-    #provider
-    provider = None
-    #category
-    #Better if it can be none.. specially on the free version
-    category = None
-    #Minimum stock before warning 
-    #min_stock = 0 #later, needs View and Controller
-    #Constants for type of product, it defines the tax it to be charged (depends on other crappy stuff)
-    description = ""
-    TYPE_EXEMPT = 0
-    TYPE_SELL_GOOD = 1
-    TYPE_USE_GOOD = 2
-    TYPE_NAMES = (
-        'Exento (0%)',
-        'Bien de cambio (' + str(int(TAX_MAX*100))+'%)',
-        'Bien de uso (' + str(int(TAX_REDUCED*100))+'%)',
-    )
-    #Consts for Brute Income (Ingresos Brutos), defines what will be charged (depends on other stuff)
-    IB_NOT_EXEMPT = 0
-    IB_EXEMPT = 1
-    IB_NAMES = ('Exento', 'No Exento')
+	"""Each of the product in the store.
+	It can have stock, or not. It can be available or not.
+	It just store the properties for each product (like a 'class' for real products)
+	"""
+	name = ""
+	code = ""
+	#External/Provider code
+	external_code = ""
+	#sold price, SOLD price
+	price = 0.0
+	#Price at which is (usually) bought
+	buy_price = 0.0
+	ib_type = 0
+	prod_type = 0
+	#Available stock
+	stock = 0
+	#Units PER (bought) Package (box)
+	pack_units = 1
+	tax_type = None
+	#provider
+	provider = None
+	#category
+	#Better if it can be none.. specially on the free version
+	category = None
+	#Minimum stock before warning
+	#min_stock = 0 #later, needs View and Controller
+	#Constants for type of product, it defines the tax it to be charged (depends on other crappy stuff)
+	description = ""
+	TYPE_EXEMPT = 0
+	TYPE_SELL_GOOD = 1
+	TYPE_USE_GOOD = 2
+	TYPE_NAMES = (
+			'Exento (0%)',
+			'Bien de cambio (' + str(int(TAX_MAX*100))+'%)',
+			'Bien de uso (' + str(int(TAX_REDUCED*100))+'%)',
+	)
+	#Consts for Brute Income (Ingresos Brutos), defines what will be charged (depends on other stuff)
+	IB_NOT_EXEMPT = 0
+	IB_EXEMPT = 1
+	IB_NAMES = ('Exento', 'No Exento')
 
-    def __init__(self, code, name="", price=0.0, stock=0, tax_type=0):
-        _per.Persistent.__init__(self)
-        self.code = code
-        self.setName(name)
-        self.price = price
-        self.stock = stock
-        self.tax_type = tax_type
+	def __init__(self, code, name="", price=0.0, stock=0, tax_type=None):
+		_per.Persistent.__init__(self)
+		self.code = code
+		self.setName(name)
+		self.price = price
+		self.stock = stock
+		self.tax_type = tax_type
 
-    def IBStr(self):
-        return self.IB_NAMES[self.ib_type]
+	def IBStr(self):
+		return self.IB_NAMES[self.ib_type]
 
-    def __str__(self):
-        return "[%s] $%s %s"%(self.code, self.price, self.name)
+	def __str__(self):
+		return "[%s] $%s %s"%(self.code, self.price, self.name)
 
-    def setName(self, name):
-        self.name = banta.utils.printable(name)
-    pass
+	def setName(self, name):
+		self.name = banta.utils.printable(name)
+	pass
 
 class Item(_per.Persistent):
-    """Represents an item in a bill.
-    it is related to a product, BUT for historical reasons (ask nande) 
-    the product data needed to form a bill, must be duplicated and stored SEPARATEDLY"""
-    product = None
-    #price per unit as the product in that date
-    base_price=0.0
-    #CALCULATED price per unit, including markup but without tax
-    unit_price = 0.0
-    #CALCULATED total price with tax (calculated with item.calculate())
-    price = 0.0
-    #CALCULATED net_price without tax (calculated with item.calculate())
-    net_price = 0.0
-    quantity = 1
-    #CALCULATED tax percentaje, calculated by calculateTax
-    tax = TAX_MAX
-    #CALCULATED total tax charged for the item
-    tax_total = 0.0
-    description = ""
-    reducible = False
-    #A percentaje that the owner charges over the price of a product
-    #Sets the markup of a item, that is when the owner decides to charge an overprice or make a discount (negative markup)
-    #markup is a percentaje
-    markup = 0.0
-    #Tells wether the client is exempt or not
-    client_exempt  = False
-    def __init__(self, product=None, quant=1, markup=0.0, client_exempt=False):
-        _per.Persistent.__init__(self)
-        self.markup = markup
-        self.client_exempt = client_exempt
-        if product:
-            self.setProduct(product)
-        self.setQuantity(quant)
+	"""Represents an item in a bill.
+	it is related to a product, BUT for historical reasons (ask nande)
+	the product data needed to form a bill, must be duplicated and stored SEPARATEDLY"""
+	product = None
+	tax_type = None
+	#price per unit as the product in that date
+	base_price=0.0
+	#CALCULATED price per unit, including markup but without tax
+	unit_price = 0.0
+	#CALCULATED total price with tax (calculated with item.calculate())
+	price = 0.0
+	#CALCULATED net_price without tax (calculated with item.calculate())
+	net_price = 0.0
+	quantity = 1
+	#CALCULATED tax percentaje, calculated by calculateTax
+	tax = TAX_MAX
+	#CALCULATED total tax charged for the item
+	tax_total = 0.0
+	description = ""
+	reducible = False
+	#A percentaje that the owner charges over the price of a product
+	#Sets the markup of a item, that is when the owner decides to charge an overprice or make a discount (negative markup)
+	#markup is a percentaje
+	markup = 0.0
+	#Tells wether the client is exempt or not
+	client_exempt  = False
+	def __init__(self, product=None, quant=1, markup=0.0, client_exempt=False):
+			_per.Persistent.__init__(self)
+			self.markup = markup
+			self.client_exempt = client_exempt
+			if product:
+					self.setProduct(product)
+			self.setQuantity(quant)
 
-    def setProduct(self, product):
-        self.product = product
-        #this values need duplication because the client might want to change the default values 
-        #also to allow the use of generic products
+	def setProduct(self, product):
+		self.product = product
+		#this values need duplication because the client might want to change the default values
+		#also to allow the use of generic products
 
-        self.unit_price =  self.base_price = product.price
-        self.description = product.name
-        self.reducible = (self.product.tax_type == self.product.TYPE_USE_GOOD)
+		self.unit_price =  self.base_price = product.price
+		self.description = product.name
+		#TODO quitar
+		self.reducible = (self.product.tax_type == self.product.TYPE_USE_GOOD)
+		self.tax_type = product.tax_type
 
-    def setQuantity(self, quant):
-        self.quantity = quant
 
-    def calculateTax(self):
-        """Calculates the tax for this item
-        it depends on :
-        Product, and client_exempt
-        sets self.tax for the corresponding tax for this item
-        """
-        #i use another variable just for clarity
-        #"self.product and" will prevent checking when there's no product set
-        prod_exempt = self.product and (self.product.tax_type == self.product.TYPE_EXEMPT)
+	def setQuantity(self, quant):
+			self.quantity = quant
 
-        #if self.client_exempt or prod_exempt:
-        if prod_exempt:
-            self.tax = 0.0
-        elif self.reducible:
-            self.tax = TAX_REDUCED
-        else:
-            self.tax = TAX_MAX
+	def calculateTax(self):
+		"""Calculates the tax for this item
+		it depends on :
+		sets self.tax for the corresponding tax for this item
+		"""
+		self.tax = 0.0
+		if self.tax_type:
+			self.tax = self.tax_type.tax
+		#i use another variable just for clarity
+		#"self.product and" will prevent checking when there's no product set
+		#prod_exempt = self.product and (self.product.tax_type == self.product.TYPE_EXEMPT)
 
-    def calculate(self):
-        """Calculates the total
-        and other values.
-        self.price is the total price of the item (including tax)
-        self.tax_total is the total ammount of tax in the price (not a percentaje)
-        self.net_price is the total price without tax
-        """
-        self.calculateTax()
-        #round( ,4) rounds the item to 4 digits, is needed because printers dont process more then 4 digits
-        self.unit_price = round(self.base_price, 4) * (1+self.markup)
-        self.price = (self.unit_price * self.quantity)
+		#if self.client_exempt or prod_exempt:
+		#if prod_exempt:
+		#		self.tax = 0.0
+		#elif self.reducible:
+		#		self.tax = TAX_REDUCED
+		#else:
+		#		self.tax = TAX_MAX
 
-        if self.tax > 0.0 :
-            #theres always an easy way in python
-            self.net_price = round(self.price/(1+self.tax) , 4)
-            self.tax_total = self.price - self.net_price
-        else:
-            self.net_price = self.price
-            self.tax_total = 0.0
-        return self.price
+	def calculate(self):
+		"""Calculates the total
+		and other values.
+		self.price is the total price of the item (including tax)
+		self.tax_total is the total ammount of tax in the price (not a percentaje)
+		self.net_price is the total price without tax
+		"""
+		self.calculateTax()
+		#round( ,4) rounds the item to 4 digits, is needed because printers dont process more then 4 digits
+		self.unit_price = round(self.base_price, 4) * (1+self.markup)
+		self.price = (self.unit_price * self.quantity)
+
+		if self.tax > 0.0 :
+				#theres always an easy way in python
+				self.net_price = round(self.price/(1+self.tax) , 4)
+				self.tax_total = self.price - self.net_price
+		else:
+				self.net_price = self.price
+				self.tax_total = 0.0
+		return self.price
 
 class TypePay(_per.Persistent):
     name = ''

@@ -48,7 +48,8 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		w.bDraft.setDefaultAction(w.acSaveDraft)
 		w.bChangeType.setDefaultAction(w.acChangeClientSearch)
 
-		w.chBProdReducible.stateChanged.connect(self.prodReducibleChanged)
+		#w.chBProdReducible.stateChanged.connect(self.prodReducibleChanged)
+
 		## combos
 		w.cb_tbill.currentIndexChanged.connect(self.typeChanged)
 		w.cb_tpay.currentIndexChanged.connect(self.payChanged)
@@ -56,6 +57,8 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		w.cb_clients.currentIndexChanged.connect(self.clientChanged)
 		w.cb_billUser.currentIndexChanged.connect(self.userChanged)
 		w.eProdDetail.editingFinished.connect(self.prodDetailChanged)
+		w.cb_billIva.setModel(_pkg.optional.type_tax.MODEL)
+		w.cb_billIva.currentIndexChanged.connect(self.taxChanged)
 		#So the label clears when the user inputs another client, this will make sure they select the correct one.
 		#(notice that is still possible that SOME client is assigned to the bill but the interface wont show it)
 		w.cb_clients.editTextChanged.connect(w.lBCliDetail.clear)
@@ -271,7 +274,8 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 			self.app.window.dsPrice.setValue(0.0)
 			self.app.window.eBProdQuant.setValue(0.0)
 			self.app.window.eProdDetail.setText("")
-			self.app.window.chBProdReducible.setChecked(False)
+			#self.app.window.chBProdReducible.setChecked(False)
+			self.app.window.cb_billIva.setCurrentIndex(0)
 			return
 
 		code = self.app.window.cb_billProds.itemData(i, _qc.Qt.UserRole)
@@ -279,17 +283,31 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		self.item.setProduct(prod)
 		self.app.window.dsPrice.setValue(prod.price)
 		self.app.window.eProdDetail.setText(self.item.description)
-		self.app.window.chBProdReducible.setChecked(self.item.reducible)
+		try:
+			tax_index = _db.DB.type_tax.index(prod.tax_type)
+		except:
+			tax_index = 0
+
+		self.app.window.cb_billIva.setCurrentIndex(tax_index)
+		#self.app.window.chBProdReducible.setChecked(self.item.reducible)
 		self.updateItem()
 
 	@_qc.Slot(float)
 	def prodQuantChanged(self, quant):
 		self.item.setQuantity(quant)
-		self.updateItem()
+		input("aslkd")
+		#self.updateItem()
+
+	#@_qc.Slot(int)
+	#def prodReducibleChanged(self, val):
+	#	self.item.reducible = bool(val)
+	#	self.updateItem()
 
 	@_qc.Slot(int)
-	def prodReducibleChanged(self, val):
-		self.item.reducible = bool(val)
+	def taxChanged(self, val):
+		if val < 0:
+			return
+		self.item.tax_type = _db.DB.type_tax[val]
 		self.updateItem()
 
 	@_qc.Slot()

@@ -74,7 +74,7 @@ class BillList(_pack.GenericModule):
 		#if the list is too big, it could mean problems
 		to_delete = []
 		#_db.DB.bills.values()[:] doesnt work
-		for bill in _db.DB.bills.values(min= tmin, max=tmax):
+		for bill in _db.DB.bills.values(min=tmin, max=tmax):
 			#Documentation on python says that the data is "stringified" using str() so no need to call it here
 			#I have NO idea why the csv writer tries to convert stuff to Ascii even when the file is open with codecs...
 			#Only solution is to decode stuff to ascii.. this in python 3 will be easier...
