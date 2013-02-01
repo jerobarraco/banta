@@ -45,9 +45,9 @@ def v11(root):
 	root['typeTax'] = _pl.PersistentList()
 	root['typeTax'].append(_mods.TypeTax("Exento", 0))
 	root['typeTax'].append(_mods.TypeTax("Bien de uso", 0.105))
-	root['typeTax'].append(_mods.TypeTax('Bien de Cambio', 0.21))
+	root['typeTax'].append(_mods.TypeTax('Bien de cambio', 0.21))
 	root['typeTax'].append(_mods.TypeTax("Cigarrillos", 0.0667))
-	root['typeTax'].append(_mods.TypeTax("telefono", 0.27))
+	root['typeTax'].append(_mods.TypeTax("Teléfono", 0.27))
 
 def v12(root):
 	taxes = root['typeTax']
@@ -104,8 +104,9 @@ def blankInit(root):
 	root['typeTax'] = _pl.PersistentList()
 	root['typeTax'].append(_mods.TypeTax("Exento", 0))
 	root['typeTax'].append(_mods.TypeTax("Bien de uso", 0.105))
+	root['typeTax'].append(_mods.TypeTax("Bien de cambio", 0.21))
 	root['typeTax'].append(_mods.TypeTax("Cigarrillos", 0.0667))
-	root['typeTax'].append(_mods.TypeTax("telefono", 0.27))
+	root['typeTax'].append(_mods.TypeTax("Teléfono", 0.27))
 
 	root['version'] = 11
 #List of updates functions

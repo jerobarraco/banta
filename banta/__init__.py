@@ -5,7 +5,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 import sys
 import logging
 
-__version__ = '1.21.1'
+__version__ = '1.22.0'
 
 #3rd party
 ##for pyinstaller

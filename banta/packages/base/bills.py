@@ -264,9 +264,10 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		self.bill.setTypePay(tp)
 		self.item.markup = self.bill.markup
 		#This should recalculate the items and the bill totals
+		self.updateAllItems()
 		self.showInfo()
 		self.updateItem()
-		self.updateAllItems()
+
 
 	@_qc.Slot(int)
 	def prodChanged(self, i):
@@ -295,7 +296,6 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 	@_qc.Slot(float)
 	def prodQuantChanged(self, quant):
 		self.item.setQuantity(quant)
-		input("aslkd")
 		#self.updateItem()
 
 	#@_qc.Slot(int)

@@ -195,282 +195,282 @@ class TypePay(_per.Persistent):
         return "%s - %s%%" % (self.name, self.markup*100)
 
 class Client(_per.Persistent):
-    """Class for the Clients"""
-    #Constants for identification
-    DOC_CUIT = 0
-    DOC_LIBRETA_ENROLAMIENTO = 1
-    DOC_LIBRETA_CIVICA = 2
-    DOC_DNI = 3
-    DOC_PASAPORTE = 4
-    DOC_CEDULA = 5
-    DOC_SIN_CALIFICADOR = 6
-    DOC_NAMES = (
-        "CUIT", "Libreta de Enrolamiento", "Libreta Cívica", "DNI",
-        "Pasaporte", "Cédula" , "Sin Calificador"
-    )
-    
-    #Constants for Tax information related to the client
-    TAX_CONSUMIDOR_FINAL = 0
-    TAX_RESPONSABLE_INSCRIPTO = 1
-    TAX_RESPONSABLE_NO_INSCRIPTO = 2
-    TAX_EXENTO = 3
-    TAX_NO_RESPONSABLE = 4
-    TAX_RESPONSABLE_NO_INSCRIPTO_BIENES_DE_USO = 5
-    TAX_RESPONSABLE_MONOTRIBUTO = 6
-    TAX_MONOTRIBUTISTA_SOCIAL = 7
-    TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL = 8
-    TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL_SOCIAL = 9
-    TAX_NO_CATEGORIZADO = 10
-    TAX_NAMES = (
-        "Consumidor Final", "Responsable Inscripto", "Responsable no Inscripto", "Exento", "No Responsable",
-        "Responsable No Inscripto Bienes de Uso",
-        "Monotributista", "Monotributista Social", "Pequeño Contribuyente Eventual",
-        "Pequeño Contribuyente Eventual Social",
-        "No categorizado"
-    )
+	"""Class for the Clients"""
+	#Constants for identification
+	DOC_CUIT = 0
+	DOC_LIBRETA_ENROLAMIENTO = 1
+	DOC_LIBRETA_CIVICA = 2
+	DOC_DNI = 3
+	DOC_PASAPORTE = 4
+	DOC_CEDULA = 5
+	DOC_SIN_CALIFICADOR = 6
+	DOC_NAMES = (
+		"CUIT", "Libreta de Enrolamiento", "Libreta Cívica", "DNI",
+		"Pasaporte", "Cédula" , "Sin Calificador"
+	)
 
-    #Constants for Ingresos Brutos (Brute Income) for the client (This is argentinean AFAIK)
-    IB_UNREGISTERED = 0
-    IB_REGISTERED = 1
-    IB_EXEMPT = 2
-    IB_NAMES = ('No registrado', 'Registrado', 'Exento')
+	#Constants for Tax information related to the client
+	TAX_CONSUMIDOR_FINAL = 0
+	TAX_RESPONSABLE_INSCRIPTO = 1
+	TAX_RESPONSABLE_NO_INSCRIPTO = 2
+	TAX_EXENTO = 3
+	TAX_NO_RESPONSABLE = 4
+	TAX_RESPONSABLE_NO_INSCRIPTO_BIENES_DE_USO = 5
+	TAX_RESPONSABLE_MONOTRIBUTO = 6
+	TAX_MONOTRIBUTISTA_SOCIAL = 7
+	TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL = 8
+	TAX_PEQUENIO_CONTRIBUYENTE_EVENTUAL_SOCIAL = 9
+	TAX_NO_CATEGORIZADO = 10
+	TAX_NAMES = (
+			"Consumidor Final", "Responsable Inscripto", "Responsable no Inscripto", "Exento", "No Responsable",
+			"Responsable No Inscripto Bienes de Uso",
+			"Monotributista", "Monotributista Social", "Pequeño Contribuyente Eventual",
+			"Pequeño Contribuyente Eventual Social",
+			"No categorizado"
+	)
 
-    idn = -1
-    #great, you can have two peoples with the same code in this country, ain't it bad?
-    name = ""
-    code = ""
-    address = ""
-    #TAX (Iva)
-    tax_type = 0
-    #Documento (A.K.A. ID)
-    doc_type = 0
-    #Ingresos Brutos
-    ib_type = 0
-    ##ACCOUNTING
-    #stores the debt (or credit if negative)
-    balance = 0.0
-    def __init__(self, code, name="", address="", doc_type=DOC_SIN_CALIFICADOR, tax_type=TAX_CONSUMIDOR_FINAL,
-			 ib_type=IB_UNREGISTERED, save=True):
-			"""Creates a new instance of a client, it uses an internal id, so it's persisted in the db automatically"""
-			_per.Persistent.__init__(self)
-			self.code = code
-			self.setName(name)
-			self.setAddress(address)
-			self.address = address
-			self.tax_type = tax_type
-			self.doc_type = doc_type
-			self.ib_type = ib_type
-			if save:
-				self.save()
+	#Constants for Ingresos Brutos (Brute Income) for the client (This is argentinean AFAIK)
+	IB_UNREGISTERED = 0
+	IB_REGISTERED = 1
+	IB_EXEMPT = 2
+	IB_NAMES = ('No registrado', 'Registrado', 'Exento')
 
-    def setName(self, name):
-        self.name = banta.utils.printable(name)
+	idn = -1
+	#great, you can have two peoples with the same code in this country, ain't it bad?
+	name = ""
+	code = ""
+	address = ""
+	#TAX (Iva)
+	tax_type = 0
+	#Documento (A.K.A. ID)
+	doc_type = 0
+	#Ingresos Brutos
+	ib_type = 0
+	##ACCOUNTING
+	#stores the debt (or credit if negative)
+	balance = 0.0
+	def __init__(self, code, name="", address="", doc_type=DOC_SIN_CALIFICADOR, tax_type=TAX_CONSUMIDOR_FINAL,
+		 ib_type=IB_UNREGISTERED, save=True):
+		"""Creates a new instance of a client, it uses an internal id, so it's persisted in the db automatically"""
+		_per.Persistent.__init__(self)
+		self.code = code
+		self.setName(name)
+		self.setAddress(address)
+		self.address = address
+		self.tax_type = tax_type
+		self.doc_type = doc_type
+		self.ib_type = ib_type
+		if save:
+			self.save()
 
-    def setAddress(self, address):
-        self.address = banta.utils.printable(address)
+	def setName(self, name):
+		self.name = banta.utils.printable(name)
 
-    def getPossibleBillTypes(self):
-        #Todo ask jorge for the exact values
-        #Always return a list even if there's not value, or just one
-        #TODO filter in case the seller is Responsable or not
-        if self.tax_type == self.TAX_RESPONSABLE_INSCRIPTO :
-            return (Bill.TYPE_A, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_DEB_A )
-        elif self.tax_type in (self.TAX_RESPONSABLE_MONOTRIBUTO, self.TAX_MONOTRIBUTISTA_SOCIAL):
-            return (Bill.TYPE_B,  Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
-        elif self.tax_type in (self.TAX_CONSUMIDOR_FINAL, self.TAX_NO_CATEGORIZADO, self.TAX_NO_RESPONSABLE, self.TAX_EXENTO):
-            return (Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
-        else:
-            return (Bill.TYPE_B, Bill.TYPE_A, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
+	def setAddress(self, address):
+		self.address = banta.utils.printable(address)
 
-    def save(self):
-        """Saves a client into the database and returns an id.
-        selff.idn holds the key for the inserted client
-        """
-        #This is needed for a weird requeriment, that needs the client to have different codes.
-        #Also some clients wont be saved in the db, the key shoudlnt be generated for every client
-        if self.idn >-1:
-            return #the client is already saved
-        import banta.db
-        if len(banta.db.DB.clients):
-            self.idn = banta.db.DB.clients.maxKey()+1
-        else :
-            self.idn = 0
-        banta.db.DB.clients[self.idn] = self
-        return self.idn
+	def getPossibleBillTypes(self):
+		#Todo ask jorge for the exact values
+		#Always return a list even if there's not value, or just one
+		#TODO filter in case the seller is Responsable or not
+		if self.tax_type == self.TAX_RESPONSABLE_INSCRIPTO :
+				return (Bill.TYPE_A, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_DEB_A )
+		elif self.tax_type in (self.TAX_RESPONSABLE_MONOTRIBUTO, self.TAX_MONOTRIBUTISTA_SOCIAL):
+				return (Bill.TYPE_B,  Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
+		elif self.tax_type in (self.TAX_CONSUMIDOR_FINAL, self.TAX_NO_CATEGORIZADO, self.TAX_NO_RESPONSABLE, self.TAX_EXENTO):
+				return (Bill.TYPE_B, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_B )
+		else:
+				return (Bill.TYPE_B, Bill.TYPE_A, Bill.TYPE_C, Bill.TYPE_NOTA_CRED_A, Bill.TYPE_NOTA_CRED_B, Bill.TYPE_NOTA_DEB_A )
 
-    def taxStr(self):
-        return self.TAX_NAMES[self.tax_type]
-    
-    def docStr(self):
-        return self.DOC_NAMES[self.doc_type]
-    
-    def IBStr(self):
-        return self.IB_NAMES[self.ib_type]
+	def save(self):
+		"""Saves a client into the database and returns an id.
+		selff.idn holds the key for the inserted client
+		"""
+		#This is needed for a weird requeriment, that needs the client to have different codes.
+		#Also some clients wont be saved in the db, the key shoudlnt be generated for every client
+		if self.idn >-1:
+				return #the client is already saved
+		import banta.db
+		if len(banta.db.DB.clients):
+				self.idn = banta.db.DB.clients.maxKey()+1
+		else :
+				self.idn = 0
+		banta.db.DB.clients[self.idn] = self
+		return self.idn
 
-    def __str__(self):
-        return "\n".join((self.code, self.name, self.address, self.taxStr()))
+	def taxStr(self):
+		return self.TAX_NAMES[self.tax_type]
+
+	def docStr(self):
+		return self.DOC_NAMES[self.doc_type]
+
+	def IBStr(self):
+		return self.IB_NAMES[self.ib_type]
+
+	def __str__(self):
+		return "\n".join((self.code, self.name, self.address, self.taxStr()))
 
 class Bill(_per.Persistent):
-    """Bill. Factura. Ticket. 
-    """
-    #Constants for the bill type
-    TYPE_A = 0
-    TYPE_B = 1
-    TYPE_C = 2
-    TYPE_NOTA_CRED_A = 3
-    TYPE_NOTA_CRED_B = 4
-    TYPE_NOTA_DEB_A = 5
-    TYPE_NOTA_DEB_B = 6
-    TYPE_NAMES = (
-        'A', 'B', 'C', 'Nota de Crédito A', 'Nota de Crédito B', 'Nota de Débito A', 'Nota de Débito B'
-    )
+	"""Bill. Factura. Ticket.
+	"""
+	#Constants for the bill type
+	TYPE_A = 0
+	TYPE_B = 1
+	TYPE_C = 2
+	TYPE_NOTA_CRED_A = 3
+	TYPE_NOTA_CRED_B = 4
+	TYPE_NOTA_DEB_A = 5
+	TYPE_NOTA_DEB_B = 6
+	TYPE_NAMES = (
+			'A', 'B', 'C', 'Nota de Crédito A', 'Nota de Crédito B', 'Nota de Débito A', 'Nota de Débito B'
+	)
+
+	number = 0
+	date = 0
+	markup = 0.0
+	tax = 0.0
+	total = 0.0
+	subtotal = 0.0
+	btype = 0
+	#Payment Type
+	ptype = None
+	client = None
+	#User (cashier) that creates a bill
+	user = None
+	printed = False
+	closed = False
+	#used as a key
+	time = 0
+	def __init__(self):
+		super(Bill, self).__init__()
+		self.date = datetime.datetime.now()
+		self.items = _per.list.PersistentList()
+
+	def setTypePay(self, tpay):
+		self.ptype = tpay
+		self.setMarkup(tpay.markup)
+
+	def setTypeBill(self, tb):
+		self.btype = tb
+
+	def setClient(self, client):
+		self.client = client
+
+	def setMarkup(self, markup):
+		"""Sets the markup for the bill, which affects all the item.
+		Neither the bill nor the items are recalculated"""
+		self.markup = markup
+		for i in self.items:
+			i.markup = markup
+
+	def calculate(self):
+		"""Recalculate the values for the bill, and sets the values in each variable.
+		It can be slow so call it only if it has changed"""
+		self.subtotal = 0.0
+		self.tax = 0.0
+		self.total = 0.0
+		for i in self.items:
+			i.calculate()
+			self.total += i.price
+			self.tax += i.tax_total
+		self.subtotal = self.total - self.tax
     
-    number = 0
-    date = 0
-    markup = 0.0
-    tax = 0.0
-    total = 0.0
-    subtotal = 0.0
-    btype = 0
-    #Payment Type
-    ptype = None
-    client = None
-    #User (cashier) that creates a bill
-    user = None
-    printed = False
-    closed = False
-    #used as a key
-    time = 0
-    def __init__(self):
-        super(Bill, self).__init__()
-        self.date = datetime.datetime.now()
-        self.items = _per.list.PersistentList()
+	def copy(self):
+		copy = Bill()
+		#copy of the rest of bill class
+		copy.btype = self.btype
+		copy.client = self.client
+		copy.markup = self.markup
+		copy.ptype = self.ptype
+		copy.user = self.user
+		copy.ptype = self.ptype
+		#is easier to just copy this attributes than recalculating stuff
+		copy.subtotal = self.subtotal
+		copy.tax = self.tax
 
-    def setTypePay(self, tpay):
-        self.ptype = tpay
-        self.setMarkup(tpay.markup)
+		for i in self.items:
+			item = Item()
+			#copy ALL item properties! :D!
+			#here is safer to copy attributes instead of recalculating, because a bill could have a modified price/description
+			#that's the reason we have redundant attributes in the item after all
+			item.base_price = i.base_price
+			item.client_exempt = i.client_exempt
+			item.description = i.description
+			item.markup = i.markup
+			item.net_price = i.net_price
+			item.price = i.price
+			#copy the product to the new instance
+			#product is an object that is safe to copy (that way we can do reports)
+			item.product = i.product
+			item.quantity = i.quantity
+			item.reducible = i.reducible
+			item.tax_type = i.tax_type
+			item.tax = i.tax
+			item.tax_total = i.tax_total
+			item.unit_price = i.unit_price
+			copy.items.append(item)
+		return copy
 
-    def setTypeBill(self, tb):
-        self.btype = tb
+	def close(self):
+		"""Closes the bill.
+		ADDS THE BILL TO THE DATABASE
+		Reduces the stock, sets the bill date
+		and add it to the bill list
+		if the bill is already closed, it does nothing.
+		Notice this is pretty destructive and has side-effects, so be careful when using it
+		"""
+		#TODO disable all functions if the bill is closed
+		if self.closed:
+			return False
 
-    def setClient(self, client):
-        self.client = client
+		import banta.db
+		self.closed = True
+		self.date = datetime.datetime.now()
+		#we will be using time as a key
+		self.time = banta.utils.dateTimeToInt(self.date)
+		#calculate if we will be adding or substracting the stock
+		#this is a little trick to impact lowly on the code
+		if self.btype in (self.TYPE_NOTA_CRED_A, self.TYPE_NOTA_CRED_B):
+			sign = 1
+		else :
+			sign = -1
+		#let's reduce the stock :D
+		for item in self.items:
+			prod = item.product
+			prod.stock += sign* item.quantity
+			#TODO ask the client if adding a "Move" for each returned item would be a good feature
+		#check that there's not another bill with the same key (should not happen unless using several clients at once)
+		#though that's not possible YET, let's be prepared (also if some stupid person changes the system date)
 
-    def setMarkup(self, markup):
-        """Sets the markup for the bill, which affects all the item.
-        Neither the bill nor the items are recalculated"""
-        self.markup = markup
-        for i in self.items:
-            i.markup = markup
+		while (self.time in banta.db.DB.bills):
+			self.time += 1
 
-    def calculate(self):
-        """Recalculate the values for the bill, and sets the values in each variable.
-        It can be slow so call it only if it has changed"""
-        self.subtotal = 0.0
-        self.tax = 0.0
-        self.total = 0.0
-        for i in self.items:
-            i.calculate()
-            self.total += i.price
-            self.tax += i.tax_total
-        self.subtotal = self.total - self.tax
-    
-    def copy(self):
-        copy = Bill()
+		banta.db.DB.bills[self.time] = self
+		return True
 
-        #copy of the rest of bill class
-        copy.btype = self.btype
-        copy.client = self.client
-        copy.markup = self.markup
-        copy.ptype = self.ptype
-        copy.user = self.user
-        copy.ptype = self.ptype
-        #is easier to just copy this attributes than recalculating stuff
-        copy.subtotal = self.subtotal
-        copy.tax = self.tax
+	def addItem(self, item):
+		"""Adds an item to the bill.
+		Returns True if ok.
+		If the item is already on the bill, or there's an error it returns False."""
 
-        for i in self.items:
-            item = Item()
-            #copy ALL item properties! :D!
-            #here is safer to copy attributes instead of recalculating, because a bill could have a modified price/description
-            #that's the reason we have redundant attributes in the item after all
-            item.base_price = i.base_price
-            item.client_exempt = i.client_exempt
-            item.description = i.description
-            item.markup = i.markup
-            item.net_price = i.net_price
-            item.price = i.price
-            #copy the product to the new instance
-            #product is an object that is safe to copy (that way we can do reports)
-            item.product = i.product
-            item.quantity = i.quantity
-            item.reducible = i.reducible
-            item.tax = i.tax
-            item.tax_total = i.tax_total
-            item.unit_price = i.unit_price            
-            copy.items.append(item)
-        return copy
-    
-    def close(self):
-        """Closes the bill.
-        ADDS THE BILL TO THE DATABASE
-        Reduces the stock, sets the bill date
-        and add it to the bill list
-        if the bill is already closed, it does nothing.
-        Notice this is pretty destructive and has side-effects, so be careful when using it
-        """
-        #TODO disable all functions if the bill is closed
-        if self.closed:
-            return False
+		if self.printed:
+			#this means the bill has been printed fiscally
+			#by no means we should modify printed bills
+			return False
 
-        import banta.db
-        self.closed = True
-        self.date = datetime.datetime.now()
-        #we will be using time as a key
-        self.time = banta.utils.dateTimeToInt(self.date)
-        #calculate if we will be adding or substracting the stock
-        #this is a little trick to impact lowly on the code
-        if self.btype in (self.TYPE_NOTA_CRED_A, self.TYPE_NOTA_CRED_B):
-            sign = 1
-        else :
-            sign = -1
-        #let's reduce the stock :D
-        for item in self.items:
-            prod = item.product
-            prod.stock += sign* item.quantity
-            #TODO ask the client if adding a "Move" for each returned item would be a good feature
-        #check that there's not another bill with the same key (should not happen unless using several clients at once)
-        #though that's not possible YET, let's be prepared (also if some stupid person changes the system date)
+		if item in self.items:
+			return False
 
-        while (self.time in banta.db.DB.bills):
-            self.time += 1
+		self.items.append(item)
+		return True
+		#DB.commit() #DONT COMMIT UNTIL THE BILL IS PRINTED (important also if we ever make a network shared-db version)
 
-        banta.db.DB.bills[self.time] = self
-        return True
+	def delItem(self, i):
+		del self.items[i]
 
-    def addItem(self, item):
-        """Adds an item to the bill. 
-        Returns True if ok. 
-        If the item is already on the bill, or there's an error it returns False."""
-        
-        if self.printed:
-            #this means the bill has been printed fiscally
-            #by no means we should modify printed bills
-            return False
-        
-        if item in self.items:
-            return False
-        
-        self.items.append(item)
-        return True
-        #DB.commit() #DONT COMMIT UNTIL THE BILL IS PRINTED (important also if we ever make a network shared-db version)
-
-    def delItem(self, i):
-        del self.items[i]
-
-    def strPrinted(self):
-        #TODO translate
-        return (self.printed and "Impresa") or "Presupuesto"
+	def strPrinted(self):
+		#TODO translate
+		return (self.printed and "Impresa") or "Presupuesto"
 
 class Printer(_per.Persistent):
     #One of the printers available in the system

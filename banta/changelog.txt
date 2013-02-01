@@ -12,6 +12,11 @@ and easy_install
 
 MoonGate http://MoonGate.com.ar
 
+1.22
+	- Solucionado problema al instalar PySide en Fedora.
+	- Agregada la posibilidad de utilizar alícuotas I.V.A. personalizadas.
+	- Venta de productos con unidades decimales. Pej, vender por litro, metro, o peso.
+
 1.21
 	- Mejorado información de conectividad de impresora fiscal.
 	- Nuevas alícuotas para Quioscos.
