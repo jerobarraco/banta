@@ -56,8 +56,24 @@ def v12(root):
 	for pro in root["products"].values():
 		indice = pro.tax_type
 		if isinstance(indice, int):
-			tax = taxes[indice]
-			pro.tax_type = tax
+			try:
+				pro.tax_type = taxes[indice]
+			except:
+				pro.tax_type = taxes[0]
+		else:
+			pro.tax_type = taxes[0]
+
+	for b in root["bills"].values():
+		for i in b.items:
+			indice = getattr(i, "tax_type", 0)
+			if isinstance(indice, int):
+				try:
+					i.tax_type = taxes[indice]
+				except:
+					i.tax_type = taxes[0]
+			else:
+				i.tax_type = taxes[0]
+
 
 #Convert all the objects to the new namespace
 def blankInit(root):
