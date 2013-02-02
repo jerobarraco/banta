@@ -105,6 +105,18 @@ class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
 		self.set_header('WWW-Authenticate:','basic realm="Banta"')
 		raise Exception("Usuario y/o contraseña incorrecta!")
 
+class ProdImg(BasicAuthHandler):
+	def get(self, *args, **kwargs):
+		code = self.get_argument('code', None)
+		if code:
+			with _db.DB.threaded() as root:
+				self.set_header('Content-Type', 'image')
+				if code in root['products']:
+					prod = root['products'][code]
+					if prod.thumb:
+						self.write(prod.thumb.open("r").read())
+						return
+
 
 class HProducts(BasicAuthHandler):
 	changed = _qc.Signal(int)
@@ -120,7 +132,9 @@ class HProducts(BasicAuthHandler):
 
 
 	def _prodDict(self, p):
-		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock}
+		imgurl = p.thumb and ("../prod_img/?code="+p.code) or 'thumb.jpg'
+		return {'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock,
+						'thumb': imgurl}#hardcoded to allow cache on client
 
 	def _prodFullDict(self, p):
 		return {
@@ -404,6 +418,8 @@ class Server( _qc.QThread ):
 			[
 				(r'/prods(.*)', HProducts, {'server_thread':self}),
 				(r'/reports(.*)', Reports, {'server_thread':self}),
+				(r'/prod_img(.*)', ProdImg, {'server_thread':self}),#todo handle inside product
+
 			],
 			#debug = True
 			gzip = True,

@@ -1,4 +1,14 @@
-
+Ext.Loader.setConfig({enabled: true});
+Ext.Loader.setPath('Ext.ux', 'ux');
+Ext.require([
+    'Ext.grid.*',
+    'Ext.data.*',
+    'Ext.util.*',
+    'Ext.toolbar.Paging',
+    'Ext.ux.PreviewPlugin',
+    'Ext.ModelManager',
+    'Ext.tip.QuickTipManager'
+]);
 
 Ext.onReady(function() {
     Ext.QuickTips.init();
@@ -18,19 +28,29 @@ Ext.onReady(function() {
 			},
 			actionMethods: {
 				create: 'POST', read: 'GET', update: 'POST', destroy: 'POST'
-			},
+			}
 			//extraParams: { test: 'test' }
 		},
 		autoLoad: true,
         fields: [
            {name: 'code'},
 		   {name: 'name'},
-           {name: 'price',      type: 'float'},
+           {name: 'price',     type: 'float'},
            {name: 'stock',     type: 'float'},
-        ],
+           {name: 'thumb',     type: 'str'},
+
+        ]
 		
     });
-
+    function renderProduct(value, p, record) {
+        return Ext.String.format(
+            '<img src="{0}" />{0} {3} {1} ',
+            value,
+            record.data.code,
+            record.getId(),
+            record.data.thumb
+        );
+    }
     // create the Grid
     var grid = new Ext.grid.Panel({
         store: store,
@@ -60,14 +80,47 @@ Ext.onReady(function() {
                 width    : 75,
                 sortable : true,
                 dataIndex: 'stock'
-            }            
+            }         ,
+            {
+                text     : 'thumb',
+                width    : 75,
+                sortable : true,
+                dataIndex: 'thumb',
+                renderer:renderProduct
+            }
+
         ],
-        height: 600,
+        height: 620,
         width: 800,
-        title: 'Array Grid',
+        title: 'Banta',
         renderTo: 'grid-example',
         viewConfig: {
-            stripeRows: true
-        }
+            //stripeRows: true,
+            id: 'gv',
+            trackOver: false,
+            stripeRows: false,
+            plugins: [{
+                ptype: 'preview',
+                bodyField: 'name',
+                expanded: true,
+                pluginId: 'preview'
+            }]
+        },
+        bbar: Ext.create('Ext.PagingToolbar', {
+            store: store,
+            displayInfo: true,
+            displayMsg: 'Displaying topics {0} - {1} of {2}',
+            emptyMsg: "No topics to display",
+            items:[
+                '-', {
+                    text: 'Show Preview',
+                    pressed: false,
+                    enableToggle: true,
+                    toggleHandler: function(btn, pressed) {
+                        var preview = Ext.getCmp('gv').getPlugin('preview');
+                        preview.toggleExpanded(pressed);
+                    }
+                }]
+        })
     });
 });

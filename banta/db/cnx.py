@@ -24,9 +24,15 @@ class MiZODB(object):
 			#es importante asignar el blob_dir para poder contar con soporte de blobs
 			#de manera correcta
 			import ZEO.ClientStorage
-			self.storage =  ZEO.ClientStorage.ClientStorage((server, port))#, blob_dir="./blobcache")#mac stuff?
+			try:
+				self.storage =  ZEO.ClientStorage.ClientStorage((server, port), blob_dir="./blobs")
+			except:
+				self.storage =  ZEO.ClientStorage.ClientStorage((server, port))#mac's old transaction can't handle blobs
 		else:
-			self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac
+			try:
+				self.storage = ZODB.FileStorage.FileStorage(file_name, blob_dir="./blobs")# we have to solve the problem on mac
+			except:
+				self.storage = ZODB.FileStorage.FileStorage(file_name)#, blob_dir="./blobcache")# we have to solve the problem on mac
 		self.db = ZODB.DB(self.storage)
 		self.cnx = self.db.open()
 		self.root = self.cnx.root()

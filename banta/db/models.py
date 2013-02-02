@@ -57,18 +57,11 @@ class Product(_per.Persistent):
 	#category
 	#Better if it can be none.. specially on the free version
 	category = None
+	thumb = None
 	#Minimum stock before warning
 	#min_stock = 0 #later, needs View and Controller
 	#Constants for type of product, it defines the tax it to be charged (depends on other crappy stuff)
 	description = ""
-	TYPE_EXEMPT = 0
-	TYPE_SELL_GOOD = 1
-	TYPE_USE_GOOD = 2
-	TYPE_NAMES = (
-			'Exento (0%)',
-			'Bien de cambio (' + str(int(TAX_MAX*100))+'%)',
-			'Bien de uso (' + str(int(TAX_REDUCED*100))+'%)',
-	)
 	#Consts for Brute Income (Ingresos Brutos), defines what will be charged (depends on other stuff)
 	IB_NOT_EXEMPT = 0
 	IB_EXEMPT = 1
@@ -112,6 +105,7 @@ class Item(_per.Persistent):
 	#CALCULATED total tax charged for the item
 	tax_total = 0.0
 	description = ""
+	#todo quitar
 	reducible = False
 	#A percentaje that the owner charges over the price of a product
 	#Sets the markup of a item, that is when the owner decides to charge an overprice or make a discount (negative markup)
@@ -134,8 +128,6 @@ class Item(_per.Persistent):
 
 		self.unit_price =  self.base_price = product.price
 		self.description = product.name
-		#TODO quitar
-		self.reducible = (self.product.tax_type == self.product.TYPE_USE_GOOD)
 		self.tax_type = product.tax_type
 
 

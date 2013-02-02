@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, print_function, unicode_literals
 import logging
+import ZODB.blob
+
 logger = logging.getLogger(__name__)
 
 import datetime
@@ -54,6 +56,8 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			#Ingresos Brutos
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.IB_NAMES)
+		elif col == 12:
+			editor = _qg.QLabel()
 		#else:
 			#Theres a bug in pyside with this and spinboxes
 			#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
@@ -93,6 +97,9 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			i = editor.findData(d)
 			if i< 0: return None
 			editor.setCurrentIndex(i)
+		elif col == 12:
+			editor.setPixmap(_qg.QPixmap(d))
+
 
 	def setModelData(self, editor, model, index):
 		#Set the data from the editor back to the model (usually changed)
@@ -112,6 +119,14 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			i = editor.currentIndex()
 			#itemData returns the userRole (if i remember well)
 			model.setData(index, editor.itemData(i), er)
+		elif col == 12:
+			fname = _qg.QFileDialog.getOpenFileName(None,
+				'Elegir imágen', "",
+				"Archivos PNG (*.png);;Archivos JPG (*.jpg);;Todos los archivos (*.*)")[0]
+
+			model.setData(index, fname, er)
+
+
 
 class ProductModel(_qc.QAbstractTableModel):
 	HEADERS = (
@@ -126,10 +141,12 @@ class ProductModel(_qc.QAbstractTableModel):
 		_qc.QT_TRANSLATE_NOOP('products', 'Rubro'),
 		_qc.QT_TRANSLATE_NOOP('products', 'Tipo'),
 		_qc.QT_TRANSLATE_NOOP('products', 'Ingresos Brutos'),
+
 		_qc.QT_TRANSLATE_NOOP('products', "Descripción"),
+		_qc.QT_TRANSLATE_NOOP('products', "Imágen"),
 	)
 	max_rows = 0
-	columns = 12
+	columns = 13
 
 	def __init__(self, parent = None):
 		_qc.QAbstractTableModel.__init__(self, parent)
@@ -176,7 +193,7 @@ class ProductModel(_qc.QAbstractTableModel):
 		if not index.isValid():
 			return None
 
-		if role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole, _qc.Qt.UserRole): #maybe faster, easier to understand, compact
+		if role not in (_qc.Qt.DisplayRole, _qc.Qt.EditRole, _qc.Qt.UserRole, _qc.Qt.DecorationRole): #maybe faster, easier to understand, compact
 			return None
 
 		#technically faster
@@ -185,7 +202,18 @@ class ProductModel(_qc.QAbstractTableModel):
 		if role == _qc.Qt.UserRole:
 			return pro.code
 
+
 		col = index.column()
+
+		if col == 12 and (role in( _qc.Qt.DecorationRole, _qc.Qt.EditRole)):
+			if pro.thumb:
+				im = pro.thumb.open("r")
+				img = _qg.QImage()
+				img.loadFromData(im.read())
+				return img
+			else:
+				return _qg.QImage("./static/thumb.jpg")
+
 		if role == _qc.Qt.EditRole:
 			if col == 9:
 				try:
@@ -314,6 +342,13 @@ class ProductModel(_qc.QAbstractTableModel):
 				pro.ib_type = value
 			elif col == 11:
 				pro.description = value
+			elif col == 12:
+				pro.thumb = ZODB.blob.Blob()
+				#open(value, 'rb').write(pro.thumb.open('w')) #horrible
+				im = open(value, 'rb')
+				with pro.thumb.open("w") as f:
+					f.write(im.read())
+
 			#endif
 			_db.DB.commit()
 			#informs other views of the change
