@@ -1,11 +1,10 @@
 <resources>
 
     <string name="app_name">Banta Touch Control</string>
-    <string name="hello_world"></string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Banta Touch Control</string>
     <string name="title_activity_mantenedor__producto">Banta Touch Control</string>
-    <string name="Combobox">Que reporte deseas visualizar</string>
+    <string name="Combobox">¿Qué reporte desea visualizar?</string>
     <string-array name="Seleccione">
         <item >Productos más vendidos</item>
         <item >Clientes más fieles</item>

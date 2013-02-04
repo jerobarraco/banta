@@ -10,7 +10,7 @@
         android:targetSdkVersion="15" />
 
     <application
-        android:icon="@drawable/bantatc2"
+        android:icon="@drawable/ico2"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 		<activity android:name=".Adm_Pro"></activity>
-        <activity android:name=".mantenedor_pro"></activity>
+		<activity android:name=".mantenedor_pro"></activity>
 		<activity android:name=".Reportes"></activity>
 		<activity android:name=".Graficos"></activity>
 		<activity android:name=".Configuracion"></activity>
