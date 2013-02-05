@@ -56,8 +56,7 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			#Ingresos Brutos
 			editor = _qg.QComboBox(parent)
 			editor.addItems(_db.models.Product.IB_NAMES)
-		elif col == 12:
-			editor = _qg.QLabel()
+
 		#else:
 			#Theres a bug in pyside with this and spinboxes
 			#Usando setItemDelegateForColumn esto no se hace muy necesario, lo dejo por las dudas.
@@ -97,8 +96,6 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			i = editor.findData(d)
 			if i< 0: return None
 			editor.setCurrentIndex(i)
-		elif col == 12:
-			editor.setPixmap(_qg.QPixmap(d))
 
 
 	def setModelData(self, editor, model, index):
@@ -119,12 +116,6 @@ class ProductDelegate(_qg.QStyledItemDelegate):
 			i = editor.currentIndex()
 			#itemData returns the userRole (if i remember well)
 			model.setData(index, editor.itemData(i), er)
-		elif col == 12:
-			fname = _qg.QFileDialog.getOpenFileName(None,
-				'Elegir imágen', "",
-				"Archivos PNG (*.png);;Archivos JPG (*.jpg);;Todos los archivos (*.*)")[0]
-
-			model.setData(index, fname, er)
 
 
 
@@ -143,10 +134,9 @@ class ProductModel(_qc.QAbstractTableModel):
 		_qc.QT_TRANSLATE_NOOP('products', 'Ingresos Brutos'),
 
 		_qc.QT_TRANSLATE_NOOP('products', "Descripción"),
-		_qc.QT_TRANSLATE_NOOP('products', "Imágen"),
 	)
 	max_rows = 0
-	columns = 13
+	columns = 12
 
 	def __init__(self, parent = None):
 		_qc.QAbstractTableModel.__init__(self, parent)
@@ -205,7 +195,7 @@ class ProductModel(_qc.QAbstractTableModel):
 
 		col = index.column()
 
-		if col == 12 and (role in( _qc.Qt.DecorationRole, _qc.Qt.EditRole)):
+		if role == _qc.Qt.DecorationRole and col == 0:
 			if pro.thumb:
 				im = pro.thumb.open("r")
 				img = _qg.QImage()
@@ -342,12 +332,7 @@ class ProductModel(_qc.QAbstractTableModel):
 				pro.ib_type = value
 			elif col == 11:
 				pro.description = value
-			elif col == 12:
-				pro.thumb = ZODB.blob.Blob()
-				#open(value, 'rb').write(pro.thumb.open('w')) #horrible
-				im = open(value, 'rb')
-				with pro.thumb.open("w") as f:
-					f.write(im.read())
+
 
 			#endif
 			_db.DB.commit()
@@ -448,9 +433,31 @@ class Products(_pack.GenericModule):
 		self.app.window.eProdCode.textChanged.connect(self.nameChanged)
 		self.app.window.cb_FilProvider.currentIndexChanged.connect(self.providerChanged)
 
+		#Actions
+		self.app.window.bImage.setDefaultAction(self.app.window.acProdImg)
+		self.app.window.acProdImg.triggered.connect(self.setImg)
+
 		#self.app.window.v_products.setColumnHidden(3, True)
 		#careful! this could be slow!
 		#self.app.window.v_products.resizeColumnsToContents()
+
+	@_qc.Slot()
+	def setImg(self):
+		sel = self.app.window.v_products.selectedIndexes()
+		if sel:
+			i = sel[0]
+			fname = _qg.QFileDialog.getOpenFileName(self.app.window,
+				'Elegir imágen', "",
+				"Archivos PNG (*.png);;Archivos JPG (*.jpg);;Todos los archivos (*.*)")[0]
+			code = i.data(_qc.Qt.UserRole)
+			pro = _db.DB.products[code]
+			pro.thumb = ZODB.blob.Blob()
+			#open(value, 'rb').write(pro.thumb.open('w')) #horrible
+			im = open(fname, 'rb')
+			with pro.thumb.open("w") as f:
+				f.write(im.read())
+			_db.DB.commit()
+			self.proxy_model.dataChanged.emit(i, i)
 
 	@_qc.Slot(str)
 	def nameChanged(self, name):

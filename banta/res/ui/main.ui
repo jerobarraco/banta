@@ -27,7 +27,7 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_7">
+   <layout class="QVBoxLayout" name="verticalLayout_12">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -727,30 +727,59 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QToolButton" name="bProdClearFilter">
-                <property name="text">
-                 <string>Limpiar Filtro</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_8">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
             <item>
              <widget class="QPushButton" name="bProdNew">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>Nuevo</string>
               </property>
              </widget>
             </item>
             <item>
+             <widget class="QToolButton" name="bProdClearFilter">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Limpiar Filtro</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <item>
              <widget class="QPushButton" name="bProdDelete">
               <property name="text">
                <string>Borrar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="bImage">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Imagen</string>
               </property>
              </widget>
             </item>
@@ -1163,6 +1192,11 @@
     <string>Salir</string>
    </property>
   </action>
+  <action name="acProdImg">
+   <property name="text">
+    <string>Imagen</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>cb_clients</tabstop>
@@ -1188,8 +1222,6 @@
   <tabstop>v_clients</tabstop>
   <tabstop>eProdCode</tabstop>
   <tabstop>cb_FilProvider</tabstop>
-  <tabstop>bProdClearFilter</tabstop>
-  <tabstop>bProdNew</tabstop>
   <tabstop>bProdDelete</tabstop>
   <tabstop>bExport</tabstop>
   <tabstop>bNewStockBuy</tabstop>

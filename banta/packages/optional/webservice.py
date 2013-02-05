@@ -419,7 +419,6 @@ class Server( _qc.QThread ):
 				(r'/prods(.*)', HProducts, {'server_thread':self}),
 				(r'/reports(.*)', Reports, {'server_thread':self}),
 				(r'/prod_img(.*)', ProdImg, {'server_thread':self}),#todo handle inside product
-
 			],
 			#debug = True
 			gzip = True,

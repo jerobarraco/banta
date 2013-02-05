@@ -44,9 +44,10 @@ Ext.onReady(function() {
     });
     function renderProduct(value, p, record) {
         return Ext.String.format(
-            '<img src="{0}" />{0} {3} {1} ',
+            '<img src="{0}"/>',
             value,
             record.data.code,
+			record.data.price,
             record.getId(),
             record.data.thumb
         );
