@@ -195,15 +195,18 @@ class ProductModel(_qc.QAbstractTableModel):
 
 		col = index.column()
 
-		if role == _qc.Qt.DecorationRole and col == 0:
-			if pro.thumb:
-				im = pro.thumb.open("r")
-				img = _qg.QImage()
-				img.loadFromData(im.read())
-				return img
+		if role == _qc.Qt.DecorationRole:
+			if col == 0:
+				if pro.thumb:
+					im = pro.thumb.open("r")
+					img = _qg.QImage()
+					img.loadFromData(im.read())
+					return img
+				else:
+					return _qg.QImage("./static/thumb.jpg")
 			else:
-				return _qg.QImage("./static/thumb.jpg")
-
+				return None
+			
 		if role == _qc.Qt.EditRole:
 			if col == 9:
 				try:
