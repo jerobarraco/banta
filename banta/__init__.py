@@ -5,7 +5,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 import sys
 import logging
 
-__version__ = '1.22.0'
+__version__ = '1.23.0'
 
 #3rd party
 ##for pyinstaller
@@ -50,7 +50,7 @@ class App(_qg.QApplication):
 		#Qt app itself
 		#self.app = _qg.QApplication(sys.argv)
 		#Before creating the translators we tell Qt how strings are encoded (the fact that Qt has this functions makes it awesome)
-		self.codec = _qc.QTextCodec.codecForName("UTF-8")
+		self.codec = _qc.QTextCodec.codecForName("UTF-8".encode("ascii", "ignore"))
 		#CodecForTr is maybe the most important, it affects string stored in translations, as well as string constants in the source
 		#that's being translated. otherway we need to use trUtf8 in code.
 		#(Also important to set the CODECFORTR in the qt project from where translations are generated

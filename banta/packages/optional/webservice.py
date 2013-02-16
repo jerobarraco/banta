@@ -36,6 +36,14 @@ import banta.utils as _utils
 #I dont really like decorators, i think they are a bad idea and can be supplied by other means...
 # like passing results to a function.
 #so i think i'll convert this to a context manager which does the same thing but less cumbersome
+class WrongUser(Exception):
+	def __init__(self, *args):
+		Exception.__init__(self, "Incorrect user or password")
+
+class WrongSchema(Exception):
+	def __init__(self, *args):
+		Exception.__init__(self, "Schema not supported, only Basic.")
+
 class JsonWriter(object):
 	"""Context manager for a json writer.
 	needs an argument, an instance that inherits from RequestHandler
@@ -49,34 +57,62 @@ class JsonWriter(object):
 
 	def __enter__(self):
 		self.res = res = {'success':False}
+		#Cannot send error response after headers written
+		#auth handler sets the header
 		return self.res
 
 	def __exit__(self, exc_type, exc_val, exc_tb):
+		act = 0
 		if exc_type is None:
 			self.res['success'] = True
 			self.res['error'] = ""
-			act = 0
 		else:
+			if exc_type == WrongSchema:
+				self.ins.set_status(500)
+				#if we try to write a header normally here, it'll try to write a 
+				#unicode because we are using unicode_literals
+				#then tornado will assert(isinstance(chunk, str))
+				#but chunk is "header + chunk"
+				#and will fail with a missexplained error (header already written)
+				#so we need to put the b in the string to make it a str type
+				#this doesnt happen when we try to set the "content-type"
+				#also, this happens only on ubuntu, not on windows.¿?
+				#i dont know why...
+				self.ins.set_header(b'WWW-Authenticate', b'basic realm="Banta"')
+			elif exc_type == WrongUser:
+				self.ins.set_status(401)
+				self.ins.set_header(b'WWW-Authenticate:', b'basic realm="Banta"')
 			error = unicode(exc_val)
-			logger.exception(error)
+			logger.exception("Caught exception on product modification.\n" + error)
 			self.res['error'] = error
 			self.res['success'] = False
 			act = 1
-		self.ins.set_header('Content-Type', 'application/json; charset=utf-8')
+		self.ins.set_header(b'Content-Type', b'application/json; charset=utf-8')
 		json = tornado.escape.json_encode(self.res)
+		#just in case, this will never happen cuz json writes a str 
+		#(maybe because we are using tornado's json
+		if isinstance(json, unicode):
+			json = json.encode('utf-8', 'replace')
+
 		self.ins.write(json)
 		self.ins.onAct.emit(act)
 		return True
 
-class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
+class BasicAuthHandler(_qc.QObject, tornado.web.RequestHandler):
 	#Avoid creating the signal per class, as this class will be inherited, it could lead
 	#to duplicated connections and problems,
 	#even though it seems to be fixed but, better to be explicit
 	#http://stackoverflow.com/questions/7577290/pyside-signal-duplicating-behavior
+	#https://groups.google.com/forum/#!msg/pyside/pAkPYBSl698/sqCaSKmgCY4J
 	onAct = _qc.Signal(int)
 	#looks like there  is no other way to create signals
 	SUPPORTED_METHODS = ("GET", "HEAD", "POST", "DELETE", "PATCH", "PUT", "OPTIONS")
-
+	
+	def __init__(self, *args, **kwargs):
+		#This is needed because nor the QObject not the RequestHandler can handle multiple inheritance. 
+		_qc.QObject.__init__(self)
+		tornado.web.RequestHandler.__init__(self, *args, **kwargs)
+		
 	def initialize(self, server_thread, *args, **kwargs):
 		self.server_thread = server_thread
 		#we cant create the signal here, because error
@@ -87,9 +123,7 @@ class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
 		#print ('aut', scheme, sep, token)
 		#if the scheme is wrong (or have nothing
 		if scheme.lower() != 'basic':
-			self.set_status(500)
-			self.set_header('WWW-Authenticate', 'basic realm="Banta"')
-			raise Exception("Schema not supported, only Basic.")
+			raise WrongSchema()
 		#first we decode the base64, it returns a bytestring (encoded) so we MUST decode it BEFORE spliting
 		#decoded = token.decode('base64') // recoded = decoded.decode('utf-8') // recoded.split(':', 1)
 		username, pwd = token.decode('base64').decode('utf-8').split(':', 1)
@@ -101,9 +135,7 @@ class BasicAuthHandler(tornado.web.RequestHandler, _qc.QObject):
 				if user.password == pwd:
 					return user
 		#if there is no user, or the user or passwrd is incorrect, it'll fail
-		self.set_status(401)
-		self.set_header('WWW-Authenticate:','basic realm="Banta"')
-		raise Exception("Usuario y/o contraseña incorrecta!")
+		raise WrongUser()
 
 class ProdImg(BasicAuthHandler):
 	def get(self, *args, **kwargs):
@@ -205,7 +237,7 @@ class HProducts(BasicAuthHandler):
 	def post(self, *args, **kwargs):
 		"""inserts or modify element"""
 		row = -1
-		with JsonWriter(self) as res:#, _utils.Timer("post"):
+		with JsonWriter(self) as res: #,_utils.Timer("post") :
 			with _db.DB.threaded() as root:
 				user = self.get_current_user(root)
 
@@ -388,7 +420,7 @@ class Server( _qc.QThread ):
 			#first it tries to get it through the internet connection
 			#this is good because it will show the ip associated to an interface connected to internet
 			s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-			s.connect(("gmail.com", 80))
+			s.connect(("google.com", 80))
 			n = s.getsockname()[0]
 		except Exception, e:
 			logger.exception("Error when trying to get the local ip: "+ unicode(e))
@@ -420,11 +452,11 @@ class Server( _qc.QThread ):
 				(r'/reports(.*)', Reports, {'server_thread':self}),
 				(r'/prod_img(.*)', ProdImg, {'server_thread':self}),#todo handle inside product
 			],
-			#debug = True
+			#debug = True,
 			gzip = True,
-			static_path= pth,
+			static_path = pth,
 		)
-		application.listen(8080, '0.0.0.0')
+		application.listen(_db.CONF.WEBSERVICE_PORT, '0.0.0.0')
 		tornado.ioloop.IOLoop.instance().start()
 
 class WebService(_pack.GenericModule):

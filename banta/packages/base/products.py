@@ -197,13 +197,17 @@ class ProductModel(_qc.QAbstractTableModel):
 
 		if role == _qc.Qt.DecorationRole:
 			if col == 0:
-				if pro.thumb:
-					im = pro.thumb.open("r")
-					img = _qg.QImage()
-					img.loadFromData(im.read())
-					return img
-				else:
-					return _qg.QImage("./static/thumb.jpg")
+				try:
+					if pro.thumb:
+						im = pro.thumb.open("r")
+						img = _qg.QImage()
+						img.loadFromData(im.read())
+						return img
+					else:
+						return _qg.QImage("./static/thumb.jpg")
+				except Exception, e:
+					logger.exception(unicode(e).encode('ascii', 'replace'))
+					return None
 			else:
 				return None
 			

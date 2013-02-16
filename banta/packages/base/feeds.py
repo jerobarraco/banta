@@ -126,9 +126,8 @@ class Feeds(banta.packages.GenericModule):
 	REQUIRES = []
 	NAME = "feeds"
 	last_message = 0
-	def __init__(self, app):
-		super(Feeds, self).__init__(app)
-
+	reader = None
+	
 	def load(self):
 		#graphic effect to control the opacity of the label
 		self.goe = _qg.QGraphicsOpacityEffect()
@@ -146,10 +145,10 @@ class Feeds(banta.packages.GenericModule):
 		self.timer.timeout.connect(self.showMessage)
 		#The timer is started ONLY when the reader has fetched some news
 		#the reader will fetch the news from internet, or fail-to if there's no internet
-		self.app.reader = Reader()
-		self.app.reader.newsFetched.connect(self.addNews, _qc.Qt.QueuedConnection)
-		self.app.reader.finished.connect(self.term)
-		self.app.reader.start()
+		self.reader = Reader()
+		self.reader.newsFetched.connect(self.addNews, _qc.Qt.QueuedConnection)
+		self.reader.finished.connect(self.term)
+		self.reader.start()
 
 	@_qc.Slot()
 	def showMessage(self):
@@ -182,7 +181,8 @@ class Feeds(banta.packages.GenericModule):
 		pass #The thread is finished..
 
 	def wait(self):
-		self.app.reader.wait(5000)
+		if self.reader:
+			self.reader.wait(5000)
 
 a = """NOTE ABOUT QTHREADS!!
 DONT add slots to a QThread subclass:

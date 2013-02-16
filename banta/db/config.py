@@ -13,13 +13,16 @@ class Config:
 	PROFILING = False
 	SERVER = ''
 	DISABLED_MODULES = [ ]
+	WEBSERVICE_PORT = 8008
 
 	K_EXPERIMENTAL = 'experimental'
 	K_PERSISTENT_PRINTER = 'persistent_printer'
 	K_DEBUG = 'debug'
 	K_PROFILING = 'profiling'
 	K_DISABLED_MODULES = 'disabled_modules'
+	K_WEBSERVICE_PORT = 'webservice_port'
 	K_SERVER = 'server'
+
 
 	def __init__(self, cfg = 'banta.cfg'):
 		self.filename = os.path.join(os.path.abspath('.'), cfg)
@@ -29,7 +32,9 @@ class Config:
 			self.K_PERSISTENT_PRINTER : str(self.PERSISTENT_PRINTER),
 			self.K_EXPERIMENTAL : str(self.EXPERIMENTAL),
 			self.K_DISABLED_MODULES : ','.join(self.DISABLED_MODULES),
+			self.K_WEBSERVICE_PORT : str(self.WEBSERVICE_PORT),
 			self.K_SERVER : self.SERVER,
+
 		}
 
 		self.config = ConfigParser.SafeConfigParser(self.defaults)
@@ -47,6 +52,7 @@ class Config:
 			m.strip()
 			for m in d_modules.split(',')
 		]
+		self.WEBSERVICE_PORT = int(self.config.get(sect, self.K_WEBSERVICE_PORT))
 		self.SERVER = self.config.get(sect, self.K_SERVER)
 
 	def get(self, section, key):
@@ -76,6 +82,7 @@ class Config:
 		self.set(self.K_EXPERIMENTAL, self.EXPERIMENTAL)
 		self.set(self.K_PERSISTENT_PRINTER, self.PERSISTENT_PRINTER)
 		self.set(self.K_DISABLED_MODULES, ','.join(self.DISABLED_MODULES))
+		self.set(self.K_WEBSERVICE_PORT, str(self.WEBSERVICE_PORT))
 		self.set(self.K_SERVER, self.SERVER)
 
 		if self.config:

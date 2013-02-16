@@ -11,7 +11,10 @@ and easy_install
 )
 
 MoonGate http://MoonGate.com.ar
-
+1.23
+	- Mejoras en el webservice
+	- Posibilidad de configurar el puerto donde funcionará el webservice.
+	
 1.22
 	- Solucionado problema al instalar PySide en Fedora.
 	- Agregada la posibilidad de utilizar alícuotas I.V.A. personalizadas.
@@ -21,7 +24,11 @@ MoonGate http://MoonGate.com.ar
 	- Mejorado información de conectividad de impresora fiscal.
 	- Nuevas alícuotas para Quioscos.
 	- Mejorada importacion de datos.
-
+TC 1.1
+	- Puerto en el webservice
+	- Mejoras
+	- Evitado "Force close" cuando se intenta escanear un producto sin tener instalado BarcodeScanner o Google Goggles.
+	
 TC 1.0
 	- Interfaz ampliamente mejorada
 	- UTF8 modificar y al buscar
