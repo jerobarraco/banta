@@ -184,7 +184,7 @@ class Printer(GenericModule):
 		#TODO poner el currentIndex en -1 en los demas combobox al crearlo/vaciarlo, arregla el probleam de la signal not emmited
 		#dont use clear
 		self.dialog.cbBrands.setCurrentIndex(-1)
-		self.dialog.cbBrands.currentIndexChanged.connect(self.brandChanged)
+		self.dialog.cbBrands.currentIndexChanged[int].connect(self.brandChanged)
 		
 		#loads printer data into the form
 		#show data from current config
@@ -194,9 +194,9 @@ class Printer(GenericModule):
 		#order DO mathers, because previous function emits currentIndexChanged that calls brandChanged that fills this combo
 		self.dialog.cbModels.setCurrentIndex(printer.model)
 		#connect the rest of the slots
-		self.dialog.cbModels.currentIndexChanged.connect(self.modelChanged)
+		self.dialog.cbModels.currentIndexChanged[int].connect(self.modelChanged)
 		self.dialog.device.editingFinished.connect(self.deviceChanged)
-		self.dialog.cbSpeed.currentIndexChanged.connect(self.speedChanged)
+		self.dialog.cbSpeed.currentIndexChanged[int].connect(self.speedChanged)
 
 		#creates the threaded printing which could be run in the same thread also
 		#create another thread

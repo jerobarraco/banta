@@ -5,7 +5,7 @@ Ext.require([
     'Ext.data.*',
     'Ext.util.*',
     'Ext.toolbar.Paging',
-    'Ext.ux.PreviewPlugin',
+    //'Ext.ux.PreviewPlugin',
     'Ext.ModelManager',
     'Ext.tip.QuickTipManager'
 ]);
@@ -133,7 +133,9 @@ Ext.onReady(function() {
             displayMsg: 'Displaying topics {0} - {1} of {2}',
             emptyMsg: "No topics to display",
             items:[
-                '-', {
+                '-'
+				/*, 
+				{
                     text: 'Show Preview',
                     pressed: false,
                     enableToggle: true,
@@ -141,7 +143,8 @@ Ext.onReady(function() {
                         var preview = Ext.getCmp('gv').getPlugin('preview');
                         preview.toggleExpanded(pressed);
                     }
-                }]
+                }*/
+				]
         })
     });
 });

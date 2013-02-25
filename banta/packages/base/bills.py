@@ -51,14 +51,14 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		#w.chBProdReducible.stateChanged.connect(self.prodReducibleChanged)
 
 		## combos
-		w.cb_tbill.currentIndexChanged.connect(self.typeChanged)
-		w.cb_tpay.currentIndexChanged.connect(self.payChanged)
-		w.cb_billProds.currentIndexChanged.connect(self.prodChanged)
-		w.cb_clients.currentIndexChanged.connect(self.clientChanged)
-		w.cb_billUser.currentIndexChanged.connect(self.userChanged)
+		w.cb_tbill.currentIndexChanged[int].connect(self.typeChanged)
+		w.cb_tpay.currentIndexChanged[int].connect(self.payChanged)
+		w.cb_billProds.currentIndexChanged[int].connect(self.prodChanged)
+		w.cb_clients.currentIndexChanged[int].connect(self.clientChanged)
+		w.cb_billUser.currentIndexChanged[int].connect(self.userChanged)
 		w.eProdDetail.editingFinished.connect(self.prodDetailChanged)
 		w.cb_billIva.setModel(_pkg.optional.type_tax.MODEL)
-		w.cb_billIva.currentIndexChanged.connect(self.taxChanged)
+		w.cb_billIva.currentIndexChanged[int].connect(self.taxChanged)
 		#So the label clears when the user inputs another client, this will make sure they select the correct one.
 		#(notice that is still possible that SOME client is assigned to the bill but the interface wont show it)
 		w.cb_clients.editTextChanged.connect(w.lBCliDetail.clear)
@@ -88,7 +88,7 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		w.eBProdQuant.valueChanged.connect(self.prodQuantChanged)
 		#example of how to set a locale for just one widget
 		#w.eBProdMarkup.setLocale(_qc.QLocale.c())
-		w.dsPrice.valueChanged.connect(self.priceChanged)
+		w.dsPrice.valueChanged[float].connect(self.priceChanged)
 		#setting the first item, will also trigger the signal, that's exactly what i want, it will set a default value
 		#to the objects
 		#order matters
@@ -364,7 +364,7 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		self.app.window.lBCliDetail.setText("")
 		#forces to re-set the user on the new bill.. using the current index we allow to create several bills
 		# using the same user and not having to change the combobox each time
-		self.app.window.cb_billUser.currentIndexChanged.emit(self.app.window.cb_billUser.currentIndex())
+		self.app.window.cb_billUser.currentIndexChanged[int].emit(self.app.window.cb_billUser.currentIndex())
 		#force the re-set of the pay type
 		self.app.window.cb_tpay.currentIndexChanged.emit(0)
 		self.showInfo()

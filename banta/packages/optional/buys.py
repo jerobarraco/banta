@@ -24,7 +24,7 @@ class Buys(_pack.GenericModule):
 		self.buy_price = 0
 		self.app.window.acNewStockBuy.setEnabled(True)
 		self.app.window.acNewStockBuy.triggered.connect(self.newBuy)
-		self.dialog.cbProd.currentIndexChanged.connect(self.prodChanged)
+		self.dialog.cbProd.currentIndexChanged[int].connect(self.prodChanged)
 		self.dialog.dPacks.valueChanged.connect(self.packChanged)
 		prod_mod_name = banta.packages.base.products.Products.NAME
 		model = self.app.modules[prod_mod_name].model

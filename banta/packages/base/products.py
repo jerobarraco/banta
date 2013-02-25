@@ -438,7 +438,7 @@ class Products(_pack.GenericModule):
 		#this is direct way, but we couldnt filter by another thing i leave it for the record
 		#self.app.window.eProdCode.textChanged.connect(self.proxy_model.setFilterWildcard)
 		self.app.window.eProdCode.textChanged.connect(self.nameChanged)
-		self.app.window.cb_FilProvider.currentIndexChanged.connect(self.providerChanged)
+		self.app.window.cb_FilProvider.currentIndexChanged[int].connect(self.providerChanged)
 
 		#Actions
 		self.app.window.bImage.setDefaultAction(self.app.window.acProdImg)
