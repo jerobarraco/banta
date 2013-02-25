@@ -26,24 +26,23 @@ class ClientDetails(_pkg.GenericModule):
 		self.dialog.setWindowTitle(self.dialog.tr('Detalles de cliente'))
 		w.bClientAccount.setDefaultAction(w.acShowClientDetails)
 		#Not ready for release yet
-		#w.acShowClientDetails.triggered.connect(self.showDetails)
-		#w.bClientAccount.setVisible(True)
+		w.acShowClientDetails.triggered.connect(self.showDetails)
+		w.bClientAccount.setVisible(True)
 
 
 	@_qc.Slot()
 	def showDetails(self):
-		"""Creates a new Client for a temporary use (one shot/one buy)
-		The idea of this is not to bloat the client list with one-time shoppers
+		"""
+			Displays the details for a client
 		"""
 		d = self.dialog
 		w = self.app.window
-		#get the selected user
-		#cmod = self.app.modules[banta.packages.base.clients.NAME].model
 		model = w.v_clients.model()
 		selected = w.v_clients.selectedIndexes()
 		if not selected:
-			#TODO SHOW MESSAGE
+			_qg.QMessageBox.critical(self.app.window, "Banta", self.dialog.tr("Primero seleccione el cliente."))
 			return
+
 		r = selected[0]
 		#TODO use the model to work with the db instead of using it directly????
 		cli_code = r.data(_qc.Qt.UserRole)
