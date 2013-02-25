@@ -85,7 +85,7 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		#though is way more prone to errors...
 		w.cb_clients.setModelColumn(1)
 
-		w.eBProdQuant.valueChanged.connect(self.prodQuantChanged)
+		w.eBProdQuant.valueChanged[float].connect(self.prodQuantChanged)
 		#example of how to set a locale for just one widget
 		#w.eBProdMarkup.setLocale(_qc.QLocale.c())
 		w.dsPrice.valueChanged[float].connect(self.priceChanged)
@@ -366,7 +366,7 @@ class Bills( _qc.QObject, _pkg.GenericModule):
 		# using the same user and not having to change the combobox each time
 		self.app.window.cb_billUser.currentIndexChanged[int].emit(self.app.window.cb_billUser.currentIndex())
 		#force the re-set of the pay type
-		self.app.window.cb_tpay.currentIndexChanged.emit(0)
+		self.app.window.cb_tpay.currentIndexChanged[int].emit(0)
 		self.showInfo()
 
 	@_qc.Slot()

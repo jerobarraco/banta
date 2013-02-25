@@ -21,7 +21,7 @@ class Buys(GenericModule):
 		self.app.window.acAllopass.triggered.connect(self.code)
 		self.dialog.cbCountries.setItems(self.countries)
 		self.dialog.cbCountries.currentIndexChanged[int].connect(self.countChanged)
-		self.dialog.dPacks.valueChanged.connect(self.packChanged)
+		self.dialog.dPacks.valueChanged[float].connect(self.packChanged)
 		import packages.base.products
 		model = self.app.modules[packages.base.products.Products.NAME].model
 		cbp = self.dialog.cbProd
