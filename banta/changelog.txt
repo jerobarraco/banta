@@ -14,6 +14,9 @@ MoonGate http://MoonGate.com.ar
 1.23
 	- Mejoras en el webservice
 	- Posibilidad de configurar el puerto donde funcionará el webservice.
+	- Detalle completo en api webservice al buscar.
+	- Problemas varios en ubuntu.
+	-
 	
 1.22
 	- Solucionado problema al instalar PySide en Fedora.

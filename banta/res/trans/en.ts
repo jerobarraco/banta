@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="en">
+<!DOCTYPE TS><TS version="1.1" language="en">
 <context>
     <name>Acerca</name>
     <message>
@@ -10,7 +9,7 @@
     </message>
     <message>
         <location filename="../ui/about.ui" line="23"/>
-        <source>Entre en nostro sítio</source>
+        <source>Entre en nostro s&#xed;tio</source>
         <translation type="obsolete">Visit our site</translation>
     </message>
     <message>
@@ -32,7 +31,7 @@ p, li { white-space: pre-wrap; }
         <source>Visite nuestro sitio</source>
         <translation>Visite our site</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/about.ui" line="64"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -40,31 +39,31 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Contacto/Servicio Técnico:&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-weight:600;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;E-mail	&lt;/span&gt;&lt;a href=&quot;mailto://mail@moongate.com.ar&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;mail@moongate.com.ar&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Web	&lt;/span&gt;&lt;a href=&quot;http://www.moongate.com.ar&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;MoonGate.com.ar&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Twitter	&lt;/span&gt;&lt;a href=&quot;https://twitter.com/#!/moongateis&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;@MoonGateIS&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Facebook&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	&lt;/span&gt;&lt;a href=&quot;https://www.facebook.com/MoonGateInteractive&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;MoonGateInteractive&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Argentina	+&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;54 9 (343) 4628881&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	+54 (343) 4236348&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;E-mail<byte value="x9"/>&lt;/span&gt;&lt;a href=&quot;mailto://mail@moongate.com.ar&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;mail@moongate.com.ar&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Web<byte value="x9"/>&lt;/span&gt;&lt;a href=&quot;http://www.moongate.com.ar&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;MoonGate.com.ar&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Twitter<byte value="x9"/>&lt;/span&gt;&lt;a href=&quot;https://twitter.com/#!/moongateis&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;@MoonGateIS&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Facebook&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;<byte value="x9"/>&lt;/span&gt;&lt;a href=&quot;https://www.facebook.com/MoonGateInteractive&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;MoonGateInteractive&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Argentina<byte value="x9"/>+&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;54 9 (343) 4628881&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;<byte value="x9"/>+54 (343) 4236348&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/about.ui" line="91"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:7.8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Desarrollo&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	&lt;/span&gt;&lt;a href=&quot;http://moongate.com.ar&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;MoonGate Interactive Studio&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;<byte value="x9"/>&lt;/span&gt;&lt;a href=&quot;http://moongate.com.ar&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;MoonGate Interactive Studio&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Diseño Gráfico&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	&lt;/span&gt;&lt;a href=&quot;http://greatstudio.tv&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;GreatStudio.tv&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;<byte value="x9"/>&lt;/span&gt;&lt;a href=&quot;http://greatstudio.tv&quot;&gt;&lt;span style=&quot; font-size:8pt; text-decoration: underline; color:#aaaaff;&quot;&gt;GreatStudio.tv&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;Consultores profesionales en área contable:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;	Jorge Furlán&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;<byte value="x9"/>Jorge Furlán&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/about.ui" line="117"/>
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -74,8 +73,8 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-weight:600;&quot;&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;Taller Paraná &lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;P. Arturo Illia 3 - Paraná - Entre Ríos - Argentina&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;TelFax	&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;54 343 4313129&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;E-Mail	&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;taller_parana@ciudad.com.ar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;TelFax<byte value="x9"/>&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;54 343 4313129&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:8pt; font-weight:600;&quot;&gt;E-Mail<byte value="x9"/>&lt;/span&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;taller_parana@ciudad.com.ar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation></translation>
     </message>
 </context>
@@ -94,7 +93,7 @@ p, li { white-space: pre-wrap; }
         <source>Categorias</source>
         <translation type="obsolete">Categories</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/optional/categories.py" line="74"/>
         <source>Ingrese el nombre de la categoría</source>
         <translation type="obsolete">Enter category name</translation>
@@ -122,7 +121,7 @@ p, li { white-space: pre-wrap; }
         <source>Ingrese el DNI/CUIT/CUIL</source>
         <translation type="obsolete">Enter the DNI/CUIT/CUIL</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/clients.py" line="232"/>
         <source>Ya existe un cliente con ese código.</source>
         <translation type="obsolete">There is already a client with that code.</translation>
@@ -175,7 +174,7 @@ p, li { white-space: pre-wrap; }
         <source>Total</source>
         <translation>Total</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/client_details.ui" line="20"/>
         <source>Configuración</source>
         <translation>Setting</translation>
@@ -225,7 +224,7 @@ p, li { white-space: pre-wrap; }
         <source>Tipo</source>
         <translation>Type</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/temp_client.ui" line="91"/>
         <source>Dirección</source>
         <translation>Address</translation>
@@ -348,7 +347,7 @@ p, li { white-space: pre-wrap; }
         <source>Usuario</source>
         <translation>User</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/bill_list.ui" line="94"/>
         <source>Número</source>
         <translation>Number</translation>
@@ -431,9 +430,9 @@ p, li { white-space: pre-wrap; }
         <source>Borrar</source>
         <translation>Delete</translation>
     </message>
-    <message utf8="both">
+    <message>
         <location filename="../ui/main.ui" line="344"/>
-        <source>Código</source>
+        <source>C&#xf3;digo</source>
         <translation type="obsolete">Code</translation>
     </message>
     <message>
@@ -636,42 +635,42 @@ p, li { white-space: pre-wrap; }
         <source>Nueva Compra</source>
         <translation>New purchase</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="54"/>
         <source>Código del cliente</source>
         <translation type="obsolete">Client code</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="151"/>
         <source>Nuevo Ítem</source>
         <translation type="obsolete">New item</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="453"/>
         <source>Número</source>
         <translation>Number</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="687"/>
         <source>Artículos</source>
         <translation>Articles</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="960"/>
         <source>Menú</source>
         <translation>Menu</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="1019"/>
         <source>Configuración</source>
         <translation>Settings</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="1039"/>
         <source>Agregar Ítem</source>
         <translation>Add item</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="1119"/>
         <source>Importar Artículos</source>
         <translation>Import articles</translation>
@@ -731,7 +730,7 @@ p, li { white-space: pre-wrap; }
         <source>Cerrar Impresora</source>
         <translation>Close Printer</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../ui/main.ui" line="151"/>
         <source>Nuevo ítem</source>
         <translation>New item</translation>
@@ -751,10 +750,15 @@ p, li { white-space: pre-wrap; }
         <source>Imagen</source>
         <translation>Image</translation>
     </message>
+    <message encoding="UTF-8">
+        <location filename="../ui/main.ui" line="387"/>
+        <source>Código</source>
+        <translation type="unfinished">Code</translation>
+    </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>ProductModel</name>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/products.py" line="360"/>
         <source>Ya existe un producto con ese código.</source>
         <translation>There is already a previous product with that code.</translation>
@@ -764,7 +768,7 @@ p, li { white-space: pre-wrap; }
         <source>Modificar Stock</source>
         <translation>Modify stock</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/products.py" line="316"/>
         <source>Razón de la modificación:</source>
         <translation>Reason of stock modification:</translation>
@@ -774,20 +778,20 @@ p, li { white-space: pre-wrap; }
         <source>Nuevo Producto</source>
         <translation>New product</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/products.py" line="354"/>
         <source>Ingrese el código</source>
         <translation>Enter code</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>ProviderModel</name>
     <message>
         <location filename="../../packages/base/providers.py" line="105"/>
         <source>Nuevo Proveedor</source>
         <translation>New provider</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/providers.py" line="106"/>
         <source>Ingrese el código</source>
         <translation>Enter code</translation>
@@ -838,7 +842,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../packages/base/clients.py" line="74"/>
-        <source>DirecciÃ³n</source>
+        <source>Direcci&#xc3;&#xb3;n</source>
         <translation>Address</translation>
     </message>
     <message>
@@ -902,12 +906,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../packages/base/products.py" line="124"/>
-        <source>CÃ³digo</source>
+        <source>C&#xc3;&#xb3;digo</source>
         <translation>Code</translation>
     </message>
     <message>
         <location filename="../../packages/base/products.py" line="125"/>
-        <source>CÃ³digo Externo</source>
+        <source>C&#xc3;&#xb3;digo Externo</source>
         <translation>External code</translation>
     </message>
     <message>
@@ -952,7 +956,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../packages/base/products.py" line="136"/>
-        <source>DescripciÃ³n</source>
+        <source>Descripci&#xc3;&#xb3;n</source>
         <translation>Description</translation>
     </message>
 </context>
@@ -960,7 +964,7 @@ p, li { white-space: pre-wrap; }
     <name>provider</name>
     <message>
         <location filename="../../__main__.py" line="74"/>
-        <source>CÃ³digo</source>
+        <source>C&#xc3;&#xb3;digo</source>
         <translation type="obsolete">Code</translation>
     </message>
     <message>
@@ -973,12 +977,12 @@ p, li { white-space: pre-wrap; }
     <name>providers</name>
     <message>
         <location filename="../../packages/base/providers.py" line="13"/>
-        <source>CÃ³digo</source>
+        <source>C&#xc3;&#xb3;digo</source>
         <translation>Code</translation>
     </message>
     <message>
         <location filename="../../packages/base/providers.py" line="10"/>
-        <source>Código</source>
+        <source>C&#xf3;digo</source>
         <translation type="obsolete">Code</translation>
     </message>
     <message>
@@ -988,12 +992,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="../../packages/base/providers.py" line="15"/>
-        <source>DirecciÃ³n</source>
+        <source>Direcci&#xc3;&#xb3;n</source>
         <translation>Address</translation>
     </message>
     <message>
         <location filename="../../packages/base/providers.py" line="16"/>
-        <source>TelÃ©fono</source>
+        <source>Tel&#xc3;&#xa9;fono</source>
         <translation>Phone</translation>
     </message>
     <message>
@@ -1039,7 +1043,7 @@ p, li { white-space: pre-wrap; }
     <name>self.app</name>
     <message>
         <location filename="../../packages/base/providers.py" line="12"/>
-        <source>La licencia ha expirado - Usando versión gratuita - Considere obtener una licencia para obtener mayores prestaciones</source>
+        <source>La licencia ha expirado - Usando versi&#xf3;n gratuita - Considere obtener una licencia para obtener mayores prestaciones</source>
         <translation type="obsolete">The licence has expired. Using free version. Consider acquiring a new license to get bigger bennefits</translation>
     </message>
     <message>
@@ -1048,7 +1052,7 @@ p, li { white-space: pre-wrap; }
 %s</source>
         <translation>the web %s can&apos;t be shown</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="144"/>
         <source>Código del cliente</source>
         <translation type="obsolete">Client code</translation>
@@ -1068,7 +1072,7 @@ p, li { white-space: pre-wrap; }
         <source>No se ha indicado el cliente</source>
         <translation type="obsolete">A client must be selected</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="167"/>
         <source>¿Desea imprimir?</source>
         <translation type="obsolete">Do you wish to print?</translation>
@@ -1078,7 +1082,7 @@ p, li { white-space: pre-wrap; }
         <source>Esta factura ya ha sido impresa.</source>
         <translation type="obsolete">This bill has already been printed</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/non_free/printer/__init__.py" line="73"/>
         <source>No se ha podido realizar la impresión
 {0}</source>
@@ -1105,12 +1109,12 @@ p, li { white-space: pre-wrap; }
         <source>Banta - Exportar</source>
         <translation type="obsolete">Banta - Export</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/non_free/bill_list.py" line="44"/>
         <source>No es posible exportar en la versión básica</source>
         <translation type="obsolete">Is not possible to export in the basic version</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/non_free/bill_list.py" line="59"/>
         <source>¿Desea eliminar los presupuestos?</source>
         <translation type="obsolete">Do you want to remove the budgets?</translation>
@@ -1136,9 +1140,9 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Loading ...</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>self.app.window</name>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="243"/>
         <source>Impresión Fallida </source>
         <translation>Print failed</translation>
@@ -1148,7 +1152,7 @@ p, li { white-space: pre-wrap; }
         <source>Debe seleccionar un producto</source>
         <translation type="obsolete">Please select a product</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/csv_imports.py" line="30"/>
         <source>Elija un archivo .csv cuyas columnas sean:
 Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</source>
@@ -1164,21 +1168,21 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>Archivos CSV (*.csv);;Todos los archivos (*.*)</source>
         <translation>CSV files (*.csv);;all files (*.*)</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/csv_imports.py" line="114"/>
         <source>%s productos agregados
 %s modificados
 %s descartados por código incorrecto</source>
         <translation>%s products added %s modified%s dismissed by wrong code</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/csv_imports.py" line="204"/>
         <source>%s clientes agregados
 %s modificados
 %s descartados por código incorrecto</source>
         <translation>%s added clients % modified % dismissed by wrong code </translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/csv_imports.py" line="285"/>
         <source>%s proveedores agregados
 %s modificados
@@ -1190,12 +1194,12 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>Guardar Reporte</source>
         <translation>Save report</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/non_free/printer/__init__.py" line="74"/>
         <source>Impresión Fallida: </source>
         <translation type="obsolete">Print failed:</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="154"/>
         <source>Código del cliente</source>
         <translation>Client code</translation>
@@ -1215,7 +1219,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>No se ha indicado el cliente</source>
         <translation>A client must be selected</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="209"/>
         <source>¿Desea imprimir?</source>
         <translation>Do you wish to print?</translation>
@@ -1225,7 +1229,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>Esta factura ya ha sido impresa.</source>
         <translation>This bill has already been printed.</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="215"/>
         <source>No se ha podido realizar la impresión
 {0}</source>
@@ -1237,12 +1241,12 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>Banta - Exportar</source>
         <translation>Banta - Export</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/optional/bill_list.py" line="48"/>
         <source>No es posible exportar en la versión básica</source>
         <translation type="obsolete">Is not possible to export in the basic version</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/optional/bill_list.py" line="57"/>
         <source>¿Desea eliminar los presupuestos?</source>
         <translation>Do you want to remove the budgets?</translation>
@@ -1252,7 +1256,7 @@ Código, Nombre, Precio, Stock, Tipo de Iva [0, 1 o 2], Código de Proveedor</so
         <source>Debe seleccionar un producto.</source>
         <translation>You must select a product.</translation>
     </message>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/base/bills.py" line="241"/>
         <source>No se ha podido realizar la impresión
 {0}
@@ -1276,7 +1280,7 @@ If you choose No the bill will not be saved.</translation>
 </context>
 <context>
     <name>self.dialog</name>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../packages/optional/limits.py" line="203"/>
         <source>Límites</source>
         <translation>Limits</translation>
@@ -1316,6 +1320,11 @@ If you choose No the bill will not be saved.</translation>
         <source>Detalles de cliente</source>
         <translation>Client&apos;s details</translation>
     </message>
+    <message>
+        <location filename="../../packages/optional/client_details.py" line="43"/>
+        <source>Primero seleccione el cliente.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>self.widget</name>
@@ -1335,9 +1344,9 @@ If you choose No the bill will not be saved.</translation>
         <translation>CSV files (*.csv);;all files (*.*)</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>self.window</name>
-    <message utf8="true">
+    <message encoding="UTF-8">
         <location filename="../../__init__.py" line="104"/>
         <source>Banta versión %s listo.</source>
         <translation>Banta version %s ready.</translation>

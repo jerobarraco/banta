@@ -169,12 +169,15 @@ class HProducts(BasicAuthHandler):
 						'thumb': imgurl}#hardcoded to allow cache on client
 
 	def _prodFullDict(self, p):
+		imgurl = p.thumb and ("../prod_img/?code="+p.code) or 'thumb.jpg'
 		return {
 			'code':p.code, 'name':p.name, 'price':p.price, 'stock':p.stock,
 			'external_code':p.external_code, 'buy_price':p.buy_price,
 			'pack_units':p.pack_units,
 			'provider':p.provider and p.provider.name or "",
 			'category':p.category and p.category.name or "",
+			'description':p.description,
+			'thumb': imgurl
 		}
 
 	def get(self, *args, **kwargs):
@@ -194,7 +197,7 @@ class HProducts(BasicAuthHandler):
 				if code in root['products']:
 					prod = root['products'][code]
 					#to allow a "search" function later
-					prods.append(self._prodDict(prod))
+					prods.append(self._prodFullDict(prod))
 				else:
 					raise Exception("Producto no encontrado")
 				res['count'] = len(prods)

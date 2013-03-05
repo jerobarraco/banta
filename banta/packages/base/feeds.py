@@ -133,7 +133,7 @@ class Feeds(banta.packages.GenericModule):
 		self.goe = _qg.QGraphicsOpacityEffect()
 		#assign the effect to the label
 		self.app.window.l_news.setGraphicsEffect(self.goe)
-		animation = _qc.QPropertyAnimation(self.goe, "opacity")
+		animation = _qc.QPropertyAnimation(self.goe, "opacity".encode('utf-8'))
 		animation.setDuration(2000)
 		animation.setStartValue(0)
 		animation.setEndValue(1)
