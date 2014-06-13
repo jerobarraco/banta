@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-				
+				android:background="@drawable/buttons" 
         android:onClick="mostrar"
         android:text="Mostrar" />
 		<Spinner
@@ -19,6 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
 				android:layout_toLeftOf="@+id/Btn_Mostrar"
+				android:background="@drawable/buttons" 
         android:entries="@array/Seleccione"
         android:prompt="@string/Combobox" />
 

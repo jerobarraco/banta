@@ -21,7 +21,7 @@ public class wsListProducts extends AsyncTask<mantenedor_pro, Void, ArrayList<Pr
 		this.padre = class_padre[0];
 		this.padre.cargando = true; //no muy thread-safe pero necesario
 		
-		Uri.Builder b = Uri.parse("http://"+Pref.ip+":8080").buildUpon();
+		Uri.Builder b = Uri.parse("http://"+Pref.ip+":"+Pref.port).buildUpon();
 		b.path("/prods");
 		//que pida los datos comenzando desde la pagina a cargar
 		String start = String.valueOf(this.padre.cargar * this.padre.pagina);

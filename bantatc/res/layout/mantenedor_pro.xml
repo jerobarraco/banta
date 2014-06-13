@@ -10,55 +10,48 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_alignParentTop="true"
+			android:background="@drawable/buttons" 
 			android:layout_alignParentRight="true"
 			android:src="@drawable/ic_menu_more"
 			android:onClick="menu"
 	/>
 
 <ImageButton
-        android:id="@+id/Btn_Scan"
-				android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_menu"
-				android:layout_toLeftOf="@+id/btn_menu"
-				android:layout_alignBottom="@+id/btn_menu"
-				android:src="@drawable/ic_menu_scan"
-        android:onClick="escanear"
+        	android:id="@+id/Btn_Scan"
+			android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_alignBaseline="@+id/btn_menu"
+			android:layout_toLeftOf="@+id/btn_menu"
+			android:layout_alignBottom="@+id/btn_menu"
+			android:src="@drawable/ic_menu_scan"
+			android:background="@drawable/buttons" 
+        	android:onClick="escanear"
          /> 
-   <!-- <Button
-        android:id="@+id/Btn_Scan"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/btn_menu"
-				android:layout_alignParentLeft="true"
-				android:layout_toLeftOf="@+id/btn_menu"
-				android:layout_alignBottom="@+id/btn_menu"
-        android:onClick="escanear"
-        android:text="Escanear" /> -->
+
 		<ImageButton
-				android:id="@+id/Btn_Buscar"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_toLeftOf="@+id/Btn_Scan"
-				android:layout_alignBottom="@+id/btn_menu"
-				android:src="@drawable/ic_menu_search"
-				android:onClick="buscar"
-			/>
-		<AutoCompleteTextView
-			android:id="@+id/ProductCode"
-			android:layout_width="fill_parent"
+			android:id="@+id/Btn_Buscar"
+			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_alignParentLeft="true"
-			android:layout_alignBottom="@+id/Btn_Buscar"
-			android:layout_toLeftOf="@+id/Btn_Buscar"
-		>
+			android:layout_toLeftOf="@+id/Btn_Scan"
+			android:layout_alignBottom="@+id/btn_menu"
+			android:background="@drawable/buttons" 
+			android:src="@drawable/ic_menu_search"
+			android:onClick="buscar"
+			/>
+
+		<AutoCompleteTextView
+		    android:id="@+id/ProductCode"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignBottom="@+id/Btn_Buscar"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignTop="@+id/Btn_Buscar"
+		    android:layout_toLeftOf="@+id/Btn_Buscar"
+		    android:hint="Buscar" >
+
     </AutoCompleteTextView>
 		
-		
-	
 
-    
-		<!--label-->
     <TextView
 			android:id="@+id/cdHttp"
 			android:layout_width="wrap_content"

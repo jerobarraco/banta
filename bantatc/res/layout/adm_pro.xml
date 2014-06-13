@@ -4,98 +4,107 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent" >
 
-	<TextView
-		android:id="@+id/tv_codigo"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
-		android:layout_alignParentTop="true"
-		android:text="Código:"
-	/>
-	<EditText
-		android:id="@+id/Txt_codigo"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/tv_codigo"
-		android:layout_alignParentLeft="true"
-		android:layout_marginLeft="15dp"
-	>
-	</EditText>
+<ScrollView
+	    android:id="@+id/scrollView1"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true" >
 
-	<TextView
-		android:id="@+id/tv_nombre"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@+id/Txt_codigo"
-		android:text="Nombre:"
-	/>
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_alignParentBottom="true"
+	        android:orientation="vertical" >
 
-	<EditText
-		android:id="@+id/txt_nombre"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@+id/tv_nombre"
-		android:layout_marginLeft="15dp"
-	/>
+	        <TextView
+	            android:id="@+id/tv_codigo"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Código:"
+	            android:textStyle="bold" />
 
-	<TextView
-		android:id="@+id/tv_stock"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@+id/txt_nombre"
-		android:text="Stock:"
-	/>
+	        <EditText
+	            android:id="@+id/Txt_codigo"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="15dp"
+	            android:hint="Código" />
 
-	<EditText
-		android:id="@+id/txt_stock"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/tv_stock"
-		android:layout_alignParentLeft="true"
-		android:inputType="numberSigned"
-		android:layout_marginLeft="15dp"
-		>
-		<requestFocus />
-	</EditText>
-	<TextView
-		android:id="@+id/tv_precio"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentLeft="true"
-		android:layout_below="@+id/txt_stock"
-		android:text="Precio:"
-		/>
-	<EditText
-		android:id="@+id/txt_precio"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_below="@+id/tv_precio"
-		android:inputType="numberDecimal"
-		android:layout_marginLeft="15dp"
-	/>
+	        <TextView
+	            android:id="@+id/tv_nombre"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Nombre:"
+	            android:textStyle="bold" />
 
-	<Button
-		android:id="@+id/Btn_Modificar"
-		android:layout_width="114dp"
-		android:layout_height="70dp"
-		android:layout_alignParentBottom="true"
-		android:layout_centerHorizontal="true"
-		android:onClick="modificar"
-		android:text="Guardar"
-	/>
+	        <EditText
+	            android:id="@+id/txt_nombre"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="15dp"
+	            android:hint="Nombre" />
 
-	<Button
-		android:id="@+id/Btn_Delete"
-		android:layout_width="114dp"
-		android:layout_height="70dp"
-		android:layout_toRightOf="@+id/Btn_Modificar"
-		android:layout_alignParentBottom="true"
-		android:onClick="eliminar"
-		android:text="Eliminar"
-		/>
+	        <TextView
+	            android:id="@+id/tv_stock"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Stock:"
+	            android:textStyle="bold" />
+
+	        <EditText
+	            android:id="@+id/txt_stock"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="15dp"
+	            android:hint="Stock"
+	            android:inputType="numberSigned" />
+
+	        <TextView
+	            android:id="@+id/tv_precio"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="Precio:"
+	            android:textStyle="bold" />
+
+	        <EditText
+	            android:id="@+id/txt_precio"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginLeft="15dp"
+	            android:hint="Precio"
+	            android:inputType="numberDecimal" />
+
+	        <LinearLayout
+	            android:layout_width="match_parent"
+	            android:layout_height="222dp"
+	            android:gravity="center_vertical|center"
+	            android:orientation="horizontal" >
+
+	            <Button
+	                android:id="@+id/Btn_Delete"
+	                android:layout_width="114dp"
+	                android:layout_height="70dp"
+	                android:layout_marginRight="10dp"
+	                android:background="@drawable/buttons"
+	                android:onClick="eliminar"
+	                android:text="Eliminar"
+	                android:textStyle="bold" />
+
+	            <Button
+	                android:id="@+id/Btn_Modificar"
+	                android:layout_width="114dp"
+	                android:layout_height="70dp"
+	                android:layout_marginLeft="10dp"
+	                android:background="@drawable/buttons"
+	                android:onClick="modificar"
+	                android:text="Guardar"
+	                android:textStyle="bold" />
+
+	        </LinearLayout>
+
+	    </LinearLayout>
+
+	</ScrollView>
 
 </RelativeLayout>

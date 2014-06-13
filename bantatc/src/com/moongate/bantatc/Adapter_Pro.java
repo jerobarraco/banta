@@ -1,3 +1,8 @@
+
+/*CopyRight  Nicolas Jorquera Arellano
+ *  Designed and coded by Nicolas Jorquera Arellano for Monngate
+ *  License GPL v3
+ */
 package com.moongate.bantatc;
 import com.moongate.bantatc.R;
 import android.content.Context;

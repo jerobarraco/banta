@@ -53,14 +53,27 @@ public class Adm_Pro extends Activity {
 		old_code = code ; //esto es por si el user cambio el codigo
 		code = cdt_code.getText().toString();
 		name = cdt_name.getText().toString();
+		if (cdt_stock.getText().toString().equals("")){
+			  Toast.makeText(this, "El campo Stock no puede estar vacío.", Toast.LENGTH_LONG).show();
+			  return;
+			}
+		
+		if (cdt_price.getText().toString().equals("")){
+			  Toast.makeText(this, "El campo Precio no puede estar vacío.", Toast.LENGTH_LONG).show();
+			  return;
+			}
 		stock = Double.valueOf(cdt_stock.getText().toString());
 		price = Double.valueOf(cdt_price.getText().toString());
+		
 		if (! pattern.matcher(code).find()){
-				Toast.makeText(this, "El codigo solo admite letras de la A a la Z y numeros", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "El código solo admite letras de la A a la Z, números y no puede tener espacios en blanco.", Toast.LENGTH_LONG).show();
 				return ;
 		}
+
+
+		
 		if (name.equals("")){
-		  Toast.makeText(this, "No puede estar vacio el nombre", Toast.LENGTH_LONG).show();
+		  Toast.makeText(this, "El campo Nombre no puede estar vacío.", Toast.LENGTH_LONG).show();
 		  return;
 		}
 		//finalmente si no hubo problemas, llamamos al webservice que enviara los datos

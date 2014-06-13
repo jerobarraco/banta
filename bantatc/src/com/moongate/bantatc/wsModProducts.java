@@ -30,7 +30,7 @@ public class wsModProducts extends AsyncTask<Adm_Pro, Void, Void>{
 
 			//Este es el request mas complicado, porque hay que pasar los parametros en el cuerpo
 			//y no en la url
-			HttpPost post = new HttpPost("http://"+Pref.ip+":8080/prods");
+			HttpPost post = new HttpPost("http://"+Pref.ip+":"+Pref.port+"/prods");
 			//creamos los parámetros
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 			//agregamos los parametros
@@ -43,7 +43,7 @@ public class wsModProducts extends AsyncTask<Adm_Pro, Void, Void>{
 				//y los metemos en el post. EL UTF ES IMPORTANTE!
 				post.setEntity(new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8));
 				JSONObject obj = this.ws.doRequest(post);
-			} catch (UnsupportedEncodingException ex) {
+			} catch (Exception ex) {
 				this.ws.success = false;
 				this.ws.error = ex.toString();
 				Log.e(wsModProducts.class.getName(), this.ws.error);

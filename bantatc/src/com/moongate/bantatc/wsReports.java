@@ -46,7 +46,7 @@ public class wsReports extends AsyncTask<BaseReport, Void, wsReports.InstanciaRe
 		this.padre = class_padre[0];
 
 		//Generamos el query
-		Uri.Builder b = Uri.parse("http://"+Pref.ip+":8080").buildUpon();
+		Uri.Builder b = Uri.parse("http://"+Pref.ip+":"+Pref.port).buildUpon();
 		b.path("/reports");
 		if (this.padre.report_type >= tipos.length){
 			this.ws.error = "Reporte incorrecto";

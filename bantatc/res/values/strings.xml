@@ -20,7 +20,8 @@
 	<string name="mpmenu_by_price">Por precio</string>
 	<string name="mpmenu_by_stock">Por stock</string>
 	<string name="mpmenu_by_code">Por código</string>	
-	<string name="default_ip">192.168.1.99</string>
+	<string name="default_ip">190.22.193.82</string>
+	<string name="default_port">8008</string>
 	<string name="default_user"></string>
 	<string name="default_password"></string>
 	<!--<string name="default_ip">ks3271107.kimsufi.com</string>-->

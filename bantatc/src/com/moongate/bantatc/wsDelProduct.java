@@ -14,7 +14,7 @@ public class wsDelProduct extends AsyncTask<Adm_Pro, Void, Void>{
 			this.padre = class_padre[0];
 			code = this.padre.code;
 			//Crear el query para el delete
-			HttpDelete del = new HttpDelete("http://"+Pref.ip+":8080/prods?code="+code+"");	
+			HttpDelete del = new HttpDelete("http://"+Pref.ip+":"+Pref.port+"/prods?code="+code+"");	
 			//lanzar el query
 			JSONObject res = ws.doRequest(del);
 			//la verdad que el resultado no importa, el error lo maneja el ws		
@@ -28,7 +28,7 @@ public class wsDelProduct extends AsyncTask<Adm_Pro, Void, Void>{
 			// aca hay quehacer que muestre un cartel, "ok', o "cac"
 			String mensaje ;
 			if (this.ws.success){
-				mensaje = "Se ha eliminado el producto";
+				mensaje = "Producto eliminado";
 			}else{
 				mensaje = "Error. " + this.ws.error;
 			}

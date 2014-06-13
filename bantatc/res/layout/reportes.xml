@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:background="@drawable/buttons" 
         android:layout_alignParentTop="true"
         android:onClick="mostrar"
         android:text="Mostrar" />
@@ -16,6 +17,7 @@
         android:id="@+id/rep_c_box"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/buttons" 
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
 				android:layout_toLeftOf="@+id/rep_b_Mostrar"

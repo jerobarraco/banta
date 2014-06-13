@@ -118,10 +118,14 @@ public class mantenedor_pro extends Activity implements OnScrollListener{
 	public void escanear(View v){
 		// intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
 		//   intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
-		Intent intent = new Intent("com.google.zxing.client.android.SCAN");
-		//intent.putExtra("SCAN_FORMATS", "CODE_39,CODE_93,CODE_128,DATA_MATRIX,ITF,CODABAR");
-		intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
-		startActivityForResult(intent, 0);    //Barcode Scanner to scan for us
+		try{
+			Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+			//intent.putExtra("SCAN_FORMATS", "CODE_39,CODE_93,CODE_128,DATA_MATRIX,ITF,CODABAR");
+			intent.putExtra("SCAN_MODE", "PRODUCT_MODE");
+			startActivityForResult(intent, 0);    //Barcode Scanner to scan for us
+		}catch (Exception e){
+			Toast.makeText(this,  "Se necesita BarcodeScanner o Google Goggles para seguir con el funcionamiento.", Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	public void recargar(boolean reset){
